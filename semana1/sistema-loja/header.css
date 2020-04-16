@@ -1,0 +1,51 @@
+body{overflow-y:scroll;}
+
+.store-logo{
+    color: black;
+    background-color: peachpuff;
+    text-align: center;
+    font-size: 24px;
+    border: 2px solid orange;
+}
+
+
+.welcome{
+    color: peachpuff;
+    background-color: orchid;
+    text-align: center;
+    font-size: 24px;
+    width: 80%;
+    margin: auto;
+    border: 2px solid rebeccapurple;
+}
+
+.nav-bar{
+    color: red;
+    background-color: chartreuse;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    width: 60%;
+    margin: auto;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    border: 2px solid blue;
+}
+
+.nav-button{
+    text-decoration: none;
+    color: black;
+    background-color: lightskyblue;
+
+}
+
+.nav-button-select{
+    text-decoration: none;
+    color: red;
+    background-color: darkblue;
+
+}
+
+a:hover{
+    background-color: royalblue;
+}
