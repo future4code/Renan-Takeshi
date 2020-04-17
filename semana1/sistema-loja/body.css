@@ -1,0 +1,24 @@
+.centerImage {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.centerTable{
+    margin: auto;
+    text-align: center;
+}
+
+table, td, th{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.centerForm{
+    text-align: center;
+  }
+
+.centerList{
+    text-align: center;
+    list-style-type: none;
+}
