@@ -121,6 +121,18 @@ td button {
     height: 30px;
     border-radius: 5px;
     color: black;
+    transition-duration: 0.3s;
+}
+
+td button:hover{
+    background-color: green;    
+    color: black;
+}
+
+td button:active{
+    background-color: orange;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 .container-do-search {
