@@ -43,6 +43,11 @@ div>p:first-child {
     display: inline;
 }
 
+div>button{
+    display: block;
+    margin: auto;
+}
+
 div img {
     background: white;
 }
@@ -132,6 +137,7 @@ table {
     font-weight: bold;
     width: 60%;
     margin: auto;
+    margin-bottom: 200px;
 }
 
 
@@ -171,6 +177,7 @@ td button:active{
     border-radius: 5px;
     font-size: 10px;
     color: black;
+    margin: auto;
 }
 
 #back-button:hover {
