@@ -1,0 +1,83 @@
+body{
+    padding: 20Px;
+    overflow-y:scroll;
+}
+
+a:hover{
+    background-color: lightskyblue;
+}
+
+h1{
+    margin-bottom: 10px;
+}
+
+input{
+    margin-top: 5px;
+    width: 60%;
+}
+
+.container-large{
+    border: 3px solid grey;
+    height: 175px;
+    margin-top: 5px;
+}
+
+.container-med{
+    border: 3px solid grey;
+    height: 140px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.container-small{
+    border: 3px solid grey;
+    margin-top: 5px;
+    height: 20px;
+}
+
+.img{
+    padding: 5px;
+    float: left;
+}
+
+.text{
+    display: inline;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-bar{
+    color:black;
+    background-color: lightgray;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: auto;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    border: 2px solid black;
+}
+
+.nav-button{
+    text-decoration: none;
+    color: black;
+}
+
+.nav-button-select{
+    text-decoration: none;
+    color: black;
+    background-color: royalblue;
+}
+
+.centerForm{
+    text-align: center;
+    padding: 10px;
+}
+
+.email{
+    margin-top: 2px;
+    height: 70px;
+    resize: none;
+}
+
+
