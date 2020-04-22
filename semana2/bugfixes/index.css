@@ -1,0 +1,193 @@
+/** 
+  *
+  *  ESTILOS GERAIS 
+  *
+  **/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*:focus{
+    outline: none;
+}
+
+h2 {
+    background-color: #fe7e02;
+    padding: 10px 5px 10px 5px;
+    color: white;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+h3{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+    height: 20px;
+    width: 500px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid gray;
+}
+
+button:focus {
+    color: white;
+}
+
+img {
+    width: 50px;
+}
+
+div>p:first-child {
+    display: inline;
+}
+
+div>button{
+    display: block;
+    margin: auto;
+}
+
+div img {
+    background: white;
+}
+
+.botao-amarelo {
+    background-color: #ffaf43;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+}
+
+.botao-amarelo:hover {
+    background-color: #c44f00;
+}
+
+.container {
+    height: 500px;
+    text-align: center;
+}
+
+.icone {
+    width: 15px;
+}
+
+.icone:hover{
+    opacity: 50%;
+}
+
+.icone:active{
+    opacity: 100%;
+}
+
+
+/** 
+  *
+  *  ESTILOS HOME 
+  *
+  **/
+
+#container-de-descricao {
+    background-color: #2274a5;
+    color: white;
+    padding-top: 100px;
+    
+}
+
+#container-de-descricao>ol {
+    padding: 15px 0px;
+    display: inline-block;
+    width: 250px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+#container-de-descricao>p{
+    margin: auto;
+    display: block;
+    max-width: 230px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+#container-para-comprar {
+    background-color: #e7eb90;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container-para-comprar>p {
+    color: #c44f00;
+    padding: 100px 0;
+    font-size: 60px;
+    display: block;
+}
+
+
+/**
+  *
+  *  ESTILOS COMPRAR 
+  *
+  **/
+
+div:nth-child(2),
+div:last-child {
+    text-align: center;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 200px;
+}
+
+
+td button {
+    background-color: #fadf63;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    color: black;
+    transition-duration: 0.3s;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+td button:hover{
+    background-color: green;    
+}
+
+td button:active{
+    background-color: orange;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+    color: black;
+}
+
+.container-do-search {
+    margin-top: 20px;
+    height: 100px;
+}
+
+
+#back-button {
+    background-color: white;
+    width: 100px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 10px;
+    color: black;
+    margin: auto;
+}
+
+#back-button:hover {
+    background-color: #635a3d
+}
