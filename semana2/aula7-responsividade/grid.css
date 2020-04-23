@@ -9,7 +9,7 @@
     margin-right: 20px;
     display: grid;
     grid-template-columns: 200px repeat(6, 1fr);
-    grid-template-rows: repeat(13, 1fr);
+    grid-template-rows: repeat(13, 100px);
     gap: 20px;
     height: 100vh;
     grid-template-areas: 
@@ -159,7 +159,7 @@ ul{
 @media screen and (min-width: 640px) and (max-width: 1199px){
     .container-grid{
         grid-template-columns: 200px repeat(2, 1fr);
-        grid-template-rows: repeat(19, 1fr);
+        grid-template-rows: repeat(19, 100px);
         grid-template-areas: 
         "lista red red"
         "lista red red"
@@ -192,7 +192,7 @@ ul{
     .container-grid{
         margin-left: 20px;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(19, 1fr);
+        grid-template-rows: repeat(19, 100px);
         grid-template-areas: 
         "red red"
         "red red"
@@ -225,7 +225,7 @@ ul{
     .container-grid{
         margin-left: 20px;
         grid-template-columns: repeat(1, 1fr);
-        grid-template-rows: repeat(30, 1fr);
+        grid-template-rows: repeat(30, 100px);
         grid-template-areas: 
         "red"
         "red"
