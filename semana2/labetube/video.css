@@ -6,17 +6,16 @@
 
 main{
     height: 100vh;
-    max-height: 860px;
     width: 100vw;
     max-width: 1600px;
     row-gap: 20px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 80px 300px 300px 40px;
+    grid-template-rows: 80px 60vh 1fr 40px;
     grid-template-areas: 
     "h h h b"
     "v v v v"
-    "v v v v"
+    "e e e e"
     "f f f f";
 }
 
@@ -31,7 +30,7 @@ header{
 }
 
 footer{
-    font-size: 36px;
+    font-size: 28px;
     display: grid;
     grid-area: f;
     align-items: center;
@@ -63,6 +62,14 @@ article{
     align-items: center;
     justify-content: center;
     background-color: green;
+}
+
+video{
+    width: 80vw;
+}
+
+iframe{
+    width: 80vw;
 }
 
 @media screen and (max-width: 380px){

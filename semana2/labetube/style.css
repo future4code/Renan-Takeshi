@@ -12,17 +12,17 @@ img{
 
 main{
     height: 100vh;
-    max-height: 860px;
     width: 100vw;
     max-width: 1600px;
     row-gap: 20px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 80px 300px 300px 40px;
+    grid-template-rows: 80px 300px 300px 1fr 40px;
     grid-template-areas: 
     "h  h  h  b"
     "v1 v2 v3 v4"
     "v5 v6 v7 v8"
+    "e  e  e  e"
     "f  f  f  f";
 }
 
@@ -117,8 +117,7 @@ article:nth-of-type(8){
         "v6 v6"
         "v7 v7"
         "v8 v8"
-        "f  f"
-        ;
+        "f  f";
     }
 
     header{
