@@ -68,10 +68,11 @@ article{
 @media screen and (max-width: 380px){
     main{
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 80px 300px 40px;
+        grid-template-rows: 80px 300px 1fr 40px;
         grid-template-areas: 
         "h b"
         "v v"
+        "e e"
         "f f";
     }
 
