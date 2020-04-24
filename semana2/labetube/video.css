@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+main{
+    height: 100vh;
+    max-height: 860px;
+    width: 100vw;
+    max-width: 1600px;
+    row-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 80px 300px 300px 40px;
+    grid-template-areas: 
+    "h h h b"
+    "v v v v"
+    "v v v v"
+    "f f f f";
+}
+
+header{
+    text-align: left;
+    font-size: 36px;
+    padding-left: 20px;
+    display: grid;
+    grid-area: h;
+    align-items: center;
+    background-color: red;
+}
+
+footer{
+    font-size: 36px;
+    display: grid;
+    grid-area: f;
+    align-items: center;
+    background-color: red;
+}
+
+#busca{
+    display: grid;
+    grid-area: b;
+    align-items: center;
+    background-color: red;
+}
+
+#input-busca{
+    width: 80%;
+    height: 30px;
+    font-size: 24px;
+    text-align: left;
+}
+
+article{
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border: 2px solid black;
+    display: grid;
+    grid-area: v;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+}
+
+@media screen and (max-width: 380px){
+    main{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 80px 300px 40px;
+        grid-template-areas: 
+        "h b"
+        "v v"
+        "f f";
+    }
+
+    iframe{
+        width: 100%;
+    }
+
+    video{
+        width: 100%;
+    }
+
+    article{
+        width: 93vw;
+    }
+}
