@@ -53,7 +53,7 @@ footer{
 
 article{
     cursor: pointer;
-    font-size: 24px;
+    font-size: 36px;
     margin-right: 10px;
     margin-left: 10px;
     border: 2px solid black;
@@ -81,6 +81,10 @@ iframe{
         "v v"
         "e e"
         "f f";
+    }
+
+    article{
+        font-size: 28px;
     }
 
     iframe{
