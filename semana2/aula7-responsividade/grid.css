@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 26px;
+    text-align: center;
+}
+
+.container-grid{
+    margin-right: 20px;
+    display: grid;
+    grid-template-columns: 200px repeat(6, 1fr);
+    grid-template-rows: repeat(13, 100px);
+    gap: 20px;
+    height: 100vh;
+    grid-template-areas: 
+    "lista red red red red red red"
+    "lista red red red red red red"
+    "lista one one two two three three"
+    "lista one one two two three three"
+    "lista four four five five six six"
+    "lista four four five five six six"
+    "lista seven seven seven eight eight eight"
+    "lista seven seven seven eight eight eight"
+    "lista seven seven seven eight eight eight"
+    "lista seven seven seven eight eight eight"
+    "lista seven seven seven eight eight eight"
+    "lista nine nine ten ten eleven eleven"
+    "lista nine nine ten ten eleven eleven"
+    ;
+}
+
+.lista {
+    display: grid;
+    background-color: gray;
+    align-content: start;
+    grid-area: lista;
+}
+
+p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+li{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 25px;
+}
+
+li:first-of-type{
+    margin-top: 25px;
+}
+
+ul{
+    padding-bottom: 25px;
+}
+
+.red{
+    margin: 0 -20px 0 -20px;
+    display: grid;
+    align-items: center;
+    background-color: red;
+    grid-area: red;
+}
+
+.item1{
+    display: grid;
+    align-items: center;
+    background-color: blue;
+    grid-area: one;
+    border: 2px solid black;
+}
+
+.item2{
+    display: grid;
+    align-items: center;
+    background-color: yellow;
+    grid-area: two;
+    border: 2px solid black;
+}
+
+.item3{
+    display: grid;
+    align-items: center;
+    background-color: green;
+    grid-area: three;
+    border: 2px solid black;
+}
+
+.item4{
+    display: grid;
+    align-items: center;
+    background-color: blue;
+    grid-area: four;
+    border: 2px solid black;
+}
+
+.item5{
+    display: grid;
+    align-items: center;
+    background-color: yellow;
+    grid-area: five;
+    border: 2px solid black;
+}
+
+.item6{
+    display: grid;
+    align-items: center;
+    background-color: green;
+    grid-area: six;
+    border: 2px solid black;
+}
+
+.item7{
+    display: grid;
+    align-items: center;
+    background-color: black;
+    color: white;
+    grid-area: seven;
+    border: 2px solid black;
+}
+
+.item8{
+    display: grid;
+    align-items: center;
+    background-color: black;
+    color: white;
+    grid-area: eight;
+    border: 2px solid black;
+}
+
+.item9{
+    display: grid;
+    align-items: center;
+    background-color: white;
+    grid-area: nine;
+    border: 2px solid black;
+}
+
+.item10{
+    display: grid;
+    align-items: center;
+    background-color: white;
+    grid-area: ten;
+    border: 2px solid black;
+}
+
+.item11{
+    display: grid;
+    align-items: center;
+    background-color: white;
+    grid-area: eleven;
+    border: 2px solid black;
+}
+
+@media screen and (min-width: 640px) and (max-width: 1199px){
+    .container-grid{
+        grid-template-columns: 200px repeat(2, 1fr);
+        grid-template-rows: repeat(19, 100px);
+        grid-template-areas: 
+        "lista red red"
+        "lista red red"
+        "lista one two"
+        "lista one two"
+        "lista three three"
+        "lista three three"
+        "lista four five"
+        "lista four five"
+        "lista six six"
+        "lista six six"
+        "lista seven eight"
+        "lista seven eight"
+        "lista seven eight"
+        "lista seven eight"
+        "lista seven eight"
+        "lista nine ten"
+        "lista nine ten"
+        "lista eleven eleven"
+        "lista eleven eleven"
+        ;
+    }
+}
+
+@media screen and (min-width: 380px) and (max-width: 639px){
+    .lista{
+        display: none;
+    }
+
+    .container-grid{
+        margin-left: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(19, 100px);
+        grid-template-areas: 
+        "red red"
+        "red red"
+        "one two"
+        "one two"
+        "three three"
+        "three three"
+        "four five"
+        "four five"
+        "six six"
+        "six six"
+        "seven eight"
+        "seven eight"
+        "seven eight"
+        "seven eight"
+        "seven eight"
+        "nine ten"
+        "nine ten"
+        "eleven eleven"
+        "eleven eleven"
+        ;
+    }
+}
+
+@media screen and (max-width: 379px){
+    .lista{
+        display: none;
+    }
+
+    .container-grid{
+        margin-left: 20px;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(30, 100px);
+        grid-template-areas: 
+        "red"
+        "red"
+        "one"
+        "one"
+        "two"
+        "two"
+        "three"
+        "three"
+        "four"
+        "four"
+        "five"
+        "five"
+        "six"
+        "six"
+        "seven"
+        "seven"
+        "seven"
+        "seven"
+        "seven"
+        "eight"
+        "eight"
+        "eight"
+        "eight"
+        "eight"
+        "nine"
+        "nine"
+        "ten"
+        "ten"
+        "eleven"
+        "eleven"
+        ;
+    }
+}
