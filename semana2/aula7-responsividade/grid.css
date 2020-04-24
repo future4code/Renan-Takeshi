@@ -31,8 +31,6 @@
 
 .lista {
     display: grid;
-    grid-row: 1 / 14;
-    grid-column: 1;
     background-color: gray;
     align-content: start;
     grid-area: lista;
