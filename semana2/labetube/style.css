@@ -1,45 +1,43 @@
-* {
+*{
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 /* width para a imagem não vazar; mas está distorcendo */
 img{
     width: 100%;
-    max-width: 400px;
     max-height: 80%;
 }
 /* As medidas estão meio random, mas esse fds eu vou pesquisar sobre os layouts */
 main{
-    height: 100vh;
+    display: grid;
     width: 100vw;
     max-width: 1600px;
+    height: 100vh;
+    max-height: 1200px;
     row-gap: 20px;
-    display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 80px 300px 300px 1fr 40px;
     grid-template-areas: 
     "h  h  h  b"
     "v1 v2 v3 v4"
     "v5 v6 v7 v8"
-    "e  e  e  e"
+    ".  .  .  ."
     "f  f  f  f";
-/* h = header, b = busca, v# os quadrados dos videos, e = vazio(empty), f = footer */
+/* h = header, b = busca, v# os quadrados dos videos, . = vazio, f = footer */
 }
 header{
-    font-size: 36px;
-    text-align: left;
-    padding-left: 20px;
     display: grid;
-    grid-area: h;
-    align-items: center;
     background-color: red;
+    padding-left: 20px;
+    font-size: 36px;
+    place-items: center start;
+    grid-area: h;
 }
 #busca{
     display: grid;
-    grid-area: b;
-    align-items: center;
     background-color: red;
+    place-items: center;
+    grid-area: b;
 }
 #input-busca{
     width: 85%;
@@ -48,21 +46,21 @@ header{
     text-align: left;
 }
 footer{
-    font-size: 28px;
     display: grid;
-    grid-area: f;
-    align-items: center;
     background-color: red;
+    font-size: 28px;
+    place-items: center;
+    grid-area: f;
 }
+/* os quadrados dos videos são articles */
 article{
+    display: grid;
+    background-color: green;
+    border: 2px solid black;
+    margin-left: 10px;
     cursor: pointer;
     font-size: 24px;
-    margin-left: 10px;
-    display: grid;
-    align-items: end;
-    justify-content: center;
-    border: 2px solid black;
-    background-color: green;
+    place-items: end center;
 }
 article:nth-of-type(1){
     grid-area: v1;
@@ -97,7 +95,7 @@ article:nth-of-type(8){
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 80px repeat(8,200px) 40px;
         grid-template-areas: 
-        "h   b"
+        "h  b"
         "v1 v1"
         "v2 v2"
         "v3 v3"
@@ -107,10 +105,6 @@ article:nth-of-type(8){
         "v7 v7"
         "v8 v8"
         "f  f";
-/* h = header, b = busca e seguimos contentes */
-    }
-    header{
-        font-size: 28px;
     }
     footer{
         font-size: 12px;

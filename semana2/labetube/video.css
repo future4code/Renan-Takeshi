@@ -1,69 +1,65 @@
-* {
+*{
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 /* As medidas estão meio random, mas esse fds eu vou pesquisar sobre os layouts */
 main{
-    height: 100vh;
+    display: grid;
     width: 100vw;
     max-width: 1600px;
+    height: 100vh;
+    max-height: 1200px;
     row-gap: 20px;
-    display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 80px 60vh 1fr 40px;
     grid-template-areas: 
     "h h h b"
     "v v v v"
-    "e e e e"
+    ". . . ."
     "f f f f";
-/* h = header, b = busca, v = video, e = vazio(empty), f = footer */
+/* h = header, b = busca, v = video, . = vazio, f = footer */
 }
 header{
-    text-align: left;
-    font-size: 36px;
+    display: grid;
+    background-color: red;
     padding-left: 20px;
-    display: grid;
+    font-size: 36px;
+    place-items: center start;
     grid-area: h;
-    align-items: center;
-    background-color: red;
-}
-footer{
-    font-size: 28px;
-    display: grid;
-    grid-area: f;
-    align-items: center;
-    background-color: red;
 }
 #busca{
     display: grid;
-    grid-area: b;
-    align-items: center;
     background-color: red;
+    place-items: center;
+    grid-area: b;
 }
 #input-busca{
-    width: 80%;
+    width: 85%;
     height: 30px;
     font-size: 24px;
     text-align: left;
 }
-article{
-    cursor: pointer;
-    font-size: 36px;
-    margin-right: 10px;
-    margin-left: 10px;
-    border: 2px solid black;
+footer{
     display: grid;
-    grid-area: v;
-    align-items: center;
-    justify-content: center;
+    background-color: red;
+    font-size: 28px;
+    place-items: center;
+    grid-area: f;
+}
+article{
+    display: grid;
     background-color: green;
+    border: 2px solid black;
+    margin: 0 10px 0 10px;
+    font-size: 36px;
+    place-items: center;
+    grid-area: v;
 }
 video{
-    width: 80vw;
+    width: 80%;
 }
 iframe{
-    width: 80vw;
+    width: 80%;
 }
 @media screen and (max-width: 380px){
     main{
@@ -72,7 +68,7 @@ iframe{
         grid-template-areas: 
         "h b"
         "v v"
-        "e e"
+        ". ."
         "f f";
     }
     footer{
