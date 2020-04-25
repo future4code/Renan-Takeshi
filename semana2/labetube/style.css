@@ -106,7 +106,7 @@ article:nth-of-type(8){
 @media screen and (max-width: 380px){
     main{
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 80px 200px 200px 200px 200px 200px 200px 200px 200px 40px;
+        grid-template-rows: 80px repeat(8,200px) 40px;
         grid-template-areas: 
         "h   b"
         "v1 v1"
