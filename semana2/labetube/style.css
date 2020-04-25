@@ -3,13 +3,13 @@
     padding: 0;
     text-align: center;
 }
-
+/* width para a imagem não vazar; mas está distorcendo */
 img{
     width: 100%;
     max-width: 400px;
     max-height: 80%;
 }
-
+/* As medidas estão meio random, mas esse fds eu vou pesquisar sobre os layouts */
 main{
     height: 100vh;
     width: 100vw;
@@ -24,18 +24,29 @@ main{
     "v5 v6 v7 v8"
     "e  e  e  e"
     "f  f  f  f";
+/* h = header, b = busca, v# os quadrados dos videos, e = vazio(empty), f = footer */
 }
-
 header{
     font-size: 36px;
+    text-align: left;
     padding-left: 20px;
     display: grid;
     grid-area: h;
     align-items: center;
-    text-align: left;
     background-color: red;
 }
-
+#busca{
+    display: grid;
+    grid-area: b;
+    align-items: center;
+    background-color: red;
+}
+#input-busca{
+    width: 85%;
+    height: 30px;
+    font-size: 24px;
+    text-align: left;
+}
 footer{
     font-size: 28px;
     display: grid;
@@ -43,66 +54,44 @@ footer{
     align-items: center;
     background-color: red;
 }
-
-#busca{
-    display: grid;
-    grid-area: b;
-    align-items: center;
-    background-color: red;
-}
-
-#input-busca{
-    width: 85%;
-    height: 30px;
-    font-size: 24px;
-    text-align: left;
-}
-
 article{
     cursor: pointer;
     font-size: 24px;
     margin-left: 10px;
     display: grid;
-    align-items: flex-end;
+    align-items: end;
     justify-content: center;
     border: 2px solid black;
     background-color: green;
 }
-
 article:nth-of-type(1){
     grid-area: v1;
 }
-
 article:nth-of-type(2){
     grid-area: v2;
 }
-
 article:nth-of-type(3){
     grid-area: v3;
 }
-
 article:nth-of-type(4){
     grid-area: v4;
+/* margin para não colar, deve haver um jeito melhor. aceito sugestões! */
     margin-right: 10px;
 }
-
 article:nth-of-type(5){
     grid-area: v5;
 }
-
 article:nth-of-type(6){
     grid-area: v6;
 }
-
 article:nth-of-type(7){
     grid-area: v7;
 }
-
 article:nth-of-type(8){
     grid-area: v8;
+/* not my proudest moment */
     margin-right: 10px;
 }
-
 @media screen and (max-width: 380px){
     main{
         grid-template-columns: repeat(2, 1fr);
@@ -118,13 +107,16 @@ article:nth-of-type(8){
         "v7 v7"
         "v8 v8"
         "f  f";
+/* h = header, b = busca e seguimos contentes */
     }
-
     header{
         font-size: 28px;
     }
-
+    footer{
+        font-size: 12px;
+        font-weight: bold;
+    }
     article{
-        width: 93vw;
+        margin-right: 10px;
     }
 }

@@ -3,7 +3,7 @@
     padding: 0;
     text-align: center;
 }
-
+/* As medidas estão meio random, mas esse fds eu vou pesquisar sobre os layouts */
 main{
     height: 100vh;
     width: 100vw;
@@ -17,8 +17,8 @@ main{
     "v v v v"
     "e e e e"
     "f f f f";
+/* h = header, b = busca, v = video, e = vazio(empty), f = footer */
 }
-
 header{
     text-align: left;
     font-size: 36px;
@@ -28,7 +28,6 @@ header{
     align-items: center;
     background-color: red;
 }
-
 footer{
     font-size: 28px;
     display: grid;
@@ -36,21 +35,18 @@ footer{
     align-items: center;
     background-color: red;
 }
-
 #busca{
     display: grid;
     grid-area: b;
     align-items: center;
     background-color: red;
 }
-
 #input-busca{
     width: 80%;
     height: 30px;
     font-size: 24px;
     text-align: left;
 }
-
 article{
     cursor: pointer;
     font-size: 36px;
@@ -63,15 +59,12 @@ article{
     justify-content: center;
     background-color: green;
 }
-
 video{
     width: 80vw;
 }
-
 iframe{
     width: 80vw;
 }
-
 @media screen and (max-width: 380px){
     main{
         grid-template-columns: repeat(2, 1fr);
@@ -82,20 +75,17 @@ iframe{
         "e e"
         "f f";
     }
-
+    footer{
+        font-size: 12px;
+        font-weight: bold;
+    }
     article{
         font-size: 28px;
     }
-
     iframe{
         width: 100%;
     }
-
     video{
         width: 100%;
-    }
-
-    article{
-        width: 93vw;
     }
 }
