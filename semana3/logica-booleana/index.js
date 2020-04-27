@@ -53,4 +53,28 @@ const resultadoC = array[i]%array[1]
 console.log('VII. ', resultadoC)
 //VII. 1
 
+//Exercícios de escrita de código
+//Exercício 1.a
+function fahrenheitToKelvin(fahrenheit){
+    let kelvin = ((fahrenheit - 32) * (5/9)) + 273.15
+    return kelvin
+}
+console.log('77 graus Fahrenheit = ',fahrenheitToKelvin(77), "Kelvin")
 
+//Exercício 1.b
+function celciusToFahrenheit(celcius){
+    let fahrenheit = (celcius * (9/5)) + 32
+    return fahrenheit
+}
+console.log('80 graus Celcius = ',celciusToFahrenheit(80), "graus Fahrenheit")
+
+//Exercício 1.c
+let fahrenheit = celciusToFahrenheit(30)
+let kelvin = fahrenheitToKelvin(fahrenheit)
+console.log('30 graus Celcius = ', fahrenheit,'graus Fahrenheit = ', kelvin,'Kelvin')
+
+//Exercício 1.d
+let celcius = prompt("Qual valor Celcius deseja converter ?")
+fahrenheit = celciusToFahrenheit(celcius)
+kelvin = fahrenheitToKelvin(fahrenheit)
+console.log(celcius,'graus Celcius = ', fahrenheit,'graus Fahrenheit = ', kelvin, 'Kelvin')
