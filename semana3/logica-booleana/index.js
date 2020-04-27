@@ -104,3 +104,17 @@ console.log('4.', perguntas[3])
 console.log('Resposta:', respostas[3])
 console.log('5.', perguntas[4])
 console.log('Resposta:', respostas[4])
+
+//Exercício 3.a
+console.log("Exercício 3.a")
+function calculoCusto(consumo){
+    return consumo * 0.05; 
+}
+console.log('Valor a ser pago por 280kWh: R$',calculoCusto(280))
+//Exercício 3.b
+console.log("Exercício 3.b")
+function calculoCustoDesconto(consumo, desconto){
+    let bruto = consumo * 0.05;
+    return (bruto * (1 - desconto / 100));
+}
+console.log('Valor a ser pago por 280kWh com 15% de desconto: R$',calculoCustoDesconto(280,15))
