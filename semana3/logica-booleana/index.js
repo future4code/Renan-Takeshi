@@ -118,3 +118,21 @@ function calculoCustoDesconto(consumo, desconto){
     return (bruto * (1 - desconto / 100));
 }
 console.log('Valor a ser pago por 280kWh com 15% de desconto: R$',calculoCustoDesconto(280,15))
+
+//Desafios
+console.log('Desafios')
+//Desafio 1.a  - lb para kg (dividir por 2.205)
+console.log('20lb equivalem a', 20 / 2.205, 'kg')
+//Desafio 1.b - oz para kg (dividir por 35.274)
+console.log('10.5oz equivalem a', 10.5 / 35.274, 'kg')
+//Desafio 1.c - mi para m (multiplicar por 1609)
+console.log('100mi equivalem a', 100 * 1609, 'm')
+//Desafio 1.d - ft para m (multiplicar por 3.281)
+console.log('50ft equivalem a', 50 * 3.281, 'm')
+//Desafio 1.e - gal para l (multiplicar por 3.785)
+console.log('103.56gal equivalem a', 103.56 * 3.785, 'l')
+//Desafio 1.f - xic para l (multiplicar por 0.24)
+console.log('450xic equivalem a', 450 * 0.24, 'l')
+//Desafio 1.g - item a
+let unidade = prompt("Qual valor em lb deseja converter para kg ?")
+console.log(unidade, 'lb equivalem a', unidade / 2.205, 'kg')
