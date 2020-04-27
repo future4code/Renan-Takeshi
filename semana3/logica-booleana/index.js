@@ -1,6 +1,7 @@
 //Exercícios de interpretação de código
+console.log("Exercícios de interpretação de código")
 // Exercício 1
-console.log("Exercicio 1")
+console.log("Exercício 1")
 const bool1 = true
 const bool2 = false
 const bool3 = !bool2
@@ -25,7 +26,7 @@ console.log("e. ", typeof resultado)
 //b. O index inicial é 0
 //c. Usando o comando .lenght (ex: tamanho = array.lenght)
 //d.
-console.log("Exercicio 2")
+console.log("Exercício 2")
 let array
 console.log('I. ', array)
 //I. undefined
@@ -54,7 +55,9 @@ console.log('VII. ', resultadoC)
 //VII. 1
 
 //Exercícios de escrita de código
+console.log("Exercícios de escrita de código")
 //Exercício 1.a
+console.log("Exercício 1")
 function fahrenheitToKelvin(fahrenheit){
     let kelvin = ((fahrenheit - 32) * (5/9)) + 273.15
     return kelvin
@@ -78,3 +81,26 @@ let celcius = prompt("Qual valor Celcius deseja converter ?")
 fahrenheit = celciusToFahrenheit(celcius)
 kelvin = fahrenheitToKelvin(fahrenheit)
 console.log(celcius,'graus Celcius = ', fahrenheit,'graus Fahrenheit = ', kelvin, 'Kelvin')
+
+//Exercício 2
+console.log("Exercício 2")
+const perguntas = ["Oi, sou o JSbot, qual o seu nome ?",
+                   "Em que ano estamos ?",
+                   "Como é sentir o Sol na sua pele ?",
+                   "Você prefere praia ou montanha ?",
+                   "Qual o sentido da vida ?"]
+let respostas = [prompt(perguntas[0]), 
+                 prompt(perguntas[1]),
+                 prompt(perguntas[2]),
+                 prompt(perguntas[3]),
+                 prompt(perguntas[4])]
+console.log('1.', perguntas[0])
+console.log('Resposta:', respostas[0])
+console.log('2.', perguntas[1])
+console.log('Resposta:', respostas[1])
+console.log('3.', perguntas[2])
+console.log('Resposta:', respostas[2])
+console.log('4.', perguntas[3])
+console.log('Resposta:', respostas[3])
+console.log('5.', perguntas[4])
+console.log('Resposta:', respostas[4])
