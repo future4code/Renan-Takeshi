@@ -62,25 +62,25 @@ function fahrenheitToKelvin(fahrenheit){
     let kelvin = ((fahrenheit - 32) * (5/9)) + 273.15
     return kelvin
 }
-console.log('77 graus Fahrenheit = ',fahrenheitToKelvin(77), "Kelvin")
+console.log('a) 77 graus Fahrenheit = ',fahrenheitToKelvin(77), "Kelvin")
 
 //Exercício 1.b
 function celciusToFahrenheit(celcius){
     let fahrenheit = (celcius * (9/5)) + 32
     return fahrenheit
 }
-console.log('80 graus Celcius = ',celciusToFahrenheit(80), "graus Fahrenheit")
+console.log('b) 80 graus Celcius = ',celciusToFahrenheit(80), "graus Fahrenheit")
 
 //Exercício 1.c
 let fahrenheit = celciusToFahrenheit(30)
 let kelvin = fahrenheitToKelvin(fahrenheit)
-console.log('30 graus Celcius = ', fahrenheit,'graus Fahrenheit = ', kelvin,'Kelvin')
+console.log('c) 30 graus Celcius = ', fahrenheit,'graus Fahrenheit = ', kelvin,'Kelvin')
 
 //Exercício 1.d
 let celcius = prompt("Qual valor Celcius deseja converter ?")
 fahrenheit = celciusToFahrenheit(celcius)
 kelvin = fahrenheitToKelvin(fahrenheit)
-console.log(celcius,'graus Celcius = ', fahrenheit,'graus Fahrenheit = ', kelvin, 'Kelvin')
+console.log('d)', celcius,'graus Celcius = ', fahrenheit,'graus Fahrenheit = ', kelvin, 'Kelvin')
 
 //Exercício 2
 console.log("Exercício 2")
@@ -122,17 +122,17 @@ console.log('Valor a ser pago por 280kWh com 15% de desconto: R$',calculoCustoDe
 //Desafios
 console.log('Desafios')
 //Desafio 1.a  - lb para kg (dividir por 2.205)
-console.log('20lb equivalem a', (20 / 2.205).toFixed(2), 'kg')
+console.log('a) 20lb equivalem a', (20 / 2.205).toFixed(2), 'kg')
 //Desafio 1.b - oz para kg (dividir por 35.274)
-console.log('10.5oz equivalem a', (10.5 / 35.274).toFixed(2), 'kg')
+console.log('b) 10.5oz equivalem a', (10.5 / 35.274).toFixed(2), 'kg')
 //Desafio 1.c - mi para m (multiplicar por 1609)
-console.log('100mi equivalem a', (100 * 1609).toFixed(2), 'm')
+console.log('c) 100mi equivalem a', (100 * 1609).toFixed(2), 'm')
 //Desafio 1.d - ft para m (multiplicar por 3.281)
-console.log('50ft equivalem a', (50 * 3.281).toFixed(2), 'm')
+console.log('d) 50ft equivalem a', (50 * 3.281).toFixed(2), 'm')
 //Desafio 1.e - gal para l (multiplicar por 3.785)
-console.log('103.56gal equivalem a', (103.56 * 3.785).toFixed(2), 'l')
+console.log('e) 103.56gal equivalem a', (103.56 * 3.785).toFixed(2), 'l')
 //Desafio 1.f - xic para l (multiplicar por 0.24)
-console.log('450xic equivalem a', (450 * 0.24).toFixed(2), 'l')
+console.log('f) 450xic equivalem a', (450 * 0.24).toFixed(2), 'l')
 //Desafio 1.g - item a
 let unidade = prompt("Qual valor em lb deseja converter para kg ?")
-console.log(unidade, 'lb equivalem a', (unidade / 2.205).toFixed(2), 'kg')
+console.log('g)', unidade, 'lb equivalem a', (unidade / 2.205).toFixed(2), 'kg')
