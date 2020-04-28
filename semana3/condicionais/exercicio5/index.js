@@ -1,15 +1,27 @@
-let bool1 = true
-let bool2 = false
-let bool3 = true
-
-let resultado1 = bool1 || bool2
-console.log(!resultado1)
-
-let resultado2 = bool2 || bool3
-console.log(resultado2)
-
-let resultado3 = bool1 || bool3
-console.log(resultado3)
-
-let resultado4 = bool1 || bool2 || bool3
-console.log(resultado4)
+if(prompt("Possui ossos ? Responda S ou N").toUpperCase() === "N"){
+    // Não possui ossos é invertebrado
+    console.log("Invertebrado")}
+else if(prompt("É terrestre ? Responda S ou N").toUpperCase() === "N"){
+    // Não é terrestre, então é peixe
+    console.log("Peixe")}
+else if(prompt("Possui penas ? Responda S ou N").toUpperCase() === "S"){
+    // Possui penas é ave
+    console.log("Ave")}
+else if(prompt("Possui pelos ? Responda S ou N").toUpperCase() === "N"){
+    // Não possui pelos, pode ser anfibio ou reptil
+    if(prompt("Morou na água ? Responda S ou N").toUpperCase() === "S")
+    {
+        // Morou na agua é anfibio
+        console.log("Anfibio")}
+    else{
+        // Não morou na agua é reptil
+        console.log("Reptil")}}
+else{
+    // Possui pelos, pode ser humano ou não-humano
+    if(prompt("É racional ? Responda S ou N").toUpperCase() === "S"){
+        // Racional é humano
+        console.log("Ser-Humano")
+    }
+        // Não racional, não humano
+    else{console.log("Mamifero não-humano")}
+}
