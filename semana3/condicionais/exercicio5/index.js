@@ -1,3 +1,6 @@
+// Link para o diagrama:
+// https://user-images.githubusercontent.com/10583511/80531098-6f028500-8970-11ea-9bf0-0294da1bed84.png
+
 if(prompt("Possui ossos ? Responda S ou N").toUpperCase() === "N"){
     // Não possui ossos é invertebrado
     console.log("Invertebrado")}

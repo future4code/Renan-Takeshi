@@ -39,7 +39,6 @@ if(terceiroNumero > segundoNumero && segundoNumero < primeiroNumero){
 // Se digitar números iguais nada acontece
 
 // c.
-console.log("item c")
 if(primeiroNumero === segundoNumero && segundoNumero === terceiroNumero){
-    alert("Os primeiros 2 números devem ser diferente!")
+    console.log("Os primeiros 2 números devem ser diferente!")
 }
