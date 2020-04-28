@@ -1,6 +1,6 @@
 // Atribui a string digitada pelo usuário para a variavel respostaDoUsuario
 const respostaDoUsuario = prompt("Digite o número que você quer testar?")
-// Cast da respostaDoUsuario para o tipo Number
+// Cast da respostaDoUsuario para o tipo Number e atribuição para a variavel numero
 const numero = Number(respostaDoUsuario)
 
 // O operador % devolve o resto de uma divisão
