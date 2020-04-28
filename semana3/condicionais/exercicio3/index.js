@@ -1,13 +1,16 @@
-let array = [1, 2, 3, 4, 5, 6]
-let tamanhoDoArray = array.length
-console.log("O tamanho é", tamanhoDoArray)
+const numero1 = prompt("Digite o primeiro número.")
+const numero2 = prompt("Digite o próximo número?")
 
-console.log("Primeiro elemento:", array[0])
-console.log("Terceiro elemento:", array[2])
-console.log("Último elemento:", array[5])
+if(numero1 > 0 && numero2 > 0) {
+  let mensagem
+  if(numero1 > numero2) {
+    mensagem = "Número 1 é maior que o 2!"
+  } else {
+    mensagem = "Número 1 é menor ou igual ao 2!"
+  }
+}
 
-array[0] *= 2 // Mesma coisa que: array[0] = array[0] * 2
-array[2] *= 2
-array[4] *= 2
-
-console.log(array)
+console.log(mensagem)
+// Uncaught ReferenceError: mensagem is not defined
+// O erro acontece pois a variavel mensagem foi declarada dentro do bloco if
+// o comando console.log(mensagem) está fora do bloco, logo não tem acesso a mensagem
