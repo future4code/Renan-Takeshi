@@ -1,15 +1,45 @@
-let bool1 = true
-let bool2 = false
-let bool3 = true
+// a.
+console.log("item a")
+let primeiroNumero = Number(prompt("Digite o primeiro número"))
+let segundoNumero = Number(prompt("Digite o segundo número"))
+if(primeiroNumero < segundoNumero){
+    console.log(segundoNumero, primeiroNumero)
+} else{
+    console.log(primeiroNumero, segundoNumero)
+}
+// Quando os dois números são iguais cai no else e imprime os dois números
 
-resultado1 = bool2 && bool1
-console.log(resultado1)
+// b.
+console.log("item b")
+let terceiroNumero = Number(prompt("Digite o terceiro número"))
+// 3 2 1
+if(primeiroNumero > segundoNumero && segundoNumero > terceiroNumero){
+    console.log(primeiroNumero, segundoNumero, terceiroNumero)
+}else
+// 3 1 2
+if(primeiroNumero > segundoNumero && segundoNumero < terceiroNumero && terceiroNumero < primeiroNumero){
+    console.log(primeiroNumero, terceiroNumero, segundoNumero)
+}else
+// 1 3 2
+if(segundoNumero > terceiroNumero && terceiroNumero > primeiroNumero){
+    console.log(segundoNumero, terceiroNumero, primeiroNumero)
+}else 
+// 2 3 1
+if(segundoNumero > terceiroNumero && terceiroNumero < primeiroNumero){
+    console.log(segundoNumero, primeiroNumero, terceiroNumero)
+}else
+// 1 2 3
+if(terceiroNumero > segundoNumero && segundoNumero > primeiroNumero){
+    console.log(terceiroNumero, segundoNumero, primeiroNumero)
+}else
+// 2 1 3
+if(terceiroNumero > segundoNumero && segundoNumero < primeiroNumero){
+    console.log(terceiroNumero, primeiroNumero, segundoNumero)
+}
+// Se digitar números iguais nada acontece
 
-resultado2 = bool3 && bool2
-console.log(resultado2)
-
-resultado3 = bool1 && bool3
-console.log(resultado3)
-
-resultado4 = bool1 && bool2 && bool3
-console.log(resultado4)
+// c.
+console.log("item c")
+if(primeiroNumero === segundoNumero && segundoNumero === terceiroNumero){
+    alert("Os primeiros 2 números devem ser diferente!")
+}
