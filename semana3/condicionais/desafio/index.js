@@ -47,13 +47,15 @@ console.log(`Quantidade de ingressos: ${quantidade}`)
 console.log("---Valores---")
 // Valor total
 valorTotal = valorIngresso * quantidade
-if(tipo === "IN"){
-    valorIngresso = valorIngresso * 4.1
-    valorTotal = valorTotal * 4.1
-    console.log(`Valor do ingresso: U$${valorIngresso}`)
-    console.log(`Valor do total: U$${valorTotal}`)
-}
-if(tipo === "DO"){
-    console.log(`Valor do ingresso: R$${valorIngresso}`)
-    console.log(`Valor do total: R$${valorTotal}`)
+switch (tipo){
+    case "IN":
+        valorIngresso = valorIngresso * 4.1
+        valorTotal = valorTotal * 4.1
+        console.log(`Valor do ingresso: U$${valorIngresso}`)
+        console.log(`Valor do total: U$${valorTotal}`)
+        break;
+    case "DO":
+        console.log(`Valor do ingresso: R$${valorIngresso}`)
+        console.log(`Valor do total: R$${valorTotal}`)
+    break;
 }
