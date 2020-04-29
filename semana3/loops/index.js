@@ -29,13 +29,12 @@ console.log(novaLista)
 
 //**Exercícios de escrita de código**
 // Exercício 3
+console.log('Exercício 3')
 // Este array será usado para exemplificar as respostas de todos os itens
 const array = [80, 30, 130, 40, 60, 21, 70, 120, 90, 103, 110, 55]
-
+console.log(`array = ${array}`)
 // 3.a
 // Devolvendo o maior número do array
-console.log('Exercício 3')
-console.log(`array = ${array}`)
 console.log('item a')
 let maior = 0
 for(let numero of array){
