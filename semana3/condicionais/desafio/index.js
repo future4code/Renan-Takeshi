@@ -20,7 +20,7 @@ console.log(`Nome do cliente: ${nome}`)
 switch(tipo){
     case "IN":
         console.log("Tipo de jogo: Internacional")
-    break;
+        break;
     case "DO":
         console.log("Tipo de jogo: Nacional")
         break;
