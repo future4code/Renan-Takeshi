@@ -57,5 +57,5 @@ switch (tipo){
     case "DO":
         console.log(`Valor do ingresso: R$${valorIngresso}`)
         console.log(`Valor do total: R$${valorTotal}`)
-    break;
+        break;
 }
