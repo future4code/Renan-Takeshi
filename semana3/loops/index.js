@@ -129,7 +129,7 @@ console.log(`O número de tentativos foi: ${tentativas}`)
 // Desafio 3
 // Jogo de adivinhação de número com 1 jogador e objetivo random
 console.log('Desafio 3')
-const aleatorio = Math.floor((Math.random() * 100))
+const aleatorio = Math.ceil((Math.random() * 100))
 console.log('Vamos jogar!')
 chute = null
 tentativas = 0
