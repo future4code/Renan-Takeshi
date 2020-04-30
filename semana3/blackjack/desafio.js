@@ -37,14 +37,13 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
       }  
    // A pontuação pra dois A é 22
    }while(pontuacaoUsuario === 22 || pontuacaoComputador === 22)
-   alert(`Suas cartas são ${cartasUsuario}. A carta revelada do computador é ${cartasComputador[0]}`)
    
    // Usuario comprando cartas
-   while(pontuacaoUsuario <= 21 && confirm('Deseja comprar mais uma carta ?')){
+   while(pontuacaoUsuario <= 21 && confirm(`Suas cartas são ${cartasUsuario}. A carta revelada do computador é ${cartasComputador[0]}\n`+
+                                           'Deseja comprar mais uma carta ?')){
       novaCompra = comprarCarta()
       cartasUsuario.push(novaCompra.texto)
       pontuacaoUsuario += novaCompra.valor
-      alert(`Suas cartas são ${cartasUsuario}. A carta revelada do computador é ${cartasComputador[0]}`)
    }
    // Pontuacao do usuario extrapolou 21
    if(pontuacaoUsuario > 21){
