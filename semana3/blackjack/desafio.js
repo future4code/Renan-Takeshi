@@ -49,7 +49,7 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
    // Pontuacao do usuario extrapolou 21
    if(pontuacaoUsuario > 21){
       alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}\n`+
-      `O usuário perdeu pois ultrapassou 21!`)
+            `O usuário perdeu pois ultrapassou 21!`)
    }else{
       // Loop do computador comprando cartas
       while(pontuacaoComputador < pontuacaoUsuario){
