@@ -27,8 +27,8 @@ while(confirm('Quer iniciar uma nova rodada ?')){
    computador[0] = comprarCarta()
    computador[1] = comprarCarta()
    // Calculo da pontuacao dos jogadores
-   usuario[2] = usuario[0].valor+usuario[1].valor
-   computador[2] = computador[0].valor+computador[1].valor
+   usuario[2] = usuario[0].valor + usuario[1].valor
+   computador[2] = computador[0].valor + computador[1].valor
    // Imprime cartas e pontuação
    console.log(`Usuário - cartas ${usuario[0].texto},${usuario[1].texto} - pontuação ${usuario[2]}`)
    console.log(`Computador - cartas ${computador[0].texto},${computador[1].texto} - pontuação ${computador[2]}`)
