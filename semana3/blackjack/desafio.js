@@ -15,16 +15,15 @@
 console.log('Bem vindo ao jogo de Blackjack! - Desafio')
 // Loop principal do jogo
 while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
-   // Iniciando variaveis
-   // Aqui faz mais sentido iniciar dentro do loop!
-   let cartasUsuario = []
-   let cartasComputador = []
-   let pontuacaoUsuario = 0
-   let pontuacaoComputador = 0
-   let novaCompra = null
+   // Aqui faz mais sentido declarar dentro do loop!
+   let cartasUsuario, cartasComputador, pontuacaoUsuario, pontuacaoComputador, novaCompra
    // Comprando cartas iniciais
-   // Tô me sentindo meio trapaceiro por usar do-while =/
    do{
+      // Inicializando as variaveis
+      cartasUsuario = []
+      cartasComputador = []
+      pontuacaoUsuario = 0
+      pontuacaoComputador = 0
       for(let i =0; i < 2; i++){
          novaCompra = comprarCarta()
          cartasUsuario.push(novaCompra.texto)
