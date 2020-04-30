@@ -15,7 +15,8 @@
 console.log('Bem vindo ao jogo de Blackjack! - Desafio')
 // Loop principal do jogo
 while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
-   // Aqui faz mais sentido declarar dentro do loop!
+   // Aqui eu declarei dentro do loop, qual será que usa menos memória ?
+   // Mas será que faz diferença já que o navegador por padrão vai consumir memória ordens de magnitude maior ??!?
    let cartasUsuario, cartasComputador, pontuacaoUsuario, pontuacaoComputador, novaCompra
    // Comprando cartas iniciais
    do{
