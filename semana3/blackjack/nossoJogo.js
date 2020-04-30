@@ -30,8 +30,8 @@ while(confirm('Quer iniciar uma nova rodada ?')){
    usuario[2] = usuario[0].valor+usuario[1].valor
    computador[2] = computador[0].valor+computador[1].valor
    // Imprime cartas e pontuação
-   console.log(`Usuário - cartas ${usuario[0].texto}${usuario[1].texto} - pontuação ${usuario[2]}`)
-   console.log(`Computador - cartas ${computador[0].texto}${computador[1].texto} - pontuação ${computador[2]}`)
+   console.log(`Usuário - cartas ${usuario[0].texto},${usuario[1].texto} - pontuação ${usuario[2]}`)
+   console.log(`Computador - cartas ${computador[0].texto},${computador[1].texto} - pontuação ${computador[2]}`)
    // Testa qual vencedor
    if(usuario[2] > computador[2]){
       console.log('O usuário ganhou!')

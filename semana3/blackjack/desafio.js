@@ -40,7 +40,7 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
    alert(`Suas cartas são ${cartasUsuario}. A carta revelada do computador é ${cartasComputador[0]}`)
    
    // Usuario comprando cartas
-   while(confirm('Deseja comprar mais uma carta ?')){
+   while(pontuacaoUsuario <= 21 && confirm('Deseja comprar mais uma carta ?')){
       novaCompra = comprarCarta()
       cartasUsuario.push(novaCompra.texto)
       pontuacaoUsuario += novaCompra.valor
