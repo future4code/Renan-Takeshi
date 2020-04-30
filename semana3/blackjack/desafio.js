@@ -39,7 +39,8 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
    }while(pontuacaoUsuario === 22 || pontuacaoComputador === 22)
    
    // Usuario comprando cartas
-   while(pontuacaoUsuario < 21 && confirm(`Suas cartas são ${cartasUsuario}. A carta revelada do computador é ${cartasComputador[0]}\n`+
+   // Não pode comprar se for maior que 19, pois vai perder já que o valor mínimo é 2
+   while(pontuacaoUsuario < 20 && confirm(`Suas cartas são ${cartasUsuario}. A carta revelada do computador é ${cartasComputador[0]}\n`+
                                           'Deseja comprar mais uma carta ?')){
       novaCompra = comprarCarta()
       cartasUsuario.push(novaCompra.texto)
