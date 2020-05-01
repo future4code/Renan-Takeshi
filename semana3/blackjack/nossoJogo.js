@@ -28,6 +28,6 @@ while(confirm('Quer iniciar uma nova rodada ?')){
    } else{
       console.log('Empate!')
    }
-}
+} // Fim do loop principal - linha 9
 // Término do jogo
 console.log('O jogo acabou')
