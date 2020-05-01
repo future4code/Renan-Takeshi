@@ -27,7 +27,7 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
    
    // Usuario comprando cartas
    // Não pode comprar se for maior que 19, pois vai perder já que o valor mínimo é 2
-   while(pontuacaoUsuario < 20 && confirm(`Suas cartas são ${cartasUsuario}. A carta revelada do computador é ${cartasComputador[0]}\n`+
+   while(pontuacaoUsuario < 20 && confirm(`Suas cartas são ${cartasUsuario.join(" ")}. A carta revelada do computador é ${cartasComputador[0]}\n`+
                                           'Deseja comprar mais uma carta ?')){
       novaCompra = comprarCarta()
       cartasUsuario.push(novaCompra.texto)
@@ -35,8 +35,8 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
    }
    // Pontuacao do usuario extrapolou 21
    if(pontuacaoUsuario > 21){
-      alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
-            `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
+      alert(`Suas cartas são ${cartasUsuario.join(" ")}. Sua pontuação é ${pontuacaoUsuario}.\n`+
+            `As cartas do computador são ${cartasComputador.join(" ")}. A pontuação do computador é ${pontuacaoComputador}.\n`+
             `O computador ganhou!`)
    }else{
       // Loop do computador comprando cartas
@@ -47,17 +47,17 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
       }
       // Checando o vencedor        (Acho que essa segunda condicão é irrelevante e nunca vai ser checada, mas eu gosto dela então ela fica =)
       if(pontuacaoComputador > 21 || pontuacaoUsuario > pontuacaoComputador){
-         alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
-               `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
+         alert(`Suas cartas são ${cartasUsuario.join(" ")}. Sua pontuação é ${pontuacaoUsuario}.\n`+
+               `As cartas do computador são ${cartasComputador.join(" ")}. A pontuação do computador é ${pontuacaoComputador}.\n`+
                `O usuário ganhou!`)
       }else
       if(pontuacaoComputador > pontuacaoUsuario){
-         alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
-               `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
+         alert(`Suas cartas são ${cartasUsuario.join(" ")}. Sua pontuação é ${pontuacaoUsuario}.\n`+
+               `As cartas do computador são ${cartasComputador.join(" ")}. A pontuação do computador é ${pontuacaoComputador}.\n`+
                `O computador ganhou!`)
       }else{
-         alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
-               `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
+         alert(`Suas cartas são ${cartasUsuario.join(" ")}. Sua pontuação é ${pontuacaoUsuario}.\n`+
+               `As cartas do computador são ${cartasComputador.join(" ")}. A pontuação do computador é ${pontuacaoComputador}.\n`+
                `Empate!`)
       } // Fim da checagem de vencedor - linha 49
    } // Fim do if-else - linha 37
