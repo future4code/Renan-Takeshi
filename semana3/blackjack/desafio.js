@@ -45,7 +45,7 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
          cartasComputador.push(novaCompra.texto)
          pontuacaoComputador += novaCompra.valor
       }
-      // Checando o vencedor        (Acho que essa segunda condicão é irrelevante e nunca vai ser checada)
+      // Checando o vencedor        (Acho que essa segunda condicão é irrelevante e nunca vai ser checada, mas eu gosto dela então ela fica =)
       if(pontuacaoComputador > 21 || pontuacaoUsuario > pontuacaoComputador){
          alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
                `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
