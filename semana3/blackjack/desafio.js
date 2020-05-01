@@ -46,12 +46,7 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
          pontuacaoComputador += novaCompra.valor
       }
       // Checando o vencedor
-      if(pontuacaoComputador > 21){
-         alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
-               `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
-               `O usuário ganhou!`)
-      }else
-      if(pontuacaoUsuario > pontuacaoComputador){
+      if(pontuacaoComputador > 21 || pontuacaoUsuario > pontuacaoComputador){
          alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
                `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
                `O usuário ganhou!`)
