@@ -76,8 +76,8 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
          alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
                `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
                `Empate!`)
-      }
-   }
-}
+      } // Fim da checagem de vencedor - linha 61
+   } // Fim do if-else - linha 50
+} // Fim do loop princial - linha 17
 // Término do jogo
 console.log('O jogo acabou')
