@@ -35,8 +35,9 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
    }
    // Pontuacao do usuario extrapolou 21
    if(pontuacaoUsuario > 21){
-      alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}\n`+
-            `O usuário perdeu pois ultrapassou 21!`)
+      alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
+            `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
+            `O computador ganhou!`)
    }else{
       // Loop do computador comprando cartas
       while(pontuacaoComputador < pontuacaoUsuario){
@@ -58,12 +59,12 @@ while(confirm('Quer iniciar uma nova rodada ? - Desafio')){
       if(pontuacaoComputador > pontuacaoUsuario){
          alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
                `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
-               `O computador ganhou ganhou!`)
+               `O computador ganhou!`)
       }else{
          alert(`Suas cartas são ${cartasUsuario}. Sua pontuação é ${pontuacaoUsuario}.\n`+
                `As cartas do computador são ${cartasComputador}. A pontuação do computador é ${pontuacaoComputador}.\n`+
                `Empate!`)
-      } // Fim da checagem de vencedor - linha 48
+      } // Fim da checagem de vencedor - linha 49
    } // Fim do if-else - linha 37
 } // Fim do loop princial - linha 4
 // Término do jogo
