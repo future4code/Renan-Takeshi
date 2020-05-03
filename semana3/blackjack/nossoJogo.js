@@ -1,7 +1,6 @@
 // Mensagem de boas vindas
 console.log('Bem vindo ao jogo de Blackjack!')
-
-// Iniciando variaveis
+// Inicializando variaveis
 // Qual pratica seria melhor, declarar aqui ou dentro do while ?
 let usuario = []
 let computador = []
