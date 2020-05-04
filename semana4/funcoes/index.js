@@ -78,7 +78,7 @@ const idadeCachorro = (idadeHumana) => {
   return idadeHumana * 7
 }
 console.log(`4 anos humanos são ${idadeCachorro(4)} anos em idade de cachorro`)
-// 28
+// 4 anos humanos são 28 anos em idade de cachorro
 
 // Item b
 console.log('Exercício 4b')
@@ -109,7 +109,7 @@ const qualSeculo = (ano) => {
   }
 }
 console.log(qualSeculo(1001))
-// O ano 901 pertence ao século XI
+// O ano 1001 pertence ao século XI
 
 // Exercício 6
 // Item a
