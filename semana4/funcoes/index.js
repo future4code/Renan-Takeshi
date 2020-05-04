@@ -12,15 +12,20 @@ const minhaFuncao = (quantidade) => {
 // Item a
 console.log(minhaFuncao(2))
 // []
+// vazio pois quando i = 0, j não é menor que i
+// somente 1 iteração pois i = 2 não é menor que quantidade
 
 // Item b
 console.log(minhaFuncao(5))
 // [0, 1, 0, 1, 2, 3]
+// duas iterações quando i = 2 e i = 4
+// não imprime o 5 pois o i pula para 6, que é maior que quantidade
 
 // Item c
 console.log(minhaFuncao(8))
 // [0, 1, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5]
-
+// tres iterações quando i = 2, i = 4 e i = 6
+// não itera quando i = 8, pois não é menor que 8
 
 // Exercício 2
 console.log('Exercício 2')
