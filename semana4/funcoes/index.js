@@ -13,7 +13,7 @@ const minhaFuncao = (quantidade) => {
 console.log(minhaFuncao(2))
 // []
 // vazio pois quando i = 0, j não é menor que i
-// somente 1 iteração pois i = 2 não é menor que quantidade
+// nenhuma iteração no loop interno 
 
 // Item b
 console.log(minhaFuncao(5))
