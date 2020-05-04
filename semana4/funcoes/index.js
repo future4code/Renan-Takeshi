@@ -1,4 +1,5 @@
 // Exercício 1
+console.log('Exercício 1')
 const minhaFuncao = (quantidade) => {
 	const array = []
 	for(let i = 0; i < quantidade; i+=2) {
@@ -22,6 +23,7 @@ console.log(minhaFuncao(8))
 
 
 // Exercício 2
+console.log('Exercício 2')
 let arrayDeNomes = ["Darvas", "Goli", "João", "Paulinha", "Soter"];
 
 const funcao = (lista, nome) => {
@@ -45,6 +47,7 @@ console.log(funcao(arrayDeNomes, "Paula"));
 // Sim, funcionaria, pois compara dois parametros do mesmo tipo, Number
 
 // Exercício 3
+console.log('Exercício 3 (nos comentários)')
 function metodo(array) {
   let resultadoA = 0;
   let resultadoB = 1;
@@ -65,13 +68,15 @@ function metodo(array) {
 
 // Exercício 4
 // Item a
+console.log('Exercício 4a')
 const idadeCachorro = (idadeHumana) => {
   return idadeHumana * 7
 }
-console.log(idadeCachorro(4))
+console.log(`4 anos humanos são ${idadeCachorro(4)} anos em idade de cachorro`)
 // 28
 
 // Item b
+console.log('Exercício 4b')
 const infoPessoal = (nome, idade, endereco, ehEstudante) => {
   if(typeof(nome) === 'string' && typeof(idade) === 'number' && typeof(endereco) === 'string' && typeof(ehEstudante) === 'boolean'){
     let stringEstudante
@@ -89,6 +94,7 @@ console.log(infoPessoal('Renan', 34, 'Alameda 42 número 37', true))
 // Eu sou Renan, tenho 34 anos, moro em Alameda 42 número 37 e sou estudante.
 
 // Exercício 5
+console.log('Exercício 5')
 const qualSeculo = (ano) => {
   if(typeof(ano) === 'number'){
     const algarismosRomanos = [0,1,2,3,4,5,6,7,8,9,'X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI']
@@ -102,6 +108,7 @@ console.log(qualSeculo(1001))
 
 // Exercício 6
 // Item a
+console.log('Exercício 6a')
 const array = [10, 23, 45, 78, 90, 52, 35, 67, 84, 22]
 const quantidadeElementos = (array) => {
   return array.length
@@ -110,6 +117,7 @@ console.log(`O array possui ${quantidadeElementos(array)} elementos`)
 // O array possui 10 elementos
 
 // Item b
+console.log('Exercício 6b')
 const ehPar = (numero) => {
   if(numero % 2 === 0){
     return true
@@ -120,6 +128,7 @@ console.log(ehPar(1))
 // false
 
 // Item c
+console.log('Exercício 6c')
 const quantosPares = (array) => {
   let contador = 0
   for(let numero of array){
@@ -133,6 +142,7 @@ console.log(quantosPares(array))
 // 6
 
 // Item d
+console.log('Exercício 6d')
 const quantosPares2 = (array) => {
   let contador = 0
   for(let numero of array){
