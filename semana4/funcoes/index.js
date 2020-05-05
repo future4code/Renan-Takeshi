@@ -101,12 +101,8 @@ console.log(infoPessoal('Renan', 34, 'Alameda 42 número 37', true))
 // Exercício 5
 console.log('Exercício 5')
 const qualSeculo = (ano) => {
-  if(typeof(ano) === 'number'){
-    const algarismosRomanos = ['NÃO EXISTE ANO 0!','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI']
-    return `O ano ${ano} percente ao século ${algarismosRomanos[Math.ceil(ano/100)]}`
-  }else{
-    console.log('Argumento incorreto!')
-  }
+  const algarismosRomanos = ['NÃO EXISTE ANO 0!','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI']
+  return `O ano ${ano} percente ao século ${algarismosRomanos[Math.ceil(ano/100)]}`
 }
 console.log(qualSeculo(1001))
 // O ano 1001 pertence ao século XI
