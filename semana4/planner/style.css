@@ -7,6 +7,9 @@ p{
     text-align: center;
     font-size: 20px;
 }
+li{
+    margin-left: 20px;
+}
 main{
     display: grid;
     width: 100vw;

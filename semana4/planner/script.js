@@ -37,7 +37,7 @@ function limparTarefas(){
         // Cria uma div pra cada hora do dia - Desafio 4
         for(let dia of dias){
             for(let i = 0; i < 24; i++){
-                dia.innerHTML += `<div id="${dia.id}${i}">${i}h:</div>`
+                dia.innerHTML += `<ul id="${dia.id}${i}">${i}h:</ul>`
             }
         }
 }
