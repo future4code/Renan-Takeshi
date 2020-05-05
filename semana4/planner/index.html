@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script defer type="application/javascript" src="script.js"></script>
+    <title>Planner</title>
+</head>
+<body>
+    <main>
+        <div id="entrada">
+            <input type="text" id="texto" placeholder="Digite aqui a sua tarefa">
+            <select id="dia">
+                <option value="" disabled selected>Selecione um dia</option>
+                <option value="segunda">Segunda</option>
+                <option value="terca">Terça</option>
+                <option value="quarta">Quarta</option>
+                <option value="quinta">Quinta</option>
+                <option value="sexta">Sexta</option>
+                <option value="sabado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+            <button id="botao" onclick="adicionarTarefa()">Adicionar</button>
+            <button id="limpar" onclick="limparTarefas()">Limpar tarefas</button>
+        </div>
+        <div id="segunda" class="dia"></div>
+        <div id="terca" class="dia"></div>
+        <div id="quarta" class="dia"></div>
+        <div id="quinta" class="dia"></div>
+        <div id="sexta" class="dia"></div>
+        <div id="sabado" class="dia"></div>
+        <div id="domingo" class="dia"></div>
+    </main>
+</body>
+</html>
