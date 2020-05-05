@@ -28,8 +28,11 @@ main{
 #selectDia{
     font-size: 18px;
 }
+#botoes{
+    display: flex;
+}
 .botao{
-    width: 49%;
+    width: 50%;
     height: 100%;
 }
 #segunda{
