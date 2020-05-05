@@ -1,7 +1,7 @@
 function adicionarTarefa(){
     let texto = document.getElementById("texto")
     if(validarTexto(texto.value)){
-        let divDia = document.getElementById(document.getElementById("dia").value)
+        let divDia = document.getElementById(document.getElementById("selectDia").value)
         divDia.innerHTML += `<li onclick="riscarTarefa(this)">${texto.value}</li>`
         texto.value = ""
     }else{

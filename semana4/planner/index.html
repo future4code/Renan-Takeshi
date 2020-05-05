@@ -12,7 +12,7 @@
     <main>
         <div id="entrada">
             <input type="text" id="texto" placeholder="Digite aqui a sua tarefa">
-            <select id="dia">
+            <select id="selectDia">
                 <option value="" disabled selected>Selecione um dia</option>
                 <option value="segunda">Segunda</option>
                 <option value="terca">Terça</option>
@@ -22,8 +22,10 @@
                 <option value="sábado">Sábado</option>
                 <option value="domingo">Domingo</option>
             </select>
-            <button id="botao" onclick="adicionarTarefa()">Adicionar</button>
-            <button id="limpar" onclick="limparTarefas()">Limpar tarefas</button>
+            <div>
+                <button class="botao" onclick="adicionarTarefa()">Adicionar</button>
+                <button class="botao" onclick="limparTarefas()">Limpar tarefas</button>
+            </div>
         </div>
         <div id="segunda" class="dia"><p>Segunda</p></div>
         <div id="terca" class="dia"><p>Terça</p></div>

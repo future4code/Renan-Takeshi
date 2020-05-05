@@ -21,6 +21,17 @@ main{
     display: grid;
     grid-area: ent;
 }
+#texto{
+    font-size: 18px;
+    padding-left: 5px;
+}
+#selectDia{
+    font-size: 18px;
+}
+.botao{
+    width: 49%;
+    height: 100%;
+}
 #segunda{
     display: flex;
     flex-direction: column;
