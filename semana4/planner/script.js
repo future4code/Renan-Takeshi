@@ -1,5 +1,3 @@
-limparTarefas()
-
 function adicionarTarefa(){
     let texto = document.getElementById("texto")
     if(validarTexto(texto.value)){
@@ -24,9 +22,11 @@ function riscarTarefa(li){
 
 // Desafio 3
 function limparTarefas(){
-    let dias = document.getElementsByClassName("dia")
-    for (let dia of dias){
-        dia.innerHTML = `<p>${dia.id.replace(dia.id.charAt(0),dia.id.charAt(0).toUpperCase())}</p>`
+    if(confirm('Deseja limpar todas as tarefas ?')){
+       let dias = document.getElementsByClassName("dia")
+        for (let dia of dias){
+            dia.innerHTML = `<p>${dia.id.replace(dia.id.charAt(0),dia.id.charAt(0).toUpperCase())}</p>`
+        }
     }
 }
 
