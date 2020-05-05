@@ -1,8 +1,10 @@
+limparTarefas()
+
 function adicionarTarefa(){
     let texto = document.getElementById("texto")
     if(validarTexto(texto.value)){
-        let dia = document.getElementById(document.getElementById("dia").value)
-        dia.innerHTML += `<p onclick="riscarTarefa(this)">${texto.value}</p>`
+        let divDia = document.getElementById(document.getElementById("dia").value)
+        divDia.innerHTML += `<li onclick="riscarTarefa(this)">${texto.value}</li>`
         texto.value = ""
     }else{
         alert('Digite algo!')
@@ -11,23 +13,44 @@ function adicionarTarefa(){
 
 // Desafio 1
 function validarTexto(texto){
-    if(texto.length === 0){return false}
+    if(texto.replace(/ /g,"").length === 0){return false}
     return true
 }
 
 // Desafio 2
-function riscarTarefa(p){
-    p.style.textDecoration = "line-through"
+function riscarTarefa(li){
+    li.style.textDecoration = "line-through"
 }
 
 // Desafio 3
 function limparTarefas(){
     let dias = document.getElementsByClassName("dia")
     for (let dia of dias){
-        dia.innerHTML = ""
+        dia.innerHTML = `<p>${dia.id.replace(dia.id.charAt(0),dia.id.charAt(0).toUpperCase())}</p>`
     }
 }
 
 // Desafio 4
 
+
 // Desafio 5 no CSS
+
+// Pra funcionar quando apertar Enter
+const texto = document.getElementById("texto");
+texto.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("botao").click();
+    }
+})
+const select = document.getElementById("dia");
+select.addEventListener("keydown", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+    }
+})
+select.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        document.getElementById("botao").click();
+    }
+})
