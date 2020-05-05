@@ -13,27 +13,30 @@
         <div id="entrada">
             <input type="text" id="texto" placeholder="Digite aqui a sua tarefa">
             <select id="selectDia">
-                <option value="" disabled selected>Selecione um dia</option>
+                <option value="vazio" disabled selected>Selecione um dia</option>
                 <option value="segunda">Segunda</option>
-                <option value="terca">Terça</option>
+                <option value="terça">Terça</option>
                 <option value="quarta">Quarta</option>
                 <option value="quinta">Quinta</option>
                 <option value="sexta">Sexta</option>
-                <option value="sábado">Sábado</option>
+                <option value="sabado">Sábado</option>
                 <option value="domingo">Domingo</option>
+            </select>
+            <select id="selectHora">
+                <option value="24" disabled selected>Selecione uma hora</option>
             </select>
             <div id="botoes">
                 <button class="botao" onclick="adicionarTarefa()">Adicionar</button>
                 <button class="botao" onclick="limparTarefas()">Limpar tarefas</button>
             </div>
         </div>
-        <div id="segunda" class="dia"><p>Segunda</p></div>
-        <div id="terca" class="dia"><p>Terça</p></div>
-        <div id="quarta" class="dia"><p>Quarta</p></div>
-        <div id="quinta" class="dia"><p>Quinta</p></div>
-        <div id="sexta" class="dia"><p>Sexta</p></div>
-        <div id="sábado" class="dia"><p>Sábado</p></div>
-        <div id="domingo" class="dia"><p>Domingo</p></div>
+        <div id="segunda" class="dia"></div>
+        <div id="terça" class="dia"></div>
+        <div id="quarta" class="dia"></div>
+        <div id="quinta" class="dia"></div>
+        <div id="sexta" class="dia"></div>
+        <div id="sabado" class="dia"></div>
+        <div id="domingo" class="dia"></div>
     </main>
 </body>
 </html>

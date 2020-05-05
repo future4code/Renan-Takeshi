@@ -1,17 +1,23 @@
+// Rodando a função pra criar as horas do dia
+limparTarefas()
+
 function adicionarTarefa(){
     let texto = document.getElementById("texto")
-    if(validarTexto(texto.value)){
-        let divDia = document.getElementById(document.getElementById("selectDia").value)
-        divDia.innerHTML += `<li onclick="riscarTarefa(this)">${texto.value}</li>`
+    const selectDia = document.getElementById("selectDia").value
+    const selectHora = document.getElementById("selectHora").value
+    if(validarTexto(texto) && validarDia(selectDia) && validarHora(selectHora)){
+        let divDiaHora = document.getElementById(`${selectDia}${selectHora}`)
+        divDiaHora.innerHTML += `<li onclick="riscarTarefa(this)">${texto.value}</li>`
         texto.value = ""
-    }else{
-        alert('Digite algo!')
     }
 }
 
 // Desafio 1
 function validarTexto(texto){
-    if(texto.replace(/ /g,"").length === 0){return false}
+    if(texto.value.replace(/ /g,"").length === 0){
+        alert('Digite algo!')
+        return false
+    }
     return true
 }
 
@@ -20,37 +26,41 @@ function riscarTarefa(li){
     li.style.textDecoration = "line-through"
 }
 
-// Desafio 3
+// Desafio 3 e metade do 4
 function limparTarefas(){
-    if(confirm('Deseja limpar todas as tarefas ?')){
        let dias = document.getElementsByClassName("dia")
+        // <p> com o nome de cada dia
         for (let dia of dias){
             dia.innerHTML = `<p>${dia.id.replace(dia.id.charAt(0),dia.id.charAt(0).toUpperCase())}</p>`
         }
-    }
+        // Cria uma div pra cada hora do dia - Desafio 4
+        for(let dia of dias){
+            for(let i = 0; i < 24; i++){
+                dia.innerHTML += `<div id="${dia.id}${i}">${i}h:</div>`
+            }
+        }
 }
 
-// Desafio 4
+// Desafio 4 - populando a select de horas
+let selectHora = document.getElementById("selectHora")
+for(let i = 0; i < 24; i++){
+    selectHora.innerHTML += `<option value="${i}">${i}h</option>`
+}
 
+// Já que to validando texto, bora validar tudo!
+function validarDia(dia){
+    if(dia === "vazio"){
+        alert('Selecione um dia!')
+        return false
+    }
+    return true
+}
+function validarHora(hora){
+    if(hora === "24"){
+        alert('Selecione a hora!')
+        return false
+    }
+    return true
+}
 
 // Desafio 5 no CSS
-
-// Pra funcionar quando apertar Enter
-const texto = document.getElementById("texto");
-texto.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        document.getElementById("botao").click();
-    }
-})
-const select = document.getElementById("dia");
-select.addEventListener("keydown", function(event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-    }
-})
-select.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        document.getElementById("botao").click();
-    }
-})

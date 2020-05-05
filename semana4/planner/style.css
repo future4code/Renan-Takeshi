@@ -12,7 +12,7 @@ main{
     width: 100vw;
     height: 100vh;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 120px 1fr;
+    grid-template-rows: 160px 1fr;
     grid-template-areas: 
     "ent ent ent ent ent ent ent"
     "seg ter qua qui sex sab dom";
@@ -28,6 +28,9 @@ main{
 #selectDia{
     font-size: 18px;
 }
+#selectHora{
+    font-size: 18px;
+}
 #botoes{
     display: flex;
 }
@@ -35,45 +38,36 @@ main{
     width: 50%;
     height: 100%;
 }
-#segunda{
+.dia{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+#segunda{
     grid-area: seg;
     background-color: #ffe8a3;
 }
-#terca{
-    display: flex;
-    flex-direction: column;
+#terça{
     grid-area: ter;
     background-color: #fff5d6;
 }
 #quarta{
-    display: flex;
-    flex-direction: column;
     grid-area: qua;
     background-color: #ffe8a3;
 }
 #quinta{
-    display: flex;
-    flex-direction: column;
     grid-area: qui;
     background-color: #fff5d6;
 }
 #sexta{
-    display: flex;
-    flex-direction: column;
     grid-area: sex;
     background-color: #ffe8a3;
 }
 #sabado{
-    display: flex;
-    flex-direction: column;
     grid-area: sab;
     background-color: #fff5d6;
 }
 #domingo{
-    display: flex;
-    flex-direction: column;
     grid-area: dom;
     background-color: #ffe8a3;
 }
