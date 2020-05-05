@@ -33,6 +33,7 @@ function limparTarefas(){
         for (let dia of dias){
             dia.innerHTML = `<p>${dia.id.replace(dia.id.charAt(0),dia.id.charAt(0).toUpperCase())}</p>`
         }
+        dias[5].innerHTML = '<p>Sábado</p>'
         // Cria uma div pra cada hora do dia - Desafio 4
         for(let dia of dias){
             for(let i = 0; i < 24; i++){
