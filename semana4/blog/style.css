@@ -20,6 +20,11 @@ body{
     display: flex;
     width: 80vw;
 }
+#imagem{
+    margin-top: 5px;
+    display: flex;
+    width: 80vw;
+}
 #texto{
     margin-top: 5px;
     display: flex;
