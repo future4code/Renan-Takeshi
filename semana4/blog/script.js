@@ -1,10 +1,3 @@
-const blogPost = {
-    titulo: null,
-    autor: null,
-    texto: null,
-    imagem: null
-}
-
 let arrPosts = []
 
 function enviarPost(){
@@ -12,12 +5,14 @@ function enviarPost(){
     let postAutor = document.getElementById('autor')
     let postTexto = document.getElementById('texto')
     let postImagem = document.getElementById('imagem')
+    
     let novoPost = {
-        ...blogPost,
         titulo: postTitulo.value,
         autor: postAutor.value,
         texto: postTexto.value,
+        imagem: null,    
     }
+
     if(validarImagem(postImagem.value)){
         document.getElementById('posts').innerHTML +=  `<article>
                                                         <h1>${postTitulo.value}</h1>
@@ -34,10 +29,13 @@ function enviarPost(){
                                                         <p>${postTexto.value.replace(/\n/g,'<br>')}</p>
                                                         </article>`
     }
+
+    // Apagango os campos
     postTitulo.value = ''
     postAutor.value = ''
     postTexto.value = ''
     postImagem.value = ''
+
     arrPosts.push(novoPost)
     console.log(arrPosts)    
 }

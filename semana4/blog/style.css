@@ -9,7 +9,6 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
 }
 #titulo{
     display: flex;
@@ -30,6 +29,7 @@ body{
     display: flex;
     width: 80vw;
     height: 30vh;
+    resize: none;
 }
 #botao{
     margin-top: 5px;
