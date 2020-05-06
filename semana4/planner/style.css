@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+}
+p{
+    text-align: center;
+}
+li{
+    margin-left: 20px;
+}
+main{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 160px 1fr;
+    grid-template-areas: 
+    "ent ent ent ent ent ent ent"
+    "seg ter qua qui sex sab dom";
+}
+#entrada{
+    display: grid;
+    grid-area: ent;
+}
+#texto{
+    padding-left: 5px;
+}
+#botoes{
+    display: flex;
+}
+.botao{
+    width: 50%;
+    height: 100%;
+}
+.dia{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#segunda{
+    grid-area: seg;
+    background-color: #ffe8a3;
+}
+#terça{
+    grid-area: ter;
+    background-color: #fff5d6;
+}
+#quarta{
+    grid-area: qua;
+    background-color: #ffe8a3;
+}
+#quinta{
+    grid-area: qui;
+    background-color: #fff5d6;
+}
+#sexta{
+    grid-area: sex;
+    background-color: #ffe8a3;
+}
+#sabado{
+    grid-area: sab;
+    background-color: #fff5d6;
+}
+#domingo{
+    grid-area: dom;
+    background-color: #ffe8a3;
+}
+
+/* Desafio 5 */
+@media screen and (max-width: 800px){
+    main{
+        grid-template-columns: 1fr;
+        grid-template-rows: 120px repeat(7, 1fr);
+        grid-template-areas: "ent" "seg" "ter" "qua" "qui" "sex" "sab" "dom";
+    }
+}
