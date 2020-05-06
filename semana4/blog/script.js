@@ -21,8 +21,8 @@ function enviarPost(){
                                                         <p>${postTexto.value.replace(/\n/g,'<br>')}</p>
                                                         </article>`
         novoPost.imagem = postImagem.value
-    } else
-    {
+    }
+    else{
         document.getElementById('posts').innerHTML +=  `<article>
                                                         <h1>${postTitulo.value}</h1>
                                                         <h2><i>autor: ${postAutor.value}</i></h2>
