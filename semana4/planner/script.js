@@ -6,8 +6,8 @@ function adicionarTarefa(){
     const selectDia = document.getElementById("selectDia").value
     const selectHora = document.getElementById("selectHora").value
     if(validarTexto(texto) && validarDia(selectDia) && validarHora(selectHora)){
-        let divDiaHora = document.getElementById(`${selectDia}${selectHora}`)
-        divDiaHora.innerHTML += `<li onclick="riscarTarefa(this)">${texto.value}</li>`
+        let diaHora = document.getElementById(`${selectDia}${selectHora}`)
+        diaHora.innerHTML += `<li onclick="riscarTarefa(this)">${texto.value}</li>`
         texto.value = ""
     }
 }
@@ -50,14 +50,14 @@ for(let i = 0; i < 24; i++){
 
 // Já que to validando texto, bora validar tudo!
 function validarDia(dia){
-    if(dia === "vazio"){
+    if(dia === ""){
         alert('Selecione um dia!')
         return false
     }
     return true
 }
 function validarHora(hora){
-    if(hora === "24"){
+    if(hora === ""){
         alert('Selecione a hora!')
         return false
     }
