@@ -7,7 +7,7 @@ function adicionarDespesa(){
     let tipoCtd = document.getElementById('tipoCadastro')
     let descricaoCtd = document.getElementById('descricaoCadastro')
 
-    if(validarValor(valorCdt) && validarTipo(tipoCtd.value) && validarDescricao(descricaoCtd.value)){
+    if(validarValor(valorCdt) && validarTipo(tipoCtd.value) && validarDescricao(descricaoCtd)){
         let novaDespesa = {
             valor: parseInt(valorCdt.value),
             tipo: tipoCtd.value,
@@ -89,18 +89,11 @@ function imprimirDespesas(despesas){
 }
 
 // Validadores
-function validarMinMax(min, max){
-    if(min.toString().length > 0 && max.toString().length > 0 && min <= max){
-        return true
-    }
-    alert('Valores mínimo e máximo inválidos!')
-    return false
-}
 function validarValor(valor){
-    if(valor.value.length > 0){
+    if(valor.value.length > 0 && parseInt(valor.value) > 0){
         return true
     }
-    alert('Digite um valor!')
+    alert('Digite um valor válido!')
     return false
 }
 function validarTipo(tipo){
@@ -111,9 +104,16 @@ function validarTipo(tipo){
     return false
 }
 function validarDescricao(texto){
-    if(texto.replace(/ /g,"").length !== 0){
+    if(texto.value.replace(/ /g,"").length !== 0){
         return true
     }
     alert('Digite uma descrição!')
+    return false
+}
+function validarMinMax(min, max){
+    if(min.toString().length > 0 && max.toString().length > 0 && min <= max){
+        return true
+    }
+    alert('Valores mínimo e máximo inválidos!')
     return false
 }
