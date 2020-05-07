@@ -4,14 +4,13 @@ imprimirExtrato()
 
 function imprimirDespesas(despesas){
     let divDespesas = document.getElementById('despesas')
-    divDespesas.innerHTML = '<p>Despesas Detalhadas</p>'
+    divDespesas.innerHTML = '<p><u>Despesas Detalhadas</u></p>'
     despesas.forEach((despesa, idx, arr) => {
         divDespesas.innerHTML += `<p>valor: R$${despesa.valor} | 
                                      tipo: ${despesa.tipo} | 
                                      descrição: ${despesa.descricao}</p>`
     })
 }
-
 
 function adicionarDespesa(){
     let valorCdt = document.getElementById('valorCadastro')
@@ -31,8 +30,7 @@ function adicionarDespesa(){
         tipoCtd.value = ""
         descricaoCtd.value = ""
 
-        limparFiltros()
-        imprimirDespesas(arrDespesas)
+        limparFiltros() // Esta função chama imprimirDespesas
         imprimirExtrato()
     }
 }
@@ -82,7 +80,7 @@ function imprimirExtrato(){
         } // Fim do switch
     }) // Fim do forEach
 
-    divExtrato.innerHTML = `<p>Extrato</p>
+    divExtrato.innerHTML = `<p><u>Extrato</u></p>
                             <p>Gasto Total: R$${gastoTotal}</p>
                             <p>Alimentação: R$${gastoAlimentacao}</p>
                             <p>Utilidades:  R$${gastoUtilidades}</p>
