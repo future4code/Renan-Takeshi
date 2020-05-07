@@ -42,7 +42,7 @@ function filtrarDespesas(){
 
     if(validarMinMax(valorMin, valorMax)){
         let despesasFiltradas = arrDespesas.filter((despesa, idx, arr) => {
-            if((despesa.tipo === tipoFiltro || tipoFiltro === "") && despesa.valor <= valorMax && despesa.valor >= valorMin){
+            if((despesa.tipo === tipoFiltro || tipoFiltro === "todos") && despesa.valor <= valorMax && despesa.valor >= valorMin){
                 return true
             }
             return false
