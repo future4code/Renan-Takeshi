@@ -1,4 +1,6 @@
 let arrDespesas = []
+imprimirDespesas(arrDespesas)
+imprimirExtrato()
 
 function adicionarDespesa(){
     let valorCdt = document.getElementById('valorCadastro')
@@ -19,6 +21,7 @@ function adicionarDespesa(){
         descricaoCtd.value = ""
 
         imprimirDespesas(arrDespesas)
+        imprimirExtrato()
     }
 }
 
@@ -28,13 +31,42 @@ function filtrarDespesas(){
     let valorMin = parseInt(document.getElementById('valorFiltroMin').value)
 
     let despesasFiltradas = arrDespesas.filter((despesa, idx, arr) => {
-        if(despesa.tipo === tipoFiltro && despesa.valor <= valorMax && despesa.valor >= valorMin){
+        if((despesa.tipo === 'todos' || despesa.tipo === tipoFiltro) && despesa.valor <= valorMax && despesa.valor >= valorMin){
             return true
         }
         return false
     })
 
     imprimirDespesas(despesasFiltradas)
+}
+
+function imprimirExtrato(){
+    let divExtrato = document.getElementById('extrato')
+    let gastoTotal = 0
+    let gastoAlimentacao = 0
+    let gastoUtilidades = 0
+    let gastoViagem = 0
+
+    arrDespesas.forEach((despesa, idx, arr) => {
+        gastoTotal += despesa.valor
+        switch(despesa.tipo){
+            case "alimentacao":
+                gastoAlimentacao += despesa.valor
+                break;
+            case "utilidades":
+                gastoUtilidades += despesa.valor
+                break;
+            case "viagem":
+                gastoViagem += despesa.valor
+                break;
+        } // Fim do switch
+    }) // Fim do forEach
+
+    divExtrato.innerHTML = `<p>Extrato</p>
+                            <p>Gasto Total: R$${gastoTotal}</p>
+                            <p>Alimentação: R$${gastoAlimentacao}</p>
+                            <p>Utilidades:  R$${gastoUtilidades}</p>
+                            <p>Viagem:      R$${gastoViagem}</p>`
 }
 
 function imprimirDespesas(despesas){
