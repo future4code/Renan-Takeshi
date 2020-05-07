@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+}
+body{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#titulo{
+    display: flex;
+    width: 80vw;
+}
+#autor{
+    margin-top: 5px;
+    display: flex;
+    width: 80vw;
+}
+#imagem{
+    margin-top: 5px;
+    display: flex;
+    width: 80vw;
+}
+#texto{
+    margin-top: 5px;
+    display: flex;
+    width: 80vw;
+    height: 30vh;
+    resize: none;
+}
+#botao{
+    margin-top: 5px;
+    width: 80vw;
+}
+article{
+    margin-top: 20px;
+    width: 80vw;
+}
+h1{
+    font-size: 28px;
+}
