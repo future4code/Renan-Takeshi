@@ -7,7 +7,7 @@ function adicionarDespesa(){
     let tipoCtd = document.getElementById('tipoCadastro')
     let descricaoCtd = document.getElementById('descricaoCadastro')
 
-    if(validarValor(valorCdt) && validarTipo(tipoCtd) && validarDescricao(descricaoCtd)){
+    if(validarValor(valorCdt) && validarTipo(tipoCtd.value) && validarDescricao(descricaoCtd.value)){
         let novaDespesa = {
             valor: parseInt(valorCdt.value),
             tipo: tipoCtd.value,
@@ -20,6 +20,7 @@ function adicionarDespesa(){
         tipoCtd.value = ""
         descricaoCtd.value = ""
 
+        limparFiltros()
         imprimirDespesas(arrDespesas)
         imprimirExtrato()
     }
@@ -27,17 +28,25 @@ function adicionarDespesa(){
 
 function filtrarDespesas(){
     let tipoFiltro = document.getElementById('tipoFiltro').value
-    let valorMax = parseInt(document.getElementById('valorFiltroMax').value)
     let valorMin = parseInt(document.getElementById('valorFiltroMin').value)
+    let valorMax = parseInt(document.getElementById('valorFiltroMax').value)
 
-    let despesasFiltradas = arrDespesas.filter((despesa, idx, arr) => {
-        if((despesa.tipo === 'todos' || despesa.tipo === tipoFiltro) && despesa.valor <= valorMax && despesa.valor >= valorMin){
-            return true
-        }
-        return false
-    })
+    if(validarTipo(tipoFiltro) && validarMinMax(valorMin, valorMax)){
+        let despesasFiltradas = arrDespesas.filter((despesa, idx, arr) => {
+            if((despesa.tipo === tipoFiltro) && despesa.valor <= valorMax && despesa.valor >= valorMin){
+                return true
+            }
+            return false
+        })
+        imprimirDespesas(despesasFiltradas)
+    }
+}
 
-    imprimirDespesas(despesasFiltradas)
+function limparFiltros(){
+    document.getElementById('tipoFiltro').value = ""
+    document.getElementById('valorFiltroMin').value = "Valor mínimo"
+    document.getElementById('valorFiltroMax').value = "Valor máximo"
+    imprimirDespesas(arrDespesas)
 }
 
 function imprimirExtrato(){
@@ -80,6 +89,13 @@ function imprimirDespesas(despesas){
 }
 
 // Validadores
+function validarMinMax(min, max){
+    if(min.toString().length > 0 && max.toString().length > 0 && min <= max){
+        return true
+    }
+    alert('Valores mínimo e máximo inválidos!')
+    return false
+}
 function validarValor(valor){
     if(valor.value.length > 0){
         return true
@@ -88,14 +104,14 @@ function validarValor(valor){
     return false
 }
 function validarTipo(tipo){
-    if(tipo.value !== ""){
+    if(tipo !== ""){
         return true
     }
     alert('Selecione um tipo!')
     return false
 }
 function validarDescricao(texto){
-    if(texto.value.replace(/ /g,"").length !== 0){
+    if(texto.replace(/ /g,"").length !== 0){
         return true
     }
     alert('Digite uma descrição!')

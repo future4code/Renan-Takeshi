@@ -25,15 +25,15 @@
     <div id="filtro">
         <p>Filtrar Despesas</p>
         <select id="tipoFiltro">
-            <option value="todos">Todos</option>
+            <option value="" disabled selected>Selecione um tipo</option>
             <option value="alimentacao">Alimentação</option>
             <option value="utilidades">Utilidades</option>
             <option value="viagem">Viagem</option>
         </select>
-        <input id="valorFiltroMax" type="number">
-        <input id="valorFiltroMin" type="number">
+        <input id="valorFiltroMin" type="number" placeholder="Valor mínimo">
+        <input id="valorFiltroMax" type="number" placeholder="Valor máximo">
         <button onclick="filtrarDespesas()">Filtrar</button>
-        <button onclick="limparDespesas()">Limpar</button>
+        <button onclick="limparFiltros()">Limpar</button>
     </div>
 
     <div id="despesas">
