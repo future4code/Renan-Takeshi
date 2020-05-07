@@ -80,11 +80,8 @@ function imprimirExtrato(){
         } // Fim do switch
     }) // Fim do forEach
 
-    divExtrato.innerHTML = `<p><u>Extrato</u></p>
-                            <p>Gasto Total: R$${gastoTotal}</p>
-                            <p>Alimentação: R$${gastoAlimentacao}</p>
-                            <p>Utilidades:  R$${gastoUtilidades}</p>
-                            <p>Viagem:      R$${gastoViagem}</p>`
+    divExtrato.innerHTML = `<p>Extrato: Gasto Total: R$${gastoTotal} | Alimentação: R$${gastoAlimentacao} | 
+                                        Utilidades: R$${gastoUtilidades} | Viagem: R$${gastoViagem}</p>`
 }
 
 // Validadores
