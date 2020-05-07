@@ -70,7 +70,7 @@ function imprimirExtrato(){
     arrDespesas.forEach((despesa, idx, arr) => {
         gastoTotal += despesa.valor
         switch(despesa.tipo){
-            case "alimentacao":
+            case "alimentação":
                 gastoAlimentacao += despesa.valor
                 break;
             case "utilidades":
