@@ -17,7 +17,7 @@ function adicionarDespesa(){
     let tipoCtd = document.getElementById('tipoCadastro')
     let descricaoCtd = document.getElementById('descricaoCadastro')
 
-    if(validarValor(valorCdt) && validarTipo(tipoCtd.value) && validarDescricao(descricaoCtd)){
+    if(validarValor(valorCdt) && validarTipo(tipoCtd) && validarDescricao(descricaoCtd)){
         let novaDespesa = {
             valor: parseInt(valorCdt.value),
             tipo: tipoCtd.value,
@@ -40,9 +40,9 @@ function filtrarDespesas(){
     let valorMin = parseInt(document.getElementById('valorFiltroMin').value)
     let valorMax = parseInt(document.getElementById('valorFiltroMax').value)
 
-    if(validarTipo(tipoFiltro) && validarMinMax(valorMin, valorMax)){
+    if(validarMinMax(valorMin, valorMax)){
         let despesasFiltradas = arrDespesas.filter((despesa, idx, arr) => {
-            if((despesa.tipo === tipoFiltro) && despesa.valor <= valorMax && despesa.valor >= valorMin){
+            if((despesa.tipo === tipoFiltro || tipoFiltro === "") && despesa.valor <= valorMax && despesa.valor >= valorMin){
                 return true
             }
             return false
@@ -53,8 +53,8 @@ function filtrarDespesas(){
 
 function limparFiltros(){
     document.getElementById('tipoFiltro').value = ""
-    document.getElementById('valorFiltroMin').value = "Valor mínimo"
-    document.getElementById('valorFiltroMax').value = "Valor máximo"
+    document.getElementById('valorFiltroMin').value = ""
+    document.getElementById('valorFiltroMax').value = ""
     imprimirDespesas(arrDespesas)
 }
 
@@ -96,7 +96,7 @@ function validarValor(valor){
     return false
 }
 function validarTipo(tipo){
-    if(tipo !== ""){
+    if(tipo.value !== ""){
         return true
     }
     alert('Selecione um tipo!')
