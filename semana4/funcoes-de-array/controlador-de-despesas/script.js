@@ -2,6 +2,17 @@ let arrDespesas = []
 imprimirDespesas(arrDespesas)
 imprimirExtrato()
 
+function imprimirDespesas(despesas){
+    let divDespesas = document.getElementById('despesas')
+    divDespesas.innerHTML = '<p>Despesas Detalhadas</p>'
+    despesas.forEach((despesa, idx, arr) => {
+        divDespesas.innerHTML += `<p>valor: R$${despesa.valor} | 
+                                     tipo: ${despesa.tipo} | 
+                                     descrição: ${despesa.descricao}</p>`
+    })
+}
+
+
 function adicionarDespesa(){
     let valorCdt = document.getElementById('valorCadastro')
     let tipoCtd = document.getElementById('tipoCadastro')
@@ -76,16 +87,6 @@ function imprimirExtrato(){
                             <p>Alimentação: R$${gastoAlimentacao}</p>
                             <p>Utilidades:  R$${gastoUtilidades}</p>
                             <p>Viagem:      R$${gastoViagem}</p>`
-}
-
-function imprimirDespesas(despesas){
-    let divDespesas = document.getElementById('despesas')
-    divDespesas.innerHTML = '<p>Despesas Detalhadas</p>'
-    despesas.forEach((despesa, idx, arr) => {
-        divDespesas.innerHTML += `<p>valor: R$${despesa.valor} | 
-                                     tipo: ${despesa.tipo} | 
-                                     descrição: ${despesa.descricao}</p>`
-    })
 }
 
 // Validadores
