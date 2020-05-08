@@ -115,3 +115,13 @@ let anon = function(){
 }
 anon()
 
+// Exercícios de Objetos
+// 1.
+// array: é uma coleção de objetos organizados como em uma linha, 
+// usado quando queremos armazenar informações que estão de alguma 
+// forma relacionadas.
+// objeto: é um item que pode conter diversos valores dentro
+// de maneira e representar com mais clareza as informações
+// por exemplo, um objeto cadastro pode contar valores como nome,
+// telefone e endereço
+
