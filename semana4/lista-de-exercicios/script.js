@@ -33,7 +33,6 @@
 // 283
 
 // Exercícios de Lógica de Programação
-
 // 1.
 const arr = [1, 2, 3, 4, 5, 6, 7]
 // for-of (imprime todos os item no array)
@@ -101,3 +100,12 @@ function maiorDivisivelDiferenca(a, b){
 
     console.log(`A diferença entre eles é ${Math.abs(a - b)}`)
 }
+
+// Exercícios de Funções
+// 1.
+function segundoMaiorMenor(array1){
+    array1.sort((a, b) => a - b)
+    console.log(`O segundo maior é ${array1[array1.length - 2]} o segundo menor é ${array1[1]}`)
+}
+segundoMaiorMenor([3, 12, 1, 7, 14, 13, 21, 42, 99, 44])
+
