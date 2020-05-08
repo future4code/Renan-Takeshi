@@ -69,3 +69,16 @@ while(i < quantidadeDeNumerosPares) {
   console.log(i*2)
   i++
 }
+
+// 4.
+function qualTriangulo(a, b, c){
+    if(a === b && b === c){
+        console.log('Equilátero')
+    }else
+    if(a === b || a === c || b === c){
+        console.log('Isósceles')
+    }else{
+        console.log('Escaleno')
+    }
+}
+qualTriangulo(2,3,1)
