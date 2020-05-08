@@ -32,3 +32,23 @@
 // -10
 // 283
 
+// Exercícios de Lógica de Programação
+
+// 1.
+const arr = [1, 2, 3, 4, 5, 6, 7]
+// for-of (imprime todos os item no array)
+for(let num of arr){
+    console.log(num)
+}
+// while (imprime todos os itens, indicando o indice)
+let i = 0
+while(i < arr.length){
+    console.log(`O valor do array no índice ${i} é: ${arr[i]}`)
+    i++
+}
+// .forEach (soma todos os itens)
+let soma = 0
+arr.forEach((item, idx, arr) => {
+    soma += item
+})
+console.log(soma)
