@@ -165,7 +165,7 @@ function anonimizarPessoa(pessoa){
     return anonimo
 }
 
-// Exerc;icios de Funções de array
+// Exercícios de Funções de array
 // 1.
 array2 = [
 	{ nome: "Pedro", idade: 20 },
@@ -173,15 +173,35 @@ array2 = [
 	{ nome: "Paula", idade: 12 },
 	{ nome: "Artur", idade: 89 } 
 ]
-// a.
+// a)
 array3 = array2.filter((pessoa) => {
     if(pessoa.idade >= 20){return true}
     return false
 })
-// b.
+// b)
 array4 = array2.filter((pessoa) => {
     if(pessoa.idade < 20){return true}
     return false
 })
 
 // 2.
+const array5 = [1, 2, 3, 4, 5, 6]
+// a)
+const array6 = array5.map((num) => {
+    return num * 2
+})
+
+// b)
+const array7 = array5.map((num) => {
+    return `${num * 3}`
+})
+
+// c)
+const array8 = array5.map((num) => {
+    if(num % 2){
+        return `${num} é impar`
+    }
+    return `${num} é par`
+})
+
+// 3.
