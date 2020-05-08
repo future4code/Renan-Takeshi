@@ -109,3 +109,9 @@ function segundoMaiorMenor(array1){
 }
 segundoMaiorMenor([3, 12, 1, 7, 14, 13, 21, 42, 99, 44])
 
+// 2.
+let anon = function(){
+    alert('Hello LaBenu =]')
+}
+anon()
+
