@@ -243,4 +243,26 @@ function naoPodeEntrar(arr3){
 }
 
 // 4
+const consultas = [
+	{ nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
+	{ nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
+	{ nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
+	{ nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
+]
+function criarEmails(arr){
+    return arr.map((consulta) => {
+        let strSr = ''
+        let strLembra = ''
+        if(consulta.genero === 'masculino'){
+            strSr = 'Sr.'; strLembra = 'lembrá-lo'
+        }else{
+            strSr = 'Sra.'; strLembra = 'lembrá-la'
+        }
+        if(!consulta.cancelada){
+            return `Olá, ${strSr} ${consulta.nome}. Estamos enviando esta mensagem para ${strLembra} da sua consulta no dia ${consulta.dataDaConsulta}. Por favor acuse o recebimento deste e-mail`
+        }
+        return `Olá, ${strSr} ${consulta.nome}. Infelizmente, usa consulta marcada para o dia ${consulta.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
+    })
+}
 
+// 5
