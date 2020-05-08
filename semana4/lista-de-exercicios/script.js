@@ -32,25 +32,26 @@
 // -10
 // 283
 
+
 // Exercícios de Lógica de Programação
-// 1.
-const arr = [1, 2, 3, 4, 5, 6, 7]
+console.log(`Exercício de Lógica de Programação 1`)
+const array1 = [1, 2, 3]
 // for-of (imprime todos os item no array)
-for(let num of arr){
+for(let num of array1){
     console.log(num)
 }
 // while (imprime todos os itens, indicando o indice)
 let i = 0
-while(i < arr.length){
-    console.log(`O valor do array no índice ${i} é: ${arr[i]}`)
+while(i < array1.length){
+    console.log(`O valor do array no índice ${i} é: ${array1[i]}`)
     i++
 }
 // .forEach (soma todos os itens)
 let soma = 0
-arr.forEach((item, idx, arr) => {
+array1.forEach((item, idx, arr) => {
     soma += item
 })
-console.log(soma)
+console.log(`A soma do array é ${soma}`)
 
 // 2.
 // a) false
@@ -62,6 +63,7 @@ console.log(soma)
 // 3.
 // Esqueceu de incrementar o contador i
 // Na comparação não vai o =
+console.log(`Exercício de Lógica de Programação 3 - N = 3`)
 const quantidadeDeNumerosPares = 3
 i = 0
 while(i < quantidadeDeNumerosPares) {
@@ -69,7 +71,7 @@ while(i < quantidadeDeNumerosPares) {
   i++
 }
 
-// 4.
+console.log(`Exercício de Lógica de Programação 4 - Triângulo 1 2 1`)
 function qualTriangulo(a, b, c){
     if(a === b && b === c){
         console.log('Equilátero')
@@ -80,9 +82,13 @@ function qualTriangulo(a, b, c){
         console.log('Escaleno')
     }
 }
+qualTriangulo(1, 2, 1)
 
-// 5.
+console.log(`Exercício de Lógica de Programação 5`)
 function maiorDivisivelDiferenca(a, b){
+    console.log(`ENTRADA:`)
+    console.log(`${a} e ${b}`)
+    console.log(`SAÍDA:`)
     if(a > b){
         console.log(`O maior é: ${a}`)
     }else
@@ -100,20 +106,24 @@ function maiorDivisivelDiferenca(a, b){
 
     console.log(`A diferença entre eles é ${Math.abs(a - b)}`)
 }
+maiorDivisivelDiferenca(15, 30)
+
 
 // Exercícios de Funções
-// 1.
-function segundoMaiorMenor(array1){
-    array1.sort((a, b) => a - b)
-    console.log(`O segundo maior é ${array1[array1.length - 2]} o segundo menor é ${array1[1]}`)
+console.log(`Exercício de Funções 1`)
+let array4 = [3, 12, 1, 7, 14, 13, 21, 42, 99, 44]
+console.log(`array = ${array4}`)
+function segundoMaiorMenor(arr){
+    arr.sort((a, b) => a - b)
+    console.log(`O segundo maior é ${arr[arr.length - 2]} o segundo menor é ${arr[1]}`)
 }
-segundoMaiorMenor([3, 12, 1, 7, 14, 13, 21, 42, 99, 44])
+segundoMaiorMenor(array4)
 
-// 2.
-// let anon = function(){
-//     alert('Hello LaBenu =]')
-// }
-// anon()
+// Exercício de Funções 2
+let anon = function(){
+    alert('Hello LaBenu =]')
+}
+anon()
 
 // Exercícios de Objetos
 // 1.
@@ -121,11 +131,11 @@ segundoMaiorMenor([3, 12, 1, 7, 14, 13, 21, 42, 99, 44])
 // usado quando queremos armazenar informações que estão de alguma 
 // forma relacionadas.
 // objeto: é um item que pode conter diversos valores dentro
-// de maneira e representar com mais clareza as informações
+// de maneira a representar com mais clareza as informações
 // por exemplo, um objeto cadastro pode contar valores como nome,
 // telefone e endereço
 
-// 2.
+console.log(`Exercício de Objetos 2 - retangulo 3 4`)
 function criaRetangulo(lado1, lado2){
     const retangulo = {
         largura: lado1,
@@ -135,21 +145,22 @@ function criaRetangulo(lado1, lado2){
     }
     return retangulo
 }
+console.log(criaRetangulo(3, 4))
 
-// 3.
+console.log(`Exercício de Objetos 3 - Filme`)
 const wallE = {
     titulo: 'WALL-E',
     ano: '2008',
     diretor: 'Andrew Stanton',
     cast: ['Jeff Garlin', 'Elissa Knight', 'Ben Burtt'],
 
-    imprimir : function(){
-        console.log(`Venha assistir ao filme ${this.titulo}, de ${this.ano}, dirigido por ${this.diretor} e estrelado por ${this.cast}`)
+    imprimir: function(){
+        console.log(`Venha assistir ao filme ${this.titulo}, de ${this.ano}, dirigido por ${this.diretor} e estrelado por ${this.cast.join(', ')}.`)
     }
 }
 wallE.imprimir()
 
-// 4.
+console.log(`Exercício de Objetos 4 - Anonimizar`)
 const conhecido = {
     nome: 'Jão',
     idade: 33,
@@ -164,48 +175,55 @@ function anonimizarPessoa(pessoa){
     }
     return anonimo
 }
+console.log(anonimizarPessoa(conhecido))
+
 
 // Exercícios de Funções de array
-// 1.
 array2 = [
 	{ nome: "Pedro", idade: 20 },
 	{ nome: "João", idade: 10 },
 	{ nome: "Paula", idade: 12 },
 	{ nome: "Artur", idade: 89 } 
 ]
-// a)
+
+console.log(`Exercícios de Funções de Array - 1.a)`)
 function retornaAdultos(){
     return array2.filter((pessoa) => {
         if(pessoa.idade >= 20){return true}
         return false
     })
 }
+console.log(retornaAdultos(array2))
 
-// b)
+console.log(`Exercícios de Funções de Array - 1.b)`)
 function retornaCriancas(){
     return array2.filter((pessoa) => {
         if(pessoa.idade >= 20){return false}
         return true
     })
 }
+console.log(retornaCriancas(array2))
 
-// 2.
-const array5 = [1, 2, 3, 4, 5, 6]
-// a)
+// 2
+const array3 = [1, 2, 3, 4, 5, 6]
+
+console.log(`Exercícios de Funções de Array - 2.a)`)
 function multiplicaPor2(arr){
     return arr.map((num) => {
         return num * 2
     })
 }
+console.log(multiplicaPor2(array3))
 
-// b)
+console.log(`Exercícios de Funções de Array - 2.b)`)
 function multiplicaPor3naString(arr){
     return arr.map((num) => {
         return `${num * 3}`
     })
 }
+console.log(multiplicaPor3naString(array3))
 
-// c)
+console.log(`Exercícios de Funções de Array - 2.c)`)
 function dizSeEhPar(arr){
     return arr.map((num) => {
         if(num % 2){
@@ -214,8 +232,9 @@ function dizSeEhPar(arr){
         return `${num} é par`
     })
 }
+console.log(dizSeEhPar(array3))
 
-// 3.
+// 3
 const pessoas = [
 	{ nome: "Paula", idade: 12, altura: 1.8},
 	{ nome: "João", idade: 20, altura: 1.3},
@@ -225,23 +244,25 @@ const pessoas = [
 	{ nome: "Soter", idade: 70, altura: 1.9}
 ]
 
-// a)
+console.log(`Exercícios de Funções de Array - 3.a)`)
 function podeEntrar(arr2){
     return arr2.filter((pessoa) => {
         if(pessoa.idade >= 14 && pessoa.idade <= 60 && pessoa.altura >= 1.5){return true}
         return false
     })
 }
+console.log(podeEntrar(pessoas))
 
-// b)
+console.log(`Exercícios de Funções de Array - 3.b)`)
 function naoPodeEntrar(arr3){
     return arr3.filter((pessoa) => {
         if(pessoa.idade >= 14 && pessoa.idade <= 60 && pessoa.altura >= 1.5){return false}
         return true
     })
 }
+console.log(naoPodeEntrar(pessoas))
 
-// 4
+console.log(`Exercícios de Funções de Array - 4`)
 const consultas = [
 	{ nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
 	{ nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
@@ -257,14 +278,17 @@ function criarEmails(arr){
         }else{
             strSr = 'Sra.'; strLembra = 'lembrá-la'
         }
+
+        // Retornando os items para o array
         if(!consulta.cancelada){
             return `Olá, ${strSr} ${consulta.nome}. Estamos enviando esta mensagem para ${strLembra} da sua consulta no dia ${consulta.dataDaConsulta}. Por favor acuse o recebimento deste e-mail`
         }
         return `Olá, ${strSr} ${consulta.nome}. Infelizmente, usa consulta marcada para o dia ${consulta.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
     })
 }
+console.log(criarEmails(consultas))
 
-// 5
+console.log(`Exercícios de Funções de Array - 5`)
 const contas = [
 	{ cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
 	{ cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
