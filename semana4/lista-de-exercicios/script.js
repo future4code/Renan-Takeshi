@@ -180,7 +180,6 @@ function retornaAdultos(){
         return false
     })
 }
-console.log(retornaAdultos())
 
 // b)
 function retornaCriancas(){
@@ -277,8 +276,10 @@ const contas = [
 
 function atualizaSalto(arr){
     arr.forEach((conta) => {
-        for(let compra of conta.compras){
+        conta.compras.forEach((compra) => { // forEachCEPTION !!!
             conta.saldoTotal -= compra
-        }
+        })
     })
 }
+atualizaSalto(contas)
+console.log(contas)
