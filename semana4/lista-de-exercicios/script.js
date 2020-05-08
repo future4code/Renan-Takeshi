@@ -149,6 +149,7 @@ const wallE = {
 }
 wallE.imprimir()
 
+// 4.
 const conhecido = {
     nome: 'Jão',
     idade: 33,
@@ -164,3 +165,23 @@ function anonimizarPessoa(pessoa){
     return anonimo
 }
 
+// Exerc;icios de Funções de array
+// 1.
+array2 = [
+	{ nome: "Pedro", idade: 20 },
+	{ nome: "João", idade: 10 },
+	{ nome: "Paula", idade: 12 },
+	{ nome: "Artur", idade: 89 } 
+]
+// a.
+array3 = array2.filter((pessoa) => {
+    if(pessoa.idade >= 20){return true}
+    return false
+})
+// b.
+array4 = array2.filter((pessoa) => {
+    if(pessoa.idade < 20){return true}
+    return false
+})
+
+// 2.
