@@ -60,4 +60,12 @@ console.log(soma)
 // d) true
 // e) false
 
-
+// 3.
+// Esqueceu de incrementar o contador i
+// Na comparação não vai o =
+const quantidadeDeNumerosPares = 3
+i = 0
+while(i < quantidadeDeNumerosPares) {
+  console.log(i*2)
+  i++
+}
