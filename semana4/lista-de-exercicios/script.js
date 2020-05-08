@@ -52,3 +52,12 @@ arr.forEach((item, idx, arr) => {
     soma += item
 })
 console.log(soma)
+
+// 2.
+// a) false
+// b) true
+// c) true
+// d) true
+// e) false
+
+
