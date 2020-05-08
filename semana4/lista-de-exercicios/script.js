@@ -13,7 +13,15 @@
 // string tipoDeInvestimento, que é o primeiro parâmetro da função
 // Caso o tipoDeInvestimento seja inválido, mostra um alert
 // retorna um Number com o valor multiplicado pela taxa
-// Respostas do console, em ordem:
+// Respostas do console:
 // 161
 // undefined (com um alert "TIPO DE INVESTIMENTO INFORMADO INCORRETO!")
+
+// 3.
+// O código copia no array1 os elementos pares do array numeros
+// e elementos impares no array2
+// Respostas do console:
+// Quantidade total de números 14
+// 6
+// 8
 
