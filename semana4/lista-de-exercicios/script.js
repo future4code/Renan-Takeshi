@@ -81,4 +81,23 @@ function qualTriangulo(a, b, c){
         console.log('Escaleno')
     }
 }
-qualTriangulo(2,3,1)
+
+// 5.
+function maiorDivisivelDiferenca(a, b){
+    if(a > b){
+        console.log(`O maior é: ${a}`)
+    }else
+    if(b > a){
+        console.log(`O maior é: ${b}`)
+    }
+    else{console.log('São iguais!')}
+
+    if(a % b === 0){
+        console.log(`${a} é divisível por ${b}`)
+    }else{console.log(`${a} não é divisível por ${b}`)}
+    if(b % a === 0){
+        console.log(`${b} é divisível por ${a}`)
+    }else{console.log(`${b} não é divisível por ${a}`)}
+
+    console.log(`A diferença entre eles é ${Math.abs(a - b)}`)
+}
