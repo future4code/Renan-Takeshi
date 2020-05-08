@@ -110,10 +110,10 @@ function segundoMaiorMenor(array1){
 segundoMaiorMenor([3, 12, 1, 7, 14, 13, 21, 42, 99, 44])
 
 // 2.
-let anon = function(){
-    alert('Hello LaBenu =]')
-}
-anon()
+// let anon = function(){
+//     alert('Hello LaBenu =]')
+// }
+// anon()
 
 // Exercícios de Objetos
 // 1.
@@ -135,5 +135,18 @@ function criaRetangulo(lado1, lado2){
     }
     return retangulo
 }
+
+// 3.
+const wallE = {
+    titulo: 'WALL-E',
+    ano: '2008',
+    diretor: 'Andrew Stanton',
+    cast: ['Jeff Garlin', 'Elissa Knight', 'Ben Burtt'],
+
+    imprimir : function(){
+        console.log(`Venha assistir ao filme ${this.titulo}, de ${this.ano}, dirigido por ${this.diretor} e estrelado por ${this.cast}`)
+    }
+}
+wallE.imprimir()
 
 
