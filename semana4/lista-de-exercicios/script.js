@@ -25,3 +25,10 @@
 // 6
 // 8
 
+// 4.
+// Esse código procura o menor e maior item do array numeros
+// e atribui as variaveis numero1 e numero2, respectivamente.
+// Respostas do console:
+// -10
+// 283
+
