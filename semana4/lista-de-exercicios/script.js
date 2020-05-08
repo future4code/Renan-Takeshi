@@ -149,4 +149,18 @@ const wallE = {
 }
 wallE.imprimir()
 
+const conhecido = {
+    nome: 'Jão',
+    idade: 33,
+    email: 'jao@oab.br',
+    endereco: 'Rua, 13'
+}
+
+function anonimizarPessoa(pessoa){
+    let anonimo = {
+        ...pessoa,
+        nome: 'ANÔNIMO'
+    }
+    return anonimo
+}
 
