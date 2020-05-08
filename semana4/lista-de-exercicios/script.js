@@ -298,12 +298,12 @@ const contas = [
 	{ cliente: "Soter", saldoTotal: 1200, compras: [] }
 ]
 
-function atualizaSalto(arr){
+function atualizaSaldo(arr){
     arr.forEach((conta) => {
         conta.compras.forEach((compra) => { // forEachCEPTION !!!
             conta.saldoTotal -= compra
         })
     })
 }
-atualizaSalto(contas)
+atualizaSaldo(contas)
 console.log(contas)
