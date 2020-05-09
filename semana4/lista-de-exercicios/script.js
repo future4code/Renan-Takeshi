@@ -283,7 +283,7 @@ function criarEmails(arr){
         if(!consulta.cancelada){
             return `Olá, ${strSr} ${consulta.nome}. Estamos enviando esta mensagem para ${strLembra} da sua consulta no dia ${consulta.dataDaConsulta}. Por favor acuse o recebimento deste e-mail`
         }
-        return `Olá, ${strSr} ${consulta.nome}. Infelizmente, usa consulta marcada para o dia ${consulta.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
+        return `Olá, ${strSr} ${consulta.nome}. Infelizmente, sua consulta marcada para o dia ${consulta.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
     })
 }
 console.log(criarEmails(consultas))
