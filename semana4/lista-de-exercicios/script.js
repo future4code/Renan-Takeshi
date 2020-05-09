@@ -226,7 +226,7 @@ console.log(multiplicaPor3naString(array3))
 console.log(`Exercícios de Funções de Array - 2.c)`)
 function dizSeEhPar(arr){
     return arr.map((num) => {
-        if(!(num % 2)){
+        if(num % 2 === 0){
             return `${num} é par`
         }
         return `${num} é impar`
