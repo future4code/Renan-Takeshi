@@ -245,8 +245,8 @@ const pessoas = [
 ]
 
 console.log(`Exercícios de Funções de Array - 3.a)`)
-function podeEntrar(arr2){
-    return arr2.filter((pessoa) => {
+function podeEntrar(arr){
+    return arr.filter((pessoa) => {
         if(pessoa.idade >= 14 && pessoa.idade <= 60 && pessoa.altura >= 1.5){return true}
         return false
     })
@@ -254,8 +254,8 @@ function podeEntrar(arr2){
 console.log(podeEntrar(pessoas))
 
 console.log(`Exercícios de Funções de Array - 3.b)`)
-function naoPodeEntrar(arr3){
-    return arr3.filter((pessoa) => {
+function naoPodeEntrar(arr){
+    return arr.filter((pessoa) => {
         if(pessoa.idade >= 14 && pessoa.idade <= 60 && pessoa.altura >= 1.5){return false}
         return true
     })
