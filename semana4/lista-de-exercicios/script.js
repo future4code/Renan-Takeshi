@@ -300,7 +300,7 @@ const contas = [
 ]
 function atualizaSaldo(arr){
     arr.forEach((conta) => {
-        conta.compras.forEach((compra) => { // forEachCEPTION !!!
+        conta.compras.forEach((compra) => {
             conta.saldoTotal -= compra
         })
     })
