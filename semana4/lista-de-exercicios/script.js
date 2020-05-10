@@ -67,7 +67,7 @@ logicaDeProgramacao1(array1)
 // Na comparação não vai o =
 console.log(`Exercício de Lógica de Programação 3 - N = 3`)
 function quantidadeDeNumerosPares(N){
-    i = 0
+    let i = 0
     while(i < N) {
         console.log(i*2)
         i++
