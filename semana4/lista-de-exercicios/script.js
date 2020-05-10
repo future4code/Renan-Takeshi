@@ -115,13 +115,13 @@ maiorDivisivelDiferenca(15, 30)
 
 // Exercícios de Funções
 console.log(`Exercício de Funções 1`)
-let array4 = [3, 12, 1, 7, 14, 13, 21, 42, 99, 44]
-console.log(array4)
+let array2 = [3, 12, 1, 7, 14, 13, 21, 42, 99, 44]
+console.log(array2)
 function segundoMaiorMenor(arr){
     arr.sort((a, b) => a - b)
     console.log(`O segundo maior é ${arr[arr.length - 2]} o segundo menor é ${arr[1]}`)
 }
-segundoMaiorMenor(array4)
+segundoMaiorMenor(array2)
 
 // Exercício de Funções 2
 let anon = function(){
@@ -182,7 +182,7 @@ console.log(anonimizarPessoa(conhecido))
 
 
 // Exercícios de Funções de array
-array2 = [
+array3 = [
 	{ nome: "Pedro", idade: 20 },
 	{ nome: "João", idade: 10 },
 	{ nome: "Paula", idade: 12 },
@@ -195,7 +195,7 @@ function retornaAdultos(arr){
         return false
     })
 }
-console.log(retornaAdultos(array2))
+console.log(retornaAdultos(array3))
 
 console.log(`Exercícios de Funções de Array - 1.b)`)
 function retornaCriancas(arr){
@@ -204,10 +204,10 @@ function retornaCriancas(arr){
         return true
     })
 }
-console.log(retornaCriancas(array2))
+console.log(retornaCriancas(array3))
 
 // 2
-const array3 = [1, 2, 3, 4, 5, 6]
+const array4 = [1, 2, 3, 4, 5, 6]
 
 console.log(`Exercícios de Funções de Array - 2.a)`)
 function multiplicaPor2(arr){
@@ -215,7 +215,7 @@ function multiplicaPor2(arr){
         return num * 2
     })
 }
-console.log(multiplicaPor2(array3))
+console.log(multiplicaPor2(array4))
 
 console.log(`Exercícios de Funções de Array - 2.b)`)
 function multiplicaPor3naString(arr){
@@ -223,7 +223,7 @@ function multiplicaPor3naString(arr){
         return `${num * 3}`
     })
 }
-console.log(multiplicaPor3naString(array3))
+console.log(multiplicaPor3naString(array4))
 
 console.log(`Exercícios de Funções de Array - 2.c)`)
 function dizSeEhPar(arr){
@@ -234,7 +234,7 @@ function dizSeEhPar(arr){
         return `${num} é impar`
     })
 }
-console.log(dizSeEhPar(array3))
+console.log(dizSeEhPar(array4))
 
 // 3
 const pessoas = [
