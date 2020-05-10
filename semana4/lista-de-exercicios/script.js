@@ -70,8 +70,8 @@ console.log(`Exercício de Lógica de Programação 3 - N = 3`)
 function quantidadeDeNumerosPares(N){
     i = 0
     while(i < N) {
-    console.log(i*2)
-    i++
+        console.log(i*2)
+        i++
     }
 }
 quantidadeDeNumerosPares(3)
