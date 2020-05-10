@@ -115,11 +115,12 @@ maiorDivisivelDiferenca(15, 30)
 
 // Exercícios de Funções
 console.log(`Exercício de Funções 1`)
-let array2 = [3, 12, 1, 7, 14, 13, 21, 42, 99, 44]
+let array2 = [3, 12, 1, 7, 14, 13, 21, 42, 99, 44, 3, 1, 1, 99]
 console.log(array2)
 function segundoMaiorMenor(arr){
-    arr.sort((a, b) => a - b)
-    console.log(`O segundo maior é ${arr[arr.length - 2]} o segundo menor é ${arr[1]}`)
+    const arraySemDuplicatas = Array.from(new Set(arr))
+    arraySemDuplicatas.sort((a, b) => a - b)
+    console.log(`O segundo maior é ${arraySemDuplicatas[arraySemDuplicatas.length - 2]} o segundo menor é ${arraySemDuplicatas[1]}`)
 }
 segundoMaiorMenor(array2)
 
