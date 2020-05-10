@@ -187,8 +187,8 @@ array2 = [
 ]
 
 console.log(`Exercícios de Funções de Array - 1.a)`)
-function retornaAdultos(){
-    return array2.filter((pessoa) => {
+function retornaAdultos(arr){
+    return arr.filter((pessoa) => {
         if(pessoa.idade >= 20){return true}
         return false
     })
@@ -196,8 +196,8 @@ function retornaAdultos(){
 console.log(retornaAdultos(array2))
 
 console.log(`Exercícios de Funções de Array - 1.b)`)
-function retornaCriancas(){
-    return array2.filter((pessoa) => {
+function retornaCriancas(arr){
+    return arr.filter((pessoa) => {
         if(pessoa.idade >= 20){return false}
         return true
     })
