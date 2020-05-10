@@ -36,22 +36,25 @@
 // Exercícios de Lógica de Programação
 console.log(`Exercício de Lógica de Programação 1`)
 const array1 = [1, 2, 3]
-// for-of (imprime todos os item no array)
-for(let num of array1){
-    console.log(num)
+function logicaDeProgramacao1(arr){
+    // for-of (imprime todos os item no array)
+    for(let num of arr){
+        console.log(num)
+    }
+    // while (imprime todos os itens, indicando o indice)
+    let i = 0
+    while(i < arr.length){
+        console.log(`O valor do array no índice ${i} é: ${array1[i]}`)
+        i++
+    }
+    // .forEach (soma todos os itens)
+    let soma = 0
+    arr.forEach((item, idx, arr) => {
+        soma += item
+    })
+    console.log(`A soma do array é ${soma}`)
 }
-// while (imprime todos os itens, indicando o indice)
-let i = 0
-while(i < array1.length){
-    console.log(`O valor do array no índice ${i} é: ${array1[i]}`)
-    i++
-}
-// .forEach (soma todos os itens)
-let soma = 0
-array1.forEach((item, idx, arr) => {
-    soma += item
-})
-console.log(`A soma do array é ${soma}`)
+logicaDeProgramacao1(array1)
 
 // 2.
 // a) false
@@ -64,12 +67,14 @@ console.log(`A soma do array é ${soma}`)
 // Esqueceu de incrementar o contador i
 // Na comparação não vai o =
 console.log(`Exercício de Lógica de Programação 3 - N = 3`)
-const quantidadeDeNumerosPares = 3
-i = 0
-while(i < quantidadeDeNumerosPares) {
-  console.log(i*2)
-  i++
+function quantidadeDeNumerosPares(N){
+    i = 0
+    while(i < N) {
+    console.log(i*2)
+    i++
+    }
 }
+quantidadeDeNumerosPares(3)
 
 console.log(`Exercício de Lógica de Programação 4 - Triângulo 1 2 1`)
 function qualTriangulo(a, b, c){
