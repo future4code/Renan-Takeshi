@@ -266,8 +266,8 @@ const consultas = [
 	{ nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
 ]
 function criarEmails(arr){
+    let strSr, strLembra
     return arr.map((consulta) => {
-        let strSr, strLembra
         if(consulta.genero === 'masculino'){
             strSr = 'Sr.'; strLembra = 'lembrá-lo'
         }else{
