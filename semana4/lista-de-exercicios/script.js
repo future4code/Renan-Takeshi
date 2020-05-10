@@ -1,5 +1,4 @@
 // Exercícios de interpretação
-
 // 1.
 // A função conversorDeMoeda recebe um argumento number
 // e converte esse valor para moeda Real utilizando uma cotação
@@ -135,8 +134,8 @@ anon()
 // array: é uma coleção de objetos organizados como em uma linha, 
 // usado quando queremos armazenar informações que estão de alguma 
 // forma relacionadas.
-// objeto: é um item que pode conter diversos valores dentro
-// de maneira a representar com mais clareza as informações
+// objeto: é um item que pode conter diversos valores dentro,
+// de maneira a representar com mais clareza as informações,
 // por exemplo, um objeto cadastro pode contar valores como nome,
 // telefone e endereço
 
@@ -172,7 +171,6 @@ const conhecido = {
     email: 'jao@oab.br',
     endereco: 'Rua, 13'
 }
-
 function anonimizarPessoa(pessoa){
     let anonimo = {
         ...pessoa,
@@ -190,7 +188,6 @@ array2 = [
 	{ nome: "Paula", idade: 12 },
 	{ nome: "Artur", idade: 89 } 
 ]
-
 console.log(`Exercícios de Funções de Array - 1.a)`)
 function retornaAdultos(arr){
     return arr.filter((pessoa) => {
@@ -276,8 +273,7 @@ const consultas = [
 ]
 function criarEmails(arr){
     return arr.map((consulta) => {
-        let strSr = ''
-        let strLembra = ''
+        let strSr, strLembra
         if(consulta.genero === 'masculino'){
             strSr = 'Sr.'; strLembra = 'lembrá-lo'
         }else{
@@ -302,7 +298,6 @@ const contas = [
 	{ cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
 	{ cliente: "Soter", saldoTotal: 1200, compras: [] }
 ]
-
 function atualizaSaldo(arr){
     arr.forEach((conta) => {
         conta.compras.forEach((compra) => { // forEachCEPTION !!!
