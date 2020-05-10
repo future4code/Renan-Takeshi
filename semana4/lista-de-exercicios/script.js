@@ -300,9 +300,7 @@ const contas = [
 ]
 function atualizaSaldo(arr){
     arr.forEach((conta) => {
-        conta.compras.forEach((compra) => {
-            conta.saldoTotal -= compra
-        })
+        conta.saldoTotal -= conta.compras.reduce((a, b) =>  a + b, 0)
     })
 }
 atualizaSaldo(contas)
