@@ -58,10 +58,10 @@ logicaDeProgramacao1(array1)
 
 // 2.
 // a) false
-// b) true
+// b) false
 // c) true
 // d) true
-// e) false
+// e) true
 
 // 3.
 // Esqueceu de incrementar o contador i
