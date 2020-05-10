@@ -17,16 +17,14 @@
 // undefined (com um alert "TIPO DE INVESTIMENTO INFORMADO INCORRETO!")
 
 // 3.
-// O código copia no array1 os elementos pares do array numeros
-// e elementos impares no array2
+// O código copia no array1 os elementos pares do array numeros e elementos impares no array2
 // Respostas do console:
 // Quantidade total de números 14
 // 6
 // 8
 
 // 4.
-// Esse código procura o menor e maior item do array numeros
-// e atribui as variaveis numero1 e numero2, respectivamente.
+// Esse código procura o menor e maior item do array numeros e atribui às variaveis numero1 e numero2, respectivamente.
 // Respostas do console:
 // -10
 // 283
@@ -63,14 +61,11 @@ logicaDeProgramacao1(array1)
 // e) true
 
 // 3.
-// Esqueceu de incrementar o contador i
-// Na comparação não vai o =
+// Esqueceu de incrementar o contador (i); na comparação não vai o =
 console.log(`Exercício de Lógica de Programação 3 - N = 3`)
 function quantidadeDeNumerosPares(N){
-    let i = 0
-    while(i < N) {
+    for(let i = 0; i < N; i++){
         console.log(i*2)
-        i++
     }
 }
 quantidadeDeNumerosPares(3)
@@ -208,7 +203,6 @@ console.log(retornaCriancas(array3))
 
 // 2
 const array4 = [1, 2, 3, 4, 5, 6]
-
 console.log(`Exercícios de Funções de Array - 2.a)`)
 function multiplicaPor2(arr){
     return arr.map((num) => {
@@ -280,7 +274,6 @@ function criarEmails(arr){
             strSr = 'Sra.'; strLembra = 'lembrá-la'
         }
 
-        // Retornando os items para o array
         if(!consulta.cancelada){
             return `Olá, ${strSr} ${consulta.nome}. Estamos enviando esta mensagem para ${strLembra} da sua consulta no dia ${consulta.dataDaConsulta}. Por favor acuse o recebimento deste e-mail`
         }
