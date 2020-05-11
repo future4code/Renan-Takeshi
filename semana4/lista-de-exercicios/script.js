@@ -187,13 +187,13 @@ array3 = [
 
 console.log(`Exercícios de Funções de Array - 1.a)`)
 function retornaAdultos(arr){
-    return arr.filter( pessoa => {return (pessoa.idade >= 20)} )
+    return arr.filter( pessoa => pessoa.idade >= 20 )
 }      // Achei que colocando numa só linha melhora a legibilidade
 console.log(retornaAdultos(array3))
 
 console.log(`Exercícios de Funções de Array - 1.b)`)
 function retornaCriancas(arr){
-    return arr.filter( pessoa => {return (pessoa.idade < 20)} )
+    return arr.filter( pessoa => pessoa.idade < 20 )
 }
 console.log(retornaCriancas(array3))
 
@@ -234,13 +234,13 @@ const pessoas = [
 
 console.log(`Exercícios de Funções de Array - 3.a)`)
 function podeEntrar(arr){
-    return arr.filter( pessoa  => {return (pessoa.idade >= 14 && pessoa.idade <= 60 && pessoa.altura >= 1.5)} )
+    return arr.filter( pessoa  => pessoa.idade >= 14 && pessoa.idade <= 60 && pessoa.altura >= 1.5 )
 }
 console.log(podeEntrar(pessoas))
 
 console.log(`Exercícios de Funções de Array - 3.b)`)
 function naoPodeEntrar(arr){
-    return arr.filter( pessoa => {return (pessoa.idade < 14 || pessoa.idade > 60 || pessoa.altura < 1.5)} )
+    return arr.filter( pessoa => pessoa.idade < 14 || pessoa.idade > 60 || pessoa.altura < 1.5 )
 }
 console.log(naoPodeEntrar(pessoas))
 
