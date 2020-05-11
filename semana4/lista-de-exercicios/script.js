@@ -188,7 +188,7 @@ array3 = [
 console.log(`Exercícios de Funções de Array - 1.a)`)
 function retornaAdultos(arr){
     return arr.filter((pessoa) => {return (pessoa.idade >= 20)})
-}
+}      // Achei que colocando numa só linha melhora a legibilidade
 console.log(retornaAdultos(array3))
 
 console.log(`Exercícios de Funções de Array - 1.b)`)
