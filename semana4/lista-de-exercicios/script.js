@@ -174,6 +174,7 @@ function anonimizarPessoa(pessoa){
     return anonimo
 }
 console.log(anonimizarPessoa(conhecido))
+console.log(conhecido)
 
 
 // Exercícios de Funções de array
@@ -183,21 +184,16 @@ array3 = [
 	{ nome: "Paula", idade: 12 },
 	{ nome: "Artur", idade: 89 } 
 ]
+
 console.log(`Exercícios de Funções de Array - 1.a)`)
 function retornaAdultos(arr){
-    return arr.filter((pessoa) => {
-        if(pessoa.idade >= 20){return true}
-        return false
-    })
+    return arr.filter((pessoa) => {return (pessoa.idade >= 20)})
 }
 console.log(retornaAdultos(array3))
 
 console.log(`Exercícios de Funções de Array - 1.b)`)
 function retornaCriancas(arr){
-    return arr.filter((pessoa) => {
-        if(pessoa.idade >= 20){return false}
-        return true
-    })
+    return arr.filter((pessoa) => {return (pessoa.idade < 20)})
 }
 console.log(retornaCriancas(array3))
 
@@ -205,17 +201,13 @@ console.log(retornaCriancas(array3))
 const array4 = [1, 2, 3, 4, 5, 6]
 console.log(`Exercícios de Funções de Array - 2.a)`)
 function multiplicaPor2(arr){
-    return arr.map((num) => {
-        return num * 2
-    })
+    return arr.map((num) => {return num * 2})
 }
 console.log(multiplicaPor2(array4))
 
 console.log(`Exercícios de Funções de Array - 2.b)`)
 function multiplicaPor3naString(arr){
-    return arr.map((num) => {
-        return `${num * 3}`
-    })
+    return arr.map((num) => {return `${num * 3}`})
 }
 console.log(multiplicaPor3naString(array4))
 
@@ -242,19 +234,13 @@ const pessoas = [
 
 console.log(`Exercícios de Funções de Array - 3.a)`)
 function podeEntrar(arr){
-    return arr.filter((pessoa) => {
-        if(pessoa.idade >= 14 && pessoa.idade <= 60 && pessoa.altura >= 1.5){return true}
-        return false
-    })
+    return arr.filter((pessoa) => {return (pessoa.idade >= 14 && pessoa.idade <= 60 && pessoa.altura >= 1.5)})
 }
 console.log(podeEntrar(pessoas))
 
 console.log(`Exercícios de Funções de Array - 3.b)`)
 function naoPodeEntrar(arr){
-    return arr.filter((pessoa) => {
-        if(pessoa.idade >= 14 && pessoa.idade <= 60 && pessoa.altura >= 1.5){return false}
-        return true
-    })
+    return arr.filter((pessoa) => {return (pessoa.idade < 14 || pessoa.idade > 60 || pessoa.altura < 1.5)})
 }
 console.log(naoPodeEntrar(pessoas))
 
@@ -265,6 +251,7 @@ const consultas = [
 	{ nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
 	{ nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
 ]
+
 function criarEmails(arr){
     let strSr, strLembra
     return arr.map((consulta) => {
@@ -291,10 +278,9 @@ const contas = [
 	{ cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
 	{ cliente: "Soter", saldoTotal: 1200, compras: [] }
 ]
+
 function atualizaSaldo(arr){
-    arr.forEach((conta) => {
-        conta.saldoTotal -= conta.compras.reduce((a, b) =>  a + b, 0)
-    })
+    arr.forEach((conta) => conta.saldoTotal -= conta.compras.reduce((a, b) =>  a + b, 0))
 }
 atualizaSaldo(contas)
 console.log(contas)
