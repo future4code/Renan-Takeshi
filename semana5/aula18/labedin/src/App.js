@@ -18,7 +18,7 @@ function App() {
         />
         <CardPequeno
           imagem={mail}
-          texto="eusoubatman@batcave.com"
+          texto="naosoubatman@batcave.com"
         />
         <CardPequeno
           imagem={location}
