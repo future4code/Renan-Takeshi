@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script defer type="application/javascript" src="script.js"></script>
+    <title>Despesas</title>
+</head>
+<body>
+    <div id='cadastro'>
+        <p>Cadastrar Despesa</p>
+        <input id="valorCadastro" type="number" placeholder="Valor da Despesa">
+        <select id="tipoCadastro">
+            <option value="" disabled selected>Selecione um tipo</option>
+            <option value="alimentação">Alimentação</option>
+            <option value="utilidades">Utilidades</option>
+            <option value="viagem">Viagem</option>
+        </select>
+        <input id="descricaoCadastro" type="text" placeholder="Descrição">
+        <button onclick="adicionarDespesa()">Adicionar</button>
+    </div>
+
+    <div id="filtro">
+        <p>Filtrar Despesas</p>
+        <select id="tipoFiltro">
+            <option value="" selected disabled>Selecione um tipo</option>
+            <option value="todos">Todos</option>
+            <option value="alimentação">Alimentação</option>
+            <option value="utilidades">Utilidades</option>
+            <option value="viagem">Viagem</option>
+        </select>
+        <input id="valorFiltroMin" type="number" placeholder="Valor mínimo">
+        <input id="valorFiltroMax" type="number" placeholder="Valor máximo">
+        <button onclick="filtrarDespesas()">Filtrar</button>
+        <button onclick="limparFiltros()">Limpar</button>
+    </div>
+
+    <div id="despesas"></div>
+
+    <div id="extrato"></div>
+
+</body>
+</html>
