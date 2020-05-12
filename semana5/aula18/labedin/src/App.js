@@ -37,11 +37,18 @@ function App() {
           nome="Gotham City" 
           descricao="Eu sou a noite combatendo o crime!" 
         />
-        
+        <CardPequeno
+          imagem={location}
+          texto="Streets - Gotham City, NJ"
+        />
         <CardGrande 
           imagem="https://miro.medium.com/max/640/1*0ZajHBkV09OjIYLsvr81lQ.jpeg" 
           nome="Wayne Manor" 
           descricao="Playboy bilionário mantendo as aparências." 
+        />
+        <CardPequeno
+          imagem={location}
+          texto="1007 Mountain Drive - Gotham, NJ"
         />
       </div>
 
