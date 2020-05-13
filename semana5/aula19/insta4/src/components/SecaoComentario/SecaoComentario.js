@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './SecaoComentario.css'
 
-class SecaoComentario extends Component {
+export class SecaoComentario extends Component {
 	state = {
 		valorComentario: ''
 	}
@@ -26,4 +26,3 @@ class SecaoComentario extends Component {
 	}
 }
 
-export default SecaoComentario
