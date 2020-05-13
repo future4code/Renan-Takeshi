@@ -10,6 +10,7 @@ class SecaoComentario extends React.Component {
 		this.setState({
 			valorComentario: event.target.value
 		})
+		console.log(this.state.valorComentario)
 	}
 
 	render() {
