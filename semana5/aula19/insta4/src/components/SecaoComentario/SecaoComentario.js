@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './SecaoComentario.css'
 
-class SecaoComentario extends React.Component {
+class SecaoComentario extends Component {
 	state = {
 		valorComentario: ''
 	}
@@ -10,7 +10,7 @@ class SecaoComentario extends React.Component {
 		this.setState({
 			valorComentario: event.target.value
 		})
-		console.log(this.state.valorComentario)
+		console.log(event.target.value)
 	}
 
 	render() {
