@@ -10,10 +10,13 @@ const FormPost = styled.form`
 `;
 const FormInput = styled.input`
   margin-top: 5px;
+  padding-left: 5px;
+  height: 25px;
 `;
 const FormButton = styled.button`
-  margin-top: 5px;
-`
+  height: 25px;
+  margin-top: 5px
+`;
 
 class App extends React.Component {
   state = {
@@ -43,7 +46,8 @@ class App extends React.Component {
     valorInputFotoPost: "",
   };
 
-  adicionaPost = () => {
+  adicionaPost = (event) => {
+    event.preventDefault();
     const novoPost = {
       nome: this.state.valorInputUsuario,
       fotoUsuario: this.state.valorInputFotoUsuario,
@@ -89,17 +93,17 @@ class App extends React.Component {
           <FormInput
             value={this.state.valorInputUsuario}
             onChange={this.onChangeInputUsuario}
-            placeholder={"Usuário"}
+            placeholder={"Nome do usuário"}
           />
           <FormInput
             value={this.state.valorInputFotoUsuario}
             onChange={this.onChangeInputFotoUsuario}
-            placeholder={"Foto do usuário"}
+            placeholder={"URL da foto do usuário"}
           />
           <FormInput
             value={this.state.valorInputFotoPost}
             onChange={this.onChangeInputFotoPost}
-            placeholder={"Foto do post"}
+            placeholder={"URL da foto do post"}
           />
           <FormButton onClick={this.adicionaPost}>Adicionar</FormButton>
         </FormPost>
