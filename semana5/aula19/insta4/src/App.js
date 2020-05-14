@@ -1,6 +1,19 @@
 import React from "react";
 import "./App.css";
 import Post from "./components/Post/Post";
+import styled from "styled-components";
+
+const FormPost = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+`;
+const FormInput = styled.input`
+  margin-top: 5px;
+`;
+const FormButton = styled.button`
+  margin-top: 5px;
+`
 
 class App extends React.Component {
   state = {
@@ -27,19 +40,24 @@ class App extends React.Component {
     ],
     valorInputUsuario: "",
     valorInputFotoUsuario: "",
-    valorInputFotoPost: ""
+    valorInputFotoPost: "",
   };
 
   adicionaPost = () => {
     const novoPost = {
       nome: this.state.valorInputUsuario,
       fotoUsuario: this.state.valorInputFotoUsuario,
-      fotoPost: this.state.valorInputFotoPost
+      fotoPost: this.state.valorInputFotoPost,
     };
-    
+
     const novoPosts = [...this.state.posts, novoPost];
 
-    this.setState({ posts: novoPosts, valorInputUsuario: "", valorInputFotoUsuario: "", valorInputFotoPost: "" });
+    this.setState({
+      posts: novoPosts,
+      valorInputUsuario: "",
+      valorInputFotoUsuario: "",
+      valorInputFotoPost: "",
+    });
   };
 
   onChangeInputUsuario = (event) => {
@@ -67,24 +85,24 @@ class App extends React.Component {
 
     return (
       <div className={"app-container"}>
-        <div>
-          <input
+        <FormPost>
+          <FormInput
             value={this.state.valorInputUsuario}
             onChange={this.onChangeInputUsuario}
             placeholder={"Usuário"}
           />
-          <input
+          <FormInput
             value={this.state.valorInputFotoUsuario}
             onChange={this.onChangeInputFotoUsuario}
             placeholder={"Foto do usuário"}
           />
-                    <input
+          <FormInput
             value={this.state.valorInputFotoPost}
             onChange={this.onChangeInputFotoPost}
             placeholder={"Foto do post"}
           />
-          <button onClick={this.adicionaPost}>Adicionar</button>
-        </div>
+          <FormButton onClick={this.adicionaPost}>Adicionar</FormButton>
+        </FormPost>
 
         {listaDePosts}
       </div>
