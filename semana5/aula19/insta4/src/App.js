@@ -15,7 +15,7 @@ const FormInput = styled.input`
 `;
 const FormButton = styled.button`
   height: 25px;
-  margin-top: 5px
+  margin-top: 5px;
 `;
 
 class App extends React.Component {
