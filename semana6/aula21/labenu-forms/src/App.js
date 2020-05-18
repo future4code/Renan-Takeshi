@@ -4,34 +4,35 @@ import Etapa1 from "./components/Etapa1";
 import Etapa2 from "./components/Etapa2";
 import Etapa3 from "./components/Etapa3";
 import Final from "./components/Final";
-import styled from 'styled-components';
 
-const MainLayout = styled.div`
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-`
-
-const Botao = styled.button`
-  margin-top: 20px;
-`
 
 class App extends React.Component {
   state = {
     idx: 0,
-    etapas: [<Etapa1 />, <Etapa2 />, <Etapa3 />, <Final />],
+    proximaEtapa: 2, //Porque o valor default do select é ensino médio
+    etapas: [<Etapa1 avancarEtapa={() => { this.avancarEtapa() }} vaiEtapaDois={() => { this.vaiEtapaDois() }} vaiEtapaTres={() => { this.vaiEtapaTres() }} />,
+            <Etapa2 avancarEtapa={() => { this.avancarEtapa() }}/>,
+            <Etapa3 avancarEtapa={() => { this.avancarEtapa() }}/>,
+            <Final />],
   }
 
   avancarEtapa = () => {
-    this.setState({ idx: this.state.idx + 1 })
+    this.setState({ idx: this.state.proximaEtapa, proximaEtapa: 3 })
+  }
+
+  vaiEtapaDois = () => {
+    this.setState({ proximaEtapa: 1 })
+  }
+
+  vaiEtapaTres = () => {
+    this.setState({ proximaEtapa: 2 })
   }
 
   render() {
     return (
-      <MainLayout>
+      <div>
         {this.state.etapas[this.state.idx]}
-        {this.state.idx < 3 && <Botao onClick={this.avancarEtapa}>Próxima etapa</Botao>}
-      </MainLayout>
+      </div>
     );
   }
 }

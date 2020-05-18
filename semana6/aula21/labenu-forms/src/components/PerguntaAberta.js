@@ -1,11 +1,6 @@
 import React from "react";
-import styled from 'styled-components';
+import { Container } from './Etapa1'
 
-const Pergunta = styled.div`
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-`
 
 class PerguntaAberta extends React.Component {
     state = {
@@ -18,10 +13,10 @@ class PerguntaAberta extends React.Component {
 
     render() {
         return (
-            <Pergunta>
+            <Container>
                 <p>{this.props.pergunta}</p>
                 <input value={this.state.valorInput} onChange={this.onChangeInput} />
-            </Pergunta>
+            </Container>
         )
     }
 }

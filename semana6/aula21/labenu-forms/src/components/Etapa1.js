@@ -3,12 +3,15 @@ import PerguntaAberta from "./PerguntaAberta";
 import PerguntaOpcoes from "./PerguntaOpcoes";
 import styled from 'styled-components';
 
-const Container = styled.div`
+
+export const Container = styled.div`
   display:flex;
   flex-direction: column;
   align-items:center;
 `
-
+export const Botao = styled.button`
+  margin-top: 20px;
+`
 
 class Etapa1 extends React.Component {
   render() {
@@ -18,7 +21,7 @@ class Etapa1 extends React.Component {
         <PerguntaAberta pergunta={"1. Qual o seu nome?"} />
         <PerguntaAberta pergunta={"2. Qual sua idade?"} />
         <PerguntaAberta pergunta={"3. Qual seu email?"} />
-        <PerguntaOpcoes
+        <PerguntaOpcoes vaiEtapaDois={this.props.vaiEtapaDois} vaiEtapaTres={this.props.vaiEtapaTres}
           pergunta={"4. Qual a sua escolaridade?"}
           opcoes={[
             "Ensino médio incompleto",
@@ -27,6 +30,7 @@ class Etapa1 extends React.Component {
             "Ensino superior completo"
           ]}
         />
+        <Botao onClick={() => { this.props.avancarEtapa() }}>Próxima etapa</Botao>
       </Container>
     );
   }

@@ -1,34 +1,33 @@
 import React from "react";
-import styled from 'styled-components';
+import { Container } from './Etapa1'
 
-const Pergunta = styled.div`
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-`
 
 class PerguntaOpcoes extends React.Component {
     state = {
-        valorSelect: "",
+        valorSelect: "1",
     }
 
     onChangeSelect = (event) => {
-        this.setState({ valorSelect: event.target.value });
-        console.log(event.target.value)
+        // this.setState({ valorSelect: event.target.value });
+        if(event.target.value === "1" || event.target.value === "2"){
+            this.props.vaiEtapaTres();
+        }else{
+            this.props.vaiEtapaDois();
+        }
     };
 
     render() {
         let valor = 0;
         return (
-            <Pergunta>
+            <Container>
                 <p>{this.props.pergunta}</p>
-                <select >
+                <select  onChange={this.onChangeSelect}>
                     {this.props.opcoes.map(opcao => {
                         valor++;
                         return <option key={valor} value={valor}>{opcao}</option>
                     })}
                 </select>
-            </Pergunta>
+            </Container>
         )
     }
 }

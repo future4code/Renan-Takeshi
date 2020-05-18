@@ -1,11 +1,13 @@
 import React from "react";
 import PerguntaAberta from "./PerguntaAberta";
 import PerguntaOpcoes from "./PerguntaOpcoes";
+import { Container, Botao } from './Etapa1'
+
 
 class Etapa3 extends React.Component {
     render() {
         return (
-            <div>
+            <Container>
                 <h3>ETAPA 3 - INFORMAÇÕES GERAIS DE ENSINO</h3>
                 <PerguntaAberta pergunta={"5. Por que você não terminou um curso de graduação?"} />
                 <PerguntaOpcoes
@@ -16,7 +18,8 @@ class Etapa3 extends React.Component {
                         "Curso de inglês",
                     ]}
                 />
-            </div>
+                <Botao onClick={() => { this.props.avancarEtapa() }}>Finalizar</Botao>
+            </Container>
         );
     }
 }

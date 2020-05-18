@@ -1,19 +1,14 @@
 import React from "react";
-import styled from 'styled-components';
+import { Container } from './Etapa1'
 
-const Pergunta = styled.div`
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-`
 
 class Final extends React.Component {
     render() {
         return (
-            <Pergunta>
+            <Container>
                 <h3>O FORMULÁRIO ACABOU</h3>
                 <p>Muito obrigado por participar! Entraremos em contato!</p>
-            </Pergunta>
+            </Container>
         )
     }
 }
