@@ -14,17 +14,19 @@ class PerguntaOpcoes extends React.Component {
 
     onChangeSelect = (event) => {
         this.setState({ valorSelect: event.target.value });
+        console.log(event.target.value)
     };
 
     render() {
+        let valor = 0;
         return (
             <Pergunta>
                 <p>{this.props.pergunta}</p>
-                <select>
+                <select >
                     {this.props.opcoes.map(opcao => {
-                        return <option>{opcao}</option>
+                        valor++;
+                        return <option key={valor} value={valor}>{opcao}</option>
                     })}
-
                 </select>
             </Pergunta>
         )

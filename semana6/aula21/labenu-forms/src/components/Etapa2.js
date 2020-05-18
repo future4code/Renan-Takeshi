@@ -1,6 +1,5 @@
 import React from "react";
 import PerguntaAberta from "./PerguntaAberta";
-import PerguntaOpcoes from "./PerguntaOpcoes";
 
 class Etapa2 extends React.Component {
   render() {

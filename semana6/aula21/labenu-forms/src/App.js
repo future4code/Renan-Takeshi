@@ -21,16 +21,16 @@ class App extends React.Component {
     idx: 0,
     etapas: [<Etapa1 />, <Etapa2 />, <Etapa3 />, <Final />],
   }
-  
+
   avancarEtapa = () => {
-    this.setState({idx: this.state.idx + 1})
+    this.setState({ idx: this.state.idx + 1 })
   }
 
   render() {
     return (
       <MainLayout>
         {this.state.etapas[this.state.idx]}
-        { this.state.idx < 3 && <Botao onClick={this.avancarEtapa}>Próxima etapa</Botao> }
+        {this.state.idx < 3 && <Botao onClick={this.avancarEtapa}>Próxima etapa</Botao>}
       </MainLayout>
     );
   }
