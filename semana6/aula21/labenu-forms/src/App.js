@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Etapa1 from "./components/Etapa1";
 import Etapa2 from "./components/Etapa2";
 import Etapa3 from "./components/Etapa3";
@@ -11,9 +10,9 @@ class App extends React.Component {
     idx: 0,
     proximaEtapa: 2, //Porque o valor default do select é ensino médio
     etapas: [<Etapa1 avancarEtapa={() => { this.avancarEtapa() }} vaiEtapaDois={() => { this.vaiEtapaDois() }} vaiEtapaTres={() => { this.vaiEtapaTres() }} />,
-            <Etapa2 avancarEtapa={() => { this.avancarEtapa() }}/>,
-            <Etapa3 avancarEtapa={() => { this.avancarEtapa() }}/>,
-            <Final />],
+             <Etapa2 avancarEtapa={() => { this.avancarEtapa() }} />,
+             <Etapa3 avancarEtapa={() => { this.avancarEtapa() }} />,
+             <Final />],
   }
 
   avancarEtapa = () => {

@@ -21,7 +21,9 @@ class Etapa1 extends React.Component {
         <PerguntaAberta pergunta={"1. Qual o seu nome?"} />
         <PerguntaAberta pergunta={"2. Qual sua idade?"} />
         <PerguntaAberta pergunta={"3. Qual seu email?"} />
-        <PerguntaOpcoes vaiEtapaDois={this.props.vaiEtapaDois} vaiEtapaTres={this.props.vaiEtapaTres}
+        <PerguntaOpcoes
+          vaiEtapaDois={this.props.vaiEtapaDois}
+          vaiEtapaTres={this.props.vaiEtapaTres}
           pergunta={"4. Qual a sua escolaridade?"}
           opcoes={[
             "Ensino médio incompleto",

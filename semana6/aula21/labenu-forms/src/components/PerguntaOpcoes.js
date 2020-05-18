@@ -3,15 +3,11 @@ import { Container } from './Etapa1'
 
 
 class PerguntaOpcoes extends React.Component {
-    state = {
-        valorSelect: "1",
-    }
 
     onChangeSelect = (event) => {
-        // this.setState({ valorSelect: event.target.value });
-        if(event.target.value === "1" || event.target.value === "2"){
+        if (event.target.value === "1" || event.target.value === "2") {
             this.props.vaiEtapaTres();
-        }else{
+        } else {
             this.props.vaiEtapaDois();
         }
     };
@@ -21,7 +17,7 @@ class PerguntaOpcoes extends React.Component {
         return (
             <Container>
                 <p>{this.props.pergunta}</p>
-                <select  onChange={this.onChangeSelect}>
+                <select onChange={this.onChangeSelect}>
                     {this.props.opcoes.map(opcao => {
                         valor++;
                         return <option key={valor} value={valor}>{opcao}</option>
