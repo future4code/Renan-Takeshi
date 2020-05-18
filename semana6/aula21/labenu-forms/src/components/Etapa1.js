@@ -32,7 +32,7 @@ class Etapa1 extends React.Component {
             "Ensino superior completo"
           ]}
         />
-        <Botao onClick={() => { this.props.avancarEtapa() }}>Próxima etapa</Botao>
+        <Botao onClick={() => { this.props.avancarEtapa() }}>Continuar</Botao>
       </Container>
     );
   }
