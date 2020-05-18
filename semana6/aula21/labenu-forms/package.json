@@ -32,8 +32,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "eslint": "^7.0.0",
-    "eslint-plugin-vue": "^6.2.2"
-  }
+  "devDependencies": {}
 }
