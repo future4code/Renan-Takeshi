@@ -20,13 +20,17 @@ const InputsContainer = styled.div`
 
 class App extends React.Component {
     state = {
-      tarefas: [],
+      tarefas: [{
+        id: Date.now(),
+        texto: 'Texto da tarefa',
+        completa: false
+      }],
       inputValue: '',
       filter: ''
     }
 
   componentDidUpdate() {
-
+    console.log(this.state)
   };
 
   componentDidMount() {
@@ -34,11 +38,21 @@ class App extends React.Component {
   };
 
   onChangeInput = (event) => {
-
+    this.setState({inputValue: event.target.value})
   }
 
   criaTarefa = () => {
-
+    const novaTarefa = {
+      id: Date.now(),
+      texto: this.state.inputValue,
+      completa: false,
+    }
+    const novoTarefas = [...this.state.tarefas, novaTarefa]
+    this.setState({
+      tarefas: novoTarefas,
+      inputValue: '',
+      filter: '',
+    })    
   }
 
   selectTarefa = (id) => {
@@ -46,7 +60,7 @@ class App extends React.Component {
   }
 
   onChangeFilter = (event) => {
-
+    this.setState({filter: event.target.value})
   }
 
   render() {
