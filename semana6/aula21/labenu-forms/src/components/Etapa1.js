@@ -19,12 +19,11 @@ class Etapa1 extends React.Component {
     nome: "",
     nomeErro: "",
     idade: "",
-    idadeErro: "",
     email: "",
     emailErro: "",
     erro: true,
   }
-  
+
   validarTexto = (texto) => {
     if (texto.replace(/ /g, "").length !== 0) {
       return true
@@ -33,10 +32,33 @@ class Etapa1 extends React.Component {
   }
 
   validarEtapa = () => {
-    if (!this.validarTexto(this.state.email)) {
-      this.setState({ emailErro: "Preencha seu email", erro: true })
+    const nomeValido = this.validarTexto(this.state.nome);
+    const emailValido = this.validarTexto(this.state.email);
+
+    if (!nomeValido && !emailValido) {
+      this.setState({
+        nomeErro: "Preencha seu nome",
+        emailErro: "Preencha seu email",
+        erro: true,
+      })
+    } else if (!nomeValido) {
+      this.setState({
+        nomeErro: "Preencha seu nome",
+        emailErro: "",
+        erro: true,
+      })
+    } else if (!emailValido) {
+      this.setState({
+        nomeErro: "",
+        emailErro: "Preencha seu email",
+        erro: true,
+      })
     } else {
-      this.setState({ emailErro: "", erro: false })
+      this.setState({
+        nomeErro: "",
+        emailErro: "",
+        erro: false,
+      })
     }
   }
 
@@ -44,13 +66,14 @@ class Etapa1 extends React.Component {
     this.validarEtapa();
     setTimeout(() => {
       if (this.state.erro) {
-        alert("Você deve preencher seu email antes de continuar")
+        alert("Você deve preencher todos os campos antes de continuar")
       } else {
         this.props.avancarEtapa();
       }
     }, 1)
   }
 
+  // Funções passadas como props
   setNome = (nome) => { this.setState({ nome: nome }) }
   setIdade = (idade) => { this.setState({ idade: idade }) }
   setEmail = (email) => { this.setState({ email: email }) }
@@ -59,8 +82,8 @@ class Etapa1 extends React.Component {
     return (
       <Container>
         <h3>ETAPA 1 - DADOS GERAIS</h3>
-        <PerguntaAberta setValue={this.setNome} msgErro={this.state.nomeErro} pergunta={"1. Qual o seu nome?"} />
-        <PerguntaAberta setValue={this.setIdade} msgErro={this.state.idadeErro} pergunta={"2. Qual sua idade?"} />
+        <PerguntaAberta setValue={this.setNome} msgErro={this.state.nomeErro} pergunta={"1. Qual o seu nome? (OBRIGATÓRIO)"} />
+        <PerguntaAberta setValue={this.setIdade} pergunta={"2. Qual sua idade?"} />
         <PerguntaAberta setValue={this.setEmail} msgErro={this.state.emailErro} pergunta={"3. Qual seu email? (OBRIGATÓRIO)"} />
         <PerguntaOpcoes
           vaiEtapaDois={this.props.vaiEtapaDois}
