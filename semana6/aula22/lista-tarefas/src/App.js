@@ -22,15 +22,16 @@ class App extends React.Component {
   state = {
     tarefas: [
       {
-        id: Date.now(),
+        id: Date.now(), // Explicação abaixo
         texto: 'Texto da tarefa',
-        completa: false
+        completa: false // Indica se a tarefa está completa (true ou false)
       },
       {
-        id: Date.now() + 1,
+        id: Date.now() + 1, // Explicação abaixo
         texto: 'Texto da tarefa',
-        completa: true
-      }],
+        completa: true // Indica se a tarefa está completa (true ou false)
+      }
+    ],
     inputValue: '',
     filter: ''
   }
@@ -40,8 +41,11 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const storageTarefas = JSON.parse(localStorage.getItem('tarefas'))
-    this.setState({ tarefas: storageTarefas })
+    const tarefasStr = localStorage.getItem('tarefas')
+    if (tarefasStr) {
+      const tarefasObj = JSON.parse(localStorage.getItem('tarefas'))
+      this.setState({ tarefas: tarefasObj })
+    }
   };
 
   onChangeInput = (event) => {
@@ -92,6 +96,7 @@ class App extends React.Component {
 
   onChangeFilter = (event) => {
     this.setState({ filter: event.target.value })
+
   }
 
   render() {
@@ -128,7 +133,6 @@ class App extends React.Component {
           {listaFiltrada.map(tarefa => {
             return (
               <Tarefa
-                key = {tarefa.id}
                 completa={tarefa.completa}
                 onClick={() => this.selectTarefa(tarefa.id)}
               >
