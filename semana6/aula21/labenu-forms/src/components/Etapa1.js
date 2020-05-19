@@ -24,6 +24,13 @@ class Etapa1 extends React.Component {
     emailErro: "",
     erro: true,
   }
+  
+  validarTexto = (texto) => {
+    if (texto.replace(/ /g, "").length !== 0) {
+      return true
+    }
+    return false
+  }
 
   validarEtapa = () => {
     if (!this.validarTexto(this.state.email)) {
@@ -70,14 +77,6 @@ class Etapa1 extends React.Component {
       </Container>
     );
   }
-
-  validarTexto = (texto) => {
-    if (texto.replace(/ /g, "").length !== 0) {
-      return true
-    }
-    return false
-  }
-
 }
 
 export default Etapa1;
