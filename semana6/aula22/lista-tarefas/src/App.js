@@ -53,17 +53,22 @@ class App extends React.Component {
   }
 
   criaTarefa = () => {
-    const novaTarefa = {
-      id: Date.now(),
-      texto: this.state.inputValue,
-      completa: false,
+    const textoTarefa = this.state.inputValue;
+    if (this.validarTexto(textoTarefa)) {
+      const novaTarefa = {
+        id: Date.now(),
+        texto: textoTarefa,
+        completa: false,
+      }
+      const novoTarefas = [...this.state.tarefas, novaTarefa]
+      this.setState({
+        tarefas: novoTarefas,
+        inputValue: '',
+        filter: '',
+      })
+    } else {
+      alert('Digite uma tarefa')
     }
-    const novoTarefas = [...this.state.tarefas, novaTarefa]
-    this.setState({
-      tarefas: novoTarefas,
-      inputValue: '',
-      filter: '',
-    })
   }
 
   selectTarefa = (id) => {
@@ -96,7 +101,19 @@ class App extends React.Component {
 
   onChangeFilter = (event) => {
     this.setState({ filter: event.target.value })
+  }
 
+  onKeyPressInput = (event) => {
+    if (event.key === "Enter" || (event.which === 13)) {
+      this.criaTarefa();
+    }
+  };
+
+  validarTexto = (texto) => {
+    if (texto.replace(/ /g, "").length !== 0) {
+      return true
+    }
+    return false
   }
 
   render() {
@@ -116,7 +133,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Lista de tarefas</h1>
         <InputsContainer>
-          <input value={this.state.inputValue} onChange={this.onChangeInput} />
+          <input value={this.state.inputValue} onChange={this.onChangeInput} onKeyPress={this.onKeyPressInput} />
           <button onClick={this.criaTarefa}>Adicionar</button>
         </InputsContainer>
         <br />
@@ -133,6 +150,7 @@ class App extends React.Component {
           {listaFiltrada.map(tarefa => {
             return (
               <Tarefa
+                key={tarefa.id}
                 completa={tarefa.completa}
                 onClick={() => this.selectTarefa(tarefa.id)}
               >
