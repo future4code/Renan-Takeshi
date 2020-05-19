@@ -63,6 +63,19 @@ class App extends React.Component {
   }
 
   selectTarefa = (id) => {
+    if (window.confirm('Precione OK para deletar, Cancel para marcar como completa')) {
+      this.deletarTarefa(id)
+    } else {
+      this.riscarTarefa(id)
+    }
+  }
+
+  deletarTarefa = (id) => {
+    const novoTarefas = this.state.tarefas.filter(tarefa => tarefa.id !== id)
+    this.setState({ tarefas: novoTarefas })
+  }
+
+  riscarTarefa = (id) => {
     const novoTarefas = this.state.tarefas.map((tarefa) => {
       if (tarefa.id === id) {
         const novaTarefa = {
