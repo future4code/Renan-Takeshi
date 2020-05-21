@@ -175,7 +175,7 @@ class App extends React.Component {
 
   // Desafio 5
   filtrarLista = (lista) => {
-    const reg = new RegExp(this.state.regex);
+    const reg = new RegExp(this.state.regex, 'i');
     return lista.filter(tarefa => reg.test(tarefa.texto))
   }
 
