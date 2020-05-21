@@ -57,7 +57,7 @@ class App extends React.Component {
   componentDidMount() {
     const tarefasStr = localStorage.getItem('tarefas')
     if (tarefasStr) {
-      const tarefasObj = JSON.parse(localStorage.getItem('tarefas'))
+      const tarefasObj = JSON.parse(tarefasStr)
       this.setState({ tarefas: tarefasObj })
     }
   };
@@ -113,7 +113,7 @@ class App extends React.Component {
         texto: this.state.inputValue,
         completa: this.state.completa,
       }
-      novoTarefas.splice(this.state.index, 1,novaTarefa);
+      novoTarefas.splice(this.state.index, 1, novaTarefa);
       this.setState({
         tarefas: novoTarefas,
         inputValue: '',
@@ -169,17 +169,17 @@ class App extends React.Component {
   }
 
   apagarTodas = () => {
-    this.setState({tarefas: []})
+    this.setState({ tarefas: [] })
   }
 
   ordenarCrescente = () => {
-    const crescente = this.state.tarefas.sort((a,b) => {return a.texto > b.texto ? 1 : -1})
-    this.setState({tarefas: crescente})
+    const crescente = this.state.tarefas.sort((a, b) => { return a.texto.toLowerCase() > b.texto.toLowerCase() ? 1 : -1 })
+    this.setState({ tarefas: crescente })
   }
 
   ordenarDecrescente = () => {
-    const crescente = this.state.tarefas.sort((a,b) => {return a.texto > b.texto ? -1 : 1})
-    this.setState({tarefas: crescente})
+    const crescente = this.state.tarefas.sort((a, b) => { return a.texto.toLowerCase() > b.texto.toLowerCase() ? -1 : 1 })
+    this.setState({ tarefas: crescente })
   }
 
 
@@ -231,9 +231,11 @@ class App extends React.Component {
           </TarefaList>
         </TarefaContainer>
         <InputsContainer>
-        <button onClick={this.ordenarCrescente}>Crecente</button>
-        <button onClick={this.ordenarDecrescente}>Decrescente</button>
+          <button onClick={this.ordenarCrescente}>Crecente</button>
+          <button onClick={this.ordenarDecrescente}>Decrescente</button>
         </InputsContainer>
+        <br />
+
         <InputsContainer>
           <button onClick={this.apagarTodas}>Apagar</button>
         </InputsContainer>
