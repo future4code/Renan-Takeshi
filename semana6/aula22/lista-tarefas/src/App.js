@@ -168,6 +168,10 @@ class App extends React.Component {
     })
   }
 
+  apagarTodas = () => {
+    this.setState({tarefas: []})
+  }
+
   render() {
     const listaPendente = this.state.tarefas.filter(tarefa => !tarefa.completa)
     const listaCompleta = this.state.tarefas.filter(tarefa => tarefa.completa)
@@ -215,6 +219,9 @@ class App extends React.Component {
             })}
           </TarefaList>
         </TarefaContainer>
+        <InputsContainer>
+          <button onClick={this.apagarTodas}>Apagar</button>
+        </InputsContainer>
       </div>
     )
   }
