@@ -172,6 +172,17 @@ class App extends React.Component {
     this.setState({tarefas: []})
   }
 
+  ordenarCrescente = () => {
+    const crescente = this.state.tarefas.sort((a,b) => {return a.texto > b.texto ? 1 : -1})
+    this.setState({tarefas: crescente})
+  }
+
+  ordenarDecrescente = () => {
+    const crescente = this.state.tarefas.sort((a,b) => {return a.texto > b.texto ? -1 : 1})
+    this.setState({tarefas: crescente})
+  }
+
+
   render() {
     const listaPendente = this.state.tarefas.filter(tarefa => !tarefa.completa)
     const listaCompleta = this.state.tarefas.filter(tarefa => tarefa.completa)
@@ -219,6 +230,10 @@ class App extends React.Component {
             })}
           </TarefaList>
         </TarefaContainer>
+        <InputsContainer>
+        <button onClick={this.ordenarCrescente}>Crecente</button>
+        <button onClick={this.ordenarDecrescente}>Decrescente</button>
+        </InputsContainer>
         <InputsContainer>
           <button onClick={this.apagarTodas}>Apagar</button>
         </InputsContainer>
