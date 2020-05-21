@@ -38,7 +38,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-
+    localStorage.setItem('tarefas', JSON.stringify(this.state.tarefas))
   }
 
   componentDidMount() {
@@ -86,8 +86,6 @@ class App extends React.Component {
           regex: '',
           id: 0,
         })
-        localStorage.setItem('tarefas', JSON.stringify(novoTarefas))
-
       } else {
         alert('Digite uma tarefa')
       }
@@ -107,8 +105,6 @@ class App extends React.Component {
           regex: '',
           id: 0,
         })
-        localStorage.setItem('tarefas', JSON.stringify(novoTarefas))
-        
       } else {
         this.deletarTarefa(this.state.id)
       }
@@ -202,7 +198,8 @@ class App extends React.Component {
             onChange={this.onChangeInput}
             onKeyPress={this.onKeyPressInput}
           />
-          <button onClick={this.criaTarefa}>Adicionar</button>
+          <button onClick={this.criaTarefa}>{!this.state.id ? 'Adicionar' : 'Editar'}</button>
+          {Boolean(this.state.id) && <button onClick={()=>{this.deletarTarefa(this.state.id)}}>Deletar</button>}
         </InputsContainer>
         <br />
 
@@ -219,7 +216,7 @@ class App extends React.Component {
                   key={tarefa.id}
                   completa={tarefa.completa}
                   onClick={() => { this.editarTarefa(tarefa.id) }}
-                  onDoubleClick={() => { this.selectTarefa(tarefa.id) }}
+                  onDoubleClick={() => { this.riscarTarefa(tarefa.id) }}
                 >
                   {tarefa.texto}
                 </Tarefa>
@@ -233,7 +230,7 @@ class App extends React.Component {
                   key={tarefa.id}
                   completa={tarefa.completa}
                   onClick={() => { this.editarTarefa(tarefa.id) }}
-                  onDoubleClick={() => { this.selectTarefa(tarefa.id) }}
+                  onDoubleClick={() => { this.riscarTarefa(tarefa.id) }}
                 >
                   {tarefa.texto}
                 </Tarefa>
