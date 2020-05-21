@@ -36,7 +36,7 @@ class App extends React.Component {
     index: 0,
     completa: false,
     regex: '',
-    ordenacao: 'cronologica',
+    ordenacao: 'Cronológica',
   }
 
   componentDidUpdate() {
@@ -172,17 +172,18 @@ class App extends React.Component {
       id: 0,
       index: 0,
       completa: false,
-      regex: ''
+      regex: '',
+      ordenacao: 'Cronológica'
     })
   }
 
-  // Desafio 5
-  pequisarLista = (lista) => {
+  // Desafio 5 e 6
+  ordenarPesquisarLista = (lista) => {
     switch (this.state.ordenacao) {
-      case 'crescente':
+      case 'Crescente':
         lista.sort((a, b) => { return a.texto.toLowerCase() >= b.texto.toLowerCase() ? 1 : -1 })
         break
-      case 'decrescente':
+      case 'Decrescente':
         lista.sort((a, b) => { return a.texto.toLowerCase() > b.texto.toLowerCase() ? -1 : 1 })
     }
     if (this.state.regex) {
@@ -192,17 +193,21 @@ class App extends React.Component {
     return lista
   }
 
+  limparPesquisa = () => {
+    this.setState({regex: ''})
+  }
+
   // Desafio 6
   ordenarCrescente = () => {
-    this.setState({ ordenacao: 'crescente' })
+    this.setState({ ordenacao: 'Crescente' })
   }
 
   ordenarDecrescente = () => {
-    this.setState({ ordenacao: 'decrescente' })
+    this.setState({ ordenacao: 'Decrescente' })
   }
 
   ordenarCronologica = () => {
-    this.setState({ ordenacao: 'cronologica' })
+    this.setState({ ordenacao: 'Cronológica' })
   }
 
 
@@ -228,12 +233,13 @@ class App extends React.Component {
         <InputsContainer>
           <label>Pesquisar:</label>
           <input value={this.state.regex} onChange={this.onChangeRegex} />
+          <button onClick={this.limparPesquisa}>Limpar</button>
         </InputsContainer>
         <TarefaContainer>
           <div></div>
           <TarefaList>
             <h2>Pendentes</h2>
-            {this.pequisarLista(listaPendente).map(tarefa => {
+            {this.ordenarPesquisarLista(listaPendente).map(tarefa => {
               return (
                 <Tarefa
                   key={tarefa.id}
@@ -248,7 +254,7 @@ class App extends React.Component {
           </TarefaList>
           <TarefaList>
             <h2>Completas</h2>
-            {this.pequisarLista(listaCompleta).map(tarefa => {
+            {this.ordenarPesquisarLista(listaCompleta).map(tarefa => {
               return (
                 <Tarefa
                   key={tarefa.id}
@@ -262,15 +268,16 @@ class App extends React.Component {
             })}
           </TarefaList>
         </TarefaContainer>
+        <p>Ordenação atual: {this.state.ordenacao}</p>
         <InputsContainer>
           <button onClick={this.ordenarCrescente}>Crescente</button>
           <button onClick={this.ordenarDecrescente}>Decrescente</button>
           <button onClick={this.ordenarCronologica}>Cronológica</button>
         </InputsContainer>
         <br />
-
+        <p>Apagar todas as tarefas:</p>
         <InputsContainer>
-          <button onClick={this.apagarTodas}>Apagar tudo</button>
+          <button onClick={this.apagarTodas}>Apagar</button>
         </InputsContainer>
       </div>
     )
