@@ -66,10 +66,7 @@ class App extends React.Component {
   }
 
   validarTexto = (texto) => {
-    if (texto.replace(/ /g, "").length) {
-      return true
-    }
-    return false
+    return texto.replace(/ /g, "").length
   }
 
   criaTarefa = () => {
@@ -112,14 +109,6 @@ class App extends React.Component {
       }
     }
     this.inputTarefa.focus();
-  }
-
-  selectTarefa = (id) => {
-    if (window.confirm('Precione OK para deletar, Cancel para marcar como completa/pendente')) {
-      this.deletarTarefa(id)
-    } else {
-      this.riscarTarefa(id)
-    }
   }
 
   riscarTarefa = (id) => {
