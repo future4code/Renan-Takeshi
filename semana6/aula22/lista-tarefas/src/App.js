@@ -7,10 +7,7 @@ const TarefaContainer = styled.div`
   display: grid;
   width: 60vw;
   height: 60vh;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
   grid-auto-flow: column;
-
 `
 
 const TarefaList = styled.ul`
@@ -21,6 +18,7 @@ const TarefaList = styled.ul`
 const Tarefa = styled.li`
   text-align: left;
   text-decoration: ${({ completa }) => (completa ? 'line-through' : 'none')};
+  word-wrap: break-word;
 `
 
 const InputsContainer = styled.div`
@@ -66,10 +64,6 @@ class App extends React.Component {
     this.setState({ inputValue: event.target.value })
   }
 
-  onChangeFilter = (event) => {
-    this.setState({ filter: event.target.value })
-  }
-
   onChangeRegex = (event) => {
     this.setState({ regex: event.target.value })
   }
@@ -100,8 +94,8 @@ class App extends React.Component {
         this.setState({
           tarefas: novoTarefas,
           inputValue: '',
-          filter: '',
           regex: '',
+          id: 0,
         })
       } else {
         alert('Digite uma tarefa')
@@ -117,7 +111,6 @@ class App extends React.Component {
       this.setState({
         tarefas: novoTarefas,
         inputValue: '',
-        filter: '',
         regex: '',
         id: 0,
       })
@@ -132,11 +125,6 @@ class App extends React.Component {
     }
   }
 
-  deletarTarefa = (id) => {
-    const novoTarefas = this.state.tarefas.filter(tarefa => tarefa.id !== id)
-    this.setState({ tarefas: novoTarefas })
-  }
-
   riscarTarefa = (id) => {
     const novoTarefas = this.state.tarefas.map((tarefa) => {
       if (tarefa.id === id) {
@@ -149,14 +137,24 @@ class App extends React.Component {
         return tarefa
       }
     })
-    this.setState({ tarefas: novoTarefas })
+    this.setState({ 
+      tarefas: novoTarefas,
+      inputValue: '',
+      id: 0,
+    })
+  }
+  
+  // Desafio 1
+  deletarTarefa = (id) => {
+    const novoTarefas = this.state.tarefas.filter(tarefa => tarefa.id !== id)
+    this.setState({ 
+      tarefas: novoTarefas,
+      inputValue: '',
+      id: 0,
+    })
   }
 
-  filtrarLista = (lista) => {
-    const reg = new RegExp(this.state.regex);
-    return lista.filter(tarefa => reg.test(tarefa.texto))
-  }
-
+  // Desafio 3
   editarTarefa = (id) => {
     const tarefa = this.state.tarefas.find(tarefa => tarefa.id === id)
     const tarefaIndex = this.state.tarefas.indexOf(tarefa);
@@ -168,10 +166,18 @@ class App extends React.Component {
     })
   }
 
+  // Desafio 4
   apagarTodas = () => {
     this.setState({ tarefas: [] })
   }
 
+  // Desafio 5
+  filtrarLista = (lista) => {
+    const reg = new RegExp(this.state.regex);
+    return lista.filter(tarefa => reg.test(tarefa.texto))
+  }
+
+  // Desafio 6
   ordenarCrescente = () => {
     const crescente = this.state.tarefas.sort((a, b) => { return a.texto.toLowerCase() > b.texto.toLowerCase() ? 1 : -1 })
     this.setState({ tarefas: crescente })
@@ -201,6 +207,7 @@ class App extends React.Component {
           <input value={this.state.regex} onChange={this.onChangeRegex} />
         </InputsContainer>
         <TarefaContainer>
+          <div></div>
           <TarefaList>
             {this.filtrarLista(listaPendente).map(tarefa => {
               return (
