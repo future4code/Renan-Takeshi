@@ -163,7 +163,14 @@ class App extends React.Component {
 
   // Desafio 4
   apagarTodas = () => {
-    this.setState({ tarefas: [] })
+    this.setState({ 
+      tarefas: [],
+      inputValue: '',
+      id: 0,
+      index: 0,
+      completa: false,
+      regex: ''
+    })
   }
 
   // Desafio 5
