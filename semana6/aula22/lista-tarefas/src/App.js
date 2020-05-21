@@ -210,6 +210,7 @@ class App extends React.Component {
         <TarefaContainer>
           <div></div>
           <TarefaList>
+            <h2>Pendentes</h2>
             {this.filtrarLista(listaPendente).map(tarefa => {
               return (
                 <Tarefa
@@ -224,6 +225,7 @@ class App extends React.Component {
             })}
           </TarefaList>
           <TarefaList>
+            <h2>Completas</h2>
             {this.filtrarLista(listaCompleta).map(tarefa => {
               return (
                 <Tarefa
@@ -239,7 +241,7 @@ class App extends React.Component {
           </TarefaList>
         </TarefaContainer>
         <InputsContainer>
-          <button onClick={this.ordenarCrescente}>Crecente</button>
+          <button onClick={this.ordenarCrescente}>Crescente</button>
           <button onClick={this.ordenarDecrescente}>Decrescente</button>
         </InputsContainer>
         <br />
