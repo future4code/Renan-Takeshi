@@ -12,7 +12,8 @@ const TarefaContainer = styled.div`
 
 const TarefaList = styled.ul`
   padding: 0;
-  width: 200px;
+  width: 300px;
+  margin-right: 20px;
 `
 
 const Tarefa = styled.li`
@@ -34,7 +35,8 @@ class App extends React.Component {
     id: 0,
     index: 0,
     completa: false,
-    regex: ''
+    regex: '',
+    ordenacao: 'cronologica',
   }
 
   componentDidUpdate() {
@@ -109,6 +111,7 @@ class App extends React.Component {
         this.deletarTarefa(this.state.id)
       }
     }
+    this.inputTarefa.focus();
   }
 
   selectTarefa = (id) => {
@@ -163,7 +166,7 @@ class App extends React.Component {
 
   // Desafio 4
   apagarTodas = () => {
-    this.setState({ 
+    this.setState({
       tarefas: [],
       inputValue: '',
       id: 0,
@@ -174,20 +177,32 @@ class App extends React.Component {
   }
 
   // Desafio 5
-  filtrarLista = (lista) => {
-    const reg = new RegExp(this.state.regex, 'i');
-    return lista.filter(tarefa => reg.test(tarefa.texto))
+  pequisarLista = (lista) => {
+    switch (this.state.ordenacao) {
+      case 'crescente':
+        lista.sort((a, b) => { return a.texto.toLowerCase() >= b.texto.toLowerCase() ? 1 : -1 })
+        break
+      case 'decrescente':
+        lista.sort((a, b) => { return a.texto.toLowerCase() > b.texto.toLowerCase() ? -1 : 1 })
+    }
+    if (this.state.regex) {
+      const reg = new RegExp(this.state.regex, 'i');
+      return lista.filter(tarefa => reg.test(tarefa.texto))
+    }
+    return lista
   }
 
   // Desafio 6
   ordenarCrescente = () => {
-    const crescente = this.state.tarefas.sort((a, b) => { return a.texto.toLowerCase() >= b.texto.toLowerCase() ? 1 : -1 })
-    this.setState({ tarefas: crescente })
+    this.setState({ ordenacao: 'crescente' })
   }
 
   ordenarDecrescente = () => {
-    const crescente = this.state.tarefas.sort((a, b) => { return a.texto.toLowerCase() > b.texto.toLowerCase() ? -1 : 1 })
-    this.setState({ tarefas: crescente })
+    this.setState({ ordenacao: 'decrescente' })
+  }
+
+  ordenarCronologica = () => {
+    this.setState({ ordenacao: 'cronologica' })
   }
 
 
@@ -206,7 +221,7 @@ class App extends React.Component {
             onKeyPress={this.onKeyPressInput}
           />
           <button onClick={this.criaTarefa}>{!this.state.id ? 'Adicionar' : 'Editar'}</button>
-          {Boolean(this.state.id) && <button onClick={()=>{this.deletarTarefa(this.state.id)}}>Deletar</button>}
+          {Boolean(this.state.id) && <button onClick={() => { this.deletarTarefa(this.state.id) }}>Deletar</button>}
         </InputsContainer>
         <br />
 
@@ -218,7 +233,7 @@ class App extends React.Component {
           <div></div>
           <TarefaList>
             <h2>Pendentes</h2>
-            {this.filtrarLista(listaPendente).map(tarefa => {
+            {this.pequisarLista(listaPendente).map(tarefa => {
               return (
                 <Tarefa
                   key={tarefa.id}
@@ -233,7 +248,7 @@ class App extends React.Component {
           </TarefaList>
           <TarefaList>
             <h2>Completas</h2>
-            {this.filtrarLista(listaCompleta).map(tarefa => {
+            {this.pequisarLista(listaCompleta).map(tarefa => {
               return (
                 <Tarefa
                   key={tarefa.id}
@@ -250,11 +265,12 @@ class App extends React.Component {
         <InputsContainer>
           <button onClick={this.ordenarCrescente}>Crescente</button>
           <button onClick={this.ordenarDecrescente}>Decrescente</button>
+          <button onClick={this.ordenarCronologica}>Cronológica</button>
         </InputsContainer>
         <br />
 
         <InputsContainer>
-          <button onClick={this.apagarTodas}>Apagar</button>
+          <button onClick={this.apagarTodas}>Apagar tudo</button>
         </InputsContainer>
       </div>
     )
