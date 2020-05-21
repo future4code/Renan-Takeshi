@@ -2,6 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import './styles.css'
 
+
+const TarefaContainer = styled.div`
+  display: grid;
+  width: 60vw;
+  height: 60vh;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-auto-flow: column;
+
+`
+
 const TarefaList = styled.ul`
   padding: 0;
   width: 200px;
@@ -33,7 +44,8 @@ class App extends React.Component {
       }
     ],
     inputValue: '',
-    filter: ''
+    filter: '',
+    regex: ''
   }
 
   componentDidUpdate() {
@@ -52,6 +64,27 @@ class App extends React.Component {
     this.setState({ inputValue: event.target.value })
   }
 
+  onChangeFilter = (event) => {
+    this.setState({ filter: event.target.value })
+  }
+
+  onChangeRegex = (event) => {
+    this.setState({ regex: event.target.value })
+  }
+
+  onKeyPressInput = (event) => {
+    if (event.key === "Enter" || (event.which === 13)) {
+      this.criaTarefa();
+    }
+  };
+
+  validarTexto = (texto) => {
+    if (texto.replace(/ /g, "").length) {
+      return true
+    }
+    return false
+  }
+
   criaTarefa = () => {
     const textoTarefa = this.state.inputValue;
     if (this.validarTexto(textoTarefa)) {
@@ -59,6 +92,7 @@ class App extends React.Component {
         id: Date.now(),
         texto: textoTarefa,
         completa: false,
+        regex: '',
       }
       const novoTarefas = [...this.state.tarefas, novaTarefa]
       this.setState({
@@ -72,7 +106,7 @@ class App extends React.Component {
   }
 
   selectTarefa = (id) => {
-    if (window.confirm('Precione OK para deletar, Cancel para marcar como completa')) {
+    if (window.confirm('Precione OK para deletar, Cancel para marcar como completa/pendente')) {
       this.deletarTarefa(id)
     } else {
       this.riscarTarefa(id)
@@ -99,35 +133,15 @@ class App extends React.Component {
     this.setState({ tarefas: novoTarefas })
   }
 
-  onChangeFilter = (event) => {
-    this.setState({ filter: event.target.value })
+  filtrarLista = (lista) => {
+    const reg = new RegExp(this.state.regex);
+    return lista.filter(tarefa => reg.test(tarefa.texto))
   }
 
-  onKeyPressInput = (event) => {
-    if (event.key === "Enter" || (event.which === 13)) {
-      this.criaTarefa();
-    }
-  };
-
-  validarTexto = (texto) => {
-    if (texto.replace(/ /g, "").length !== 0) {
-      return true
-    }
-    return false
-  }
 
   render() {
-    const listaFiltrada = this.state.tarefas
-      .filter(tarefa => {
-        switch (this.state.filter) {
-          case 'pendentes':
-            return !tarefa.completa
-          case 'completas':
-            return tarefa.completa
-          default:
-            return true
-        }
-      })
+    const listaPendente = this.state.tarefas.filter(tarefa => !tarefa.completa)
+    const listaCompleta = this.state.tarefas.filter(tarefa => tarefa.completa)
 
     return (
       <div className="App">
@@ -139,26 +153,37 @@ class App extends React.Component {
         <br />
 
         <InputsContainer>
-          <label>Filtro</label>
-          <select value={this.state.filter} onChange={this.onChangeFilter}>
-            <option value="">Nenhum</option>
-            <option value="pendentes">Pendentes</option>
-            <option value="completas">Completas</option>
-          </select>
+          <label>Pesquisar:</label>
+          <input value={this.state.regex} onChange={this.onChangeRegex} />
         </InputsContainer>
-        <TarefaList>
-          {listaFiltrada.map(tarefa => {
-            return (
-              <Tarefa
-                key={tarefa.id}
-                completa={tarefa.completa}
-                onClick={() => this.selectTarefa(tarefa.id)}
-              >
-                {tarefa.texto}
-              </Tarefa>
-            )
-          })}
-        </TarefaList>
+        <TarefaContainer>
+          <TarefaList>
+            {this.filtrarLista(listaPendente).map(tarefa => {
+              return (
+                <Tarefa
+                  key={tarefa.id}
+                  completa={tarefa.completa}
+                  onDoubleClick={() => { this.selectTarefa(tarefa.id) }}
+                >
+                  {tarefa.texto}
+                </Tarefa>
+              )
+            })}
+          </TarefaList>
+          <TarefaList>
+            {this.filtrarLista(listaCompleta).map(tarefa => {
+              return (
+                <Tarefa
+                  key={tarefa.id}
+                  completa={tarefa.completa}
+                  onDoubleClick={() => { this.selectTarefa(tarefa.id) }}
+                >
+                  {tarefa.texto}
+                </Tarefa>
+              )
+            })}
+          </TarefaList>
+        </TarefaContainer>
       </div>
     )
   }
