@@ -29,28 +29,17 @@ const InputsContainer = styled.div`
 
 class App extends React.Component {
   state = {
-    tarefas: [
-      {
-        id: Date.now(), // Explicação abaixo
-        texto: 'Texto da tarefa',
-        completa: false // Indica se a tarefa está completa (true ou false)
-      },
-      {
-        id: Date.now() + 1, // Explicação abaixo
-        texto: 'Texto da tarefa',
-        completa: true // Indica se a tarefa está completa (true ou false)
-      }
-    ],
+    tarefas: [],
+    inputValue: '',
     id: 0,
     index: 0,
     completa: false,
-    inputValue: '',
     regex: ''
   }
 
   componentDidUpdate() {
-    localStorage.setItem('tarefas', JSON.stringify(this.state.tarefas))
-  };
+
+  }
 
   componentDidMount() {
     const tarefasStr = localStorage.getItem('tarefas')
@@ -72,7 +61,7 @@ class App extends React.Component {
     if (event.key === "Enter" || (event.which === 13)) {
       this.criaTarefa();
     }
-  };
+  }
 
   validarTexto = (texto) => {
     if (texto.replace(/ /g, "").length) {
@@ -97,23 +86,32 @@ class App extends React.Component {
           regex: '',
           id: 0,
         })
+        localStorage.setItem('tarefas', JSON.stringify(novoTarefas))
+
       } else {
         alert('Digite uma tarefa')
       }
     } else {
-      const novoTarefas = this.state.tarefas;
-      const novaTarefa = {
-        id: this.state.id,
-        texto: this.state.inputValue,
-        completa: this.state.completa,
+      const textoTarefa = this.state.inputValue;
+      if (this.validarTexto(textoTarefa)) {
+        const novoTarefas = this.state.tarefas;
+        const novaTarefa = {
+          id: this.state.id,
+          texto: this.state.inputValue,
+          completa: this.state.completa,
+        }
+        novoTarefas.splice(this.state.index, 1, novaTarefa);
+        this.setState({
+          tarefas: novoTarefas,
+          inputValue: '',
+          regex: '',
+          id: 0,
+        })
+        localStorage.setItem('tarefas', JSON.stringify(novoTarefas))
+        
+      } else {
+        this.deletarTarefa(this.state.id)
       }
-      novoTarefas.splice(this.state.index, 1, novaTarefa);
-      this.setState({
-        tarefas: novoTarefas,
-        inputValue: '',
-        regex: '',
-        id: 0,
-      })
     }
   }
 
@@ -137,17 +135,17 @@ class App extends React.Component {
         return tarefa
       }
     })
-    this.setState({ 
+    this.setState({
       tarefas: novoTarefas,
       inputValue: '',
       id: 0,
     })
   }
-  
+
   // Desafio 1
   deletarTarefa = (id) => {
     const novoTarefas = this.state.tarefas.filter(tarefa => tarefa.id !== id)
-    this.setState({ 
+    this.setState({
       tarefas: novoTarefas,
       inputValue: '',
       id: 0,
@@ -164,6 +162,7 @@ class App extends React.Component {
       completa: tarefa.completa,
       inputValue: tarefa.texto,
     })
+    this.inputTarefa.focus()
   }
 
   // Desafio 4
@@ -179,7 +178,7 @@ class App extends React.Component {
 
   // Desafio 6
   ordenarCrescente = () => {
-    const crescente = this.state.tarefas.sort((a, b) => { return a.texto.toLowerCase() > b.texto.toLowerCase() ? 1 : -1 })
+    const crescente = this.state.tarefas.sort((a, b) => { return a.texto.toLowerCase() >= b.texto.toLowerCase() ? 1 : -1 })
     this.setState({ tarefas: crescente })
   }
 
@@ -197,7 +196,12 @@ class App extends React.Component {
       <div className="App">
         <h1>Lista de tarefas</h1>
         <InputsContainer>
-          <input value={this.state.inputValue} onChange={this.onChangeInput} onKeyPress={this.onKeyPressInput} />
+          <input
+            ref={(element) => { this.inputTarefa = element; }}
+            value={this.state.inputValue}
+            onChange={this.onChangeInput}
+            onKeyPress={this.onKeyPressInput}
+          />
           <button onClick={this.criaTarefa}>Adicionar</button>
         </InputsContainer>
         <br />
