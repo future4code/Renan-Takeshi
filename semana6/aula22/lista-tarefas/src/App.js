@@ -43,8 +43,10 @@ class App extends React.Component {
         completa: true // Indica se a tarefa está completa (true ou false)
       }
     ],
+    id: 0,
+    index: 0,
+    completa: false,
     inputValue: '',
-    filter: '',
     regex: ''
   }
 
@@ -86,22 +88,39 @@ class App extends React.Component {
   }
 
   criaTarefa = () => {
-    const textoTarefa = this.state.inputValue;
-    if (this.validarTexto(textoTarefa)) {
-      const novaTarefa = {
-        id: Date.now(),
-        texto: textoTarefa,
-        completa: false,
-        regex: '',
+    if (!this.state.id) {
+      const textoTarefa = this.state.inputValue;
+      if (this.validarTexto(textoTarefa)) {
+        const novaTarefa = {
+          id: Date.now(),
+          texto: this.state.inputValue,
+          completa: false,
+        }
+        const novoTarefas = [...this.state.tarefas, novaTarefa]
+        this.setState({
+          tarefas: novoTarefas,
+          inputValue: '',
+          filter: '',
+          regex: '',
+        })
+      } else {
+        alert('Digite uma tarefa')
       }
-      const novoTarefas = [...this.state.tarefas, novaTarefa]
+    } else {
+      const novoTarefas = this.state.tarefas;
+      const novaTarefa = {
+        id: this.state.id,
+        texto: this.state.inputValue,
+        completa: this.state.completa,
+      }
+      novoTarefas.splice(this.state.index, 1,novaTarefa);
       this.setState({
         tarefas: novoTarefas,
         inputValue: '',
         filter: '',
+        regex: '',
+        id: 0,
       })
-    } else {
-      alert('Digite uma tarefa')
     }
   }
 
@@ -138,6 +157,16 @@ class App extends React.Component {
     return lista.filter(tarefa => reg.test(tarefa.texto))
   }
 
+  editarTarefa = (id) => {
+    const tarefa = this.state.tarefas.find(tarefa => tarefa.id === id)
+    const tarefaIndex = this.state.tarefas.indexOf(tarefa);
+    this.setState({
+      id: tarefa.id,
+      index: tarefaIndex,
+      completa: tarefa.completa,
+      inputValue: tarefa.texto,
+    })
+  }
 
   render() {
     const listaPendente = this.state.tarefas.filter(tarefa => !tarefa.completa)
@@ -163,6 +192,7 @@ class App extends React.Component {
                 <Tarefa
                   key={tarefa.id}
                   completa={tarefa.completa}
+                  onClick={() => { this.editarTarefa(tarefa.id) }}
                   onDoubleClick={() => { this.selectTarefa(tarefa.id) }}
                 >
                   {tarefa.texto}
@@ -176,6 +206,7 @@ class App extends React.Component {
                 <Tarefa
                   key={tarefa.id}
                   completa={tarefa.completa}
+                  onClick={() => { this.editarTarefa(tarefa.id) }}
                   onDoubleClick={() => { this.selectTarefa(tarefa.id) }}
                 >
                   {tarefa.texto}
