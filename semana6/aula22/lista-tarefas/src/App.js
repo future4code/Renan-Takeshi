@@ -121,10 +121,11 @@ class App extends React.Component {
       inputValue: tarefa.texto,
     })
     this.inputTarefa.focus();
-  }
+  } 
 
   editarTarefa = () => {
     if (this.validarTexto(this.state.inputValue)) {
+      // Vou deixar aqui para futura referencia, pois mudei pro map baixo
       // const tarefa = this.state.tarefas.find(tarefa => tarefa.id === this.state.id);
       // const index = this.state.tarefas.indexOf(tarefa);
       // tarefa.texto = this.state.inputValue;
