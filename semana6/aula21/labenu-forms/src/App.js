@@ -35,5 +35,5 @@ class App extends React.Component {
     );
   }
 }
-
+// Teste
 export default App;
