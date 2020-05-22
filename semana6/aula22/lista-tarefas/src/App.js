@@ -70,9 +70,10 @@ class App extends React.Component {
   }
 
   criaTarefa = () => {
-    if (!this.state.id) {
-      const textoTarefa = this.state.inputValue;
-      if (this.validarTexto(textoTarefa)) {
+    if (this.state.id) {
+      this.editarTarefa()
+    } else {
+      if (this.validarTexto(this.state.inputValue)) {
         const novaTarefa = {
           id: Date.now(),
           texto: this.state.inputValue,
@@ -87,25 +88,6 @@ class App extends React.Component {
         })
       } else {
         alert('Digite uma tarefa')
-      }
-    } else {
-      const textoTarefa = this.state.inputValue;
-      if (this.validarTexto(textoTarefa)) {
-        const novoTarefas = this.state.tarefas;
-        const novaTarefa = {
-          id: this.state.id,
-          texto: this.state.inputValue,
-          completa: this.state.completa,
-        }
-        novoTarefas.splice(this.state.index, 1, novaTarefa);
-        this.setState({
-          tarefas: novoTarefas,
-          inputValue: '',
-          regex: '',
-          id: 0,
-        })
-      } else {
-        this.deletarTarefa(this.state.id)
       }
     }
     this.inputTarefa.focus();
@@ -141,7 +123,7 @@ class App extends React.Component {
   }
 
   // Desafio 3
-  editarTarefa = (id) => {
+  selectTarefa = (id) => {
     const tarefa = this.state.tarefas.find(tarefa => tarefa.id === id)
     const tarefaIndex = this.state.tarefas.indexOf(tarefa);
     this.setState({
@@ -151,6 +133,27 @@ class App extends React.Component {
       inputValue: tarefa.texto,
     })
     this.inputTarefa.focus()
+  }
+
+  editarTarefa = () => {
+    if (this.validarTexto(this.state.inputValue)) {
+      const novaTarefa = {
+        id: this.state.id,
+        texto: this.state.inputValue,
+        completa: this.state.completa,
+      }
+      const novoTarefas = this.state.tarefas;
+      novoTarefas.splice(this.state.index, 1, novaTarefa);
+      this.setState({
+        tarefas: novoTarefas,
+        inputValue: '',
+        regex: '',
+        id: 0,
+      })
+    } else {
+      this.deletarTarefa(this.state.id)
+    }
+    this.inputTarefa.focus();
   }
 
   // Desafio 4
@@ -183,7 +186,7 @@ class App extends React.Component {
   }
 
   limparPesquisa = () => {
-    this.setState({regex: ''})
+    this.setState({ regex: '' })
   }
 
   // Desafio 6
@@ -233,7 +236,7 @@ class App extends React.Component {
                 <Tarefa
                   key={tarefa.id}
                   completa={tarefa.completa}
-                  onClick={() => { this.editarTarefa(tarefa.id) }}
+                  onClick={() => { this.selectTarefa(tarefa.id) }}
                   onDoubleClick={() => { this.riscarTarefa(tarefa.id) }}
                 >
                   {tarefa.texto}
@@ -248,7 +251,7 @@ class App extends React.Component {
                 <Tarefa
                   key={tarefa.id}
                   completa={tarefa.completa}
-                  onClick={() => { this.editarTarefa(tarefa.id) }}
+                  onClick={() => { this.selectTarefa(tarefa.id) }}
                   onDoubleClick={() => { this.riscarTarefa(tarefa.id) }}
                 >
                   {tarefa.texto}
