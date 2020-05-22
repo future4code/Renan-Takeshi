@@ -33,8 +33,6 @@ class App extends React.Component {
     tarefas: [],
     inputValue: '',
     id: 0,
-    index: 0,
-    completa: false,
     regex: '',
     ordenacao: 'Cronológica',
   }
@@ -44,10 +42,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const tarefasStr = localStorage.getItem('tarefas')
+    const tarefasStr = localStorage.getItem('tarefas');
     if (tarefasStr) {
-      const tarefasObj = JSON.parse(tarefasStr)
-      this.setState({ tarefas: tarefasObj })
+      const tarefasObj = JSON.parse(tarefasStr);
+      this.setState({ tarefas: tarefasObj });
     }
   };
 
@@ -95,15 +93,8 @@ class App extends React.Component {
 
   riscarTarefa = (id) => {
     const novoTarefas = this.state.tarefas.map((tarefa) => {
-      if (tarefa.id === id) {
-        const novaTarefa = {
-          ...tarefa,
-          completa: !tarefa.completa,
-        }
-        return novaTarefa
-      } else {
-        return tarefa
-      }
+      if (tarefa.id === id) { tarefa.completa = !tarefa.completa }
+      return tarefa
     })
     this.setState({
       tarefas: novoTarefas,
@@ -113,8 +104,8 @@ class App extends React.Component {
   }
 
   // Desafio 1
-  deletarTarefa = (id) => {
-    const novoTarefas = this.state.tarefas.filter(tarefa => tarefa.id !== id)
+  deletarTarefa = () => {
+    const novoTarefas = this.state.tarefas.filter(tarefa => tarefa.id !== this.state.id)
     this.setState({
       tarefas: novoTarefas,
       inputValue: '',
@@ -125,33 +116,33 @@ class App extends React.Component {
   // Desafio 3
   selectTarefa = (id) => {
     const tarefa = this.state.tarefas.find(tarefa => tarefa.id === id)
-    const tarefaIndex = this.state.tarefas.indexOf(tarefa);
     this.setState({
       id: tarefa.id,
-      index: tarefaIndex,
-      completa: tarefa.completa,
       inputValue: tarefa.texto,
     })
-    this.inputTarefa.focus()
+    this.inputTarefa.focus();
   }
 
   editarTarefa = () => {
     if (this.validarTexto(this.state.inputValue)) {
-      const novaTarefa = {
-        id: this.state.id,
-        texto: this.state.inputValue,
-        completa: this.state.completa,
-      }
-      const novoTarefas = this.state.tarefas;
-      novoTarefas.splice(this.state.index, 1, novaTarefa);
+      // const tarefa = this.state.tarefas.find(tarefa => tarefa.id === this.state.id);
+      // const index = this.state.tarefas.indexOf(tarefa);
+      // tarefa.texto = this.state.inputValue;
+      // const novoTarefas = this.state.tarefas;
+      // novoTarefas.splice(index, 1, tarefa);
+
+      const novoTarefas = this.state.tarefas.map((tarefa) => {
+        if (tarefa.id === this.state.id) { tarefa.texto = this.state.inputValue }
+        return tarefa
+      })
+
       this.setState({
         tarefas: novoTarefas,
         inputValue: '',
-        regex: '',
         id: 0,
       })
     } else {
-      this.deletarTarefa(this.state.id)
+      this.deletarTarefa()
     }
     this.inputTarefa.focus();
   }
@@ -177,6 +168,9 @@ class App extends React.Component {
         break
       case 'Decrescente':
         lista.sort((a, b) => { return a.texto.toLowerCase() > b.texto.toLowerCase() ? -1 : 1 })
+        break
+      default:
+        break
     }
     if (this.state.regex) {
       const reg = new RegExp(this.state.regex, 'i');
@@ -218,7 +212,7 @@ class App extends React.Component {
             onKeyPress={this.onKeyPressInput}
           />
           <button onClick={this.criaTarefa}>{!this.state.id ? 'Adicionar' : 'Editar'}</button>
-          {Boolean(this.state.id) && <button onClick={() => { this.deletarTarefa(this.state.id) }}>Deletar</button>}
+          {Boolean(this.state.id) && <button onClick={this.deletarTarefa}>Deletar</button>}
         </InputsContainer>
         <br />
 
