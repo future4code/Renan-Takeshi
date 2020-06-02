@@ -5,7 +5,7 @@ import ListaUsuario from "./components/ListaUsuario/ListaUsuario";
 
 function App() {
 
-  const [tela, setTela] = useState('cadastro')
+  const [tela, setTela] = useState('lista')
 
     switch(tela){
       case 'cadastro':
