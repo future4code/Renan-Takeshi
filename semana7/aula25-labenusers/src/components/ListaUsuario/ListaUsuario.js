@@ -13,31 +13,42 @@ const UsuarioP = styled.p`
   margin: 0;
 `;
 
-function ListaUsuario(props) {
+function ListaUsuario() {
   const [lista, setLista] = useState([]);
+
   const header = { headers: { Authorization: "renan-takeshi-mello" } };
+  const url =
+    "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users";
 
   function listarUsuario() {
-    const url =
-      "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users";
-
     axios
       .get(url, header)
       .then((response) => {
+        console.log(response);
         setLista(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        window.alert("Erro ao listar usuarios");
+      });
   }
 
   function deletarUsuario(idUser) {
-    const url =
-      "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/:id";
-    const param = { params: { id: idUser }  };
-    
-    axios
-      .delete(url, header, param )
-      .then(r => console.log(r))
-      .catch((e) => console.log(e));
+    if (window.confirm("Tem certeza que de que deseja deletar ?")) {
+      axios
+        .delete(url + `/${idUser}`, header)
+        .then((response) => {
+          console.log(response);
+          window.alert("Usuario deletado com sucesso");
+          listarUsuario();
+        })
+        .catch((err) => {
+          console.log(err);
+          window.alert("Erro ao deletar usuario");
+        });
+    } else {
+      window.alert("Operacao Cancelada");
+    }
   }
 
   useEffect(listarUsuario, []);
@@ -45,7 +56,14 @@ function ListaUsuario(props) {
   const listaRenderizada = (
     <ContainerLista>
       {lista.map((item) => (
-        <UsuarioP key={item.id} onClick={()=>{deletarUsuario(item.id)}} >{item.name}</UsuarioP>
+        <UsuarioP
+          key={item.id}
+          onClick={() => {
+            deletarUsuario(item.id);
+          }}
+        >
+          {item.name}
+        </UsuarioP>
       ))}
     </ContainerLista>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 // import styled from "styled-components";
 
-function CadastroUsuario(props) {
+function CadastroUsuario() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
 
@@ -16,8 +16,14 @@ function CadastroUsuario(props) {
       "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users";
     axios
       .post(url, dados, header)
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
+      .then((response) => {
+        console.log(response);
+        window.alert("Usuario adicionado com sucesso");
+      })
+      .catch((err) => {
+        console.log(err);
+        window.alert("Erro ao adicionar usuario");
+      });
   }
 
   return (
