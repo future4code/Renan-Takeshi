@@ -39,7 +39,7 @@ function ListaUsuario() {
         .delete(url + `/${idUser}`, header)
         .then((response) => {
           console.log(response);
-          window.alert("Usuario deletado com sucesso");
+          window.alert("Usuario deletado com sucesso\nAguarde a lista ser atualizada");
           listarUsuario();
         })
         .catch((err) => {

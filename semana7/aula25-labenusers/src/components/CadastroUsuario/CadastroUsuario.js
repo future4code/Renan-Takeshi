@@ -18,6 +18,8 @@ function CadastroUsuario() {
       .post(url, dados, header)
       .then((response) => {
         console.log(response);
+        setNome("");
+        setEmail("");
         window.alert("Usuario adicionado com sucesso");
       })
       .catch((err) => {
