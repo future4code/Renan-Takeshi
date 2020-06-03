@@ -13,6 +13,7 @@ const ContainerLista = styled.div`
 const UsuarioP = styled.p`
   margin: 0;
   cursor: pointer;
+  display: inline;
 `;
 
 const BotaoDeletar = styled.span`
@@ -35,7 +36,6 @@ function ListaUsuario() {
     axios
       .get(url, header)
       .then((response) => {
-        console.log(response);
         setLista(response.data);
       })
       .catch((err) => {
@@ -71,33 +71,35 @@ function ListaUsuario() {
       );
       if (response.data.length) {
         setLista(response.data);
-      }else{
-        window.alert('Usuario nao encontrado')
+      } else {
+        window.alert("Usuario nao encontrado");
       }
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }
   }
 
-  useEffect(listarUsuario, []);
+  useEffect(listarUsuario, [idUsuario]);
 
   const listaRenderizada = (
     <ContainerLista>
-      <input
-        placeholder="Pesquisar"
-        value={inputBusca}
-        onChange={(e) => setBusca(e.target.value)}
-      />
-      <button onClick={buscarUsuario}>Buscar</button>
+      <div>
+        <input
+          placeholder="Pesquisar"
+          value={inputBusca}
+          onChange={(e) => setBusca(e.target.value)}
+        />
+        <button onClick={buscarUsuario}>Buscar</button>
+      </div>
       {lista.map((item) => (
-        <UsuarioP
-          key={item.id}
-          onClick={() => {
-            setIdUsuario(item.id);
-          }}
-        >
-          {item.name}
+        <div key={item.id}>
+          <UsuarioP
+            onClick={() => {
+              setIdUsuario(item.id);
+            }}
+          >
+            {item.name}
+          </UsuarioP>
           <BotaoDeletar
             onClick={() => {
               deletarUsuario(item.id);
@@ -105,7 +107,7 @@ function ListaUsuario() {
           >
             X
           </BotaoDeletar>
-        </UsuarioP>
+        </div>
       ))}
     </ContainerLista>
   );
@@ -113,7 +115,7 @@ function ListaUsuario() {
   const detalhesUsuario = (
     <DetalhesUsuario
       idUsuario={idUsuario}
-      funcaoVoltar={() => setIdUsuario(0)}
+      funcaoVoltar={() => setIdUsuario("")}
       funcaoDeletar={() => deletarUsuario(idUsuario)}
       header={header}
       url={url}

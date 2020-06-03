@@ -4,7 +4,7 @@ import axios from "axios";
 
 function DetalhesUsuario(props) {
   const { idUsuario, funcaoVoltar, funcaoDeletar, header, url } = props;
-  const [nome, setNome] = useState("");
+  const [nome, setNome] = useState("Carregando...");
   const [email, setEmail] = useState("");
   const [modoEditar, setModoEditar] = useState(false);
 
@@ -48,27 +48,37 @@ function DetalhesUsuario(props) {
           onChange={(e) => setEmail(e.target.value)}
         />
         <button onClick={editarUsuario}>Salvar</button>
+        <button
+          onClick={() => {
+            setModoEditar(false);
+          }}
+        >
+          Cancelar
+        </button>
       </div>
     );
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {buscarUsuario()}, []);
+  useEffect(() => {
+    buscarUsuario();
+  }, []);
 
-  return nome ? (
+  return (
     <div>
-      <p>
+      <p style={{ "text-align": "center" }}>
         Nome: {nome} - Email: {email}
       </p>
-      <button onClick={funcaoVoltar}>Voltar</button>
-      <button onClick={funcaoDeletar}>Deletar</button>
+
       {modoEditar || (
-        <button onClick={() => setModoEditar(true)}>Editar</button>
+        <div style={{"display":"flex","justify-content":"center"}}>
+          <button onClick={funcaoVoltar}>Voltar</button>
+          <button onClick={funcaoDeletar}>Deletar</button>
+          <button onClick={() => setModoEditar(true)}>Editar</button>
+        </div>
       )}
       {modoEditar && prepararParaEditar()}
     </div>
-  ) : (
-    <p>Aguarde...</p>
   );
 }
 

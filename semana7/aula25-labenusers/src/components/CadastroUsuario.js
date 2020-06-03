@@ -17,7 +17,6 @@ function CadastroUsuario() {
     axios
       .post(url, dados, header)
       .then((response) => {
-        console.log(response);
         setNome("");
         setEmail("");
         window.alert("Usuario adicionado com sucesso");
