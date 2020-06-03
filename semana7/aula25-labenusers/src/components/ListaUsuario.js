@@ -3,7 +3,6 @@ import axios from "axios";
 import styled from "styled-components";
 import DetalhesUsuario from "./DetalhesUsuario";
 
-
 const ContainerLista = styled.div`
   display: flex;
   flex-direction: column;
@@ -13,7 +12,15 @@ const ContainerLista = styled.div`
 
 const UsuarioP = styled.p`
   margin: 0;
+  cursor: pointer;
 `;
+
+const BotaoDeletar = styled.span`
+  color: red;
+  background: yellow;
+  padding-left: 5px;
+  cursor: pointer;
+`
 
 function ListaUsuario() {
   const [lista, setLista] = useState([]);
@@ -43,8 +50,9 @@ function ListaUsuario() {
         .then((response) => {
           console.log(response);
           listarUsuario();
+          setIdUsuario(0);
           window.alert(
-            "Usuario deletado com sucesso\nAguarde a lista ser atualizada"
+            "Usuario deletado com sucesso"
           );
         })
         .catch((err) => {
@@ -56,29 +64,49 @@ function ListaUsuario() {
     }
   }
 
+  async function buscarUsuario(){
+    try{
+
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   useEffect(listarUsuario, []);
 
   const listaRenderizada = (
     <ContainerLista>
       {lista.map((item) => (
-        <UsuarioP key={item.id} onClick={()=>{setIdUsuario(item.id)}}>
+        <UsuarioP
+          key={item.id}
+          onClick={() => {
+            setIdUsuario(item.id);
+          }}
+        >
           {item.name}
-          <span
+          <BotaoDeletar
             onClick={() => {
               deletarUsuario(item.id);
             }}
           >
             X
-          </span>
+          </BotaoDeletar>
         </UsuarioP>
       ))}
     </ContainerLista>
   );
 
-  const detalhesUsuario = <DetalhesUsuario idUsuario={idUsuario} funcaoVoltar={()=>setIdUsuario(0)}/>
+  const detalhesUsuario = (
+    <DetalhesUsuario
+      idUsuario={idUsuario}
+      funcaoVoltar={() => setIdUsuario(0)}
+      funcaoDeletar={() => deletarUsuario(idUsuario)}
+      header={header}
+      url={url}
+    />
+  );
 
-  return (idUsuario ? detalhesUsuario : listaRenderizada);
+  return idUsuario ? detalhesUsuario : lista.length ? listaRenderizada : <p>Aguarde...</p>;
 }
 
 export default ListaUsuario;
