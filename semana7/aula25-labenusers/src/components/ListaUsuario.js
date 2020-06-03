@@ -20,11 +20,12 @@ const BotaoDeletar = styled.span`
   background: yellow;
   padding-left: 5px;
   cursor: pointer;
-`
+`;
 
 function ListaUsuario() {
   const [lista, setLista] = useState([]);
   const [idUsuario, setIdUsuario] = useState(0);
+  const [inputBusca, setBusca] = useState("");
 
   const header = { headers: { Authorization: "renan-takeshi-mello" } };
   const url =
@@ -51,9 +52,7 @@ function ListaUsuario() {
           console.log(response);
           listarUsuario();
           setIdUsuario(0);
-          window.alert(
-            "Usuario deletado com sucesso"
-          );
+          window.alert("Usuario deletado com sucesso");
         })
         .catch((err) => {
           console.log(err);
@@ -64,11 +63,20 @@ function ListaUsuario() {
     }
   }
 
-  async function buscarUsuario(){
-    try{
-
-    }catch(err){
-      console.log(err)
+  async function buscarUsuario() {
+    try {
+      const response = await axios.get(
+        url + `/search?name=${inputBusca}`,
+        header
+      );
+      if (response.data.length) {
+        setLista(response.data);
+      }else{
+        window.alert('Usuario nao encontrado')
+      }
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -76,6 +84,12 @@ function ListaUsuario() {
 
   const listaRenderizada = (
     <ContainerLista>
+      <input
+        placeholder="Pesquisar"
+        value={inputBusca}
+        onChange={(e) => setBusca(e.target.value)}
+      />
+      <button onClick={buscarUsuario}>Buscar</button>
       {lista.map((item) => (
         <UsuarioP
           key={item.id}
@@ -106,7 +120,13 @@ function ListaUsuario() {
     />
   );
 
-  return idUsuario ? detalhesUsuario : lista.length ? listaRenderizada : <p>Aguarde...</p>;
+  return idUsuario ? (
+    detalhesUsuario
+  ) : lista.length ? (
+    listaRenderizada
+  ) : (
+    <p>Aguarde...</p>
+  );
 }
 
 export default ListaUsuario;
