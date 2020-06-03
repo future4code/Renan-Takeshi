@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CadastroUsuario from "./components/CadastroUsuario/CadastroUsuario";
-import ListaUsuario from "./components/ListaUsuario/ListaUsuario";
+import CadastroUsuario from "./components/CadastroUsuario";
+import ListaUsuario from "./components/ListaUsuario";
 
 const ContainerApp = styled.div`
   display: flex;

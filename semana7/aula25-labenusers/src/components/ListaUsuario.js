@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import DetalhesUsuario from "./DetalhesUsuario";
+
 
 const ContainerLista = styled.div`
   display: flex;
@@ -15,6 +17,7 @@ const UsuarioP = styled.p`
 
 function ListaUsuario() {
   const [lista, setLista] = useState([]);
+  const [idUsuario, setIdUsuario] = useState(0);
 
   const header = { headers: { Authorization: "renan-takeshi-mello" } };
   const url =
@@ -39,8 +42,10 @@ function ListaUsuario() {
         .delete(url + `/${idUser}`, header)
         .then((response) => {
           console.log(response);
-          window.alert("Usuario deletado com sucesso\nAguarde a lista ser atualizada");
           listarUsuario();
+          window.alert(
+            "Usuario deletado com sucesso\nAguarde a lista ser atualizada"
+          );
         })
         .catch((err) => {
           console.log(err);
@@ -51,24 +56,29 @@ function ListaUsuario() {
     }
   }
 
+
   useEffect(listarUsuario, []);
 
   const listaRenderizada = (
     <ContainerLista>
       {lista.map((item) => (
-        <UsuarioP
-          key={item.id}
-          onClick={() => {
-            deletarUsuario(item.id);
-          }}
-        >
+        <UsuarioP key={item.id} onClick={()=>{setIdUsuario(item.id)}}>
           {item.name}
+          <span
+            onClick={() => {
+              deletarUsuario(item.id);
+            }}
+          >
+            X
+          </span>
         </UsuarioP>
       ))}
     </ContainerLista>
   );
 
-  return listaRenderizada;
+  const detalhesUsuario = <DetalhesUsuario idUsuario={idUsuario} funcaoVoltar={()=>setIdUsuario(0)}/>
+
+  return (idUsuario ? detalhesUsuario : listaRenderizada);
 }
 
 export default ListaUsuario;
