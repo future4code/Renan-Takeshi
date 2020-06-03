@@ -59,19 +59,19 @@ function DetalhesUsuario(props) {
     );
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     buscarUsuario();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      <p style={{ "text-align": "center" }}>
+      <p style={{ textAlign: "center" }}>
         Nome: {nome} - Email: {email}
       </p>
 
       {modoEditar || (
-        <div style={{"display":"flex","justify-content":"center"}}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <button onClick={funcaoVoltar}>Voltar</button>
           <button onClick={funcaoDeletar}>Deletar</button>
           <button onClick={() => setModoEditar(true)}>Editar</button>
