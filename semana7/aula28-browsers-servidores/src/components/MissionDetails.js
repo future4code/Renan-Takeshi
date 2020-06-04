@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const url = "https://api.spacexdata.com/v3";
-
 function MissionDetails(props) {
-  const { missionId, backFunction } = props;
+  const { url, missionId, backFunction } = props;
   const [mission, setMission] = useState();
 
   async function getOneMission() {
     try {
-      const response = await axios.get(url + `/missions/${missionId}`);
+      const response = await axios.get(url + missionId);
       setMission(response.data);
     } catch (err) {
       console.log(err);
@@ -17,9 +15,8 @@ function MissionDetails(props) {
   }
 
   useEffect(() => {
-    getOneMission();
+    getOneMission(); //eslint-disable-next-line
   }, []);
-
 
   return (
     <div>
