@@ -2,17 +2,23 @@ import React from "react";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
+  border: 1px solid blue;
+`;
 
-  width: 80%;
+const MusicItem = styled.div`
+  height: 30px;
 `;
 
 function MusicList(props) {
+  const { tracks } = props;
 
-  return (
-    <MainContainer>
+  const renderedTracks =
+    tracks &&
+    tracks.map((item) => {
+      return <MusicItem key={item.id}>{item.name}</MusicItem>;
+    });
 
-    </MainContainer>
-  );
+  return <MainContainer>{renderedTracks}</MainContainer>;
 }
 
 export default MusicList;

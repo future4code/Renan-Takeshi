@@ -3,24 +3,35 @@ import styled from "styled-components";
 
 const MainContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
   grid-auto-flow: row;
-  background: red;
 `;
 
-const Playlist = styled.div`
-  width: 100%;
-  background: blue;
+const PlaylistItem = styled.div`
+  height: 30px;
+  border: 1px solid black;
 `;
 
 function PlaylistSidebar(props) {
-  return (
-    <MainContainer>
-      <Playlist>oi</Playlist>
-      <Playlist>td</Playlist>
-      <Playlist>bem</Playlist>
-    </MainContainer>
-  );
+  const { playlists, getTracks } = props;
+
+  const renderedList =
+    playlists &&
+    playlists.map((item) => {
+      return (
+        <PlaylistItem key={item.id}>
+          <span
+            onClick={() => {
+              getTracks(item.id);
+            }}
+          >
+            {item.name}
+          </span>
+          <span> X</span>
+        </PlaylistItem>
+      );
+    });
+
+  return <MainContainer>{renderedList}</MainContainer>;
 }
 
 export default PlaylistSidebar;
