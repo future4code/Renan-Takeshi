@@ -35,8 +35,14 @@ function PlaylistSidebar(props) {
     });
 
   function addPlaylist() {
-    postPlaylist(nameInput);
-    setName("");
+    if (
+      playlists.some((item) => item.name.toLowerCase() === nameInput.toLowerCase())
+    ) {
+      window.alert("Já existe uma playlist com o mesmo nome");
+    } else {
+      postPlaylist(nameInput);
+      setName("");
+    }
   }
 
   return (

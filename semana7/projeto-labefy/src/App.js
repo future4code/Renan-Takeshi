@@ -48,19 +48,11 @@ function App() {
   }
 
   async function createPlaylist(name) {
-    if (
-      playlists.some(
-        (item) => item.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      window.alert("Já existe uma playlist com o mesmo nome");
-    } else {
-      try {
-        await axios.post(url, { name: name }, headers);
-        getAllPlaylists();
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      await axios.post(url, { name: name }, headers);
+      getAllPlaylists();
+    } catch (err) {
+      console.log(err);
     }
   }
 
