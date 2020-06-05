@@ -11,6 +11,15 @@ const PlaylistItem = styled.div`
   border: 1px solid black;
 `;
 
+const Name = styled.span`
+  cursor: pointer;
+`
+
+const DelButton = styled.span`
+  color: red;
+  cursor: pointer;
+`;
+
 function PlaylistSidebar(props) {
   const { playlists, getTracks, delPlaylist, postPlaylist } = props;
   const [nameInput, setName] = useState("");
@@ -20,21 +29,20 @@ function PlaylistSidebar(props) {
     playlists.map((item) => {
       return (
         <PlaylistItem key={item.id}>
-          <span
+          <Name
             onClick={() => {
               getTracks(item.id, item.name);
             }}
           >
             {item.name}
-          </span>
-          <span
+          </Name>
+          <DelButton
             onClick={() => {
               delPlaylist(item.id);
             }}
           >
-            {" "}
-            X
-          </span>
+            {" X"}
+          </DelButton>
         </PlaylistItem>
       );
     });
@@ -53,11 +61,7 @@ function PlaylistSidebar(props) {
           setName(e.target.value);
         }}
       />
-      <button
-        onClick={addPlaylist}
-      >
-        Criar
-      </button>
+      <button onClick={addPlaylist}>Criar</button>
       {renderedList}
     </MainContainer>
   );

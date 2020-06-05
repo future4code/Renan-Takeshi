@@ -9,6 +9,10 @@ const MainContainer = styled.div`
   grid-template-columns: 1fr 3fr;
 `;
 
+const Header = styled.h2`
+  text-align: center;
+`
+
 const url =
   "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists";
 
@@ -43,7 +47,8 @@ function App() {
   async function deletePlaylist(id) {
     if (window.confirm("Deseja mesmo deletar a playlist ?")) {
       try {
-        const response = await axios.delete(url + `/${id}`, headers);
+        await axios.delete(url + `/${id}`, headers);
+        (id === playlistId && setTracks())
         getAllPlaylists();
       } catch (err) {
         console.log(err);
@@ -53,7 +58,7 @@ function App() {
 
   async function createPlaylist(playlistName) {
     try {
-      const response = await axios.post(url, { name: playlistName }, headers);
+      await axios.post(url, { name: playlistName }, headers);
       getAllPlaylists();
     } catch (err) {
       console.log(err);
@@ -62,11 +67,7 @@ function App() {
 
   async function addTrackToPlaylist(body) {
     try {
-      const response = await axios.post(
-        url + `/${playlistId}/tracks`,
-        body,
-        headers
-      );
+      await axios.post(url + `/${playlistId}/tracks`, body, headers);
       getPlaylistTracks(playlistId, playlistName);
     } catch (err) {
       console.log(err);
@@ -76,10 +77,7 @@ function App() {
   async function removeTrackFromPlaylist(trackId) {
     if (window.confirm("Deseja mesmo deletar a faixa ?")) {
       try {
-        const response = await axios.delete(
-          url + `/${playlistId}/tracks/${trackId}`,
-          headers
-        );
+        await axios.delete(url + `/${playlistId}/tracks/${trackId}`, headers);
         getPlaylistTracks(playlistId, playlistName);
       } catch (err) {
         console.log(err);
@@ -107,7 +105,7 @@ function App() {
           delTrack={removeTrackFromPlaylist}
         />
       ) : (
-        <p>Selecione uma playlist</p>
+        <Header>Selecione uma playlist</Header>
       )}
     </MainContainer>
   );
