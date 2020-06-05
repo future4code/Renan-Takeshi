@@ -31,7 +31,7 @@ function App() {
 
   return (
     <MainApp>
-      <h1>🚀SpaceX Missions🚀</h1>
+      <h1>SpaceX Missions</h1>
       {!missionId ? (
         <MissionsGrid missions={missionsList} setMission={setId} />
       ) : (
