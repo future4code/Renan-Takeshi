@@ -9,7 +9,7 @@ const url = "https://api.spacexdata.com/v3/missions/";
 const MainApp = styled.div`
   display:flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 `
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <MainApp>
-      <h2>SpaceX</h2>
+      <h1>🚀SpaceX Missions🚀</h1>
       {!missionId ? (
         <MissionsGrid missions={missionsList} setMission={setId} />
       ) : (
