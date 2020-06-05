@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
@@ -12,7 +12,8 @@ const PlaylistItem = styled.div`
 `;
 
 function PlaylistSidebar(props) {
-  const { playlists, getTracks } = props;
+  const { playlists, getTracks, delPlaylist, postPlaylist } = props;
+  const [nameInput, setName] = useState("")
 
   const renderedList =
     playlists &&
@@ -26,12 +27,25 @@ function PlaylistSidebar(props) {
           >
             {item.name}
           </span>
-          <span> X</span>
+          <span
+            onClick={() => {
+              delPlaylist(item.id);
+            }}
+          >
+            {" "}
+            X
+          </span>
         </PlaylistItem>
       );
     });
 
-  return <MainContainer>{renderedList}</MainContainer>;
+  return (
+    <MainContainer>
+      <input placeholder="Name" value={nameInput} onChange={(e)=>{setName(e.target.value)}}/>
+      <button onClick={()=>{postPlaylist(nameInput)}}>Criar</button>
+      {renderedList}
+    </MainContainer>
+  );
 }
 
 export default PlaylistSidebar;

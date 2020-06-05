@@ -38,13 +38,38 @@ function App() {
     }
   }
 
+  async function deletePlaylist(id) {
+    if (window.confirm("Deseja mesmo deletar a playlist ?")) {
+      try {
+        const response = await axios.delete(url + `/${id}`, headers);
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
+  async function createPlaylist(playlistName) {
+    try {
+      const response = await axios.post(url, { name: playlistName }, headers);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     getAllPlaylists();
   }, []);
 
   return (
     <MainContainer>
-      <PlaylistSidebar playlists={playlists} getTracks={getPlaylistTracks} />
+      <PlaylistSidebar
+        playlists={playlists}
+        getTracks={getPlaylistTracks}
+        delPlaylist={deletePlaylist}
+        postPlaylist={createPlaylist}
+      />
       {tracks ? <MusicList tracks={tracks} /> : <p>Selecione uma playlist</p>}
     </MainContainer>
   );
