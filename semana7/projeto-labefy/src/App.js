@@ -1,20 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import PlaylistSidebar from "./components/PlaylistSidebar/PlaylistSidebar";
 import MusicList from "./components/MusicList/MusicList";
-
-const MainContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  width: 80vh;
-  margin: auto;
-  margin-top: 20px;
-`;
-
-const Header = styled.h2`
-  text-align: center;
-`
+import { MainContainer, Header } from "./styled";
 
 const url =
   "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists";
@@ -51,7 +39,7 @@ function App() {
     if (window.confirm("Deseja mesmo deletar a playlist ?")) {
       try {
         await axios.delete(url + `/${id}`, headers);
-        (id === playlistId && setTracks())
+        id === playlistId && setTracks(); // Checa se a playlist excluida estava selecionada
         getAllPlaylists();
       } catch (err) {
         console.log(err);

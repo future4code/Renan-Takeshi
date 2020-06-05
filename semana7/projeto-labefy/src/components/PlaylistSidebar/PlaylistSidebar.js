@@ -1,36 +1,11 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const InputGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 50px;
-  height: 34px;
-`;
-
-const PlaylistItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 30px;
-  border: 1px solid black;
-  margin-top:5px;
-`;
-
-const Name = styled.span`
-  cursor: pointer;
-  padding-left: 5px;
-`;
-
-const DelButton = styled.span`
-  color: red;
-  cursor: pointer;
-  padding-right: 5px;
-`;
+import {
+  MainContainer,
+  InputGrid,
+  PlaylistItem,
+  Name,
+  DelButton,
+} from "./styled";
 
 function PlaylistSidebar(props) {
   const { playlists, getTracks, delPlaylist, postPlaylist } = props;
