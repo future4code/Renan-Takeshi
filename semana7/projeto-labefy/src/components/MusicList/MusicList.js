@@ -2,18 +2,25 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
-  border: 1px solid blue;
+  margin-left: 10px;
+`;
+
+const Header = styled.h2`
+  text-align: center;
+  text-decoration: underline;
 `;
 
 const InputGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(1fr, 3) 50px;
   grid-auto-flow: column;
+  gap: 5px;
+  margin-bottom: 5px;
 `;
 
 const MusicItem = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 80px;
+  grid-template-columns: 2fr 1fr 80px;
   grid-auto-flow: column;
   height: 30px;
 `;
@@ -23,11 +30,6 @@ const Track = styled.audio`
   margin-left: 50px;
 `;
 
-const Header = styled.h2`
-  text-align: center;
-  text-decoration: underline;
-`;
-
 function MusicList(props) {
   const { name, tracks, postTrack, delTrack } = props;
   const [nameInput, setName] = useState("");
@@ -35,7 +37,9 @@ function MusicList(props) {
   const [urlInput, setUrl] = useState("");
 
   function addTrack() {
-    const trackUrl = `http://spoti4.future4.com.br/${Math.floor(Math.random()*100)}.mp3`
+    const trackUrl = `http://spoti4.future4.com.br/${Math.floor(
+      Math.random() * 100
+    )}.mp3`;
     const body = {
       name: nameInput,
       artist: artistInput,
@@ -52,12 +56,13 @@ function MusicList(props) {
     tracks.map((item) => {
       return (
         <MusicItem key={item.id}>
-          <span>{item.name}{" - "}{item.artist}</span>
+          <span>
+            {item.name}
+            {" - "}
+            {item.artist}
+          </span>
           <Track controls>
-            <source
-              src={item.url}
-              type="audio/mpeg"
-            />
+            <source src={item.url} type="audio/mpeg" />
           </Track>
           <button
             onClick={() => {

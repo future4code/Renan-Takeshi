@@ -7,6 +7,9 @@ import MusicList from "./components/MusicList/MusicList";
 const MainContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 3fr;
+  width: 80vh;
+  margin: auto;
+  margin-top: 20px;
 `;
 
 const Header = styled.h2`
