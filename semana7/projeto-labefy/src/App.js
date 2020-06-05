@@ -46,13 +46,20 @@ function App() {
       }
     }
   }
-
   async function createPlaylist(playlistName) {
-    try {
-      await axios.post(url, { name: playlistName }, headers);
-      getAllPlaylists();
-    } catch (err) {
-      console.log(err);
+    if (
+      playlists.some(
+        (item) => item.name.toLowerCase() === playlistName.toLowerCase()
+      )
+    ) {
+      window.alert("Já existe uma playlist com o mesmo nome");
+    } else {
+      try {
+        await axios.post(url, { name: playlistName }, headers);
+        getAllPlaylists();
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 
