@@ -16,25 +16,25 @@ const headers = { headers: { Authorization: "renan-takeshi-mello" } };
 
 function App() {
   const [playlists, setPlaylists] = useState();
+  const [playlistId, setPlaylistId] = useState();
+  const [playlistName, setPlaylistName] = useState();
   const [tracks, setTracks] = useState();
-  const [playlistId, setId] = useState();
 
   async function getAllPlaylists() {
     try {
       const response = await axios.get(url, headers);
       setPlaylists(response.data.result.list);
-      console.table(response.data.result.list);
     } catch (err) {
       console.log(err);
     }
   }
 
-  async function getPlaylistTracks(id) {
+  async function getPlaylistTracks(id, name) {
     try {
       const response = await axios.get(url + `/${id}/tracks`, headers);
       setTracks(response.data.result.tracks);
-      setId(id);
-      console.table(response.data.result.tracks);
+      setPlaylistId(id);
+      setPlaylistName(name);
     } catch (err) {
       console.log(err);
     }
@@ -44,7 +44,7 @@ function App() {
     if (window.confirm("Deseja mesmo deletar a playlist ?")) {
       try {
         const response = await axios.delete(url + `/${id}`, headers);
-        console.log(response);
+        getAllPlaylists();
       } catch (err) {
         console.log(err);
       }
@@ -54,22 +54,36 @@ function App() {
   async function createPlaylist(playlistName) {
     try {
       const response = await axios.post(url, { name: playlistName }, headers);
-      console.log(response);
+      getAllPlaylists();
     } catch (err) {
       console.log(err);
     }
   }
 
-  async function addTrackToPlaylist(playlistId, body) {
+  async function addTrackToPlaylist(body) {
     try {
       const response = await axios.post(
         url + `/${playlistId}/tracks`,
         body,
         headers
       );
-      console.log(response);
+      getPlaylistTracks(playlistId, playlistName);
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async function removeTrackFromPlaylist(trackId) {
+    if (window.confirm("Deseja mesmo deletar a faixa ?")) {
+      try {
+        const response = await axios.delete(
+          url + `/${playlistId}/tracks/${trackId}`,
+          headers
+        );
+        getPlaylistTracks(playlistId, playlistName);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 
@@ -87,9 +101,10 @@ function App() {
       />
       {tracks ? (
         <MusicList
+          name={playlistName}
           tracks={tracks}
           postTrack={addTrackToPlaylist}
-          playlistId={playlistId}
+          delTrack={removeTrackFromPlaylist}
         />
       ) : (
         <p>Selecione uma playlist</p>

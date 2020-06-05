@@ -10,7 +10,7 @@ const MusicItem = styled.div`
 `;
 
 function MusicList(props) {
-  const { tracks, postTrack, playlistId } = props;
+  const { name, tracks, postTrack, delTrack } = props;
   const [nameInput, setName] = useState("");
   const [artistInput, setArtist] = useState("");
   const [urlInput, setUrl] = useState("");
@@ -21,17 +21,32 @@ function MusicList(props) {
       artist: artistInput,
       url: urlInput,
     };
-    postTrack(playlistId, body);
+    postTrack(body);
+    setName("");
+    setArtist("");
+    setUrl("");
   }
 
   const renderedTracks =
     tracks &&
     tracks.map((item) => {
-      return <MusicItem key={item.id}>{item.name}</MusicItem>;
+      return (
+        <MusicItem key={item.id}>
+          <span>{item.name}</span>
+          <span
+            onClick={() => {
+              delTrack(item.id);
+            }}
+          >
+            X
+          </span>
+        </MusicItem>
+      );
     });
 
   return (
     <MainContainer>
+      <h2>{name}</h2>
       <input
         placeholder="Name"
         value={nameInput}

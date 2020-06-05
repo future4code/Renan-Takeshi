@@ -22,7 +22,7 @@ function PlaylistSidebar(props) {
         <PlaylistItem key={item.id}>
           <span
             onClick={() => {
-              getTracks(item.id);
+              getTracks(item.id, item.name);
             }}
           >
             {item.name}
@@ -39,6 +39,11 @@ function PlaylistSidebar(props) {
       );
     });
 
+  function addPlaylist() {
+    postPlaylist(nameInput);
+    setName("");
+  }
+
   return (
     <MainContainer>
       <input
@@ -49,9 +54,7 @@ function PlaylistSidebar(props) {
         }}
       />
       <button
-        onClick={() => {
-          postPlaylist(nameInput);
-        }}
+        onClick={addPlaylist}
       >
         Criar
       </button>
