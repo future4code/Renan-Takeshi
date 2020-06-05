@@ -17,6 +17,7 @@ const headers = { headers: { Authorization: "renan-takeshi-mello" } };
 function App() {
   const [playlists, setPlaylists] = useState();
   const [tracks, setTracks] = useState();
+  const [playlistId, setId] = useState();
 
   async function getAllPlaylists() {
     try {
@@ -32,6 +33,7 @@ function App() {
     try {
       const response = await axios.get(url + `/${id}/tracks`, headers);
       setTracks(response.data.result.tracks);
+      setId(id);
       console.table(response.data.result.tracks);
     } catch (err) {
       console.log(err);
@@ -58,6 +60,19 @@ function App() {
     }
   }
 
+  async function addTrackToPlaylist(playlistId, body) {
+    try {
+      const response = await axios.post(
+        url + `/${playlistId}/tracks`,
+        body,
+        headers
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     getAllPlaylists();
   }, []);
@@ -70,7 +85,15 @@ function App() {
         delPlaylist={deletePlaylist}
         postPlaylist={createPlaylist}
       />
-      {tracks ? <MusicList tracks={tracks} /> : <p>Selecione uma playlist</p>}
+      {tracks ? (
+        <MusicList
+          tracks={tracks}
+          postTrack={addTrackToPlaylist}
+          playlistId={playlistId}
+        />
+      ) : (
+        <p>Selecione uma playlist</p>
+      )}
     </MainContainer>
   );
 }

@@ -13,7 +13,7 @@ const PlaylistItem = styled.div`
 
 function PlaylistSidebar(props) {
   const { playlists, getTracks, delPlaylist, postPlaylist } = props;
-  const [nameInput, setName] = useState("")
+  const [nameInput, setName] = useState("");
 
   const renderedList =
     playlists &&
@@ -41,8 +41,20 @@ function PlaylistSidebar(props) {
 
   return (
     <MainContainer>
-      <input placeholder="Name" value={nameInput} onChange={(e)=>{setName(e.target.value)}}/>
-      <button onClick={()=>{postPlaylist(nameInput)}}>Criar</button>
+      <input
+        placeholder="Name"
+        value={nameInput}
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          postPlaylist(nameInput);
+        }}
+      >
+        Criar
+      </button>
       {renderedList}
     </MainContainer>
   );
