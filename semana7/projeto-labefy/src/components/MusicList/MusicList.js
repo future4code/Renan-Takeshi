@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { MainContainer, Header, InputGrid, MusicItem, Track } from "./styled";
+import SpotifySearch from "../SpotifySearch/SpotifySearch";
 
 function MusicList(props) {
-  const { name, tracks, postTrack, delTrack } = props;
+  const { name, tracks, postTrack, delTrack, token } = props;
   const [nameInput, setName] = useState("");
   const [artistInput, setArtist] = useState("");
   const [urlInput, setUrl] = useState("");
@@ -28,9 +29,7 @@ function MusicList(props) {
       return (
         <MusicItem key={item.id}>
           <span>
-            {item.name}
-            {" - "}
-            {item.artist}
+            {item.name} ({item.artist})
           </span>
           <Track controls>
             <source src={item.url} type="audio/mpeg" />
@@ -74,6 +73,7 @@ function MusicList(props) {
         <button onClick={addTrack}>Adicionar</button>
       </InputGrid>
       {renderedTracks}
+      <SpotifySearch token={token} postTrack={postTrack} />
     </MainContainer>
   );
 }

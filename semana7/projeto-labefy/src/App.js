@@ -6,7 +6,6 @@ import { MainContainer, Header } from "./styled";
 import qs from "querystring";
 
 const urlTokenSpotify = "https://accounts.spotify.com/api/token";
-const urlSearchSpotify = "https://api.spotify.com/v1/search";
 const bodySpotify = { grant_type: "client_credentials" };
 const headersTokenSpotify = {
   headers: {
@@ -39,7 +38,6 @@ function App() {
         headersTokenSpotify
       );
       setToken(response.data.access_token);
-      console.log(response.data.access_token);
     } catch (err) {
       console.log(err);
     }
@@ -47,25 +45,6 @@ function App() {
   useEffect(() => {
     getSpotifyToken();
   }, []);
-
-  async function searchSpotify(query) {
-    try {
-      const headersSearchSpotify = {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const response = await axios.get(
-        urlSearchSpotify + `?q=${query}&type=track&market=BR`,
-        headersSearchSpotify
-      );
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   async function getAllPlaylists() {
     try {
@@ -75,6 +54,9 @@ function App() {
       console.log(err);
     }
   }
+  useEffect(() => {
+    getAllPlaylists();
+  }, []);
 
   async function getPlaylistTracks(id, name) {
     try {
@@ -128,10 +110,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    getAllPlaylists();
-  }, []);
-
   return (
     <MainContainer>
       <PlaylistSidebar
@@ -146,6 +124,7 @@ function App() {
           tracks={tracks}
           postTrack={addTrackToPlaylist}
           delTrack={removeTrackFromPlaylist}
+          token={token}
         />
       ) : (
         <Header>Selecione uma playlist</Header>
