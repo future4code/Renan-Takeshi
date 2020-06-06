@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MainContainer, Header, InputGrid, MusicItem, Track } from "./styled";
 import SpotifySearch from "../SpotifySearch/SpotifySearch";
+import Iframe from "react-iframe";
 
 function MusicList(props) {
   const { name, tracks, postTrack, delTrack, token } = props;
@@ -31,9 +32,20 @@ function MusicList(props) {
           <span>
             {item.name} ({item.artist})
           </span>
-          <Track controls>
-            <source src={item.url} type="audio/mpeg" />
-          </Track>
+          {item.url.toLowerCase().includes("spotify") ? (
+            <Iframe
+              url={item.url.replace(/track/g, "embed/track")}
+              width="250px"
+              height="80px"
+              frameborder="0"
+              allowtransparency="true"
+              allow="encrypted-media"
+            />
+          ) : (
+            <Track controls>
+              <source src={item.url} type="audio/mpeg" />
+            </Track>
+          )}
           <button
             onClick={() => {
               delTrack(item.id);
