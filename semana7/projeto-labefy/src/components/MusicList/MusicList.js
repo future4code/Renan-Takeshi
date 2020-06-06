@@ -8,7 +8,7 @@ function MusicList(props) {
   const [urlInput, setUrl] = useState("");
 
   function addTrack() {
-    const trackUrl = `http://spoti4.future4.com.br/${Math.floor(
+    const trackUrl = `http://spoti4.future4.com.br/${Math.ceil(
       Math.random() * 100
     )}.mp3`;
     const body = {
