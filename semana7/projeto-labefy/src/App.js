@@ -3,6 +3,21 @@ import axios from "axios";
 import PlaylistSidebar from "./components/PlaylistSidebar/PlaylistSidebar";
 import MusicList from "./components/MusicList/MusicList";
 import { MainContainer, Header } from "./styled";
+import qs from "querystring";
+
+const urlTokenSpotify = "https://accounts.spotify.com/api/token";
+const urlSearchSpotify = "https://api.spotify.com/v1/search";
+const bodySpotify = { grant_type: "client_credentials" };
+const headersTokenSpotify = {
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+  auth: {
+    username: "73f01c670ed349f399db684c6a0a3e05",
+    password: "dad56bdf9ebb40958fab09f06c10acb1",
+  },
+};
 
 const url =
   "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists";
@@ -14,6 +29,43 @@ function App() {
   const [playlistId, setPlaylistId] = useState();
   const [playlistName, setPlaylistName] = useState();
   const [tracks, setTracks] = useState();
+  const [token, setToken] = useState();
+
+  async function getSpotifyToken() {
+    try {
+      const response = await axios.post(
+        urlTokenSpotify,
+        qs.stringify(bodySpotify),
+        headersTokenSpotify
+      );
+      setToken(response.data.access_token);
+      console.log(response.data.access_token);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    getSpotifyToken();
+  }, []);
+
+  async function searchSpotify(query) {
+    try {
+      const headersSearchSpotify = {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.get(
+        urlSearchSpotify + `?q=${query}&type=track&market=BR`,
+        headersSearchSpotify
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   async function getAllPlaylists() {
     try {
