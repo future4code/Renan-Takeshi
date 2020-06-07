@@ -15,7 +15,8 @@ function SpotifySearch(props) {
   const [searchInput, setSearch] = useState("");
   const [tracks, setTracks] = useState();
 
-  const headersSearchSpotify = {    headers: {
+  const headersSearchSpotify = {
+    headers: {
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Bearer ${token}`,
