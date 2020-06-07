@@ -15,7 +15,7 @@ import SpotifySearch from "../SpotifySearch/SpotifySearch";
 import Iframe from "react-iframe";
 
 function MusicList(props) {
-  const { name, tracks, postTrack, delTrack, token } = props;
+  const { playlistName, tracks, postTrack, delTrack, token } = props;
   const [nameInput, setName] = useState("");
   const [artistInput, setArtist] = useState("");
   const [urlInput, setUrl] = useState("");
@@ -43,19 +43,19 @@ function MusicList(props) {
       <Remove />
       <thead>
         <tr>
-          <th>Song</th>
-          <th>Artists</th>
+          <th>Músicas</th>
+          <th>Artistas</th>
         </tr>
       </thead>
-      {tracks.map((item) => {
+      {tracks.map((track) => {
         return (
-          <Track key={item.id}>
-            <td style={{ wordWrap: "break-word" }}>{item.name}</td>
-            <td style={{ wordWrap: "break-word" }}>{item.artist}</td>
+          <Track key={track.id}>
+            <td style={{ wordWrap: "break-word" }}>{track.name}</td>
+            <td style={{ wordWrap: "break-word" }}>{track.artist}</td>
             <td>
-              {item.url.toLowerCase().includes("spotify") ? (
+              {track.url.toLowerCase().includes("spotify") ? (
                 <Iframe
-                  url={item.url.replace(/track/g, "embed/track")}
+                  url={track.url.replace(/track/g, "embed/track")}
                   width="250px"
                   height="80px"
                   frameborder="0"
@@ -64,14 +64,14 @@ function MusicList(props) {
                 />
               ) : (
                 <Audio controls>
-                  <source src={item.url} type="audio/mpeg" />
+                  <source src={track.url} type="audio/mpeg" />
                 </Audio>
               )}
             </td>
             <td
               style={{ cursor: "pointer", color: "red" }}
               onClick={() => {
-                delTrack(item.id);
+                delTrack(track.id);
               }}
             >
               Remover
@@ -84,7 +84,7 @@ function MusicList(props) {
 
   return (
     <MainContainer>
-      <Header>{name}</Header>
+      <Header>{playlistName}</Header>
       <InputGrid>
         <input
           placeholder="Name"

@@ -10,22 +10,21 @@ import {
 } from "./styled";
 import axios from "axios";
 
-const urlSearchSpotify = "https://api.spotify.com/v1/search";
-
 function SpotifySearch(props) {
   const { token, postTrack } = props;
   const [searchInput, setSearch] = useState("");
   const [tracks, setTracks] = useState();
 
+  const headersSearchSpotify = {    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const urlSearchSpotify = "https://api.spotify.com/v1/search";
+
   async function searchSpotify() {
     try {
-      const headersSearchSpotify = {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Bearer ${token}`,
-        },
-      };
       const response = await axios.get(
         urlSearchSpotify + `?q=${searchInput}&type=track&market=BR`,
         headersSearchSpotify
@@ -37,11 +36,11 @@ function SpotifySearch(props) {
     }
   }
 
-  function addTrack(item) {
+  function addTrack(track) {
     const body = {
-      name: item.name,
-      artist: item.artists.map((item) => item.name).join(", "),
-      url: item.external_urls.spotify,
+      name: track.name,
+      artist: track.artists.map((item) => item.name).join(", "),
+      url: track.external_urls.spotify,
     };
     postTrack(body);
   }
@@ -53,19 +52,23 @@ function SpotifySearch(props) {
       <Add />
       <thead>
         <tr>
-          <th>Song</th>
-          <th>Artists</th>
+          <th>Músicas</th>
+          <th>Artistas</th>
         </tr>
       </thead>
-      {tracks.map((item) => {
+      {tracks.map((track) => {
         return (
-          <Track key={item.id}>
-            <td>{item.name}</td>
-            <td>{item.artists.map((item) => item.name).join(", ")}</td>
+          <Track key={track.id}>
+            <td>{track.name}</td>
+            <td>
+              {track.artists.map((item, idx, arr) =>
+                idx === arr.length - 1 ? item.name : `${item.name}, `
+              )}
+            </td>
             <td
               style={{ cursor: "pointer", color: "green" }}
               onClick={() => {
-                addTrack(item);
+                addTrack(track);
               }}
             >
               Adicionar

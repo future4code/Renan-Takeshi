@@ -120,7 +120,7 @@ function App() {
       />
       {tracks ? (
         <MusicList
-          name={playlistName}
+          playlistName={playlistName}
           tracks={tracks}
           postTrack={addTrackToPlaylist}
           delTrack={removeTrackFromPlaylist}
