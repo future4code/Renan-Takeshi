@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { MainContainer, InputGrid, SpotifyItem } from "./styled";
+import {
+  MainContainer,
+  InputGrid,
+  Table,
+  Song,
+  Artist,
+  Track,
+  Add,
+} from "./styled";
 import axios from "axios";
 
 const urlSearchSpotify = "https://api.spotify.com/v1/search";
@@ -34,29 +42,40 @@ function SpotifySearch(props) {
       name: item.name,
       artist: item.artists.map((item) => item.name).join(", "),
       url: item.external_urls.spotify,
-        // url: `http://spoti4.future4.com.br/${Math.ceil(Math.random() * 100)}.mp3`,
+      // url: `http://spoti4.future4.com.br/${Math.ceil(Math.random() * 100)}.mp3`,
     };
     postTrack(body);
   }
 
-  const renderedTracks =
-    tracks &&
-    tracks.map((item) => {
-      return (
-        <SpotifyItem key={item.id}>
-          <span>
-            {item.name} ({item.artists.map((item) => item.name).join(", ")})
-          </span>
-          <button
-            onClick={() => {
-              addTrack(item);
-            }}
-          >
-            Adicionar
-          </button>
-        </SpotifyItem>
-      );
-    });
+  const renderedTracks = tracks && (
+    <Table>
+      <Song />
+      <Artist />
+      <Add />
+      <thead>
+        <tr>
+          <th>Song</th>
+          <th>Artist</th>
+        </tr>
+      </thead>
+      {tracks.map((item) => {
+        return (
+          <Track key={item.id}>
+            <td>{item.name}</td>
+            <td>{item.artists.map((item) => item.name).join(", ")}</td>
+            <td
+              style={{ cursor: "pointer", color: "green" }}
+              onClick={() => {
+                addTrack(item);
+              }}
+            >
+              Adicionar
+            </td>
+          </Track>
+        );
+      })}
+    </Table>
+  );
 
   return (
     <MainContainer>

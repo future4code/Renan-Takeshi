@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { MainContainer, Header, InputGrid, MusicItem, Track } from "./styled";
+import {
+  MainContainer,
+  Header,
+  InputGrid,
+  Audio,
+  Track,
+  Song,
+  Artist,
+  Table,
+  Control,
+  Remove,
+} from "./styled";
 import SpotifySearch from "../SpotifySearch/SpotifySearch";
 import Iframe from "react-iframe";
 
@@ -24,38 +35,52 @@ function MusicList(props) {
     setUrl("");
   }
 
-  const renderedTracks =
-    tracks &&
-    tracks.map((item) => {
-      return (
-        <MusicItem key={item.id}>
-          <span>
-            {item.name} ({item.artist})
-          </span>
-          {item.url.toLowerCase().includes("spotify") ? (
-            <Iframe
-              url={item.url.replace(/track/g, "embed/track")}
-              width="250px"
-              height="80px"
-              frameborder="0"
-              allowtransparency="true"
-              allow="encrypted-media"
-            />
-          ) : (
-            <Track controls>
-              <source src={item.url} type="audio/mpeg" />
-            </Track>
-          )}
-          <button
-            onClick={() => {
-              delTrack(item.id);
-            }}
-          >
-            Remover
-          </button>
-        </MusicItem>
-      );
-    });
+  const renderedTracks = tracks && (
+    <Table>
+      <Song />
+      <Artist />
+      <Control />
+      <Remove />
+      <thead>
+        <tr>
+          <th>Song</th>
+          <th>Artist</th>
+        </tr>
+      </thead>
+      {tracks.map((item) => {
+        return (
+          <Track key={item.id}>
+            <td style={{ wordWrap: "break-word" }}>{item.name}</td>{" "}
+            <td style={{ wordWrap: "break-word" }}>{item.artist}</td>
+            <td>
+              {item.url.toLowerCase().includes("spotify") ? (
+                <Iframe
+                  url={item.url.replace(/track/g, "embed/track")}
+                  width="250px"
+                  height="80px"
+                  frameborder="0"
+                  allowtransparency="true"
+                  allow="encrypted-media"
+                />
+              ) : (
+                <Audio controls>
+                  <source src={item.url} type="audio/mpeg" />
+                </Audio>
+              )}
+            </td>
+            <td
+              style={{ cursor: "pointer", color: "red" }}
+              onClick={() => {
+                delTrack(item.id);
+              }}
+            >
+              Remover
+            </td>
+          </Track>
+        );
+      })}
+    </Table>
+  );
 
   return (
     <MainContainer>
