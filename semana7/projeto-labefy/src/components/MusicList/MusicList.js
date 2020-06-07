@@ -37,48 +37,52 @@ function MusicList(props) {
 
   const renderedTracks = tracks && (
     <Table>
-      <Song />
-      <Artist />
-      <Control />
-      <Remove />
+      <colgroup>
+        <Song />
+        <Artist />
+        <Control />
+        <Remove />
+      </colgroup>
       <thead>
         <tr>
-          <th>Músicas</th>
-          <th>Artistas</th>
+          <th>Música</th>
+          <th>Artista</th>
         </tr>
       </thead>
-      {tracks.map((track) => {
-        return (
-          <Track key={track.id}>
-            <td style={{ wordWrap: "break-word" }}>{track.name}</td>
-            <td style={{ wordWrap: "break-word" }}>{track.artist}</td>
-            <td>
-              {track.url.toLowerCase().includes("spotify") ? (
-                <Iframe
-                  url={track.url.replace(/track/g, "embed/track")}
-                  width="250px"
-                  height="80px"
-                  frameborder="0"
-                  allowtransparency="true"
-                  allow="encrypted-media"
-                />
-              ) : (
-                <Audio controls>
-                  <source src={track.url} type="audio/mpeg" />
-                </Audio>
-              )}
-            </td>
-            <td
-              style={{ cursor: "pointer", color: "red" }}
-              onClick={() => {
-                delTrack(track.id);
-              }}
-            >
-              Remover
-            </td>
-          </Track>
-        );
-      })}
+      <tbody>
+        {tracks.map((track) => {
+          return (
+            <Track key={track.id}>
+              <td style={{ wordWrap: "break-word" }}>{track.name}</td>
+              <td style={{ wordWrap: "break-word" }}>{track.artist}</td>
+              <td>
+                {track.url.toLowerCase().includes("spotify") ? (
+                  <Iframe
+                    url={track.url.replace(/track/g, "embed/track")}
+                    width="250px"
+                    height="80px"
+                    frameborder="0"
+                    allowtransparency="true"
+                    allow="encrypted-media"
+                  />
+                ) : (
+                  <Audio controls>
+                    <source src={track.url} type="audio/mpeg" />
+                  </Audio>
+                )}
+              </td>
+              <td
+                style={{ cursor: "pointer", color: "red" }}
+                onClick={() => {
+                  delTrack(track.id);
+                }}
+              >
+                Remover
+              </td>
+            </Track>
+          );
+        })}
+      </tbody>
     </Table>
   );
 

@@ -27,7 +27,7 @@ export const Table = styled.table`
 `;
 
 export const Track = styled.tr`
-  &:nth-child(even) {
+  &:nth-child(odd) {
     background-color: #f5f5f5;
   }
   &:hover {

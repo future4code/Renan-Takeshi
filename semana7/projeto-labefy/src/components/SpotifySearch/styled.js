@@ -30,6 +30,10 @@ export const Song = styled.col`
   width: 1fr;
 `;
 
+export const Album = styled.col`
+  width: 1fr;
+`;
+
 export const Artist = styled.col`
   width: 1fr;
 `;

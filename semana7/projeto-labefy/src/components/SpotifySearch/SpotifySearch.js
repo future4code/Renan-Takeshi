@@ -4,6 +4,7 @@ import {
   InputGrid,
   Table,
   Song,
+  Album,
   Artist,
   Track,
   Add,
@@ -48,35 +49,42 @@ function SpotifySearch(props) {
 
   const renderedTracks = tracks && (
     <Table>
-      <Song />
-      <Artist />
-      <Add />
+      <colgroup>
+        <Song />
+        <Album />
+        <Artist />
+        <Add />
+      </colgroup>
       <thead>
         <tr>
-          <th>Músicas</th>
-          <th>Artistas</th>
+          <th>Música</th>
+          <th>Album</th>
+          <th>Artista</th>
         </tr>
       </thead>
-      {tracks.map((track) => {
-        return (
-          <Track key={track.id}>
-            <td>{track.name}</td>
-            <td>
-              {track.artists.map((item, idx, arr) =>
-                idx === arr.length - 1 ? item.name : `${item.name}, `
-              )}
-            </td>
-            <td
-              style={{ cursor: "pointer", color: "green" }}
-              onClick={() => {
-                addTrack(track);
-              }}
-            >
-              Adicionar
-            </td>
-          </Track>
-        );
-      })}
+      <tbody>
+        {tracks.map((track) => {
+          return (
+            <Track key={track.id}>
+              <td>{track.name}</td>
+              <td>{track.album.name}</td>
+              <td>
+                {track.artists.map((item, idx, arr) =>
+                  idx === arr.length - 1 ? item.name : `${item.name}, `
+                )}
+              </td>
+              <td
+                style={{ cursor: "pointer", color: "green" }}
+                onClick={() => {
+                  addTrack(track);
+                }}
+              >
+                Adicionar
+              </td>
+            </Track>
+          );
+        })}
+      </tbody>
     </Table>
   );
 
