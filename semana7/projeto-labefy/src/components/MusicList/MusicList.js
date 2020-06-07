@@ -44,13 +44,13 @@ function MusicList(props) {
       <thead>
         <tr>
           <th>Song</th>
-          <th>Artist</th>
+          <th>Artists</th>
         </tr>
       </thead>
       {tracks.map((item) => {
         return (
           <Track key={item.id}>
-            <td style={{ wordWrap: "break-word" }}>{item.name}</td>{" "}
+            <td style={{ wordWrap: "break-word" }}>{item.name}</td>
             <td style={{ wordWrap: "break-word" }}>{item.artist}</td>
             <td>
               {item.url.toLowerCase().includes("spotify") ? (

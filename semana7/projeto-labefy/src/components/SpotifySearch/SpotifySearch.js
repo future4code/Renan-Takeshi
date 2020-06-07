@@ -42,7 +42,6 @@ function SpotifySearch(props) {
       name: item.name,
       artist: item.artists.map((item) => item.name).join(", "),
       url: item.external_urls.spotify,
-      // url: `http://spoti4.future4.com.br/${Math.ceil(Math.random() * 100)}.mp3`,
     };
     postTrack(body);
   }
@@ -55,7 +54,7 @@ function SpotifySearch(props) {
       <thead>
         <tr>
           <th>Song</th>
-          <th>Artist</th>
+          <th>Artists</th>
         </tr>
       </thead>
       {tracks.map((item) => {
