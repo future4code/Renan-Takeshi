@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
 
 export const InputGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 80px;
+  grid-template-columns: 1fr 80px 80px;
   gap: 5px;
   margin-bottom: 5px;
 `;

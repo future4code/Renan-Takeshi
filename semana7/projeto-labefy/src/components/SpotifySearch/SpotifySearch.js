@@ -38,6 +38,11 @@ function SpotifySearch(props) {
     }
   }
 
+  function clearSearch() {
+    setTracks();
+    setSearch("");
+  }
+
   function addTrack(track) {
     const body = {
       name: track.name,
@@ -66,9 +71,9 @@ function SpotifySearch(props) {
         {tracks.map((track) => {
           return (
             <Track key={track.id}>
-              <td>{track.name}</td>
-              <td>{track.album.name}</td>
-              <td>
+              <td style={{ wordWrap: "break-word" }}>{track.name}</td>
+              <td style={{ wordWrap: "break-word" }}>{track.album.name}</td>
+              <td style={{ wordWrap: "break-word" }}>
                 {track.artists.map((item, idx, arr) =>
                   idx === arr.length - 1 ? item.name : `${item.name}, `
                 )}
@@ -100,6 +105,7 @@ function SpotifySearch(props) {
           }}
         />
         <button onClick={searchSpotify}>Pesquisar</button>
+        <button onClick={clearSearch}>Limpar</button>
       </InputGrid>
       {renderedTracks}
     </MainContainer>
