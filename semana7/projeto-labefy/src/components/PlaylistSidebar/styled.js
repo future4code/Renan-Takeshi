@@ -8,6 +8,7 @@ export const MainContainer = styled.div`
 export const InputGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 50px;
+  grid-template-rows: 30px;
   gap:5px;
   height: 30px;
 `;

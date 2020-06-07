@@ -91,6 +91,7 @@ function MusicList(props) {
       <Header>{playlistName}</Header>
       <InputGrid>
         <input
+          style={{ fontSize: "16px" }}
           placeholder="Name"
           value={nameInput}
           onChange={(e) => {
@@ -98,6 +99,7 @@ function MusicList(props) {
           }}
         />
         <input
+          style={{ fontSize: "16px" }}
           placeholder="Artist"
           value={artistInput}
           onChange={(e) => {
@@ -105,6 +107,7 @@ function MusicList(props) {
           }}
         />
         <input
+          style={{ fontSize: "16px" }}
           placeholder="Url"
           value={urlInput}
           onChange={(e) => {

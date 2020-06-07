@@ -36,7 +36,9 @@ function PlaylistSidebar(props) {
 
   function addPlaylist() {
     if (
-      playlists.some((item) => item.name.toLowerCase() === nameInput.toLowerCase())
+      playlists.some(
+        (item) => item.name.toLowerCase() === nameInput.toLowerCase()
+      )
     ) {
       window.alert("Já existe uma playlist com o mesmo nome");
     } else {
@@ -49,6 +51,7 @@ function PlaylistSidebar(props) {
     <MainContainer>
       <InputGrid>
         <input
+          style={{ fontSize: "16px" }}
           placeholder="Criar nova playlist..."
           value={nameInput}
           onChange={(e) => {

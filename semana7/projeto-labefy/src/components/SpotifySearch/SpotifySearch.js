@@ -98,6 +98,7 @@ function SpotifySearch(props) {
       <hr />
       <InputGrid>
         <input
+          style={{ fontSize: "16px" }}
           placeholder="Pesquisar faixas/artistas no Spotify"
           value={searchInput}
           onChange={(e) => {

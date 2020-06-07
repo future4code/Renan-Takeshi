@@ -12,6 +12,7 @@ export const Header = styled.h2`
 export const InputGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr) 80px;
+  grid-template-rows: 30px;
   gap: 5px;
   margin-bottom: 5px;
 `;
