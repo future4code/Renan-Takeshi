@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function MatchesScreen() {
+function MatchesScreen(props) {
+  const { updateFlag } = props;
   const [matches, setMatches] = useState([]);
 
   const url =
@@ -10,14 +11,14 @@ function MatchesScreen() {
     const response = await axios.get(url);
     setMatches(response.data.matches);
   };
+
   useEffect(() => {
     getMatches();
-  }, []);
-
+  }, [updateFlag]);
   return (
     <div>
       {matches.map((item) => (
-        <img src={item.photo} style={{ width: "200px" }}/>
+        <img src={item.photo} style={{ width: "200px" }} />
       ))}
     </div>
   );

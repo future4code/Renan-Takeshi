@@ -12,24 +12,26 @@ const MainContainer = styled.div`
 const Header = styled.div``;
 
 function App() {
-  const [getMatches, setGetMatches] = useState(false);
+  const [showMatches, setShowMatches] = useState(false);
+  const [updateFlag, setFlag] = useState(false);
 
   const url =
     "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/renan/clear";
   const putClearMatches = async () => {
     try {
-      const response = axios.put(url);
+      const response = await axios.put(url);
+      setFlag(!updateFlag);
     } catch (err) {
       console.log(err);
     }
   };
-  
+
   return (
     <MainContainer>
       <Header>
         <button
           onClick={() => {
-            setGetMatches(!getMatches);
+            setShowMatches(!showMatches);
           }}
         >
           Trocar
@@ -42,7 +44,11 @@ function App() {
           Limpar
         </button>
       </Header>
-      {getMatches ? <MatchesScreen /> : <ChoosePerson />}
+      {showMatches ? (
+        <MatchesScreen updateFlag={updateFlag} />
+      ) : (
+        <ChoosePerson />
+      )}
     </MainContainer>
   );
 }
