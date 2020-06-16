@@ -3,9 +3,6 @@ import axios from "axios";
 
 const PokeCard = (props) => {
   const [pokemon, setPokemon] = useState({});
-  useEffect(() => {
-    pegaPokemon(props.pokemon);
-  }, [props.pokemon]);
 
   const pegaPokemon = (pokeName) => {
     axios
@@ -17,6 +14,9 @@ const PokeCard = (props) => {
         console.log(err);
       });
   };
+  useEffect(() => {
+    pegaPokemon(props.pokemon);
+  }, [props.pokemon]);
 
   return (
     <div>
