@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import ChoosePerson from "./components/ChoosePerson";
+import React, { useState, useEffect } from "react";
+import ProfileScreen from "./components/ProfileScreen";
 import MatchesScreen from "./components/MatchesScreen";
 import styled from "styled-components";
-import axios from "axios";
+import * as astromatch from "./axios";
 
 const MainContainer = styled.div`
   display: grid;
@@ -13,17 +13,27 @@ const Header = styled.div``;
 
 function App() {
   const [showMatches, setShowMatches] = useState(false);
-  const [updateFlag, setFlag] = useState(false);
+  const [matches, setMatches] = useState([]);
+  const [profile, setProfile] = useState();
 
-  const url =
-    "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/renan/clear";
-  const putClearMatches = async () => {
-    try {
-      const response = await axios.put(url);
-      setFlag(!updateFlag);
-    } catch (err) {
-      console.log(err);
+  useEffect(() => {
+    astromatch.getProfileToChoose(setProfile);
+    astromatch.getMatches(setMatches);
+  }, []);
+
+
+  const choosePerson = async (id, choice) => {
+    const isMatch = await astromatch.postChoosePerson(id, choice);
+    if (isMatch) {
+      matches.push(profile);
+      if (window.confirm("Match! Deseja enviar uma mensagem ?")) {
+      } else {
+        astromatch.getProfileToChoose(setProfile);
+      }
+    } else {
+      astromatch.getProfileToChoose(setProfile);
     }
+    console.log(isMatch);
   };
 
   return (
@@ -38,16 +48,16 @@ function App() {
         </button>
         <button
           onClick={() => {
-            putClearMatches();
+            astromatch.clearMatches(setMatches);
           }}
         >
           Limpar
         </button>
       </Header>
       {showMatches ? (
-        <MatchesScreen updateFlag={updateFlag} />
+        <MatchesScreen matches={matches} />
       ) : (
-        <ChoosePerson />
+        <ProfileScreen profile={profile} choosePerson={choosePerson} />
       )}
     </MainContainer>
   );

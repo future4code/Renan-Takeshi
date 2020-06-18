@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 
 function MatchesScreen(props) {
-  const { updateFlag } = props;
-  const [matches, setMatches] = useState([]);
+  const {matches} = props
 
-  const url =
-    "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/renan/matches";
-  const getMatches = async () => {
-    const response = await axios.get(url);
-    setMatches(response.data.matches);
-  };
 
-  useEffect(() => {
-    getMatches();
-  }, [updateFlag]);
   return (
     <div>
       {matches.map((item) => (
-        <img src={item.photo} style={{ width: "200px" }} />
+        <img key={item.id} alt={`Imagem de ${item.name}`} src={item.photo} style={{ width: "200px" }} />
       ))}
     </div>
   );
