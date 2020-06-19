@@ -8,10 +8,9 @@ export const getMatches = async (setFunction) => {
   setFunction(response.data.matches);
 };
 
-export const clearMatches = async (setFunction) => {
+export const clearMatches = async () => {
   try {
     await axios.put(baseUrl + "clear");
-    setFunction([])
   } catch (err) {
     console.log(err);
   }

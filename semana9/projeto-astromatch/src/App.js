@@ -20,6 +20,7 @@ function App() {
     astromatch.getProfileToChoose(setProfile);
     astromatch.getMatches(setMatches);
   }, []);
+  
 
 
   const choosePerson = async (id, choice) => {
@@ -48,7 +49,8 @@ function App() {
         </button>
         <button
           onClick={() => {
-            astromatch.clearMatches(setMatches);
+            astromatch.clearMatches();
+            setMatches([])
           }}
         >
           Limpar
