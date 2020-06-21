@@ -6,7 +6,7 @@ import * as astromatch from "./axios";
 
 const MainContainer = styled.div`
   display: grid;
-  grid-template-rows: 50px 1fr;
+  grid-auto-flow: row;
 `;
 
 const Header = styled.div``;
@@ -20,13 +20,11 @@ function App() {
     astromatch.getProfileToChoose(setProfile);
     astromatch.getMatches(setMatches);
   }, []);
-  
-
 
   const choosePerson = async (id, choice) => {
-    const isMatch = await astromatch.postChoosePerson(id, choice);
+    const isMatch = await astromatch.choosePerson(id, choice);
     if (isMatch) {
-      matches.push(profile);
+      astromatch.getMatches(setMatches);
       if (window.confirm("Match! Deseja enviar uma mensagem ?")) {
       } else {
         astromatch.getProfileToChoose(setProfile);
@@ -40,20 +38,20 @@ function App() {
   return (
     <MainContainer>
       <Header>
-        <button
+        <button style={{width:"100px"}}
           onClick={() => {
             setShowMatches(!showMatches);
           }}
         >
-          Trocar
+          {showMatches ? "Ver perfil" : "Ver matches"}
         </button>
         <button
-          onClick={() => {
-            astromatch.clearMatches();
-            setMatches([])
+          onClick={async () => {
+            await astromatch.clearMatches();
+            setMatches([]);
           }}
         >
-          Limpar
+          Limpar matches
         </button>
       </Header>
       {showMatches ? (
