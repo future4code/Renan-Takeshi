@@ -5,7 +5,7 @@ import HomePage from "../HomePage";
 import ListTripsPage from "../ListTripsPage";
 import LoginPage from "../LoginPage";
 import TripDetailsPage from "../TripDetailsPage";
-
+import ApplicationForm from '../ApplicationForm'
 const Router = () => {
   return (
     <BrowserRouter>
@@ -13,11 +13,20 @@ const Router = () => {
         <Route exact path="/">
           <HomePage />
         </Route>
+        <Route exact path="/application-form">
+          <ApplicationForm />
+        </Route>
         <Route exact path="/login">
           <LoginPage />
         </Route>
-        <Route exact path="/trips">
+        <Route exact path="/trips/create">
+          <CreateTripPage />
+        </Route>
+        <Route exact path="/trips/list">
           <ListTripsPage />
+        </Route>
+        <Route exact path="/trips/details">
+          <TripDetailsPage />
         </Route>
       </Switch>
     </BrowserRouter>
