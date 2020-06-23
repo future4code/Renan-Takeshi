@@ -28,6 +28,9 @@ const Router = () => {
         <Route exact path="/trips/details">
           <TripDetailsPage />
         </Route>
+        <Route  path="/">
+          <div>404</div>
+        </Route>
       </Switch>
     </BrowserRouter>
   );
