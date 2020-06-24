@@ -10,8 +10,7 @@ const ListTripsPage = () => {
 
   return (
     <div>
-      <h2>TripsList</h2>
-      {renderedTrips}
+      <span><h2>TripsList</h2></span>
       <button
         onClick={() => {
           history.push("/trips/create");
@@ -19,6 +18,8 @@ const ListTripsPage = () => {
       >
         Create New Trip
       </button>
+      {renderedTrips}
+
     </div>
   );
 };

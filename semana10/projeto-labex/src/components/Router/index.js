@@ -19,7 +19,7 @@ const Router = () => {
         <Route exact path="/trips/list">
           <ListTripsPage />
         </Route>
-        <Route exact path="/application-form">
+        <Route exact path="/trips/application-form/:tripId">
           <ApplicationForm />
         </Route>
         <Route exact path="/trips/details/:tripId">

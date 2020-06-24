@@ -16,7 +16,7 @@ export const getTripDetail = async (tripId, token) => {
   try {
     const headers = { headers: { auth: token } };
     const response = await axios.get(baseUrl + `trip/${tripId}`, headers);
-    console.log(response.data.trip);
+    return response.data.trip
   } catch (err) {
     console.log(err);
   }

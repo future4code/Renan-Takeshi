@@ -6,7 +6,7 @@ const useProtectedPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    token === null && history.push("/login");
+    token === null && history.replace("/login");
   }, [history]);
 };
 
