@@ -16,17 +16,17 @@ const Router = () => {
         <Route exact path="/login">
           <LoginPage />
         </Route>
-        <Route exact path="/application-form">
-          <ApplicationForm />
-        </Route>
-        <Route exact path="/trips/create">
-          <CreateTripPage />
-        </Route>
         <Route exact path="/trips/list">
           <ListTripsPage />
         </Route>
+        <Route exact path="/application-form">
+          <ApplicationForm />
+        </Route>
         <Route exact path="/trips/details/:tripId">
           <TripDetailsPage />
+        </Route>
+        <Route exact path="/trips/create">
+          <CreateTripPage />
         </Route>
         <Route path="/">
           <div>404</div>

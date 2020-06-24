@@ -1,34 +1,26 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import useTrips from "../hooks/useTrips";
+import useRequestTrips from "../hooks/useRequestTrips";
 const ListTripsPage = () => {
   const history = useHistory();
-  const trips = useTrips();
-  console.table(trips);
+  const trips = useRequestTrips();
 
   const handleClick = (event) => {
     history.push(event.target.value);
   };
 
+const renderedTrips = trips && trips.map((item)=><div key={item.id}>{item.name}</div>)
+
   return (
     <div>
-      TripsList
-      <button value={"/trips/details"} onClick={handleClick}>
-        go to details
-      </button>
+      <h2>TripsList</h2>
+      {renderedTrips}
       <button
         onClick={() => {
-          history.push("/application-form");
+          history.push("/trips/create");
         }}
       >
-        go to form
-      </button>
-      <button
-        onClick={() => {
-          history.goBack();
-        }}
-      >
-        go to create
+        Create New Trip
       </button>
     </div>
   );

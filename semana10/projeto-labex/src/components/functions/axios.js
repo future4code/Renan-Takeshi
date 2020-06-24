@@ -42,10 +42,15 @@ export const applyToTrip = async (tripId, body) => {
 };
 
 export const login = async (email, pwd) => {
+  const body = { email: email, password: pwd };
   try {
-    const body = { email: email, password: pwd };
     const response = await axios.post(baseUrl + "login", body);
-    console.log(response.data);
+    if (response.data.token) {
+      localStorage.setItem("token", response.data.token);
+      return true;
+    } else {
+      return false;
+    }
   } catch (err) {
     console.log(err);
   }
