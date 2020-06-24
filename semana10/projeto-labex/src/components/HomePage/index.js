@@ -16,6 +16,7 @@ const HomePage = () => {
       </button>
       <button
         onClick={() => {
+          localStorage.removeItem('token')
           history.push("/trips/list");
         }}
       >

@@ -9,9 +9,12 @@ const LoginPage = () => {
   const history = useHistory();
 
   const handleLoginClick = async () => {
-    const isLogged = await login(email, password);
-    history.push("/trips/list")
-    // isLogged ? window.alert("ok") : window.alert("bad");
+    const message = await login(email, password);
+    if (message === true) {
+      history.push("/trips/list");
+    }else{
+      window.alert(message)
+    }
   };
 
   return (

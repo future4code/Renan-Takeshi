@@ -10,7 +10,7 @@ const useRequestTrips = () => {
       setTrips(response);
     }
     getTrips();
-  }, []);
+  }, [setTrips]);
 
   return trips;
 };

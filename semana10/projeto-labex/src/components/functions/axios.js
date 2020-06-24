@@ -48,11 +48,10 @@ export const login = async (email, pwd) => {
     if (response.data.token) {
       localStorage.setItem("token", response.data.token);
       return true;
-    } else {
-      return false;
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error.response.data.message);
+    return error.response.data.message;
   }
 };
 
