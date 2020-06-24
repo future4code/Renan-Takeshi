@@ -1,13 +1,20 @@
 import React from "react";
-import {useHistory} from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom";
 
 const TripDetailsPage = () => {
-  const history = useHistory()
-
+  const history = useHistory();
+  const { tripId } = useParams();
+  console.log(tripId);
   return (
     <div>
-      Details
-      <button onClick={()=>{history.push("/application-form")}}>Go to form</button>
+      Details {tripId}
+      <button
+        onClick={() => {
+          history.push("/application-form");
+        }}
+      >
+        Go to form
+      </button>
     </div>
   );
 };

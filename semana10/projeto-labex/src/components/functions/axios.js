@@ -6,7 +6,7 @@ const baseUrl =
 export const getTrips = async () => {
   try {
     const response = await axios.get(baseUrl + "trips");
-    console.log(response.data.trips);
+    return response.data.trips;
   } catch (err) {
     console.log(err);
   }
@@ -22,10 +22,10 @@ export const getTripDetail = async (tripId, token) => {
   }
 };
 
-export const createTrip = async (trip, token) => {
+export const createTrip = async (tripBody, token) => {
   try {
     const headers = { headers: { auth: token } };
-    const response = await axios.post(baseUrl + "trips", trip, headers);
+    const response = await axios.post(baseUrl + "trips", tripBody, headers);
     console.log(response.data);
   } catch (err) {
     console.log(err);

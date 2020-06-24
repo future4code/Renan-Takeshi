@@ -11,8 +11,7 @@ const HomePage = () => {
     description: "Venha passar a virada pertinho do Sol!",
     durationInDays: 7,
   };
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFuOTlsd2hJcUhLZEo2YkNZZ1k3IiwiZW1haWwiOiJyZW5hbkByZW5hbiIsImlhdCI6MTU5Mjk0NjExNH0.fSQK9zK3DRlxRU3KYzY93P0LLB1_HLuvEqHK6qkChZI";
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFuOTlsd2hJcUhLZEo2YkNZZ1k3IiwiZW1haWwiOiJyZW5hbkByZW5hbiIsImlhdCI6MTU5Mjk0OTEyOH0.e92OqkoUknYZbpurLZPO-avccIUouhEAOVOfMVnNGTE"
   const body = {
     name: "Astrodev",
     age: 20,
@@ -20,6 +19,7 @@ const HomePage = () => {
     profession: "Chefe",
     country: "Brasil",
   };
+  labex.getTripDetail("4HhzRAPGGq3XTssf6OlJ", token)
 
   return (
     <div>
