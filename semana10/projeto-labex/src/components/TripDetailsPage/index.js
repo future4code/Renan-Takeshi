@@ -1,24 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import { useHistory, useParams } from "react-router-dom";
 import useRequestTripDetails from "../hooks/useRequestTripDetails";
 import TripDetailsCard from "../TripDetailsCard";
 import CandidateCard from "../CandidateCard";
 import ApprovedCard from "../ApprovedCard";
+// import useForceUpdate from "../hooks/useForceUpdate";
+
+
 
 const TripDetailsPage = () => {
   const { tripId } = useParams();
-  const token = localStorage.getItem('token')
-  const trip = useRequestTripDetails(tripId, token);
+  const token = localStorage.getItem("token");
+  const [trip, forceUpdate] = useRequestTripDetails(tripId, token);
   const history = useHistory();
-
 
   const renderedCandidates =
     trip &&
     trip.candidates.map((item) => (
-      <CandidateCard key={item.id} token={token} tripId={tripId} candidate={item} />
+      <CandidateCard
+        key={item.id}
+        token={token}
+        tripId={tripId}
+        candidate={item}
+        forceUpdate={forceUpdate}
+      />
     ));
 
-    const renderedApproved =
+  const renderedApproved =
     trip &&
     trip.approved.map((item) => (
       <ApprovedCard key={item.id} candidate={item} />

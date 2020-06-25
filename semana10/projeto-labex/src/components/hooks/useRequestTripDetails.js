@@ -3,6 +3,7 @@ import { getTripDetails } from "../functions/axios";
 
 const useRequestTripDetails = (tripId, token) => {
   const [trip, setTrip] = useState();
+  const [aux, setAux] = useState(0);
 
   useEffect(() => {
     async function requestTripDetail() {
@@ -10,8 +11,12 @@ const useRequestTripDetails = (tripId, token) => {
       trip && setTrip(trip);
     }
     requestTripDetail();
-  }, [setTrip, tripId, token]);
+  }, [setTrip, tripId, token, aux]);
 
-  return trip;
+  const forceUpdate = () => {
+    setAux(aux + 1);
+  };
+
+  return [trip, forceUpdate];
 };
 export default useRequestTripDetails;

@@ -25,8 +25,8 @@ const ApplicationForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    await applyToTrip(tripId, form);
-    resetForm();
+    const status = await applyToTrip(tripId, form);
+    // status && resetForm();
   };
 
   return (
@@ -36,13 +36,17 @@ const ApplicationForm = () => {
       />
       <form onSubmit={handleFormSubmit}>
         <input
+          required
           name="name"
+          pattern="[a-zA-Z ]{3,}"
+          title="Name must have at least 3 characters"
           onChange={handleInputChange}
           placeholder="Name"
           value={form.name}
           type="text"
         />
         <input
+          required
           name="age"
           onChange={handleInputChange}
           placeholder="Age"
@@ -51,22 +55,39 @@ const ApplicationForm = () => {
           min="18"
         />
         <input
+          required
           name="profession"
+          pattern="[a-zA-Z ]{10,}"
+          title="Proffesion must have at least 10 characters"
           onChange={handleInputChange}
           placeholder="Profession"
           value={form.profession}
           type="text"
         />
         <input
+          required
           name="applicationText"
+          pattern="[a-zA-Z ]{30,}"
+          title="Text must have at least 30 characters"
           onChange={handleInputChange}
           placeholder="Why me ?"
           value={form.applicationText}
           type="text"
         />
-        <select defaultValue="0">
-          <option key="0" value="0" disabled>Select a contry</option>
-          {getNames().map(item=><option key={item} value={item}>{item}</option>)}
+        <select
+          value={form.country}
+          required
+          name="country"
+          onChange={handleInputChange}
+        >
+          <option key="0" value="" disabled>
+            Select a contry
+          </option>
+          {getNames().map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
         </select>
         <button>Submit</button>
       </form>

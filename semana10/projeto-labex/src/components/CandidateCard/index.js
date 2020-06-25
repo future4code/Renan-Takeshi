@@ -39,16 +39,16 @@ const Reject = styled.button`
 `;
 
 const CandidateCard = (props) => {
-  const { token, tripId, candidate } = props;
+  const { token, tripId, candidate, forceUpdate } = props;
 
   const handleApproveClick = async () => {
     const status = await decideCandidate(tripId, candidate.id, true, token);
-    status && window.location.reload()
+    status && forceUpdate()
   };
 
   const handleRejectClick = async () => {
     const status = await decideCandidate(tripId, candidate.id, false, token);
-    status && window.location.reload()
+    status && forceUpdate()
   };
 
   return candidate ? (

@@ -8,14 +8,14 @@ const LoginPage = () => {
   const [password, handlePasswordChange] = useInput("");
   const history = useHistory();
 
-  const handleClickLogin = async (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault()
     const status = await login(email, password);
     status && history.replace("/trips/list");
   };
 
   return (
-    <form>
+    <form onSubmit={handleLoginSubmit}>
       <h2>Login</h2>
       <input
         value={email}
@@ -29,7 +29,7 @@ const LoginPage = () => {
         placeholder="Password"
         type="password"
       />
-      <button onClick={handleClickLogin}>Login</button>
+      <button>Login</button>
     </form>
   );
 };

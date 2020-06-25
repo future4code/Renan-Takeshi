@@ -29,11 +29,12 @@ export const getTripDetails = async (tripId, token) => {
 export const createTrip = async (tripBody, token) => {
   try {
     const headers = { headers: { auth: token } };
-    const response = await axios.post(baseUrl + "trips", tripBody, headers);
-    return response.data.message;
+    await axios.post(baseUrl + "trips", tripBody, headers);
+    window.alert("Trip created successfully")
+    return true;
   } catch (error) {
-    console.log(error);
-    return error.response.data.message;
+    window.alert(error.response.data.message);
+    return false;
   }
 };
 
@@ -42,11 +43,10 @@ export const applyToTrip = async (tripId, body) => {
   try {
     const response = await axios.post(baseUrl + `trips/${tripId}/apply`, body);
     window.alert(response.data.message);
-    return response.data.message;
+    return true;
   } catch (error) {
-    console.log(error);
     window.alert(error.response.data.message);
-    return error.response.data.message;
+    return false;
   }
 };
 
