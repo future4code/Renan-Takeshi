@@ -8,13 +8,9 @@ const LoginPage = () => {
   const [password, handlePasswordChange] = useInput("");
   const history = useHistory();
 
-  const handleLoginClick = async () => {
-    const message = await login(email, password);
-    if (message === true) {
-      history.push("/trips/list");
-    }else{
-      window.alert(message)
-    }
+  const handleClickLogin = async () => {
+    const status = await login(email, password);
+    status && history.push("/trips/list");
   };
 
   return (
@@ -26,7 +22,7 @@ const LoginPage = () => {
         onChange={handlePasswordChange}
         placeholder="Password"
       />
-      <button onClick={handleLoginClick}>Login</button>
+      <button onClick={handleClickLogin}>Login</button>
     </div>
   );
 };

@@ -42,13 +42,13 @@ const CandidateCard = (props) => {
   const { token, tripId, candidate } = props;
 
   const handleApproveClick = async () => {
-    await decideCandidate(tripId, candidate.id, true, token);
-    window.location.reload()
+    const status = await decideCandidate(tripId, candidate.id, true, token);
+    status && window.location.reload()
   };
 
   const handleRejectClick = async () => {
-    await decideCandidate(tripId, candidate.id, false, token);
-    window.location.reload()
+    const status = await decideCandidate(tripId, candidate.id, false, token);
+    status && window.location.reload()
   };
 
   return candidate ? (

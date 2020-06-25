@@ -6,8 +6,8 @@ const useRequestTripDetails = (tripId, token) => {
 
   useEffect(() => {
     async function requestTripDetail() {
-      const response = await getTripDetails(tripId, token);
-      setTrip(response);
+      const trip = await getTripDetails(tripId, token);
+      trip && setTrip(trip);
     }
     requestTripDetail();
   }, [setTrip, tripId, token]);

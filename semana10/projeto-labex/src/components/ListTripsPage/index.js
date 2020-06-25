@@ -12,7 +12,7 @@ const ListTripsPage = () => {
 
   return (
     <div>
-      <h2>TripsList</h2>
+      <h3>TripsList</h3>
       {isLoggedIn && (
         <button
           onClick={() => {
@@ -22,7 +22,6 @@ const ListTripsPage = () => {
           Create New Trip
         </button>
       )}
-
       {renderedTrips}
     </div>
   );

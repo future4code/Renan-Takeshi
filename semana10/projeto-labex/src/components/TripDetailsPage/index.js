@@ -26,6 +26,7 @@ const TripDetailsPage = () => {
 
   return (
     <div>
+      <h3>Trip Details</h3>
       <TripDetailsCard trip={trip} />
       <h3>Candidates</h3>
       {renderedCandidates}
