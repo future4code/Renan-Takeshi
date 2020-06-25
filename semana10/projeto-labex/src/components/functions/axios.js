@@ -21,7 +21,7 @@ export const getTripDetails = async (tripId, token) => {
     return response.data.trip;
   } catch (error) {
     window.alert(error.response.data.message);
-    return false
+    return false;
   }
 };
 
@@ -41,9 +41,11 @@ export const createTrip = async (tripBody, token) => {
 export const applyToTrip = async (tripId, body) => {
   try {
     const response = await axios.post(baseUrl + `trips/${tripId}/apply`, body);
+    window.alert(response.data.message);
     return response.data.message;
   } catch (error) {
     console.log(error);
+    window.alert(error.response.data.message);
     return error.response.data.message;
   }
 };
@@ -58,8 +60,8 @@ export const login = async (email, pwd) => {
       return true;
     }
   } catch (error) {
-    window.alert(error.response.data.message)
-    return false
+    window.alert(error.response.data.message);
+    return false;
   }
 };
 
@@ -74,9 +76,9 @@ export const decideCandidate = async (tripId, candidateId, choice, token) => {
       headers
     );
     window.alert(response.data.message);
-    return true
+    return true;
   } catch (error) {
     console.log(error);
-    return false
+    return false;
   }
 };

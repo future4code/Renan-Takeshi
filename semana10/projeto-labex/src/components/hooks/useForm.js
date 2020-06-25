@@ -12,7 +12,7 @@ const useForm = (initialValues) => {
     setForm(initialValues);
   };
 
-  return { form, onChange, resetForm };
+  return [form, onChange, resetForm];
 };
 
-export default useForm
+export default useForm;

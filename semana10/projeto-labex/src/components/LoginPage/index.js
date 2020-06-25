@@ -8,7 +8,8 @@ const LoginPage = () => {
   const [password, handlePasswordChange] = useInput("");
   const history = useHistory();
 
-  const handleClickLogin = async () => {
+  const handleClickLogin = async (event) => {
+    event.preventDefault()
     const status = await login(email, password);
     status && history.replace("/trips/list");
   };
