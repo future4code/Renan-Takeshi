@@ -12,11 +12,11 @@ export const getTrips = async () => {
   }
 };
 
-export const getTripDetail = async (tripId, token) => {
+export const getTripDetails = async (tripId, token) => {
   try {
     const headers = { headers: { auth: token } };
     const response = await axios.get(baseUrl + `trip/${tripId}`, headers);
-    return response.data.trip
+    return response.data.trip;
   } catch (err) {
     console.log(err);
   }
@@ -58,13 +58,12 @@ export const login = async (email, pwd) => {
 export const decideCandidate = async (tripId, candidateId, choice, token) => {
   const body = { approve: choice };
   const headers = { headers: { auth: token } };
-  const response = await axios.put(
-    baseUrl + `trips/${tripId}/candidates/${candidateId}/decide`,
-    body,
-    headers
-  );
-  console.log(response.data);
   try {
+    const response = await axios.put(
+      baseUrl + `trips/${tripId}/candidates/${candidateId}/decide`,
+      body,
+      headers
+    );
   } catch (err) {
     console.log(err);
   }

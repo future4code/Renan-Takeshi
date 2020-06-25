@@ -8,8 +8,8 @@ const MainContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 4fr 1fr;
   grid-template-areas:
-    "name name name desc but"
-    "pnet date days desc but";
+    "name   name name description button"
+    "planet date days description button";
 `;
 
 const Name = styled.div`
@@ -17,11 +17,11 @@ const Name = styled.div`
 `;
 
 const Planet = styled.div`
-  grid-area: pnet;
+  grid-area: planet;
 `;
 
 const Description = styled.div`
-  grid-area: desc;
+  grid-area: description;
 `;
 const Date = styled.div`
   grid-area: date;
@@ -31,7 +31,7 @@ const Duration = styled.div`
 `;
 
 const Button = styled.button`
-  grid-area: but;
+  grid-area: button;
 `;
 
 const TripActionCard = (props) => {

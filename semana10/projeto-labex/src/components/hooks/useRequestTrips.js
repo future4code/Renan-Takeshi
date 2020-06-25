@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import * as labex from "../functions/axios";
+import { getTrips } from "../functions/axios";
 
 const useRequestTrips = () => {
   const [trips, setTrips] = useState();
 
   useEffect(() => {
-    async function getTrips() {
-      const response = await labex.getTrips();
+    async function requestTrips() {
+      const response = await getTrips();
       setTrips(response);
     }
-    getTrips();
+    requestTrips();
   }, [setTrips]);
 
   return trips;

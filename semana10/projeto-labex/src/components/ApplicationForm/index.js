@@ -10,7 +10,9 @@ const ApplicationForm = () => {
 
   return (
     <div>
-      <TripDetailsCard trip={trips && trips.find((trip) => trip.id === tripId)} />
+      <TripDetailsCard
+        trip={trips && trips.find((trip) => trip.id === tripId)}
+      />
       <button
         onClick={() => {
           history.push("/trips/list");

@@ -1,14 +1,12 @@
 import React from "react";
-import useProtectedPage from '../hooks/useProtectedPage'
-import styled from 'styled-components'
-import useInput from '../hooks/useInput'
+import useProtectedPage from "../hooks/useProtectedPage";
 
 const CreateTripPage = () => {
-  useProtectedPage()
+  useProtectedPage();
   return (
     <div>
-      <input placeholder='Name'/>
-      <input placeholder='Name'/>
+      <input placeholder="Name" />
+      <input placeholder="Name" />
     </div>
   );
 };

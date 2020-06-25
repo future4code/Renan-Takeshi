@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 
 const MainContainer = styled.div`
   border: 1px solid black;
   margin: 5px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(3, 1fr) 5fr;
   grid-template-areas:
-    "name pnet desc desc desc but"
-    "date days desc desc desc but";
+    "name name name desc"
+    "pnet date days desc";
 `;
 
 const Name = styled.div`
@@ -30,18 +29,9 @@ const Duration = styled.div`
   grid-area: days;
 `;
 
-const TripCard = (props) => {
+const TripDetailsCard = (props) => {
   const { trip } = props;
-  const history = useHistory();
-  const isLoggedIn = localStorage.getItem("token");
 
-  const handleButtonClick = () => {
-    history.push(
-      isLoggedIn
-        ? `/trips/details/${trip.id}`
-        : `/trips/application-form/${trip.id}`
-    );
-  };
   return trip ? (
     <MainContainer>
       <Name>{trip.name}</Name>
@@ -53,4 +43,4 @@ const TripCard = (props) => {
   ) : null;
 };
 
-export default TripCard;
+export default TripDetailsCard;

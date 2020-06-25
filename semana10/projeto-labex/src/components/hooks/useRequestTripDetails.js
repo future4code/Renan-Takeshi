@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import * as labex from "../functions/axios";
+import { getTripDetails } from "../functions/axios";
 
 const useRequestTripDetails = (tripId, token) => {
   const [trip, setTrip] = useState();
 
   useEffect(() => {
-    async function getTripDetail() {
-      const response = await labex.getTripDetail(tripId, token);
+    async function requestTripDetail() {
+      const response = await getTripDetails(tripId, token);
       setTrip(response);
     }
-    getTripDetail();
+    requestTripDetail();
   }, [setTrip, tripId, token]);
 
   return trip;
