@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-import TripCard from "../TripCard";
+import TripDetailsCard from "../TripDetailsCard";
 import useRequestTrips from "../hooks/useRequestTrips";
 
 const ApplicationForm = () => {
@@ -10,7 +10,7 @@ const ApplicationForm = () => {
 
   return (
     <div>
-      <TripCard trip={trips && trips.find((trip) => trip.id === tripId)} />
+      <TripDetailsCard trip={trips && trips.find((trip) => trip.id === tripId)} />
       <button
         onClick={() => {
           history.push("/trips/list");

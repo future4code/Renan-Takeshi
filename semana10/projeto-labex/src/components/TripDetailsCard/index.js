@@ -8,12 +8,16 @@ const MainContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
-    "name name desc desc desc but"
+    "name pnet desc desc desc but"
     "date days desc desc desc but";
 `;
 
 const Name = styled.div`
   grid-area: name;
+`;
+
+const Planet = styled.div`
+  grid-area: pnet;
 `;
 
 const Description = styled.div`
@@ -26,18 +30,14 @@ const Duration = styled.div`
   grid-area: days;
 `;
 
-const Button = styled.button`
-  grid-area: but;
-`;
-
 const TripCard = (props) => {
   const { trip } = props;
   const history = useHistory();
-  const isLogged = localStorage.getItem("token");
+  const isLoggedIn = localStorage.getItem("token");
 
   const handleButtonClick = () => {
     history.push(
-      isLogged
+      isLoggedIn
         ? `/trips/details/${trip.id}`
         : `/trips/application-form/${trip.id}`
     );
@@ -45,12 +45,10 @@ const TripCard = (props) => {
   return trip ? (
     <MainContainer>
       <Name>{trip.name}</Name>
+      <Planet>{trip.planet}</Planet>
       <Description>{trip.description}</Description>
       <Date>{trip.date}</Date>
       <Duration>{`${trip.durationInDays} days`}</Duration>
-      <Button onClick={handleButtonClick}>
-        {isLogged ? "Details" : "Apply"}
-      </Button>
     </MainContainer>
   ) : null;
 };

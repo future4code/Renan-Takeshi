@@ -1,27 +1,42 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-import TripCard from "../TripCard";
+import TripDetailsCard from "../TripDetailsCard";
 import CandidateCard from "../CandidateCard";
+import ApprovedCard from "../ApprovedCard";
 import useRequestTripDetails from "../hooks/useRequestTripDetails";
 
 const TripDetailsPage = () => {
   const { tripId } = useParams();
-  const trip = useRequestTripDetails(tripId);
+  const token = localStorage.getItem('token')
+  const trip = useRequestTripDetails(tripId, token);
   const history = useHistory();
 
+
   const renderedCandidates =
-    trip && trip.candidates.map((item) => <CandidateCard key={item.id} candidate={item} />);
+    trip &&
+    trip.candidates.map((item) => (
+      <CandidateCard key={item.id} token={token} tripId={tripId} candidate={item} />
+    ));
+
+    const renderedApproved =
+    trip &&
+    trip.approved.map((item) => (
+      <ApprovedCard key={item.id} candidate={item} />
+    ));
 
   return (
     <div>
-      <TripCard trip={trip} />
+      <TripDetailsCard trip={trip} />
+      <h3>Candidates</h3>
       {renderedCandidates}
+      <h3>Approved</h3>
+      {renderedApproved}
       <button
         onClick={() => {
           history.push("/trips/list");
         }}
       >
-        Cancelar
+        Back to list
       </button>
     </div>
   );

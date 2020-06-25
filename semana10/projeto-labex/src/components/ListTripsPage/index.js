@@ -1,25 +1,29 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import useRequestTrips from "../hooks/useRequestTrips";
-import TripCard from "../TripCard";
+import TripActionCard from "../TripActionCard";
 const ListTripsPage = () => {
   const history = useHistory();
   const trips = useRequestTrips();
+  const isLoggedIn = Boolean(localStorage.getItem("token"));
 
-  const renderedTrips = trips && trips.map((item) => <TripCard key={item.id} trip={item} />);
+  const renderedTrips =
+    trips && trips.map((item) => <TripActionCard key={item.id} trip={item} isLoggedIn={isLoggedIn}/>);
 
   return (
     <div>
-      <span><h2>TripsList</h2></span>
-      <button
-        onClick={() => {
-          history.push("/trips/create");
-        }}
-      >
-        Create New Trip
-      </button>
-      {renderedTrips}
+      <h2>TripsList</h2>
+      {isLoggedIn && (
+        <button
+          onClick={() => {
+            history.push("/trips/create");
+          }}
+        >
+          Create New Trip
+        </button>
+      )}
 
+      {renderedTrips}
     </div>
   );
 };

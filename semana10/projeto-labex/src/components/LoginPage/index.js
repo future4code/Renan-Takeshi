@@ -20,7 +20,7 @@ const LoginPage = () => {
   return (
     <div>
       <h2>Login</h2>
-      <input value={email} onChange={handleEmailChange} placeholder="Email" />
+      <input value={email} onChange={handleEmailChange} placeholder="Email" type="email" />
       <input
         value={password}
         onChange={handlePasswordChange}

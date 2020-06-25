@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import * as labex from "../functions/axios";
 
-const useRequestTripDetails = (tripId) => {
+const useRequestTripDetails = (tripId, token) => {
   const [trip, setTrip] = useState();
-  const token = localStorage.getItem('token')
 
   useEffect(() => {
     async function getTripDetail() {
