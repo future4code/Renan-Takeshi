@@ -51,9 +51,8 @@ export const applyToTrip = async (tripId, body) => {
 };
 
 // usado em ../LoginPage
-export const login = async (email, pwd) => {
-  const body = { email: email, password: pwd };
-  try {
+export const login = async (body) => {
+   try {
     const response = await axios.post(baseUrl + "login", body);
     if (response.data.token) {
       localStorage.setItem("token", response.data.token);

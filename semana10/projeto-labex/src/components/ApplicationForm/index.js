@@ -29,6 +29,13 @@ const ApplicationForm = () => {
     // status && resetForm();
   };
 
+  const renderedCountryOptions = getNames().map((item) => (
+    <option key={item} value={item}>
+      {item}
+    </option>
+  ));
+
+
   return (
     <div>
       <TripDetailsCard
@@ -81,13 +88,9 @@ const ApplicationForm = () => {
           onChange={handleInputChange}
         >
           <option key="0" value="" disabled>
-            Select a contry
+            Select a country
           </option>
-          {getNames().map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
+          {renderedCountryOptions}
         </select>
         <button>Submit</button>
       </form>
