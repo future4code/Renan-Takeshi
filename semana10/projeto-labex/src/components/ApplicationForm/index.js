@@ -13,13 +13,8 @@ const ApplicationForm = () => {
       <TripDetailsCard
         trip={trips && trips.find((trip) => trip.id === tripId)}
       />
-      <button
-        onClick={() => {
-          history.push("/trips/list");
-        }}
-      >
-        Cancelar
-      </button>
+      <button onClick={() => history.push("/trips/list")}>Back to list</button>
+      <button onClick={() => history.push("/")}>Go to Home</button>
     </div>
   );
 };

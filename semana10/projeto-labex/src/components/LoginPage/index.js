@@ -10,20 +10,26 @@ const LoginPage = () => {
 
   const handleClickLogin = async () => {
     const status = await login(email, password);
-    status && history.push("/trips/list");
+    status && history.replace("/trips/list");
   };
 
   return (
-    <div>
+    <form>
       <h2>Login</h2>
-      <input value={email} onChange={handleEmailChange} placeholder="Email" type="email" />
+      <input
+        value={email}
+        onChange={handleEmailChange}
+        placeholder="Email"
+        type="email"
+      />
       <input
         value={password}
         onChange={handlePasswordChange}
         placeholder="Password"
+        type="password"
       />
       <button onClick={handleClickLogin}>Login</button>
-    </div>
+    </form>
   );
 };
 

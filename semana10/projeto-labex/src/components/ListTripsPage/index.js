@@ -8,7 +8,10 @@ const ListTripsPage = () => {
   const isLoggedIn = Boolean(localStorage.getItem("token"));
 
   const renderedTrips =
-    trips && trips.map((item) => <TripActionCard key={item.id} trip={item} isLoggedIn={isLoggedIn}/>);
+    trips &&
+    trips.map((item) => (
+      <TripActionCard key={item.id} trip={item} isLoggedIn={isLoggedIn} />
+    ));
 
   return (
     <div>
@@ -23,6 +26,7 @@ const ListTripsPage = () => {
         </button>
       )}
       {renderedTrips}
+      <button onClick={() => history.push("/")}>Go to Home</button>{" "}
     </div>
   );
 };

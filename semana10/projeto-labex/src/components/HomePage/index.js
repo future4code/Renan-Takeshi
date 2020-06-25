@@ -4,25 +4,22 @@ import { useHistory } from "react-router-dom";
 const HomePage = () => {
   const history = useHistory();
 
+  const handleClickLogin = () => {
+    const isLoggedIn = Boolean(localStorage.getItem("token"));
+    isLoggedIn ? history.push("/trips/list") : history.push("/login");
+  };
   return (
     <div>
       <h2>Home</h2>
+      <button onClick={handleClickLogin}>Access as Administrator</button>
       <button
         onClick={() => {
-          history.push("/login");
-        }}
-      >
-        Login
-      </button>
-      <button
-        onClick={() => {
-          localStorage.removeItem('token')
+          localStorage.removeItem("token");
           history.push("/trips/list");
         }}
       >
-        TripsList
+        Access as Candidate (Logout)
       </button>
-      <button onClick={()=>{localStorage.removeItem('token')}}>Logout</button>
     </div>
   );
 };
