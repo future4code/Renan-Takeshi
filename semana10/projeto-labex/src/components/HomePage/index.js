@@ -12,20 +12,19 @@ const HomePage = () => {
     const isLoggedIn = Boolean(localStorage.getItem("token"));
     isLoggedIn ? history.push("/trips/list") : history.push("/login");
   };
+
+  const handleClickUser = () => {
+    localStorage.removeItem("token");
+    history.push("/trips/list");
+  };
+
   return (
     <Body>
       <Header />
       <Main>
         <ButtonsContainer>
           <Button onClick={handleClickLogin}>Access as Administrator</Button>
-          <Button
-            onClick={() => {
-              localStorage.removeItem("token");
-              history.push("/trips/list");
-            }}
-          >
-            Access as Candidate
-          </Button>
+          <Button onClick={handleClickUser}>Access as Candidate</Button>
         </ButtonsContainer>
       </Main>
       <Footer />

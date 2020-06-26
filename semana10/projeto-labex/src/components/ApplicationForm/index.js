@@ -103,9 +103,7 @@ const ApplicationForm = () => {
           </FormContainer>
         </form>
         <hr />
-        <Button onClick={() => history.push("/trips/list")}>
-          Back to list
-        </Button>
+        <Button onClick={() => history.push("/trips/list")}>Back to list</Button>
         <Button onClick={() => history.push("/")}>Go to Home</Button>
       </Main>
       <Footer />

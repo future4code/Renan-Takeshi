@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  MainContainer,
+  Card,
   Name,
   ApplicationText,
   Age,
@@ -12,13 +12,13 @@ const ApprovedCard = (props) => {
   const { candidate } = props;
 
   return candidate ? (
-    <MainContainer>
+    <Card>
       <Name>{candidate.name}</Name>
       <ApplicationText>{candidate.applicationText}</ApplicationText>
       <Age>{`${candidate.age} y/o`}</Age>
       <Country>{candidate.country}</Country>
       <Profession>{candidate.profession}</Profession>
-    </MainContainer>
+    </Card>
   ) : null;
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import {
-  MainContainer,
+  Card,
   Name,
   Planet,
   Description,
@@ -22,7 +22,7 @@ const TripActionCard = (props) => {
     );
   };
   return trip ? (
-    <MainContainer>
+    <Card>
       <Name>{trip.name}</Name>
       <Planet>{trip.planet}</Planet>
       <Description>{trip.description}</Description>
@@ -31,7 +31,7 @@ const TripActionCard = (props) => {
       <Button onClick={handleButtonClick}>
         {isLoggedIn ? "Details" : "Apply"}
       </Button>
-    </MainContainer>
+    </Card>
   ) : null;
 };
 

@@ -23,16 +23,12 @@ const ListTripsPage = () => {
       <Header />
       <Main>
         {isLoggedIn && (
-          <Button
-            onClick={() => {
-              history.push("/trips/create");
-            }}
-          >
+          <Button onClick={() => history.push("/trips/create")}>
             Create New Trip
           </Button>
         )}
         {renderedTrips}
-        <Button onClick={() => history.push("/")}>Go to Home</Button>{" "}
+        <Button onClick={() => history.push("/")}>Go to Home</Button>
       </Main>
       <Footer />
     </Body>

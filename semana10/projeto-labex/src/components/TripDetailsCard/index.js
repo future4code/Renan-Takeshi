@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  MainContainer,
+  Card,
   Name,
   Planet,
   Description,
@@ -12,13 +12,13 @@ const TripDetailsCard = (props) => {
   const { trip } = props;
 
   return trip ? (
-    <MainContainer>
+    <Card>
       <Name>{trip.name}</Name>
       <Planet>{trip.planet}</Planet>
       <Description>{trip.description}</Description>
       <Date>{trip.date}</Date>
       <Duration>{`${trip.durationInDays} days`}</Duration>
-    </MainContainer>
+    </Card>
   ) : null;
 };
 

@@ -8,7 +8,7 @@ import { Body, Main } from "../styles";
 import { FormContainer, Input, Button } from "./styles";
 
 const LoginPage = () => {
-  const [form, onChangeForm] = useForm({ email: "", password: "" });
+  const [form, onChangeForm] = useForm({ email: "renan@renan", password: "renan" });
   const history = useHistory();
 
   const handleInputChange = (event) => {

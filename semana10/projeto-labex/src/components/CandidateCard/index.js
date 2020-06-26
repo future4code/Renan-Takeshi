@@ -1,7 +1,7 @@
 import React from "react";
 import { decideCandidate } from "../functions/axios";
 import {
-  MainContainer,
+  Card,
   Name,
   ApplicationText,
   Age,
@@ -25,7 +25,7 @@ const CandidateCard = (props) => {
   };
 
   return candidate ? (
-    <MainContainer>
+    <Card>
       <Name>{candidate.name}</Name>
       <ApplicationText>{candidate.applicationText}</ApplicationText>
       <Age>{`${candidate.age} y/o`}</Age>
@@ -33,7 +33,7 @@ const CandidateCard = (props) => {
       <Profession>{candidate.profession}</Profession>
       <Reject onClick={handleRejectClick}>Reject</Reject>
       <Approve onClick={handleApproveClick}>Approve</Approve>
-    </MainContainer>
+    </Card>
   ) : null;
 };
 
