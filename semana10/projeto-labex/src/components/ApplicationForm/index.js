@@ -26,7 +26,7 @@ const ApplicationForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const status = await applyToTrip(tripId, form);
-    // status && resetForm();
+    status && resetForm();
   };
 
   const renderedCountryOptions = getNames().map((item) => (

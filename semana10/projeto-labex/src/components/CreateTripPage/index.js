@@ -3,6 +3,7 @@ import useProtectedPage from "../hooks/useProtectedPage";
 import { useHistory } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import { createTrip } from "../functions/axios";
+import { destinations } from "./destinations";
 
 const CreateTripPage = () => {
   useProtectedPage();
@@ -24,20 +25,29 @@ const CreateTripPage = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const status = await createTrip(form, token);
-    // status && resetForm();
+    status && resetForm();
   };
+
+  const renderedDestinations = destinations.map((item) => (
+    <option key={item} value={item}>
+      {item}
+    </option>
+  ));
 
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-        <input
+        <select
+          value={form.planet}
           required
           name="planet"
-          title="Choose a planet from the list"
-          value={form.planet}
           onChange={handleInputChange}
-          placeholder="Planet"
-        />
+        >
+          <option key="0" value="" disabled>
+            Select a destination
+          </option>
+          {renderedDestinations}
+        </select>
         <input
           required
           name="name"

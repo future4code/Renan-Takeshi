@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import useRequestTrips from "../hooks/useRequestTrips";
 import TripActionCard from "../TripActionCard";
+
 const ListTripsPage = () => {
   const history = useHistory();
   const trips = useRequestTrips();
