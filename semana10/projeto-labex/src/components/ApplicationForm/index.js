@@ -1,12 +1,12 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-import TripDetailsCard from "../TripDetailsCard";
 import useRequestTrips from "../hooks/useRequestTrips";
 import useForm from "../hooks/useForm";
-import { applyToTrip } from "../functions/axios";
-import { getNames } from "country-list";
 import Header from "../Header";
 import Footer from "../Footer";
+import TripDetailsCard from "../TripDetailsCard";
+import { applyToTrip } from "../functions/axios";
+import { getNames } from "country-list";
 import { Body, Main } from "../styles";
 import { FormContainer, Input, Button, Select, Submit } from "./styles";
 

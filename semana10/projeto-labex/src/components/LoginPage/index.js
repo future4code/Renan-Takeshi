@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { login } from "../functions/axios";
 import useForm from "../hooks/useForm";
+import { login } from "../functions/axios";
 import Header from "../Header";
 import Footer from "../Footer";
 import { Body, Main } from "../styles";
@@ -11,15 +11,15 @@ const LoginPage = () => {
   const [form, onChangeForm] = useForm({ email: "", password: "" });
   const history = useHistory();
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    onChangeForm(name, value);
+  };
+
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     const status = await login(form);
     status && history.replace("/trips/list");
-  };
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    onChangeForm(name, value);
   };
 
   return (

@@ -5,7 +5,7 @@ import TripActionCard from "../TripActionCard";
 import Header from "../Header";
 import Footer from "../Footer";
 import { Body, Main } from "../styles";
-import {Button} from './styles'
+import { Button } from "./styles";
 
 const ListTripsPage = () => {
   const history = useHistory();

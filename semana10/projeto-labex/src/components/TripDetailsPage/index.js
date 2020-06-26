@@ -38,13 +38,13 @@ const TripDetailsPage = () => {
       <Header />
       <Main>
         <TripDetailsCard trip={trip} />
-        <hr/>
+        <hr />
         <H>Candidates</H>
         {renderedCandidates}
-        <hr/>
+        <hr />
         <H>Approved</H>
         {renderedApproved}
-        <hr/>
+        <hr />
         <Button onClick={() => history.push("/trips/list")}>
           Back to list
         </Button>

@@ -3,9 +3,9 @@ import useProtectedPage from "../hooks/useProtectedPage";
 import { useHistory } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import { createTrip } from "../functions/axios";
-import { destinations } from "./destinations";
 import Header from "../Header";
 import Footer from "../Footer";
+import { destinations } from "./destinations";
 import { Body, Main } from "../styles";
 import { FormContainer, Input, Button, Select, Create } from "./styles";
 

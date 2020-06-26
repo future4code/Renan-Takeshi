@@ -1,14 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import footerText from "./footerText.png";
-
-const FooterContainer = styled.header`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 20px;
-  grid-area: footer;
-`;
+import { FooterContainer } from "./styles";
 
 const Footer = () => {
   return (
