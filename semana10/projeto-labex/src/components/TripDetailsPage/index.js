@@ -4,6 +4,10 @@ import useRequestTripDetails from "../hooks/useRequestTripDetails";
 import TripDetailsCard from "../TripDetailsCard";
 import CandidateCard from "../CandidateCard";
 import ApprovedCard from "../ApprovedCard";
+import Header from "../Header";
+import Footer from "../Footer";
+import { Body, Main } from "../styles";
+import { Button, H } from "./styles";
 
 const TripDetailsPage = () => {
   const { tripId } = useParams();
@@ -30,16 +34,24 @@ const TripDetailsPage = () => {
     ));
 
   return (
-    <div>
-      <h3>Trip Details</h3>
-      <TripDetailsCard trip={trip} />
-      <h3>Candidates</h3>
-      {renderedCandidates}
-      <h3>Approved</h3>
-      {renderedApproved}
-      <button onClick={() => history.push("/trips/list")}>Back to list</button>
-      <button onClick={() => history.push("/")}>Go to Home</button>
-    </div>
+    <Body>
+      <Header />
+      <Main>
+        <TripDetailsCard trip={trip} />
+        <hr/>
+        <H>Candidates</H>
+        {renderedCandidates}
+        <hr/>
+        <H>Approved</H>
+        {renderedApproved}
+        <hr/>
+        <Button onClick={() => history.push("/trips/list")}>
+          Back to list
+        </Button>
+        <Button onClick={() => history.push("/")}>Go to Home</Button>
+      </Main>
+      <Footer />
+    </Body>
   );
 };
 

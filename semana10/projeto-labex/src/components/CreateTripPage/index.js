@@ -4,6 +4,10 @@ import { useHistory } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import { createTrip } from "../functions/axios";
 import { destinations } from "./destinations";
+import Header from "../Header";
+import Footer from "../Footer";
+import { Body, Main } from "../styles";
+import { FormContainer, Input, Button, Select, Create } from "./styles";
 
 const CreateTripPage = () => {
   useProtectedPage();
@@ -35,62 +39,72 @@ const CreateTripPage = () => {
   ));
 
   return (
-    <div>
-      <form onSubmit={handleFormSubmit}>
-        <select
-          value={form.planet}
-          required
-          name="planet"
-          onChange={handleInputChange}
-        >
-          <option key="0" value="" disabled>
-            Select a destination
-          </option>
-          {renderedDestinations}
-        </select>
-        <input
-          required
-          name="name"
-          title="Name must have at least 5 characters"
-          value={form.name}
-          onChange={handleInputChange}
-          placeholder="Name"
-          pattern="[a-zA-Z ]{5,}"
-        />
-        <input
-          required
-          name="date"
-          title=""
-          value={form.date}
-          onChange={handleInputChange}
-          placeholder="Date"
-          type="date"
-          min={new Date().toJSON().split("T")[0]}
-        />
-        <input
-          required
-          name="durationInDays"
-          title="Duration must be at least 50 days"
-          value={form.durationInDays}
-          onChange={handleInputChange}
-          placeholder="Duration"
-          type="number"
-          min="50"
-        />
-        <input
-          required
-          name="description"
-          title="Description must have at least 30 characters"
-          value={form.description}
-          onChange={handleInputChange}
-          placeholder="Description"
-          pattern="[a-zA-Z ]{30,}"
-        />
-        <button>Create</button>
-      </form>
-      <button onClick={() => history.push("/trips/list")}>Back to list</button>
-      <button onClick={() => history.push("/")}>Go to Home</button>
-    </div>
+    <Body>
+      <Header />
+      <Main>
+        <hr/>
+        <form onSubmit={handleFormSubmit}>
+          <FormContainer>
+            <Select
+              value={form.planet}
+              required
+              name="planet"
+              onChange={handleInputChange}
+            >
+              <option key="0" value="" disabled>
+                Select a destination
+              </option>
+              {renderedDestinations}
+            </Select>
+            <Input
+              required
+              name="name"
+              title="Name must have at least 5 characters"
+              value={form.name}
+              onChange={handleInputChange}
+              placeholder="Name"
+              pattern="[a-zA-Z ]{5,}"
+            />
+            <Input
+              required
+              name="date"
+              title=""
+              value={form.date}
+              onChange={handleInputChange}
+              placeholder="Date"
+              type="date"
+              min={new Date().toJSON().split("T")[0]}
+            />
+            <Input
+              required
+              name="durationInDays"
+              title="Duration must be at least 50 days"
+              value={form.durationInDays}
+              onChange={handleInputChange}
+              placeholder="Duration"
+              type="number"
+              min="50"
+            />
+            <Input
+              required
+              name="description"
+              title="Description must have at least 30 characters"
+              value={form.description}
+              onChange={handleInputChange}
+              placeholder="Description"
+              pattern="[a-zA-Z ]{30,}"
+            />
+            <Create>Create</Create>
+          </FormContainer>
+        </form>
+        <hr/>
+        <Button onClick={() => history.push("/trips/list")}>
+          Back to list
+        </Button>
+        <Button onClick={() => history.push("/")}>Go to Home</Button>
+      </Main>
+      <Footer />
+    </Body>
   );
 };
 

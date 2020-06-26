@@ -6,6 +6,8 @@ import ListTripsPage from "../ListTripsPage";
 import LoginPage from "../LoginPage";
 import TripDetailsPage from "../TripDetailsPage";
 import ApplicationForm from "../ApplicationForm";
+import FourOFour from "../404";
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -29,7 +31,7 @@ const Router = () => {
           <CreateTripPage />
         </Route>
         <Route path="/">
-          <div>404</div>
+          <FourOFour />
         </Route>
       </Switch>
     </BrowserRouter>
