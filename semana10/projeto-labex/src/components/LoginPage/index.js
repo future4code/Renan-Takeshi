@@ -4,7 +4,7 @@ import useForm from "../hooks/useForm";
 import { login } from "../functions/axios";
 import Header from "../Header";
 import Footer from "../Footer";
-import { Body, Main } from "../styles";
+import { Body, Main } from "../styles/common";
 import { FormContainer, Input, Button } from "./styles";
 
 const LoginPage = () => {

@@ -4,13 +4,13 @@ import useRequestTrips from "../hooks/useRequestTrips";
 import TripActionCard from "../TripActionCard";
 import Header from "../Header";
 import Footer from "../Footer";
-import { Body, Main } from "../styles";
-import { Button } from "./styles";
+import { Body, Main, Button } from "../styles/common";
+import checkLoginStatus from '../functions/checkLoginStatus'
 
 const ListTripsPage = () => {
   const history = useHistory();
   const trips = useRequestTrips();
-  const isLoggedIn = Boolean(localStorage.getItem("token"));
+  const isLoggedIn = checkLoginStatus();
 
   const renderedTrips =
     trips &&

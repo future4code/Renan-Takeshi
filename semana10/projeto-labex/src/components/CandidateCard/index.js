@@ -12,16 +12,16 @@ import {
 } from "./styles";
 
 const CandidateCard = (props) => {
-  const { token, tripId, candidate, forceUpdate } = props;
+  const { tripId, candidate, requestDetails } = props;
 
   const handleApproveClick = async () => {
-    const status = await decideCandidate(tripId, candidate.id, true, token);
-    status && forceUpdate();
+    const status = await decideCandidate(tripId, candidate.id, true);
+    status && requestDetails();
   };
 
   const handleRejectClick = async () => {
-    const status = await decideCandidate(tripId, candidate.id, false, token);
-    status && forceUpdate();
+    const status = await decideCandidate(tripId, candidate.id, false);
+    status && requestDetails();
   };
 
   return candidate ? (

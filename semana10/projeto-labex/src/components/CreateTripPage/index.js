@@ -6,8 +6,8 @@ import { createTrip } from "../functions/axios";
 import Header from "../Header";
 import Footer from "../Footer";
 import { destinations } from "./destinations";
-import { Body, Main } from "../styles";
-import { FormContainer, Input, Button, Select, Create } from "./styles";
+import { FormContainer, Select, Create, Input } from "./styles";
+import { Body, Main, Button } from "../styles/common";
 
 const CreateTripPage = () => {
   useProtectedPage();
@@ -19,7 +19,6 @@ const CreateTripPage = () => {
     date: "",
     durationInDays: "",
   });
-  const token = localStorage.getItem("token");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -28,7 +27,7 @@ const CreateTripPage = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const status = await createTrip(form, token);
+    const status = await createTrip(form);
     status && resetForm();
   };
 
@@ -42,7 +41,7 @@ const CreateTripPage = () => {
     <Body>
       <Header />
       <Main>
-        <hr/>
+        <hr />
         <form onSubmit={handleFormSubmit}>
           <FormContainer>
             <Select
@@ -97,7 +96,7 @@ const CreateTripPage = () => {
             <Create>Create</Create>
           </FormContainer>
         </form>
-        <hr/>
+        <hr />
         <Button onClick={() => history.push("/trips/list")}>
           Back to list
         </Button>

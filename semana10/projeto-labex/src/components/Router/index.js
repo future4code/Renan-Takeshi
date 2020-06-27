@@ -6,7 +6,7 @@ import ListTripsPage from "../ListTripsPage";
 import LoginPage from "../LoginPage";
 import TripDetailsPage from "../TripDetailsPage";
 import ApplicationForm from "../ApplicationForm";
-import FourOFour from "../404";
+import FourOFour from "../FourOFour";
 import DocumentTitle from "react-document-title";
 
 const Router = () => {

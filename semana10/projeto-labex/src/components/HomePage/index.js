@@ -2,15 +2,14 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
-import { Body, Main } from "../styles";
-import { ButtonsContainer, Button } from "./styles";
+import { Body, Main, Button } from "../styles/common";
+import { ButtonsContainer } from "./styles";
 
 const HomePage = () => {
   const history = useHistory();
 
   const handleClickLogin = () => {
-    const isLoggedIn = Boolean(localStorage.getItem("token"));
-    isLoggedIn ? history.push("/trips/list") : history.push("/login");
+    history.push("/login");
   };
 
   const handleClickUser = () => {

@@ -6,13 +6,12 @@ import CandidateCard from "../CandidateCard";
 import ApprovedCard from "../ApprovedCard";
 import Header from "../Header";
 import Footer from "../Footer";
-import { Body, Main } from "../styles";
-import { Button, H } from "./styles";
+import { Body, Main, Button } from "../styles/common";
+import { H } from "./styles";
 
 const TripDetailsPage = () => {
   const { tripId } = useParams();
-  const token = localStorage.getItem("token");
-  const [trip, forceUpdate] = useRequestTripDetails(tripId, token);
+  const [trip, requestDetails] = useRequestTripDetails(tripId);
   const history = useHistory();
 
   const renderedCandidates =
@@ -20,10 +19,9 @@ const TripDetailsPage = () => {
     trip.candidates.map((item) => (
       <CandidateCard
         key={item.id}
-        token={token}
         tripId={tripId}
         candidate={item}
-        forceUpdate={forceUpdate}
+        requestDetails={requestDetails}
       />
     ));
 

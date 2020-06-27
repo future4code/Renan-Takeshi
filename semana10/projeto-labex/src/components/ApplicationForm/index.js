@@ -7,8 +7,8 @@ import Footer from "../Footer";
 import TripDetailsCard from "../TripDetailsCard";
 import { applyToTrip } from "../functions/axios";
 import { getNames } from "country-list";
-import { Body, Main } from "../styles";
-import { FormContainer, Input, Button, Select, Submit } from "./styles";
+import { FormContainer, Select, Submit } from "./styles";
+import { Body, Main, Button, Input } from "../styles/common";
 
 const ApplicationForm = () => {
   const { tripId } = useParams();
@@ -103,7 +103,9 @@ const ApplicationForm = () => {
           </FormContainer>
         </form>
         <hr />
-        <Button onClick={() => history.push("/trips/list")}>Back to list</Button>
+        <Button onClick={() => history.push("/trips/list")}>
+          Back to list
+        </Button>
         <Button onClick={() => history.push("/")}>Go to Home</Button>
       </Main>
       <Footer />

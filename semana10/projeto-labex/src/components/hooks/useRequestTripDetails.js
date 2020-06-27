@@ -1,22 +1,17 @@
 import { useState, useEffect } from "react";
 import { getTripDetails } from "../functions/axios";
 
-const useRequestTripDetails = (tripId, token) => {
+const useRequestTripDetails = (tripId) => {
   const [trip, setTrip] = useState();
-  const [aux, setAux] = useState(0);
 
+  async function requestTripDetails() {
+    const trip = await getTripDetails(tripId);
+    setTrip(trip);
+  }
   useEffect(() => {
-    async function requestTripDetail() {
-      const trip = await getTripDetails(tripId, token);
-      trip && setTrip(trip);
-    }
-    requestTripDetail();
-  }, [setTrip, tripId, token, aux]);
+    requestTripDetails();
+  }, []);
 
-  const forceUpdate = () => {
-    setAux(aux + 1);
-  };
-
-  return [trip, forceUpdate];
+  return [trip, requestTripDetails];
 };
 export default useRequestTripDetails;
