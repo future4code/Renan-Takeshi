@@ -6,7 +6,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 import TripDetailsCard from "../TripDetailsCard";
 import { applyToTrip } from "../functions/axios";
-import { getNames } from "country-list";
+import { getNames as getCountryNames } from "country-list";
 import { FormContainer, Select, Submit } from "./styles";
 import { Body, Main, Button, Input } from "../styles/common";
 
@@ -33,7 +33,7 @@ const ApplicationForm = () => {
     status && resetForm();
   };
 
-  const renderedCountryOptions = getNames().map((item) => (
+  const renderedCountryOptions = getCountryNames().map((item) => (
     <option key={item} value={item}>
       {item}
     </option>
