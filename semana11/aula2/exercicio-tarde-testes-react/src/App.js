@@ -61,7 +61,7 @@ const App = () => {
 
   const renderedPosts = (
     <div>
-      <p>Quantida de posts: {postsList.length}</p>
+      <p>Quantidade de posts: {postsList.length}</p>
       {postsList.map((post) => {
         return (
           <Post
@@ -83,6 +83,7 @@ const App = () => {
           onChange={onChangeInput}
           value={inputValue}
           placeholder={"Novo post"}
+          data-testid={"input"}
         />
         <button>Adicionar</button>
       </form>
