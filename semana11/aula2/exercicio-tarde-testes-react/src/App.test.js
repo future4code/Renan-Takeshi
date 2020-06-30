@@ -68,6 +68,19 @@ test("Quando a lista estiver vazia, deve mostrar 'Nenhum post'", async () => {
   });
 });
 
+test("Quando houverem posts, nao deve mostrar 'Nenhum post'", async () => {
+  const { getByText, getByPlaceholderText, queryByText } = render(<App />);
+  const input = getByPlaceholderText(/Novo post/i);
+  const addButton = getByText(/adicionar/i);
+
+  fireEvent.change(input, { target: { value: "Some" } });
+  fireEvent.click(addButton);
+
+  await wait(() => {
+    expect(queryByText(/Nenhum post/i)).not.toBeInTheDocument();
+  });
+});
+
 test("Quando houverem posts, deve mostrar a quantidade de posts", async () => {
   const { getByText, getByPlaceholderText, queryByText } = render(<App />);
   const input = getByPlaceholderText(/Novo post/i);
