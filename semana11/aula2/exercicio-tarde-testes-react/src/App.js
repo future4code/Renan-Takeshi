@@ -5,40 +5,50 @@ import { Post } from "./components/Post";
 const App = () => {
   const [postsList, setPostsList] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
-  const onChangeInput = event => {
+  const onChangeInput = (event) => {
     setInputValue(event.target.value);
+    if(event.target.value !== ""){
+      setShowAlert(false)
+    }
   };
 
-  const addPost = () => {
+  const addPost = (event) => {
+    event.preventDefault();
+    const isValid = inputValue.replace(/\s/g, "").length ? true : false;
+    setShowAlert(!isValid);
     // Adiciona um post à lista
-    const newPost = {
-      id: Date.now(),
-      text: inputValue,
-      liked: false
-    };
+    if (isValid) {
+      const newPost = {
+        id: Date.now(),
+        text: inputValue,
+        liked: false,
+      };
 
-    const newPostsList = [newPost, ...postsList];
+      const newPostsList = [newPost, ...postsList];
 
-    setPostsList(newPostsList);
+      setPostsList(newPostsList);
+      setInputValue("");
+    }
   };
 
-  const deletePost = postId => {
+  const deletePost = (postId) => {
     // Apaga um post da lista
-    const newPostsList = postsList.filter(post => {
+    const newPostsList = postsList.filter((post) => {
       return postId !== post.id;
     });
 
     setPostsList(newPostsList);
   };
 
-  const toggleLike = postId => {
+  const toggleLike = (postId) => {
     // Altera o status de curtida de um post da lista
-    const newPostsList = postsList.map(post => {
+    const newPostsList = postsList.map((post) => {
       if (postId === post.id) {
         const novoPost = {
           ...post,
-          liked: !post.liked
+          liked: !post.liked,
         };
         return novoPost;
       } else {
@@ -49,19 +59,10 @@ const App = () => {
     setPostsList(newPostsList);
   };
 
-  return (
-    <div className="App">
-      <div>
-        <input
-          type="text"
-          onChange={onChangeInput}
-          value={inputValue}
-          placeholder={"Novo post"}
-        />
-        <button onClick={addPost}>Adicionar</button>
-      </div>
-      <br />
-      {postsList.map(post => {
+  const renderedPosts = (
+    <div>
+      <p>Quantida de posts: {postsList.length}</p>
+      {postsList.map((post) => {
         return (
           <Post
             key={post.id}
@@ -71,6 +72,23 @@ const App = () => {
           />
         );
       })}
+    </div>
+  );
+
+  return (
+    <div className="App">
+      <form onSubmit={addPost}>
+        <input
+          type="text"
+          onChange={onChangeInput}
+          value={inputValue}
+          placeholder={"Novo post"}
+        />
+        <button>Adicionar</button>
+      </form>
+      <br />
+      {showAlert && <p style={{color:"red"}}>Show some creativity</p>}
+      {postsList.length ? renderedPosts : <p>Nenhum post</p>}
     </div>
   );
 };
