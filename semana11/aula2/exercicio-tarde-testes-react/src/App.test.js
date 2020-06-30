@@ -3,7 +3,7 @@ import { render, fireEvent, wait } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import App from "./App";
 
-test("Novo post eh criado apos preencher o input e clicar em Adicionar", async () => {
+test("Quando preenchar o input e clicar em Adicionar, deve aparecer o conteudo na tela", async () => {
   const { getByText, getByPlaceholderText, queryByText } = render(<App />);
   const input = getByPlaceholderText(/Novo post/i);
   const addButton = getByText(/adicionar/i);
@@ -16,7 +16,7 @@ test("Novo post eh criado apos preencher o input e clicar em Adicionar", async (
   });
 });
 
-test("Quando clicar em curtir o texto deve mudar para 'Descurtir'", async () => {
+test("Quando clicar em Curtir, o texto deve mudar para 'Descurtir'", async () => {
   const { getByText, getByPlaceholderText } = render(<App />);
   const input = getByPlaceholderText(/Novo post/i);
   const addButton = getByText(/adicionar/i);
@@ -46,7 +46,7 @@ test("Quando clicar em Apagar, o post deve sumir da tela", async () => {
   });
 });
 
-test("Quando enviar um post, apagar o input", async () => {
+test("Quando enviar um post, deve apagar o input", async () => {
   const { getByText, getByPlaceholderText } = render(<App />);
   const input = getByPlaceholderText(/Novo post/i);
   const addButton = getByText(/adicionar/i);
@@ -60,7 +60,7 @@ test("Quando enviar um post, apagar o input", async () => {
   });
 });
 
-test("Mostrar 'Nenhum post' quando a lista estiver vazia", async () => {
+test("Quando a lista estiver vazia, deve mostrar 'Nenhum post'", async () => {
   const { queryByText } = render(<App />);
 
   await wait(() => {
@@ -68,7 +68,7 @@ test("Mostrar 'Nenhum post' quando a lista estiver vazia", async () => {
   });
 });
 
-test("Mostrar a quantidade de posts", async () => {
+test("Quando houverem posts, deve mostrar a quantidade de posts", async () => {
   const { getByText, getByPlaceholderText, queryByText } = render(<App />);
   const input = getByPlaceholderText(/Novo post/i);
   const addButton = getByText(/adicionar/i);
@@ -81,7 +81,7 @@ test("Mostrar a quantidade de posts", async () => {
   });
 });
 
-test("Mostrar mensagem ao tentar criar post vazio", async () => {
+test("Quando tentar criar um post vazio, deve mostrar uma mensagem de erro", async () => {
   const { getByText, getByPlaceholderText, queryByText } = render(<App />);
   const input = getByPlaceholderText(/Novo post/i);
   const addButton = getByText(/adicionar/i);
