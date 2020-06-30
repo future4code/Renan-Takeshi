@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import App from "./App";
 
 test("Quando preenchar o input e clicar em Adicionar, deve aparecer o conteudo na tela", async () => {
-  const { getByText, getByPlaceholderText, queryByText } = render(<App />);
+  const { getByText, getByPlaceholderText } = render(<App />);
   const input = getByPlaceholderText(/Novo post/i);
   const addButton = getByText(/adicionar/i);
 
@@ -12,7 +12,7 @@ test("Quando preenchar o input e clicar em Adicionar, deve aparecer o conteudo n
   fireEvent.click(addButton);
 
   await wait(() => {
-    expect(queryByText("Oie")).toBeInTheDocument();
+    expect(getByText("Oie")).toBeInTheDocument();
   });
 });
 
@@ -42,7 +42,7 @@ test("Quando clicar em Apagar, o post deve sumir da tela", async () => {
   fireEvent.click(getByText(/apagar/i));
 
   await wait(() => {
-    expect(queryByText("Apagou")).not.toBeInTheDocument();
+    expect(queryByText("Apagou")).toBeNull();
   });
 });
 
@@ -61,10 +61,10 @@ test("Quando enviar um post, deve apagar o input", async () => {
 });
 
 test("Quando a lista estiver vazia, deve mostrar 'Nenhum post'", async () => {
-  const { queryByText } = render(<App />);
+  const { getByText } = render(<App />);
 
   await wait(() => {
-    expect(queryByText(/Nenhum post/i)).toBeInTheDocument();
+    expect(getByText(/Nenhum post/i)).toBeInTheDocument();
   });
 });
 
@@ -77,12 +77,12 @@ test("Quando houverem posts, nao deve mostrar 'Nenhum post'", async () => {
   fireEvent.click(addButton);
 
   await wait(() => {
-    expect(queryByText(/Nenhum post/i)).not.toBeInTheDocument();
+    expect(queryByText(/Nenhum post/i)).toBeNull();
   });
 });
 
 test("Quando houverem posts, deve mostrar a quantidade de posts", async () => {
-  const { getByText, getByPlaceholderText, queryByText } = render(<App />);
+  const { getByText, getByPlaceholderText } = render(<App />);
   const input = getByPlaceholderText(/Novo post/i);
   const addButton = getByText(/adicionar/i);
 
@@ -90,12 +90,12 @@ test("Quando houverem posts, deve mostrar a quantidade de posts", async () => {
   fireEvent.click(addButton);
 
   await wait(() => {
-    expect(queryByText(/Quantidade de posts: 1/i)).toBeInTheDocument();
+    expect(getByText(/Quantidade de posts: 1/i)).toBeInTheDocument();
   });
 });
 
 test("Quando tentar criar um post vazio, deve mostrar uma mensagem de erro", async () => {
-  const { getByText, getByPlaceholderText, queryByText } = render(<App />);
+  const { getByText, getByPlaceholderText } = render(<App />);
   const input = getByPlaceholderText(/Novo post/i);
   const addButton = getByText(/adicionar/i);
 
@@ -103,6 +103,6 @@ test("Quando tentar criar um post vazio, deve mostrar uma mensagem de erro", asy
   fireEvent.click(addButton);
 
   await wait(() => {
-    expect(queryByText(/Show some creativity/i)).toBeInTheDocument();
+    expect(getByText(/Show some creativity/i)).toBeInTheDocument();
   });
 });
