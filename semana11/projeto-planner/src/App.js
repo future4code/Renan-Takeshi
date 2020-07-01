@@ -54,105 +54,103 @@ function App() {
     sunday = [],
     renderedSun;
 
-  if (tasks) {
-    tasks.forEach((task) => {
-      switch (task.day) {
-        case "mon":
-          monday.push(task);
-          break;
-        case "tue":
-          tuesday.push(task);
-          break;
-        case "wed":
-          wednesday.push(task);
-          break;
-        case "thu":
-          thursday.push(task);
-          break;
-        case "fri":
-          friday.push(task);
-          break;
-        case "sat":
-          saturday.push(task);
-          break;
-        case "sun":
-          sunday.push(task);
-          break;
-        default:
-          break;
-      }
-    });
-    renderedMon = monday.map((item) => (
-      <li
-        onClick={() => {
-          handleTaskClick(item.id);
-        }}
-        key={item.id}
-      >
-        {item.text}
-      </li>
-    ));
-    renderedTue = tuesday.map((item) => (
-      <li
-        onClick={() => {
-          handleTaskClick(item.id);
-        }}
-        key={item.id}
-      >
-        {item.text}
-      </li>
-    ));
-    renderedWed = wednesday.map((item) => (
-      <li
-        onClick={() => {
-          handleTaskClick(item.id);
-        }}
-        key={item.id}
-      >
-        {item.text}
-      </li>
-    ));
-    renderedThu = thursday.map((item) => (
-      <li
-        onClick={() => {
-          handleTaskClick(item.id);
-        }}
-        key={item.id}
-      >
-        {item.text}
-      </li>
-    ));
-    renderedFri = friday.map((item) => (
-      <li
-        onClick={() => {
-          handleTaskClick(item.id);
-        }}
-        key={item.id}
-      >
-        {item.text}
-      </li>
-    ));
-    renderedSat = saturday.map((item) => (
-      <li
-        onClick={() => {
-          handleTaskClick(item.id);
-        }}
-        key={item.id}
-      >
-        {item.text}
-      </li>
-    ));
-    renderedSun = sunday.map((item) => (
-      <li
-        onClick={() => {
-          handleTaskClick(item.id);
-        }}
-        key={item.id}
-      >
-        {item.text}
-      </li>
-    ));
-  }
+  tasks.forEach((task) => {
+    switch (task.day) {
+      case "mon":
+        monday.push(task);
+        break;
+      case "tue":
+        tuesday.push(task);
+        break;
+      case "wed":
+        wednesday.push(task);
+        break;
+      case "thu":
+        thursday.push(task);
+        break;
+      case "fri":
+        friday.push(task);
+        break;
+      case "sat":
+        saturday.push(task);
+        break;
+      case "sun":
+        sunday.push(task);
+        break;
+      default:
+        break;
+    }
+  });
+  renderedMon = monday.map((item) => (
+    <li
+      onClick={() => {
+        handleTaskClick(item.id);
+      }}
+      key={item.id}
+    >
+      {item.text}
+    </li>
+  ));
+  renderedTue = tuesday.map((item) => (
+    <li
+      onClick={() => {
+        handleTaskClick(item.id);
+      }}
+      key={item.id}
+    >
+      {item.text}
+    </li>
+  ));
+  renderedWed = wednesday.map((item) => (
+    <li
+      onClick={() => {
+        handleTaskClick(item.id);
+      }}
+      key={item.id}
+    >
+      {item.text}
+    </li>
+  ));
+  renderedThu = thursday.map((item) => (
+    <li
+      onClick={() => {
+        handleTaskClick(item.id);
+      }}
+      key={item.id}
+    >
+      {item.text}
+    </li>
+  ));
+  renderedFri = friday.map((item) => (
+    <li
+      onClick={() => {
+        handleTaskClick(item.id);
+      }}
+      key={item.id}
+    >
+      {item.text}
+    </li>
+  ));
+  renderedSat = saturday.map((item) => (
+    <li
+      onClick={() => {
+        handleTaskClick(item.id);
+      }}
+      key={item.id}
+    >
+      {item.text}
+    </li>
+  ));
+  renderedSun = sunday.map((item) => (
+    <li
+      onClick={() => {
+        handleTaskClick(item.id);
+      }}
+      key={item.id}
+    >
+      {item.text}
+    </li>
+  ));
 
   return (
     <Main>
@@ -163,7 +161,7 @@ function App() {
             name="text"
             value={form.text}
             onChange={handleInputChange}
-            placeholder="task"
+            placeholder="Nova tarefa"
           />
           <select
             required
@@ -172,7 +170,7 @@ function App() {
             value={form.day}
           >
             <option value="" disabled>
-              Select
+              Dia
             </option>
             <option value="mon">Monday</option>
             <option value="tue">Tuesday</option>
@@ -182,7 +180,7 @@ function App() {
             <option value="sat">Saturday</option>
             <option value="sun">Sunday</option>
           </select>
-          <button>Submit</button>
+          <button>Criar</button>
         </form>
       </FormWrapper>
       <Monday>

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { getTasks } from "../functions/axios";
 
-const useTasks = (initialState) => {
-  const [tasks, setTasks] = useState(initialState);
+const useTasks = () => {
+  const [tasks, setTasks] = useState([]);
 
-  async function requestTasks() {
+  const requestTasks = async () => {
     const response = await getTasks();
     setTasks(response);
-  }
+  };
   useEffect(() => {
     requestTasks();
   }, []);
