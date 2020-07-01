@@ -25,9 +25,70 @@ function App() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const status = await createTask(form);
-    status && resetForm();
+    await createTask(form);
+    resetForm();
+    getTasks();
   };
+
+  let monday = [],
+    renderedMonday,
+    tuesday = [],
+    renderedTuesday,
+    wednesday = [],
+    renderedWednesday,
+    thursday = [],
+    renderedThusday,
+    friday = [],
+    renderedFriday,
+    saturday = [],
+    renderedSaturday,
+    sunday = [],
+    renderedSunday;
+
+  tasks &&
+    tasks.forEach((task) => {
+      switch (task.day) {
+        case "mon":
+          monday.push(task);
+          break;
+        case "tue":
+          tuesday.push(task);
+          break;
+        case "wed":
+          wednesday.push(task);
+          break;
+        case "thu":
+          thursday.push(task);
+          break;
+        case "fri":
+          friday.push(task);
+          break;
+        case "sat":
+          saturday.push(task);
+          break;
+        case "sun":
+          sunday.push(task);
+          break;
+        default:
+          break;
+      }
+    });
+
+  if (tasks) {
+    renderedMonday = monday.map((item) => <li key={item.id}>{item.text}</li>);
+    renderedTuesday = tuesday.map((item) => <li key={item.id}>{item.text}</li>);
+    renderedWednesday = wednesday.map((item) => (
+      <li key={item.id}>{item.text}</li>
+    ));
+    renderedThusday = thursday.map((item) => (
+      <li key={item.id}>{item.text}</li>
+    ));
+    renderedFriday = friday.map((item) => <li key={item.id}>{item.text}</li>);
+    renderedSaturday = saturday.map((item) => (
+      <li key={item.id}>{item.text}</li>
+    ));
+    renderedSunday = sunday.map((item) => <li key={item.id}>{item.text}</li>);
+  }
 
   return (
     <div>
@@ -61,13 +122,27 @@ function App() {
             <button>Submit</button>
           </form>
         </FormWrapper>
-        <Monday></Monday>
-        <Tuesday></Tuesday>
-        <Wednesday></Wednesday>
-        <Thursday></Thursday>
-        <Friday></Friday>
-        <Saturday></Saturday>
-        <Sunday></Sunday>
+        <Monday>
+          <ul>{renderedMonday}</ul>
+        </Monday>
+        <Tuesday>
+          <ul>{renderedTuesday}</ul>
+        </Tuesday>
+        <Wednesday>
+          <ul>{renderedWednesday}</ul>
+        </Wednesday>
+        <Thursday>
+          <ul>{renderedThusday}</ul>
+        </Thursday>
+        <Friday>
+          <ul>{renderedFriday}</ul>
+        </Friday>
+        <Saturday>
+          <ul>{renderedSaturday}</ul>
+        </Saturday>
+        <Sunday>
+          <ul>{renderedSunday}</ul>
+        </Sunday>
       </Body>
     </div>
   );
