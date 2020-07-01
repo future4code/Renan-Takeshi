@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Body,
-  InputWrapper,
+  FormWrapper,
   Monday,
   Tuesday,
   Wednesday,
@@ -15,7 +15,7 @@ function App() {
   return (
     <div>
       <Body>
-        <InputWrapper></InputWrapper>
+        <FormWrapper></FormWrapper>
         <Monday></Monday>
         <Tuesday></Tuesday>
         <Wednesday></Wednesday>
