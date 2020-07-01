@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Body,
+  Main,
   FormWrapper,
   Monday,
   Tuesday,
@@ -12,11 +12,15 @@ import {
 } from "./App.styles";
 import useTasks from "./hooks/useTasks";
 import useForm from "./hooks/useForm";
-import { createTask } from "./functions/axios";
+import { createTask, deleteTask } from "./functions/axios";
 
 function App() {
   const [tasks, getTasks] = useTasks();
-  const [form, onChangeForm, resetForm] = useForm({ text: "", day: "" });
+  const [form, onChangeForm, resetForm] = useForm({
+    text: "",
+    day: "",
+    done: false,
+  });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -30,22 +34,27 @@ function App() {
     getTasks();
   };
 
-  let monday = [],
-    renderedMonday,
-    tuesday = [],
-    renderedTuesday,
-    wednesday = [],
-    renderedWednesday,
-    thursday = [],
-    renderedThusday,
-    friday = [],
-    renderedFriday,
-    saturday = [],
-    renderedSaturday,
-    sunday = [],
-    renderedSunday;
+  const handleTaskClick = async (id) => {
+    await deleteTask(id);
+    getTasks();
+  };
 
-  tasks &&
+  let monday = [],
+    renderedMon,
+    tuesday = [],
+    renderedTue,
+    wednesday = [],
+    renderedWed,
+    thursday = [],
+    renderedThu,
+    friday = [],
+    renderedFri,
+    saturday = [],
+    renderedSat,
+    sunday = [],
+    renderedSun;
+
+  if (tasks) {
     tasks.forEach((task) => {
       switch (task.day) {
         case "mon":
@@ -73,78 +82,131 @@ function App() {
           break;
       }
     });
-
-  if (tasks) {
-    renderedMonday = monday.map((item) => <li key={item.id}>{item.text}</li>);
-    renderedTuesday = tuesday.map((item) => <li key={item.id}>{item.text}</li>);
-    renderedWednesday = wednesday.map((item) => (
-      <li key={item.id}>{item.text}</li>
+    renderedMon = monday.map((item) => (
+      <li
+        onClick={() => {
+          handleTaskClick(item.id);
+        }}
+        key={item.id}
+      >
+        {item.text}
+      </li>
     ));
-    renderedThusday = thursday.map((item) => (
-      <li key={item.id}>{item.text}</li>
+    renderedTue = tuesday.map((item) => (
+      <li
+        onClick={() => {
+          handleTaskClick(item.id);
+        }}
+        key={item.id}
+      >
+        {item.text}
+      </li>
     ));
-    renderedFriday = friday.map((item) => <li key={item.id}>{item.text}</li>);
-    renderedSaturday = saturday.map((item) => (
-      <li key={item.id}>{item.text}</li>
+    renderedWed = wednesday.map((item) => (
+      <li
+        onClick={() => {
+          handleTaskClick(item.id);
+        }}
+        key={item.id}
+      >
+        {item.text}
+      </li>
     ));
-    renderedSunday = sunday.map((item) => <li key={item.id}>{item.text}</li>);
+    renderedThu = thursday.map((item) => (
+      <li
+        onClick={() => {
+          handleTaskClick(item.id);
+        }}
+        key={item.id}
+      >
+        {item.text}
+      </li>
+    ));
+    renderedFri = friday.map((item) => (
+      <li
+        onClick={() => {
+          handleTaskClick(item.id);
+        }}
+        key={item.id}
+      >
+        {item.text}
+      </li>
+    ));
+    renderedSat = saturday.map((item) => (
+      <li
+        onClick={() => {
+          handleTaskClick(item.id);
+        }}
+        key={item.id}
+      >
+        {item.text}
+      </li>
+    ));
+    renderedSun = sunday.map((item) => (
+      <li
+        onClick={() => {
+          handleTaskClick(item.id);
+        }}
+        key={item.id}
+      >
+        {item.text}
+      </li>
+    ));
   }
 
   return (
-    <div>
-      <Body>
-        <FormWrapper>
-          <form onSubmit={handleFormSubmit}>
-            <input
-              required
-              name="text"
-              value={form.text}
-              onChange={handleInputChange}
-              placeholder="task"
-            />
-            <select
-              required
-              name="day"
-              onChange={handleInputChange}
-              value={form.day}
-            >
-              <option value="" disabled>
-                Select
-              </option>
-              <option value="mon">Monday</option>
-              <option value="tue">Tuesday</option>
-              <option value="wed">Wednesday</option>
-              <option value="thu">Thursday</option>
-              <option value="fri">Friday</option>
-              <option value="sat">Saturday</option>
-              <option value="sun">Sunday</option>
-            </select>
-            <button>Submit</button>
-          </form>
-        </FormWrapper>
-        <Monday>
-          <ul>{renderedMonday}</ul>
-        </Monday>
-        <Tuesday>
-          <ul>{renderedTuesday}</ul>
-        </Tuesday>
-        <Wednesday>
-          <ul>{renderedWednesday}</ul>
-        </Wednesday>
-        <Thursday>
-          <ul>{renderedThusday}</ul>
-        </Thursday>
-        <Friday>
-          <ul>{renderedFriday}</ul>
-        </Friday>
-        <Saturday>
-          <ul>{renderedSaturday}</ul>
-        </Saturday>
-        <Sunday>
-          <ul>{renderedSunday}</ul>
-        </Sunday>
-      </Body>
-    </div>
+    <Main>
+      <FormWrapper>
+        <form onSubmit={handleFormSubmit}>
+          <input
+            required
+            name="text"
+            value={form.text}
+            onChange={handleInputChange}
+            placeholder="task"
+          />
+          <select
+            required
+            name="day"
+            onChange={handleInputChange}
+            value={form.day}
+          >
+            <option value="" disabled>
+              Select
+            </option>
+            <option value="mon">Monday</option>
+            <option value="tue">Tuesday</option>
+            <option value="wed">Wednesday</option>
+            <option value="thu">Thursday</option>
+            <option value="fri">Friday</option>
+            <option value="sat">Saturday</option>
+            <option value="sun">Sunday</option>
+          </select>
+          <button>Submit</button>
+        </form>
+      </FormWrapper>
+      <Monday>
+        <ul>{renderedMon}</ul>
+      </Monday>
+      <Tuesday>
+        <ul>{renderedTue}</ul>
+      </Tuesday>
+      <Wednesday>
+        <ul>{renderedWed}</ul>
+      </Wednesday>
+      <Thursday>
+        <ul>{renderedThu}</ul>
+      </Thursday>
+      <Friday>
+        <ul>{renderedFri}</ul>
+      </Friday>
+      <Saturday>
+        <ul>{renderedSat}</ul>
+      </Saturday>
+      <Sunday>
+        <ul>{renderedSun}</ul>
+      </Sunday>
+    </Main>
   );
 }
 
