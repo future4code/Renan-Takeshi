@@ -15,7 +15,7 @@ const criaTarefa = (text, day) => {
   const button = utils.getByText(/Criar/);
 
   userEvent.type(input, text);
-  userEvent.selectOptions(select, day);
+  userEvent.selectOptions(select, utils.getByText(day).value);
   userEvent.click(button);
 
   return utils;
@@ -38,7 +38,7 @@ describe("Testa a renderizacao inicial do form", () => {
 
 describe("Testa criacao e remocao de tarefa", () => {
   test("Criacao segunda", async () => {
-    const utils = criaTarefa("segunda", "mon");
+    const utils = criaTarefa("segunda", "Monday");
 
     const task = await utils.findByText(/segunda/);
     expect(task).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao terca", async () => {
-    const utils = criaTarefa("terca", "tue");
+    const utils = criaTarefa("terca", "Tuesday");
 
     const task = await utils.findByText(/terca/);
     expect(task).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao quarta", async () => {
-    const utils = criaTarefa("quarta", "wed");
+    const utils = criaTarefa("quarta", "Wednesday");
 
     const task = await utils.findByText(/quarta/);
     expect(task).toBeInTheDocument();
@@ -92,7 +92,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao quinta", async () => {
-    const utils = criaTarefa("quinta", "thu");
+    const utils = criaTarefa("quinta", "Thursday");
 
     const task = await utils.findByText(/quinta/);
     expect(task).toBeInTheDocument();
@@ -110,7 +110,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao sexta", async () => {
-    const utils = criaTarefa("sexta", "fri");
+    const utils = criaTarefa("sexta", "Friday");
 
     const task = await utils.findByText(/sexta/);
     expect(task).toBeInTheDocument();
@@ -128,7 +128,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao sabado", async () => {
-    const utils = criaTarefa("sabado", "sat");
+    const utils = criaTarefa("sabado", "Saturday");
 
     const task = await utils.findByText(/sabado/);
     expect(task).toBeInTheDocument();
@@ -146,7 +146,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao domingo", async () => {
-    const utils = criaTarefa("domingo", "sun");
+    const utils = criaTarefa("domingo", "Sunday");
 
     const task = await utils.findByText(/domingo/);
     expect(task).toBeInTheDocument();

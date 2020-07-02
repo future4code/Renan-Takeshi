@@ -17,7 +17,7 @@ import * as api from "./functions/axios";
 
 function App() {
   const [tasks, requestTasks] = useTasks();
-  const [form, onChangeForm, resetForm] = useForm({
+  const [form, onChangeForm, resetForm, fillForm] = useForm({
     text: "",
     day: "",
     completed: false,
@@ -36,7 +36,9 @@ function App() {
   };
 
   const handleTaskClick = async (task) => {
-    await api.editTask(task.id, { ...task, completed: !task.completed });
+    // fillForm(task)
+    await api.deleteTask(task.id);
+    // await api.editTask(task.id, { ...task, completed: !task.completed });
     requestTasks();
   };
 
