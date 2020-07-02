@@ -12,12 +12,10 @@ const criaTarefa = (text, day) => {
 
   const input = utils.getByPlaceholderText("Nova tarefa");
   const select = utils.getByTestId("select");
-
-  userEvent.type(input, text);
-  userEvent.selectOptions(select, [day]);
-
   const button = utils.getByText(/Criar/);
 
+  userEvent.type(input, text);
+  userEvent.selectOptions(select, day);
   userEvent.click(button);
 
   return utils;
@@ -28,13 +26,13 @@ describe("Testa a renderizacao inicial do form", () => {
     const { getByPlaceholderText } = render(<App />);
     expect(getByPlaceholderText("Nova tarefa")).toBeInTheDocument();
   });
-  test("Botao de criar", () => {
-    const { getByText } = render(<App />);
-    expect(getByText("Criar")).toBeInTheDocument();
-  });
   test("Select", () => {
     const { getByText } = render(<App />);
     expect(getByText("Dia")).toBeInTheDocument();
+  });
+  test("Botao de criar", () => {
+    const { getByText } = render(<App />);
+    expect(getByText("Criar")).toBeInTheDocument();
   });
 });
 
@@ -42,13 +40,13 @@ describe("Testa criacao e remocao de tarefa", () => {
   test("Criacao segunda", async () => {
     const utils = criaTarefa("segunda", "mon");
 
-    const task = await utils.findByText(/segunda/, 20000);
+    const task = await utils.findByText(/segunda/);
     expect(task).toBeInTheDocument();
   });
   test("Remocao segunda", async () => {
     const utils = render(<App />);
 
-    const task = await utils.findByText(/segunda/, 20000);
+    const task = await utils.findByText(/segunda/);
 
     userEvent.click(task);
 
@@ -60,13 +58,13 @@ describe("Testa criacao e remocao de tarefa", () => {
   test("Criacao terca", async () => {
     const utils = criaTarefa("terca", "tue");
 
-    const task = await utils.findByText(/terca/, 20000);
+    const task = await utils.findByText(/terca/);
     expect(task).toBeInTheDocument();
   });
   test("Remocao terca", async () => {
     const utils = render(<App />);
 
-    const task = await utils.findByText(/terca/, 20000);
+    const task = await utils.findByText(/terca/);
 
     userEvent.click(task);
 
@@ -78,13 +76,13 @@ describe("Testa criacao e remocao de tarefa", () => {
   test("Criacao quarta", async () => {
     const utils = criaTarefa("quarta", "wed");
 
-    const task = await utils.findByText(/quarta/, 20000);
+    const task = await utils.findByText(/quarta/);
     expect(task).toBeInTheDocument();
   });
   test("Remocao quarta", async () => {
     const utils = render(<App />);
 
-    const task = await utils.findByText(/quarta/, 20000);
+    const task = await utils.findByText(/quarta/);
 
     userEvent.click(task);
 
@@ -96,13 +94,13 @@ describe("Testa criacao e remocao de tarefa", () => {
   test("Criacao quinta", async () => {
     const utils = criaTarefa("quinta", "thu");
 
-    const task = await utils.findByText(/quinta/, 20000);
+    const task = await utils.findByText(/quinta/);
     expect(task).toBeInTheDocument();
   });
   test("Remocao quinta", async () => {
     const utils = render(<App />);
 
-    const task = await utils.findByText(/quinta/, 20000);
+    const task = await utils.findByText(/quinta/);
 
     userEvent.click(task);
 
@@ -114,13 +112,13 @@ describe("Testa criacao e remocao de tarefa", () => {
   test("Criacao sexta", async () => {
     const utils = criaTarefa("sexta", "fri");
 
-    const task = await utils.findByText(/sexta/, 20000);
+    const task = await utils.findByText(/sexta/);
     expect(task).toBeInTheDocument();
   });
   test("Remocao sexta", async () => {
     const utils = render(<App />);
 
-    const task = await utils.findByText(/sexta/, 20000);
+    const task = await utils.findByText(/sexta/);
 
     userEvent.click(task);
 
@@ -132,13 +130,13 @@ describe("Testa criacao e remocao de tarefa", () => {
   test("Criacao sabado", async () => {
     const utils = criaTarefa("sabado", "sat");
 
-    const task = await utils.findByText(/sabado/, 20000);
+    const task = await utils.findByText(/sabado/);
     expect(task).toBeInTheDocument();
   });
   test("Remocao sabado", async () => {
     const utils = render(<App />);
 
-    const task = await utils.findByText(/sabado/, 20000);
+    const task = await utils.findByText(/sabado/);
 
     userEvent.click(task);
 
@@ -150,13 +148,13 @@ describe("Testa criacao e remocao de tarefa", () => {
   test("Criacao domingo", async () => {
     const utils = criaTarefa("domingo", "sun");
 
-    const task = await utils.findByText(/domingo/, 20000);
+    const task = await utils.findByText(/domingo/);
     expect(task).toBeInTheDocument();
   });
   test("Remocao domingo", async () => {
     const utils = render(<App />);
 
-    const task = await utils.findByText(/domingo/, 20000);
+    const task = await utils.findByText(/domingo/);
 
     userEvent.click(task);
 

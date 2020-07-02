@@ -9,17 +9,18 @@ import {
   Friday,
   Saturday,
   Sunday,
+  Task,
 } from "./App.styles";
 import useTasks from "./hooks/useTasks";
 import useForm from "./hooks/useForm";
-import { createTask, deleteTask } from "./functions/axios";
+import * as api from "./functions/axios";
 
 function App() {
-  const [tasks, getTasks] = useTasks();
+  const [tasks, requestTasks] = useTasks();
   const [form, onChangeForm, resetForm] = useForm({
     text: "",
     day: "",
-    done: false,
+    completed: false,
   });
 
   const handleInputChange = (event) => {
@@ -29,30 +30,23 @@ function App() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    await createTask(form);
+    await api.createTask(form);
     resetForm();
-    getTasks();
+    requestTasks();
   };
 
-  const handleTaskClick = async (id) => {
-    await deleteTask(id);
-    getTasks();
+  const handleTaskClick = async (task) => {
+    await api.editTask(task.id, { ...task, completed: !task.completed });
+    requestTasks();
   };
 
   let monday = [],
-    renderedMon,
     tuesday = [],
-    renderedTue,
     wednesday = [],
-    renderedWed,
     thursday = [],
-    renderedThu,
     friday = [],
-    renderedFri,
     saturday = [],
-    renderedSat,
-    sunday = [],
-    renderedSun;
+    sunday = [];
 
   tasks.forEach((task) => {
     switch (task.day) {
@@ -81,76 +75,27 @@ function App() {
         break;
     }
   });
-  renderedMon = monday.map((item) => (
-    <li
-      onClick={() => {
-        handleTaskClick(item.id);
-      }}
-      key={item.id}
-    >
-      {item.text}
-    </li>
-  ));
-  renderedTue = tuesday.map((item) => (
-    <li
-      onClick={() => {
-        handleTaskClick(item.id);
-      }}
-      key={item.id}
-    >
-      {item.text}
-    </li>
-  ));
-  renderedWed = wednesday.map((item) => (
-    <li
-      onClick={() => {
-        handleTaskClick(item.id);
-      }}
-      key={item.id}
-    >
-      {item.text}
-    </li>
-  ));
-  renderedThu = thursday.map((item) => (
-    <li
-      onClick={() => {
-        handleTaskClick(item.id);
-      }}
-      key={item.id}
-    >
-      {item.text}
-    </li>
-  ));
-  renderedFri = friday.map((item) => (
-    <li
-      onClick={() => {
-        handleTaskClick(item.id);
-      }}
-      key={item.id}
-    >
-      {item.text}
-    </li>
-  ));
-  renderedSat = saturday.map((item) => (
-    <li
-      onClick={() => {
-        handleTaskClick(item.id);
-      }}
-      key={item.id}
-    >
-      {item.text}
-    </li>
-  ));
-  renderedSun = sunday.map((item) => (
-    <li
-      onClick={() => {
-        handleTaskClick(item.id);
-      }}
-      key={item.id}
-    >
-      {item.text}
-    </li>
-  ));
+
+  const renderTasks = (array) =>
+    array.map((item) => (
+      <Task
+        completed={item.completed}
+        onClick={() => {
+          handleTaskClick(item);
+        }}
+        key={item.id}
+      >
+        {item.text}
+      </Task>
+    ));
+
+  const renderedMon = renderTasks(monday);
+  const renderedTue = renderTasks(tuesday);
+  const renderedWed = renderTasks(wednesday);
+  const renderedThu = renderTasks(thursday);
+  const renderedFri = renderTasks(friday);
+  const renderedSat = renderTasks(saturday);
+  const renderedSun = renderTasks(sunday);
 
   return (
     <Main>
