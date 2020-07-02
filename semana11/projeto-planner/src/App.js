@@ -164,6 +164,7 @@ function App() {
             placeholder="Nova tarefa"
           />
           <select
+            data-testid="select"
             required
             name="day"
             onChange={handleInputChange}
