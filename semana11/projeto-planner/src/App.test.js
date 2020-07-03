@@ -7,11 +7,11 @@ import userEvent from "@testing-library/user-event";
 // axios.get = jest.fn().mockResolvedValue({ data: [] });
 // axios.post = jest.fn().mockResolvedValue();
 
-const criaTarefa = (text, day) => {
+const createTask = (text, day) => {
   const utils = render(<App />);
 
   const input = utils.getByPlaceholderText("Nova tarefa");
-  const select = utils.getByTestId("select");
+  const select = utils.getByLabelText(/select/i);
   const button = utils.getByText(/Criar/);
 
   userEvent.type(input, text);
@@ -24,11 +24,11 @@ const criaTarefa = (text, day) => {
 describe("Testa a renderizacao inicial do form", () => {
   test("Input", () => {
     const { getByPlaceholderText } = render(<App />);
-    expect(getByPlaceholderText("Nova tarefa")).toBeInTheDocument();
+    expect(getByPlaceholderText("Nova tarefa")).toHaveValue("");
   });
   test("Select", () => {
     const { getByText } = render(<App />);
-    expect(getByText("Dia")).toBeInTheDocument();
+    expect(getByText("Dia")).toHaveValue("");
   });
   test("Botao de criar", () => {
     const { getByText } = render(<App />);
@@ -38,7 +38,7 @@ describe("Testa a renderizacao inicial do form", () => {
 
 describe("Testa criacao e remocao de tarefa", () => {
   test("Criacao segunda", async () => {
-    const utils = criaTarefa("segunda", "Monday");
+    const utils = createTask("segunda", "Monday");
 
     const task = await utils.findByText(/segunda/);
     expect(task).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao terca", async () => {
-    const utils = criaTarefa("terca", "Tuesday");
+    const utils = createTask("terca", "Tuesday");
 
     const task = await utils.findByText(/terca/);
     expect(task).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao quarta", async () => {
-    const utils = criaTarefa("quarta", "Wednesday");
+    const utils = createTask("quarta", "Wednesday");
 
     const task = await utils.findByText(/quarta/);
     expect(task).toBeInTheDocument();
@@ -92,7 +92,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao quinta", async () => {
-    const utils = criaTarefa("quinta", "Thursday");
+    const utils = createTask("quinta", "Thursday");
 
     const task = await utils.findByText(/quinta/);
     expect(task).toBeInTheDocument();
@@ -110,7 +110,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao sexta", async () => {
-    const utils = criaTarefa("sexta", "Friday");
+    const utils = createTask("sexta", "Friday");
 
     const task = await utils.findByText(/sexta/);
     expect(task).toBeInTheDocument();
@@ -128,7 +128,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao sabado", async () => {
-    const utils = criaTarefa("sabado", "Saturday");
+    const utils = createTask("sabado", "Saturday");
 
     const task = await utils.findByText(/sabado/);
     expect(task).toBeInTheDocument();
@@ -146,7 +146,7 @@ describe("Testa criacao e remocao de tarefa", () => {
   });
 
   test("Criacao domingo", async () => {
-    const utils = criaTarefa("domingo", "Sunday");
+    const utils = createTask("domingo", "Sunday");
 
     const task = await utils.findByText(/domingo/);
     expect(task).toBeInTheDocument();

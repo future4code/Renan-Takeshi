@@ -110,24 +110,26 @@ function App() {
             onChange={handleInputChange}
             placeholder="Nova tarefa"
           />
-          <select
-            data-testid="select"
-            required
-            name="day"
-            onChange={handleInputChange}
-            value={form.day}
-          >
-            <option value="" disabled>
-              Dia
-            </option>
-            <option value="mon">Monday</option>
-            <option value="tue">Tuesday</option>
-            <option value="wed">Wednesday</option>
-            <option value="thu">Thursday</option>
-            <option value="fri">Friday</option>
-            <option value="sat">Saturday</option>
-            <option value="sun">Sunday</option>
-          </select>
+          <label>
+            Select a day
+            <select
+              required
+              name="day"
+              onChange={handleInputChange}
+              value={form.day}
+            >
+              <option value="" disabled>
+                Dia
+              </option>
+              <option value="mon">Monday</option>
+              <option value="tue">Tuesday</option>
+              <option value="wed">Wednesday</option>
+              <option value="thu">Thursday</option>
+              <option value="fri">Friday</option>
+              <option value="sat">Saturday</option>
+              <option value="sun">Sunday</option>
+            </select>
+          </label>
           <button>Criar</button>
         </form>
       </FormWrapper>
