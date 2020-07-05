@@ -2,17 +2,12 @@ import React from "react";
 import { render, wait } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
-//import axios from "axios";
-
-// axios.get = jest.fn().mockResolvedValue({ data: [{day:"mon",text:"segunda"}] });
-// axios.post = jest.fn().mockResolvedValue();
-// axios.delete = jest.fn().mockResolvedValue();
 
 const createTask = (text, day) => {
   const utils = render(<App />);
 
   const input = utils.getByPlaceholderText("Nova tarefa");
-  const select = utils.getByLabelText(/select/i);
+  const select = utils.getByLabelText(/selecione/i);
   const button = utils.getByText(/Criar/);
 
   userEvent.type(input, text);
@@ -23,20 +18,12 @@ const createTask = (text, day) => {
 };
 
 describe("Testa a renderizacao inicial do form", () => {
-  test("", () => {
+  test("Input, select e button", () => {
     const { getByPlaceholderText, getByLabelText, getByText } = render(<App />);
     expect(getByPlaceholderText("Nova tarefa")).toHaveValue("");
-    expect(getByLabelText(/select/i)).toHaveValue("");
+    expect(getByLabelText(/selecione/i)).toHaveValue("");
     expect(getByText("Criar")).toBeInTheDocument();
   });
-  // test("Select", () => {
-  //   const { getByText } = render(<App />);
-  //   expect(getByText("Dia")).toHaveValue("");
-  // });
-  // test("Botao de criar", () => {
-  //   const { getByText } = render(<App />);
-  //   expect(getByText("Criar")).toBeInTheDocument();
-  // });
 });
 
 describe("Testa criacao e remocao de tarefa para cada dia", () => {

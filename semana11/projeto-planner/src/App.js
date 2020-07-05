@@ -17,7 +17,7 @@ import * as api from "./functions/axios";
 
 function App() {
   const [tasks, requestTasks] = useTasks();
-  const [form, handleFormChange, resetForm, fillForm] = useForm({
+  const [form, handleFormChange, resetForm] = useForm({
     text: "",
     day: "",
     completed: false,
@@ -32,8 +32,6 @@ function App() {
 
   const handleTaskClick = async (task) => {
     await api.deleteTask(task.id);
-    // fillForm(task)
-    // await api.editTask(task.id, { ...task, completed: !task.completed });
     requestTasks();
   };
 
@@ -96,16 +94,14 @@ function App() {
             placeholder="Nova tarefa"
           />
           <label>
-            Select a day
+            Selecione o
             <select
               required
               name="day"
               onChange={handleFormChange}
               value={form.day}
             >
-              <option value="" disabled>
-                Dia
-              </option>
+              <option value="" disabled>Dia</option>
               <option value="mon">Monday</option>
               <option value="tue">Tuesday</option>
               <option value="wed">Wednesday</option>
@@ -119,25 +115,25 @@ function App() {
         </form>
       </FormWrapper>
       <Monday>
-        <ul>{renderTasks(monday)}</ul>
+        <ul>Segunda{renderTasks(monday)}</ul>
       </Monday>
       <Tuesday>
-        <ul>{renderTasks(tuesday)}</ul>
+        <ul>Terça{renderTasks(tuesday)}</ul>
       </Tuesday>
       <Wednesday>
-        <ul>{renderTasks(wednesday)}</ul>
+        <ul>Quarta{renderTasks(wednesday)}</ul>
       </Wednesday>
       <Thursday>
-        <ul>{renderTasks(thursday)}</ul>
+        <ul>Quinta{renderTasks(thursday)}</ul>
       </Thursday>
       <Friday>
-        <ul>{renderTasks(friday)}</ul>
+        <ul>Sexta{renderTasks(friday)}</ul>
       </Friday>
       <Saturday>
-        <ul>{renderTasks(saturday)}</ul>
+        <ul>Sábado{renderTasks(saturday)}</ul>
       </Saturday>
       <Sunday>
-        <ul>{renderTasks(sunday)}</ul>
+        <ul>Domingo{renderTasks(sunday)}</ul>
       </Sunday>
     </Main>
   );
