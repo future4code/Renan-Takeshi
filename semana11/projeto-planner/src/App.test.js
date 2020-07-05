@@ -1,11 +1,12 @@
 import React from "react";
-import { render, wait, screen } from "@testing-library/react";
+import { render, wait } from "@testing-library/react";
 import App from "./App";
-import axios from "axios";
 import userEvent from "@testing-library/user-event";
+//import axios from "axios";
 
-// axios.get = jest.fn().mockResolvedValue({ data: [] });
+// axios.get = jest.fn().mockResolvedValue({ data: [{day:"mon",text:"segunda"}] });
 // axios.post = jest.fn().mockResolvedValue();
+// axios.delete = jest.fn().mockResolvedValue();
 
 const createTask = (text, day) => {
   const utils = render(<App />);
@@ -18,148 +19,179 @@ const createTask = (text, day) => {
   userEvent.selectOptions(select, utils.getByText(day).value);
   userEvent.click(button);
 
-  return utils;
+  return [utils, input, select];
 };
 
 describe("Testa a renderizacao inicial do form", () => {
-  test("Input", () => {
-    const { getByPlaceholderText } = render(<App />);
+  test("", () => {
+    const { getByPlaceholderText, getByLabelText, getByText } = render(<App />);
     expect(getByPlaceholderText("Nova tarefa")).toHaveValue("");
-  });
-  test("Select", () => {
-    const { getByText } = render(<App />);
-    expect(getByText("Dia")).toHaveValue("");
-  });
-  test("Botao de criar", () => {
-    const { getByText } = render(<App />);
+    expect(getByLabelText(/select/i)).toHaveValue("");
     expect(getByText("Criar")).toBeInTheDocument();
   });
+  // test("Select", () => {
+  //   const { getByText } = render(<App />);
+  //   expect(getByText("Dia")).toHaveValue("");
+  // });
+  // test("Botao de criar", () => {
+  //   const { getByText } = render(<App />);
+  //   expect(getByText("Criar")).toBeInTheDocument();
+  // });
 });
 
-describe("Testa criacao e remocao de tarefa", () => {
-  test("Criacao segunda", async () => {
-    const utils = createTask("segunda", "Monday");
+describe("Testa criacao e remocao de tarefa para cada dia", () => {
+  describe("Segunda", () => {
+    test("Criacao ", async () => {
+      const [utils, input, select] = createTask("segunda", "Monday");
 
-    const task = await utils.findByText(/segunda/);
-    expect(task).toBeInTheDocument();
-  });
-  test("Remocao segunda", async () => {
-    const utils = render(<App />);
+      const task = await utils.findByText(/segunda/);
 
-    const task = await utils.findByText(/segunda/);
+      expect(task).toBeInTheDocument();
+      expect(input).toHaveValue("");
+      expect(select).toHaveValue("");
+    });
+    test("Remocao", async () => {
+      const utils = render(<App />);
 
-    userEvent.click(task);
+      const task = await utils.findByText(/segunda/);
 
-    await wait(() => {
-      expect(utils.queryByText("segunda")).toBeNull();
+      userEvent.click(task);
+
+      await wait(() => {
+        expect(utils.queryByText("segunda")).toBeNull();
+      });
     });
   });
 
-  test("Criacao terca", async () => {
-    const utils = createTask("terca", "Tuesday");
+  describe("Terca", () => {
+    test("Criacao", async () => {
+      const [utils, input, select] = createTask("terca", "Tuesday");
 
-    const task = await utils.findByText(/terca/);
-    expect(task).toBeInTheDocument();
-  });
-  test("Remocao terca", async () => {
-    const utils = render(<App />);
+      const task = await utils.findByText(/terca/);
+      expect(task).toBeInTheDocument();
+      expect(input).toHaveValue("");
+      expect(select).toHaveValue("");
+    });
+    test("Remocao", async () => {
+      const utils = render(<App />);
 
-    const task = await utils.findByText(/terca/);
+      const task = await utils.findByText(/terca/);
 
-    userEvent.click(task);
+      userEvent.click(task);
 
-    await wait(() => {
-      expect(utils.queryByText("terca")).toBeNull();
+      await wait(() => {
+        expect(utils.queryByText("terca")).toBeNull();
+      });
     });
   });
 
-  test("Criacao quarta", async () => {
-    const utils = createTask("quarta", "Wednesday");
+  describe("Quarta", () => {
+    test("Criacao", async () => {
+      const [utils, input, select] = createTask("quarta", "Wednesday");
 
-    const task = await utils.findByText(/quarta/);
-    expect(task).toBeInTheDocument();
-  });
-  test("Remocao quarta", async () => {
-    const utils = render(<App />);
+      const task = await utils.findByText(/quarta/);
+      expect(task).toBeInTheDocument();
+      expect(input).toHaveValue("");
+      expect(select).toHaveValue("");
+    });
+    test("Remocao", async () => {
+      const utils = render(<App />);
 
-    const task = await utils.findByText(/quarta/);
+      const task = await utils.findByText(/quarta/);
 
-    userEvent.click(task);
+      userEvent.click(task);
 
-    await wait(() => {
-      expect(utils.queryByText("quarta")).toBeNull();
+      await wait(() => {
+        expect(utils.queryByText("quarta")).toBeNull();
+      });
     });
   });
 
-  test("Criacao quinta", async () => {
-    const utils = createTask("quinta", "Thursday");
+  describe("Quinta", () => {
+    test("Criacao", async () => {
+      const [utils, input, select] = createTask("quinta", "Thursday");
 
-    const task = await utils.findByText(/quinta/);
-    expect(task).toBeInTheDocument();
-  });
-  test("Remocao quinta", async () => {
-    const utils = render(<App />);
+      const task = await utils.findByText(/quinta/);
+      expect(task).toBeInTheDocument();
+      expect(input).toHaveValue("");
+      expect(select).toHaveValue("");
+    });
+    test("Remocao", async () => {
+      const utils = render(<App />);
 
-    const task = await utils.findByText(/quinta/);
+      const task = await utils.findByText(/quinta/);
 
-    userEvent.click(task);
+      userEvent.click(task);
 
-    await wait(() => {
-      expect(utils.queryByText("quinta")).toBeNull();
+      await wait(() => {
+        expect(utils.queryByText("quinta")).toBeNull();
+      });
     });
   });
 
-  test("Criacao sexta", async () => {
-    const utils = createTask("sexta", "Friday");
+  describe("Sexta", () => {
+    test("Criacao", async () => {
+      const [utils, input, select] = createTask("sexta", "Friday");
 
-    const task = await utils.findByText(/sexta/);
-    expect(task).toBeInTheDocument();
-  });
-  test("Remocao sexta", async () => {
-    const utils = render(<App />);
+      const task = await utils.findByText(/sexta/);
+      expect(task).toBeInTheDocument();
+      expect(input).toHaveValue("");
+      expect(select).toHaveValue("");
+    });
+    test("Remocao", async () => {
+      const utils = render(<App />);
 
-    const task = await utils.findByText(/sexta/);
+      const task = await utils.findByText(/sexta/);
 
-    userEvent.click(task);
+      userEvent.click(task);
 
-    await wait(() => {
-      expect(utils.queryByText("sexta")).toBeNull();
+      await wait(() => {
+        expect(utils.queryByText("sexta")).toBeNull();
+      });
     });
   });
 
-  test("Criacao sabado", async () => {
-    const utils = createTask("sabado", "Saturday");
+  describe("Sabado", () => {
+    test("Criacao", async () => {
+      const [utils, input, select] = createTask("sabado", "Saturday");
 
-    const task = await utils.findByText(/sabado/);
-    expect(task).toBeInTheDocument();
-  });
-  test("Remocao sabado", async () => {
-    const utils = render(<App />);
+      const task = await utils.findByText(/sabado/);
+      expect(task).toBeInTheDocument();
+      expect(input).toHaveValue("");
+      expect(select).toHaveValue("");
+    });
+    test("Remocao", async () => {
+      const utils = render(<App />);
 
-    const task = await utils.findByText(/sabado/);
+      const task = await utils.findByText(/sabado/);
 
-    userEvent.click(task);
+      userEvent.click(task);
 
-    await wait(() => {
-      expect(utils.queryByText("sabado")).toBeNull();
+      await wait(() => {
+        expect(utils.queryByText("sabado")).toBeNull();
+      });
     });
   });
 
-  test("Criacao domingo", async () => {
-    const utils = createTask("domingo", "Sunday");
+  describe("Domingo", () => {
+    test("Criacao", async () => {
+      const [utils, input, select] = createTask("domingo", "Sunday");
 
-    const task = await utils.findByText(/domingo/);
-    expect(task).toBeInTheDocument();
-  });
-  test("Remocao domingo", async () => {
-    const utils = render(<App />);
+      const task = await utils.findByText(/domingo/);
+      expect(task).toBeInTheDocument();
+      expect(input).toHaveValue("");
+      expect(select).toHaveValue("");
+    });
+    test("Remocao", async () => {
+      const utils = render(<App />);
 
-    const task = await utils.findByText(/domingo/);
+      const task = await utils.findByText(/domingo/);
 
-    userEvent.click(task);
+      userEvent.click(task);
 
-    await wait(() => {
-      expect(utils.queryByText("domingo")).toBeNull();
+      await wait(() => {
+        expect(utils.queryByText("domingo")).toBeNull();
+      });
     });
   });
 });

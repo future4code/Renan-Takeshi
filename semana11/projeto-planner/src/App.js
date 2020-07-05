@@ -17,16 +17,11 @@ import * as api from "./functions/axios";
 
 function App() {
   const [tasks, requestTasks] = useTasks();
-  const [form, onChangeForm, resetForm, fillForm] = useForm({
+  const [form, handleFormChange, resetForm, fillForm] = useForm({
     text: "",
     day: "",
     completed: false,
   });
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    onChangeForm(name, value);
-  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -36,8 +31,8 @@ function App() {
   };
 
   const handleTaskClick = async (task) => {
-    // fillForm(task)
     await api.deleteTask(task.id);
+    // fillForm(task)
     // await api.editTask(task.id, { ...task, completed: !task.completed });
     requestTasks();
   };
@@ -82,22 +77,12 @@ function App() {
     array.map((item) => (
       <Task
         completed={item.completed}
-        onClick={() => {
-          handleTaskClick(item);
-        }}
+        onClick={() => handleTaskClick(item)}
         key={item.id}
       >
         {item.text}
       </Task>
     ));
-
-  const renderedMon = renderTasks(monday);
-  const renderedTue = renderTasks(tuesday);
-  const renderedWed = renderTasks(wednesday);
-  const renderedThu = renderTasks(thursday);
-  const renderedFri = renderTasks(friday);
-  const renderedSat = renderTasks(saturday);
-  const renderedSun = renderTasks(sunday);
 
   return (
     <Main>
@@ -107,7 +92,7 @@ function App() {
             required
             name="text"
             value={form.text}
-            onChange={handleInputChange}
+            onChange={handleFormChange}
             placeholder="Nova tarefa"
           />
           <label>
@@ -115,7 +100,7 @@ function App() {
             <select
               required
               name="day"
-              onChange={handleInputChange}
+              onChange={handleFormChange}
               value={form.day}
             >
               <option value="" disabled>
@@ -134,25 +119,25 @@ function App() {
         </form>
       </FormWrapper>
       <Monday>
-        <ul>{renderedMon}</ul>
+        <ul>{renderTasks(monday)}</ul>
       </Monday>
       <Tuesday>
-        <ul>{renderedTue}</ul>
+        <ul>{renderTasks(tuesday)}</ul>
       </Tuesday>
       <Wednesday>
-        <ul>{renderedWed}</ul>
+        <ul>{renderTasks(wednesday)}</ul>
       </Wednesday>
       <Thursday>
-        <ul>{renderedThu}</ul>
+        <ul>{renderTasks(thursday)}</ul>
       </Thursday>
       <Friday>
-        <ul>{renderedFri}</ul>
+        <ul>{renderTasks(friday)}</ul>
       </Friday>
       <Saturday>
-        <ul>{renderedSat}</ul>
+        <ul>{renderTasks(saturday)}</ul>
       </Saturday>
       <Sunday>
-        <ul>{renderedSun}</ul>
+        <ul>{renderTasks(sunday)}</ul>
       </Sunday>
     </Main>
   );
