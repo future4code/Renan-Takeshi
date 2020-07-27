@@ -17,6 +17,6 @@ function obterEstatisticas(numeros: number[]) {
 }
 
 type amostra = {
-  numeros: [];
+  numeros: number[];
   obterEstatisticas: (numeros: number[]) => object;
 };
