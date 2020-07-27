@@ -1,5 +1,7 @@
 function obterEstatisticas(numeros: number[]) {
-  const numerosOrdenados: number[] = numeros.sort((a, b) => a - b);
+  const numerosOrdenados: number[] = numeros.sort(
+    (a: number, b: number) => a - b
+  );
 
   let soma: number = 0;
 
