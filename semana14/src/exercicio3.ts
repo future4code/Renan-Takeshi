@@ -28,6 +28,8 @@ const posts: post[] = [
 
 const buscarPostsPorAutor = (posts: post[], autorInformado: string): post[] => {
   return posts.filter((post: post) => {
-    return post.autor === autorInformado;
+    return post.autor.includes(autorInformado);
   });
 };
+
+console.log(buscarPostsPorAutor(posts, "ione"));

@@ -1,4 +1,4 @@
-function obterEstatisticas(numeros: number[]) {
+function obterEstatisticas(numeros: number[]): object {
   const numerosOrdenados: number[] = numeros.sort(
     (a: number, b: number) => a - b
   );
