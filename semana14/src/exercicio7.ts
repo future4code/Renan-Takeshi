@@ -5,7 +5,12 @@ enum Descontos {
   INTIMAS = 0.07,
 }
 
-type produto = { nome: string; preco: number; classificacao: string };
+type produto = {
+  nome: string;
+  preco: number;
+  classificacao: string;
+};
+
 type produtoComDesconto = {
   nome: string;
   preco: number;
@@ -17,11 +22,15 @@ const calculaDesconto = (arr: produto[]): produtoComDesconto[] =>
   arr.reduce((acc, cur) => {
     const produtoComDesconto: produtoComDesconto = {
       ...cur,
-      precoComDesconto: cur.preco * (1 - Descontos[cur.classificacao]),
+      precoComDesconto:
+        cur.preco *
+        (1 - Descontos[cur.classificacao as keyof typeof Descontos]),
     };
     acc.push(produtoComDesconto);
     return acc;
   }, []);
 
 const novo: produto = { nome: "oi", preco: 10, classificacao: "BANHO" };
-console.log(calculaDesconto([novo]));
+const novo2: produto = { nome: "oie", preco: 100, classificacao: "INVERNO" };
+
+console.log(calculaDesconto([novo, novo2]));
