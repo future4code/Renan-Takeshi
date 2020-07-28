@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ./src/index.ts tarefas.txt Comprar Queijo"
+    "start": "ts-node ./src/index.ts"
   },
   "author": "Renan Takeshi",
   "license": "ISC",
