@@ -1,9 +1,3 @@
-import * as fs from "fs";
+import { appendFileSync } from "fs";
 
-const args: string[] = process.argv.slice(2);
-const tarefa: string = args.slice(1).join(" ");
-
-let tarefas: string = fs.readFileSync(args[0]).toString();
-tarefas += `\n${tarefa}`;
-
-fs.writeFileSync(args[0], tarefas);
+appendFileSync(process.argv[2], `\n${process.argv.slice(3).join(" ")}`);
