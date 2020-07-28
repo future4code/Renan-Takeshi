@@ -1,0 +1,20 @@
+{
+  "name": "aula2",
+  "version": "1.0.0",
+  "description": "Semana 14 aula 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node ./build/index.js",
+    "ex1": "tsc && node ./build/exercicio1.js Renan 34",
+    "ex2": "tsc && node ./build/exercicio2.js add 1 2",
+    "ex3": "tsc && node ./build/exercicio3.js tarefas.txt Comprar Queijo"
+  },
+  "author": "Renan Takeshi",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.0.26",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  }
+}
