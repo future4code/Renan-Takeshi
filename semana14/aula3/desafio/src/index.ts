@@ -46,14 +46,15 @@ const printEvents = (day?: string, time?: string): void => {
   );
 
   const filteredEvents: event[] = events.filter(
-    // (item) => item.startsAt.includes("2020")
-    (item) => item.startsAt.includes(day.split("-").reverse().join("/"))
+    // (item) =>
+    //   item.startsAt.includes(
+    //     moment(day, "DD/MM/YYYY HH:mm").toISOString().split("T")[0]
+    //   )
+    (item) => item.startsAt.includes(day.split("/").reverse().join("-"))
   );
-  console.log(day.split("/").reverse().join("-"));
-  console.log(events);
-  console.log(filteredEvents);
+  // console.log(moment(day, "DD/MM/YYYY").toISOString());
 
-  filteredEvents.forEach((item: event) => {
+  events.forEach((item: event) => {
     const duration = moment(item.finishesAt).diff(item.startsAt, "minutes");
 
     const today = moment();
@@ -71,6 +72,40 @@ const printEvents = (day?: string, time?: string): void => {
   });
 };
 
-printEvents("25/06/2020", "15:00");
+const createEvent = (
+  title: string,
+  description: string,
+  startsAt: string,
+  finishesAt: string
+): void => {
+  if (!title || !description || !startsAt || !finishesAt) {
+    console.log("Invalid input");
+    return;
+  }
 
-// fs.writeFileSync("./src/events.json", JSON.stringify(allEvents, null, 2));
+  // const diffStartAtAndToday = startsAt.diff(moment(), "seconds");
+  // const diffFinishAtAndToday = finishesAt.diff(moment(), "seconds");name
+
+  // if (diffStartAtAndToday < 0 && diffFinishAtAndToday < 0) {
+  // console.log("Date cannot be prior to the current date");
+  //   return;
+  // }
+
+  const events: event[] = JSON.parse(
+    fs.readFileSync("./src/events.json").toString()
+  );
+
+  const newEvent: any = {
+    title,
+    description,
+    startsAt: moment(startsAt, "DD/MM/YYYY HH:mm"),
+    finishesAt: moment(finishesAt, "DD/MM/YYYY HH:mm"),
+  };
+
+  events.push(newEvent);
+
+  fs.writeFileSync("./src/events.json", JSON.stringify(events, null, 2));
+};
+
+createEvent(process.argv[2], process.argv[3], process.argv[4], process.argv[5]);
+printEvents("25/06/2020", "15:00");
