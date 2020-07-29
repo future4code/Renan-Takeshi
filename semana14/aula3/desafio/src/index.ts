@@ -25,12 +25,35 @@ type event = {
 //   },
 // ];
 
-const printEvents = (): void => {
+// [
+//   {
+//     "title": "Reunião",
+//     "description": "Reunião muito importante",
+//     "startsAt": "2020-06-25T18:00:00.000Z",
+//     "finishesAt": "2020-06-25T19:00:00.000Z"
+//   },
+//   {
+//     "title": "Reuniãozinha",
+//     "description": "Reunião não muito importante",
+//     "startsAt": "2020-06-26T20:00:00.000Z",
+//     "finishesAt": "2020-06-26T21:00:00.000Z"
+//   }
+// ]
+
+const printEvents = (day?: string, time?: string): void => {
   const events: event[] = JSON.parse(
     fs.readFileSync("./src/events.json").toString()
   );
 
-  events.forEach((item: event) => {
+  const filteredEvents: event[] = events.filter(
+    // (item) => item.startsAt.includes("2020")
+    (item) => item.startsAt.includes(day.split("-").reverse().join("/"))
+  );
+  console.log(day.split("/").reverse().join("-"));
+  console.log(events);
+  console.log(filteredEvents);
+
+  filteredEvents.forEach((item: event) => {
     const duration = moment(item.finishesAt).diff(item.startsAt, "minutes");
 
     const today = moment();
@@ -48,6 +71,6 @@ const printEvents = (): void => {
   });
 };
 
-printEvents();
+printEvents("25/06/2020", "15:00");
 
 // fs.writeFileSync("./src/events.json", JSON.stringify(allEvents, null, 2));
