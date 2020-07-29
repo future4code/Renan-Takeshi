@@ -58,7 +58,7 @@ const printAllEventsEx3 = (events: event[]): void => {
         "DD [de] MMMM [de] YYYY, HH:mm"
       )}\nDescrição: ${
         item.description
-      }\nDuracao: ${duration} minutos\nDias ate o evento: ${daysUntilEvent}`
+      }\nDuracao: ${duration} minutos\nDias ate o evento: ${daysUntilEvent}\n`
     );
   });
 };
@@ -92,3 +92,5 @@ const createEvent = (
     finishesAt,
   });
 };
+
+printAllEventsEx3(allEvents);
