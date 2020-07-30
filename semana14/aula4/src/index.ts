@@ -7,7 +7,7 @@ const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labenews/";
 
 // exercicio 1
 // item A)
-// labenews/subscribers/all
+// https://us-central1-labenu-apis.cloudfunctions.net/labenews/subscribers/all
 
 // item B)
 // Promise<any[]>
@@ -42,12 +42,14 @@ type User = {
 // Nao recebi erro de tipagem
 
 // item B)
-//
+// Para estruturarmos o resultado para exatamente o que precisamos, tornando-o previsivel de acordo com o type
 
 // item C)
 const arrowGetSubscribersTypeUser = async (): Promise<User[]> => {
   const res = await axios.get(baseUrl + "subscribers/all");
-  return res.data;
+  return res.data.map((item: any) => {
+    return { id: item.id, name: item.name, email: item.email };
+  });
 };
 
 // exercicio 4
@@ -61,6 +63,8 @@ const createNewItem = (title: string, content: string): void => {
 
 // exercicio 5
 // item A)
+// Nao eh recomendavel utilizar o forEach, pois nao eh ideal para funcoes assincronas
+// Testei com forEach e aparentemente nao deu erro, mas confio que seja ma-pratica!
 
 // item B)
 const sendNotifications = (users: User[], message: string): void => {
@@ -74,7 +78,7 @@ const sendNotifications = (users: User[], message: string): void => {
 
 // exercicio 6
 // item A)
-// Promise.all returna um um array com o resultado das promises passadas como argumento
+// Promise.all retorna um array com o resultado das promises passadas como argumento
 
 // item B)
 const sendNotificationsWithPromiseAll = async (
@@ -110,7 +114,7 @@ const createNewAndSendNotifications = async (
     await axios.put(baseUrl + "news", { title, content, date: Date.now() });
     sendNotificationsWithPromiseAll(
       await getSubscribers(),
-      `Nova noticia: ${title}`
+      `${title}: ${content}`
     );
   } catch (error) {
     console.log("ops!", error.message);
@@ -131,19 +135,20 @@ const getEveryoneNotifications = async () => {
 
   res.forEach((item) => console.log(item.data));
 };
-// subscribers/:id/notifications/all
-// main
+
+// Desafio
+const printOiWithDelay = async () => {
+  const promiseToPrintOi = new Promise((resolve, reject) => {
+    setTimeout(resolve, 5000, "Oi");
+  });
+  const res = await Promise.all([promiseToPrintOi]);
+  console.log(res[0]);
+};
+
+// testes aqui
 // (async () => {
-//   sendNotificationsWithPromiseAll(
-//     await getSubscribers(),
-//     `Renan mandou um 'Olar!' no dia ${moment().format(
-//       "DD [de] MMMM [as] HH:mm"
-//     )}`
+//   createNewAndSendNotifications(
+//     `Renan manda noticia`,
+//     `'Oie!' (enviado dia ${moment().format("DD [de] MMMM [as] HH:mm")})`
 //   );
 // })();
-// (async () => {
-//   createNewAndSendNotifications("Renan testando", "Oie");
-// })();
-(async () => {
-  getEveryoneNotifications();
-})();
