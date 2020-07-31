@@ -15,10 +15,11 @@ const addBalance = (name: string, cpf: number, amount: number) => {
     type: TransactionsEnum.INCREASE_BALANCE,
     amount,
     date: Date.now(),
+    description: "Depósito de dinheiro",
   };
   allAccounts[accountIdx].transactions.push(transaction);
   allAccounts[accountIdx].balance += amount;
-  console.log(allAccounts[accountIdx]);
+
   db.writeToDatabase(allAccounts);
 
   console.log(colors.green.bgBlack.bold("Transaction sucesfull"));
