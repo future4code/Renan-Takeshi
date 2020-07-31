@@ -1,19 +1,19 @@
 export type CustomerAccount = {
   name: string;
-  cpf: string;
+  cpf: number;
   birthday: string;
   balance: number;
   transactions: Transaction[];
 };
 
 export type Transaction = {
-  type: Transactions;
+  type: TransactionsEnum;
   amount: number;
   date: number;
 };
 
-export enum Transactions {
-  INCREASE_BALANCE = 0,
+export enum TransactionsEnum {
+  INCREASE_BALANCE = "Depósito de dinheiro",
   PAY_BILL = 1,
   INTERNAL_TRANSFER = 2,
 }

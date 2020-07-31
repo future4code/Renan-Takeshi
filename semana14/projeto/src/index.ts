@@ -1,3 +1,5 @@
 import createAccount from "./createAccount";
+import getBalance from "./getBalance";
+import addBalance from "./addBalance";
 
-createAccount("renan", "111", "31/08/2003");
+addBalance("renan", 111, 10);
