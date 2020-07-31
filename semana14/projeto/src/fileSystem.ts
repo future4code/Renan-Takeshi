@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as colors from "colors";
 
+// getAllAccounts
 export function readDatabase(): any {
   try {
     const fileData: string = fs.readFileSync("./data.json").toString();

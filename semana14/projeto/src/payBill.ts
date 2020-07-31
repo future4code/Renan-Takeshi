@@ -4,9 +4,9 @@ import * as colors from "colors";
 import * as moment from "moment";
 
 const payBill = (
-  description: string,
-  amount: number,
   cpf: number,
+  amount: number,
+  description: string,
   date?: string // DD/MM/YYYY
 ) => {
   // Validacao de data
