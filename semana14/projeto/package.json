@@ -1,16 +1,11 @@
 {
   "name": "projeto",
-  "version": "1.0.0",
+  "version": "0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ./src/index.ts",
-    "create-account": "ts-node ./src/createAccount.ts",
-    "get-balance": "ts-node ./src/getAccountBalance.ts",
-    "increase-balance": "ts-node ./src/increaseAccountBalance.ts",
-    "transfer": "ts-node ./src/internalTransfer.ts",
-    "pay-bill": "ts-node ./src/payBill.ts"
+    "start": "ts-node ./src/index.ts"
   },
   "keywords": [],
   "author": "",
