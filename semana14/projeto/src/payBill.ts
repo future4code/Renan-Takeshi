@@ -9,6 +9,7 @@ const payBill = (
   cpf: number,
   date?: string // DD/MM/YYYY
 ) => {
+  // Validacao de data
   if (date && moment(date, "DD/MM/YYYY").diff(moment(), "days") < 0) {
     console.log(colors.red.bgBlack.bold("Invalid date"));
     return;
@@ -16,8 +17,16 @@ const payBill = (
 
   const allAccounts: CustomerAccount[] = db.readDatabase();
   const accountIdx: number = allAccounts.findIndex((item) => item.cpf === cpf);
+
+  // Validacao de cliente
   if (accountIdx === -1) {
     console.log(colors.red.bgBlack.bold("Invalid customer information"));
+    return;
+  }
+
+  // Validacao de saldo
+  if (allAccounts[accountIdx].balance < amount) {
+    console.log(colors.red.bgBlack.bold("Insufficient funds"));
     return;
   }
 
