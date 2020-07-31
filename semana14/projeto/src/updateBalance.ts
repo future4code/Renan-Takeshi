@@ -7,6 +7,7 @@ const updateBalance = (cpf: number): void => {
   const allAccounts: CustomerAccount[] = getAllAccounts();
   const accountIdx: number = allAccounts.findIndex((item) => item.cpf === cpf);
 
+  // Validacao de cliente
   if (accountIdx === -1) {
     console.log(colors.red.bgBlack.bold("Invalid customer information"));
     return;
