@@ -27,7 +27,7 @@ function main(args: string[]) {
       break;
     }
     case "update": {
-      updateBalance(Number(args[3]));
+      updateBalance();
       break;
     }
     case "transfer": {

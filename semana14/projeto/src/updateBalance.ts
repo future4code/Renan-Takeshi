@@ -3,18 +3,11 @@ import getAllAccounts from "./getAllAccounts";
 import { writeToDatabase } from "./fileSystem";
 import * as colors from "colors";
 
-const updateBalance = (cpf: number): void => {
+const updateBalance = (): void => {
   const allAccounts: CustomerAccount[] = getAllAccounts();
-  const accountIdx: number = allAccounts.findIndex((item) => item.cpf === cpf);
 
-  // Validacao de cliente
-  if (accountIdx === -1) {
-    console.log(colors.red.bgBlack.bold("Invalid customer information"));
-    return;
-  }
-
-  allAccounts[accountIdx].balance = allAccounts[accountIdx].transactions.reduce(
-    (acc, cur) => {
+  for (const acount of allAccounts) {
+    acount.balance = acount.transactions.reduce((acc, cur) => {
       if (cur.date < Date.now() && !cur.completed) {
         if (
           cur.type === TransactionsEnum.PAY_BILL ||
@@ -30,9 +23,8 @@ const updateBalance = (cpf: number): void => {
       }
 
       return acc;
-    },
-    allAccounts[accountIdx].balance
-  );
+    }, acount.balance);
+  }
 
   writeToDatabase(allAccounts);
 
