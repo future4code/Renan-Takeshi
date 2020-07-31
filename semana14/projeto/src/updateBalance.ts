@@ -1,4 +1,4 @@
-import { CustomerAccount } from "./types";
+import { CustomerAccount, TransactionsEnum } from "./types";
 import * as db from "./fileSystem";
 import * as colors from "colors";
 
@@ -13,9 +13,20 @@ const updateBalance = (cpf: number) => {
 
   allAccounts[accountIdx].balance = allAccounts[accountIdx].transactions.reduce(
     (acc, cur) => {
-      if (cur.date < Date.now()) {
-        return acc - cur.amount;
+      if (cur.date < Date.now() && !cur.completed) {
+        if (
+          cur.type === TransactionsEnum.PAY_BILL ||
+          cur.type === TransactionsEnum.TRANSFER_SENT
+        ) {
+          cur.completed = true;
+          return acc - cur.amount;
+        }
+        if (cur.type === TransactionsEnum.TRANSFER_RECEIVED) {
+          cur.completed = true;
+          return acc + cur.amount;
+        }
       }
+
       return acc;
     },
     allAccounts[accountIdx].balance

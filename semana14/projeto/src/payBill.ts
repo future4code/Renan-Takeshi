@@ -35,13 +35,14 @@ const payBill = (
     amount,
     date: date ? Date.parse(date.split("/").reverse().join("-")) : Date.now(),
     description,
+    completed: false,
   };
 
   allAccounts[accountIdx].transactions.push(transaction);
 
   db.writeToDatabase(allAccounts);
 
-  console.log(colors.green.bgBlack.bold("Transaction sucesfull"));
+  console.log(colors.green.bgBlack.bold("Payment sucesfull"));
 };
 
 export default payBill;

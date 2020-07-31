@@ -11,10 +11,12 @@ export type Transaction = {
   amount: number;
   date: number;
   description: string;
+  completed: Boolean;
 };
 
 export enum TransactionsEnum {
-  INCREASE_BALANCE = 0,
+  ADD_BALANCE = 0,
   PAY_BILL = 1,
-  INTERNAL_TRANSFER = 2,
+  TRANSFER_SENT = 2,
+  TRANSFER_RECEIVED = 3,
 }

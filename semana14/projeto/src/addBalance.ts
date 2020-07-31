@@ -12,10 +12,11 @@ const addBalance = (name: string, cpf: number, amount: number) => {
     return;
   }
   const transaction: Transaction = {
-    type: TransactionsEnum.INCREASE_BALANCE,
+    type: TransactionsEnum.ADD_BALANCE,
     amount,
     date: Date.now(),
     description: "Depósito de dinheiro",
+    completed: true,
   };
   allAccounts[accountIdx].transactions.push(transaction);
   allAccounts[accountIdx].balance += amount;
