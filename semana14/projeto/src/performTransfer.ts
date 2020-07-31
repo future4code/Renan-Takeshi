@@ -9,8 +9,8 @@ const performTransfer = (
   senderCpf: number,
   receiverName: string,
   receiverCpf: number,
-  description: string,
   amount: number,
+  description: string,
   date?: string // DD/MM/YYYY
 ): void => {
   // Validacao de data

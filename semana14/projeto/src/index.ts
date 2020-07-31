@@ -36,8 +36,8 @@ function main(args: string[]) {
         Number(args[4]),
         args[5],
         Number(args[6]),
-        args[7],
-        Number(args[8]),
+        Number(args[7]),
+        args[8],
         args[9]
       );
       break;
