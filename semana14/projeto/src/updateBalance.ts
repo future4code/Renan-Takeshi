@@ -1,9 +1,10 @@
 import { CustomerAccount, TransactionsEnum } from "./types";
-import * as db from "./fileSystem";
+import getAllAccounts from "./getAllAccounts";
+import { writeToDatabase } from "./fileSystem";
 import * as colors from "colors";
 
-const updateBalance = (cpf: number) => {
-  const allAccounts: CustomerAccount[] = db.readDatabase();
+const updateBalance = (cpf: number): void => {
+  const allAccounts: CustomerAccount[] = getAllAccounts();
   const accountIdx: number = allAccounts.findIndex((item) => item.cpf === cpf);
 
   if (accountIdx === -1) {
@@ -32,7 +33,7 @@ const updateBalance = (cpf: number) => {
     allAccounts[accountIdx].balance
   );
 
-  db.writeToDatabase(allAccounts);
+  writeToDatabase(allAccounts);
 
   console.log(colors.green.bgBlack.bold("Balance update sucesfull"));
 };

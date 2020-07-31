@@ -4,7 +4,7 @@ import addBalance from "./addBalance";
 import payBill from "./payBill";
 import updateBalance from "./updateBalance";
 import performTransfer from "./performTransfer";
-import { readDatabase } from "./fileSystem";
+import getAllAccounts from "./getAllAccounts";
 
 main(process.argv);
 
@@ -43,7 +43,7 @@ function main(args: string[]) {
       break;
     }
     case "print": {
-      console.log(readDatabase());
+      console.log(getAllAccounts());
       break;
     }
     default:

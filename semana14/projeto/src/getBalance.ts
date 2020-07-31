@@ -1,9 +1,9 @@
 import { CustomerAccount } from "./types";
-import * as db from "./fileSystem";
+import getAllAccounts from "./getAllAccounts";
 import * as colors from "colors";
 
-const getBalance = (name: string, cpf: number) => {
-  const accounts: CustomerAccount[] = db.readDatabase();
+const getBalance = (name: string, cpf: number): number | void => {
+  const accounts: CustomerAccount[] = getAllAccounts();
   for (const account of accounts) {
     if (account.cpf === cpf && account.name === name) {
       console.log(

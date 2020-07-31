@@ -1,17 +1,21 @@
 import { CustomerAccount } from "./types";
-import * as db from "./fileSystem";
+import getAllAccounts from "./getAllAccounts";
+import { writeToDatabase } from "./fileSystem";
 import * as moment from "moment";
 import * as colors from "colors";
 
 moment.locale("pt-br");
 
 const createAccount = (name: string, cpf: number, birthday: string): void => {
+  // Validacao de maioridade
   if (moment().diff(moment(birthday, "DD/MM/YYYY"), "years") < 18) {
     console.log(colors.red.bgBlack.bold("Invalid age"));
     return;
   }
 
-  const accounts = db.readDatabase();
+  const accounts: CustomerAccount[] = getAllAccounts();
+
+  // Validacao de CPF
   for (const account of accounts) {
     if (account.cpf === cpf) {
       console.log(colors.red.bgBlack.bold("CPF already in use"));
@@ -28,7 +32,7 @@ const createAccount = (name: string, cpf: number, birthday: string): void => {
   };
   accounts.push(newAccount);
 
-  db.writeToDatabase(accounts);
+  writeToDatabase(accounts);
   console.log(colors.green.bgBlack.bold("Account successfully created"));
 };
 
