@@ -2,8 +2,6 @@ import * as moment from "moment";
 import * as colors from "colors";
 import getAllAccounts from "./getAllAccounts";
 
-moment.locale("pt-br");
-
 export default () => {
   const accounts = getAllAccounts();
 

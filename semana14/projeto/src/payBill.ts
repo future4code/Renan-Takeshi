@@ -6,6 +6,7 @@ import * as moment from "moment";
 import printAllAccounts from "./printAllAccounts";
 
 const payBill = (
+  name: string,
   cpf: number,
   amount: number,
   description: string,
@@ -18,7 +19,9 @@ const payBill = (
   }
 
   const allAccounts: CustomerAccount[] = getAllAccounts();
-  const accountIdx: number = allAccounts.findIndex((item) => item.cpf === cpf);
+  const accountIdx: number = allAccounts.findIndex(
+    (item) => item.name === name && item.cpf === cpf
+  );
 
   // Validacao de cliente
   if (accountIdx === -1) {
