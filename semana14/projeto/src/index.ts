@@ -4,7 +4,7 @@ import addBalance from "./addBalance";
 import payBill from "./payBill";
 import updateBalance from "./updateBalance";
 import performTransfer from "./performTransfer";
-import getAllAccounts from "./getAllAccounts";
+import printAllAccounts from "./printAllAccounts";
 
 main(process.argv);
 
@@ -43,10 +43,11 @@ function main(args: string[]) {
       break;
     }
     case "print": {
-      console.log(getAllAccounts());
+      printAllAccounts();
       break;
     }
     default:
+      printAllAccounts();
       break;
   }
 }
