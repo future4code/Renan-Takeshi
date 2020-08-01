@@ -1,6 +1,7 @@
 import { CustomerAccount, TransactionsEnum } from "./types";
 import getAllAccounts from "./getAllAccounts";
 import { writeToDatabase } from "./fileSystem";
+import * as moment from "moment";
 import * as colors from "colors";
 import printAllAccounts from "./printAllAccounts";
 
@@ -9,7 +10,7 @@ const updateBalance = (): void => {
 
   for (const acount of allAccounts) {
     acount.balance = acount.transactions.reduce((acc, cur) => {
-      if (cur.date < Date.now() && !cur.completed) {
+      if (cur.date < moment().unix() && !cur.completed) {
         if (
           cur.type === TransactionsEnum.PAY_BILL ||
           cur.type === TransactionsEnum.TRANSFER_SENT

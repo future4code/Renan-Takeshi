@@ -1,6 +1,7 @@
 import { CustomerAccount, TransactionsEnum, Transaction } from "./types";
 import getAllAccounts from "./getAllAccounts";
 import { writeToDatabase } from "./fileSystem";
+import * as moment from "moment";
 import * as colors from "colors";
 import printAllAccounts from "./printAllAccounts";
 
@@ -19,7 +20,7 @@ const addBalance = (name: string, cpf: number, amount: number): void => {
   const transaction: Transaction = {
     type: TransactionsEnum.ADD_BALANCE,
     amount,
-    date: Date.now(),
+    date: moment().unix(),
     description: "Depósito de dinheiro",
     completed: true,
   };

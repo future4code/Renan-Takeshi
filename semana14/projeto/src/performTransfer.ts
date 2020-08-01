@@ -43,7 +43,7 @@ const performTransfer = (
   const transactionSender: Transaction = {
     type: TransactionsEnum.TRANSFER_SENT,
     amount,
-    date: date ? Date.parse(date.split("/").reverse().join("-")) : Date.now(),
+    date: date ? moment(date, "DD/MM/YYYY").unix() : moment().unix(),
     description: `${description} (para: ${receiverName})`,
     completed: false,
   };
@@ -52,7 +52,7 @@ const performTransfer = (
   const transactionReceiver: Transaction = {
     type: TransactionsEnum.TRANSFER_RECEIVED,
     amount,
-    date: date ? Date.parse(date.split("/").reverse().join("-")) : Date.now(),
+    date: date ? moment(date, "DD/MM/YYYY").unix() : moment().unix(),
     description: `${description} (de: ${senderName})`,
     completed: false,
   };

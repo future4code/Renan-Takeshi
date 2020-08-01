@@ -35,7 +35,7 @@ const payBill = (
   const transaction: Transaction = {
     type: TransactionsEnum.PAY_BILL,
     amount,
-    date: date ? Date.parse(date.split("/").reverse().join("-")) : Date.now(),
+    date: date ? moment(date, "DD/MM/YYYY").unix() : moment().unix(),
     description,
     completed: false,
   };

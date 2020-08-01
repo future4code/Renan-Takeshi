@@ -48,7 +48,10 @@ export default () => {
       console.log(
         colors.bgBlack.bold(
           `Data:`.padStart(10).padEnd(17) +
-            moment(transaction.date).format("DD/MM/YYYY [às] HH:mm").padEnd(48)
+            moment
+              .unix(transaction.date)
+              .format("DD/MM/YYYY [às] HH:mm")
+              .padEnd(48)
         )
       );
       if (transaction.type === 1 || transaction.type === 2) {
