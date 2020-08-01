@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node ./src/index.ts",
-    "createJao": "ts-node ./src/index.ts create Jao 123 01/01/2000",
-    "createMaria": "ts-node ./src/index.ts create Maria 321 01/01/2000",
+    "createJao": "ts-node ./src/index.ts create Jao 123 31/12/1969",
+    "createMaria": "ts-node ./src/index.ts create Maria 321 01/01/1970",
     "createError": "ts-node ./src/index.ts create Joana 321 01/01/2010",
     "deposit": "ts-node ./src/index.ts deposit Maria 321 100",
     "balance": "ts-node ./src/index.ts balance Maria 321",

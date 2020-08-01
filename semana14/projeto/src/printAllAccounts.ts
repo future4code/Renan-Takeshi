@@ -13,7 +13,8 @@ export default () => {
     );
     console.log(
       colors.bgBlack.bold(
-        "Nascimento:".padEnd(15) + account.birthday.padEnd(50)
+        "Nascimento:".padEnd(15) +
+          moment.unix(account.birthday).format("DD/MM/YYYY").padEnd(50)
       )
     );
     console.log(

@@ -5,8 +5,6 @@ import * as moment from "moment";
 import * as colors from "colors";
 import printAllAccounts from "./printAllAccounts";
 
-moment.locale("pt-br");
-
 const createAccount = (name: string, cpf: number, birthday: string): void => {
   // Validacao de maioridade
   if (moment().diff(moment(birthday, "DD/MM/YYYY"), "years") < 18) {
@@ -27,7 +25,7 @@ const createAccount = (name: string, cpf: number, birthday: string): void => {
   const newAccount: CustomerAccount = {
     name,
     cpf,
-    birthday,
+    birthday: moment(birthday, "DD/MM/YYYY").unix(),
     balance: 0,
     transactions: [],
   };

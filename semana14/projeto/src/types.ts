@@ -1,7 +1,7 @@
 export type CustomerAccount = {
   name: string;
   cpf: number;
-  birthday: string;
+  birthday: number;
   balance: number;
   transactions: Transaction[];
 };
