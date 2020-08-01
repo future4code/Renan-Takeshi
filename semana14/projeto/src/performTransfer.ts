@@ -3,6 +3,7 @@ import getAllAccounts from "./getAllAccounts";
 import { writeToDatabase } from "./fileSystem";
 import * as colors from "colors";
 import * as moment from "moment";
+import printAllAccounts from "./printAllAccounts";
 
 const performTransfer = (
   senderName: string,
@@ -43,7 +44,7 @@ const performTransfer = (
     type: TransactionsEnum.TRANSFER_SENT,
     amount,
     date: date ? Date.parse(date.split("/").reverse().join("-")) : Date.now(),
-    description: `${description} (to ${receiverName})`,
+    description: `${description} (para: ${receiverName})`,
     completed: false,
   };
   allAccounts[senderIdx].transactions.push(transactionSender);
@@ -52,14 +53,15 @@ const performTransfer = (
     type: TransactionsEnum.TRANSFER_RECEIVED,
     amount,
     date: date ? Date.parse(date.split("/").reverse().join("-")) : Date.now(),
-    description: `${description} (from ${senderName})`,
+    description: `${description} (de: ${senderName})`,
     completed: false,
   };
   allAccounts[receiverIdx].transactions.push(transactionReceiver);
 
   writeToDatabase(allAccounts);
 
-  console.log(colors.green.bgBlack.bold("Transfer sucesfull"));
+  printAllAccounts();
+  console.log(colors.green.bgBlack.bold("Transfer scheduled\n"));
 };
 
 export default performTransfer;

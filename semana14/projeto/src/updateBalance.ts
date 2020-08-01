@@ -2,6 +2,7 @@ import { CustomerAccount, TransactionsEnum } from "./types";
 import getAllAccounts from "./getAllAccounts";
 import { writeToDatabase } from "./fileSystem";
 import * as colors from "colors";
+import printAllAccounts from "./printAllAccounts";
 
 const updateBalance = (): void => {
   const allAccounts: CustomerAccount[] = getAllAccounts();
@@ -28,7 +29,8 @@ const updateBalance = (): void => {
 
   writeToDatabase(allAccounts);
 
-  console.log(colors.green.bgBlack.bold("Balance update sucesfull"));
+  printAllAccounts();
+  console.log(colors.green.bgBlack.bold("Balance update sucesfull\n"));
 };
 
 export default updateBalance;

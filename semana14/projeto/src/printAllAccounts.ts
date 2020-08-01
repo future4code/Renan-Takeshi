@@ -72,7 +72,7 @@ export default () => {
             transaction.description.padEnd(48)
         )
       );
-      console.log("");
+      console.log(colors.bgBlack("".padStart(65)));
     }
     console.log("");
   }

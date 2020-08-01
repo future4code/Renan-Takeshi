@@ -3,6 +3,7 @@ import getAllAccounts from "./getAllAccounts";
 import { writeToDatabase } from "./fileSystem";
 import * as moment from "moment";
 import * as colors from "colors";
+import printAllAccounts from "./printAllAccounts";
 
 moment.locale("pt-br");
 
@@ -33,7 +34,9 @@ const createAccount = (name: string, cpf: number, birthday: string): void => {
   accounts.push(newAccount);
 
   writeToDatabase(accounts);
-  console.log(colors.green.bgBlack.bold("Account successfully created"));
+
+  printAllAccounts();
+  console.log(colors.green.bgBlack.bold("Account successfully created\n"));
 };
 
 export default createAccount;

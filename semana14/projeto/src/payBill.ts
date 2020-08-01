@@ -3,6 +3,7 @@ import getAllAccounts from "./getAllAccounts";
 import { writeToDatabase } from "./fileSystem";
 import * as colors from "colors";
 import * as moment from "moment";
+import printAllAccounts from "./printAllAccounts";
 
 const payBill = (
   cpf: number,
@@ -43,7 +44,8 @@ const payBill = (
 
   writeToDatabase(allAccounts);
 
-  console.log(colors.green.bgBlack.bold("Payment sucesfull"));
+  printAllAccounts();
+  console.log(colors.green.bgBlack.bold("Payment scheduled\n"));
 };
 
 export default payBill;

@@ -2,6 +2,7 @@ import { CustomerAccount, TransactionsEnum, Transaction } from "./types";
 import getAllAccounts from "./getAllAccounts";
 import { writeToDatabase } from "./fileSystem";
 import * as colors from "colors";
+import printAllAccounts from "./printAllAccounts";
 
 const addBalance = (name: string, cpf: number, amount: number): void => {
   const allAccounts: CustomerAccount[] = getAllAccounts();
@@ -27,7 +28,8 @@ const addBalance = (name: string, cpf: number, amount: number): void => {
 
   writeToDatabase(allAccounts);
 
-  console.log(colors.green.bgBlack.bold("Deposit sucesfull"));
+  printAllAccounts();
+  console.log(colors.green.bgBlack.bold("Deposit sucesfull\n"));
 };
 
 export default addBalance;

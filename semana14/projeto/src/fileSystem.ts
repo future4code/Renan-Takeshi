@@ -7,7 +7,7 @@ export function readDatabase(): any {
     return JSON.parse(fileData);
   } catch (error) {
     console.log(
-      colors.red.bgBlack.bold("Erro ao ler a base de dados: " + error.message)
+      colors.red.bold("Erro ao ler a base de dados: " + error.message + "\n")
     );
     return [];
   }
@@ -19,7 +19,7 @@ export function writeToDatabase(data: any): void {
     fs.writeFileSync("./data.json", dataAsString);
   } catch (error) {
     console.log(
-      colors.red.bgBlack.bold("Erro ao salvar os dados: " + error.message)
+      colors.red.bold("Erro ao salvar os dados: " + error.message + "\n")
     );
   }
 }
