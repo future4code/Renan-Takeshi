@@ -82,7 +82,7 @@ function inquire() {
               {
                 type: "input",
                 name: "cpf",
-                message: "Digite o CPF",
+                message: "Digite o CPF:",
                 validate: (val) =>
                   val.match(/^[0-9]/gm) ? true : "Digite um numero",
               },
@@ -112,7 +112,7 @@ function inquire() {
               {
                 type: "input",
                 name: "cpf",
-                message: "Digite o CPF",
+                message: "Digite o CPF:",
                 validate: (val) =>
                   val.match(/^[0-9]/gm) ? true : "Digite um numero",
               },
@@ -140,7 +140,7 @@ function inquire() {
               {
                 type: "input",
                 name: "cpf",
-                message: "Digite o CPF",
+                message: "Digite o CPF:",
                 validate: (val) =>
                   val.match(/^[0-9]/gm) ? true : "Digite um numero",
               },
@@ -219,12 +219,12 @@ function inquire() {
               {
                 type: "input",
                 name: "recieverName",
-                message: "Digite o nome do remetente:",
+                message: "Digite o nome do destinatario:",
               },
               {
                 type: "input",
                 name: "recieverCpf",
-                message: "Digite o CPF do remetente:",
+                message: "Digite o CPF do destinatario:",
                 validate: (val) =>
                   val.match(/^[0-9]/gm) ? true : "Digite um numero",
               },
