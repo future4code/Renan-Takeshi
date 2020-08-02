@@ -15,7 +15,8 @@
     "jaoPay": "ts-node ./src/index.ts pay Jao 123 10 'Carne do BAU'",
     "transfer": "ts-node ./src/index.ts transfer Maria 321 Jao 123 5 'Empréstimo pro folgado'",
     "update": "ts-node ./src/index.ts update",
-    "print": "ts-node ./src/index.ts print"
+    "print": "ts-node ./src/index.ts print",
+    "todos": "ts-node ./src/index.ts create Maria 321 01/01/1970 && ts-node ./src/index.ts create Jao 123 31/12/1969 && ts-node ./src/index.ts deposit Maria 321 100 && ts-node ./src/index.ts pay Maria 321 10 'Conta de luz' && ts-node ./src/index.ts transfer Maria 321 Jao 123 5 'Empréstimo pro folgado' && ts-node ./src/index.ts update"
   },
   "keywords": [],
   "author": "",
