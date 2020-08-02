@@ -64,7 +64,7 @@ function inquire() {
         "Deposito",
         "Saldo",
         "Pagamento",
-        "Transferir",
+        "Transferencia",
         "Atualizar saldos",
         "Imprimir todas as contas",
       ],
@@ -201,7 +201,7 @@ function inquire() {
             });
           break;
         }
-        case "Transferir": {
+        case "Transferencia": {
           inquirer
             .prompt([
               {
