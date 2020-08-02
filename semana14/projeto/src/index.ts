@@ -5,13 +5,11 @@ import payBill from "./payBill";
 import updateBalance from "./updateBalance";
 import performTransfer from "./performTransfer";
 import printAllAccounts from "./printAllAccounts";
-import * as readline from "readline";
-import * as colors from "colors";
+import * as inquirer from "inquirer";
 
 main(process.argv);
 
 function main(args: string[]) {
-  console.log(colors.bgRed("".padEnd(65)));
   switch (args[2]) {
     case "create": {
       createAccount(args[3], Number(args[4]), args[5]);
@@ -50,126 +48,234 @@ function main(args: string[]) {
       break;
     }
     default:
-      cli();
+      inquire();
       break;
   }
 }
 
-function cli(): void {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  const options: string =
-    "[create, deposit, balance, pay, transfer, update, print]";
-  console.log(colors.bgBlack.bold("Operações disponíveis:".padEnd(65)));
-  console.log(colors.bgBlack.bold(options.padEnd(65)));
-
-  const args: string[] = [, ,];
-
-  rl.question("Digite uma operação: ", (operation: string) => {
-    args.push(operation);
-    switch (operation) {
-      case "print": {
-        main(args);
-        rl.close();
-        break;
-      }
-      case "update": {
-        main(args);
-        rl.close();
-        break;
-      }
-      case "transfer": {
-        rl.question("Digite o nome: ", (senderName: string) => {
-          args.push(senderName);
-          rl.question("Digite o CPF: ", (senderCpf: string) => {
-            args.push(senderCpf);
-            rl.question("Digite o nome: ", (receiverName: string) => {
-              args.push(receiverName);
-              rl.question("Digite o CPF: ", (receiverCpf: string) => {
-                args.push(receiverCpf);
-                rl.question("Digite o valor: ", (amount: string) => {
-                  args.push(amount);
-                  rl.question(
-                    "Digite uma descrição: ",
-                    (description: string) => {
-                      args.push(description);
-                      main(args);
-                      rl.close();
-                    }
-                  );
-                });
-              });
+function inquire() {
+  inquirer
+    .prompt({
+      type: "list",
+      name: "operation",
+      message: "Escolha uma operacao",
+      choices: [
+        "Criar conta",
+        "Deposito",
+        "Saldo",
+        "Pagamento",
+        "Transferir",
+        "Atualizar saldos",
+        "Imprimir todas as contas",
+      ],
+    })
+    .then((res) => {
+      switch (res.operation) {
+        case "Criar conta": {
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "name",
+                message: "Digite o nome:",
+              },
+              {
+                type: "input",
+                name: "cpf",
+                message: "Digite o CPF",
+                validate: (val) =>
+                  val.match(/^[0-9]/gm) ? true : "Digite um numero",
+              },
+              {
+                type: "input",
+                name: "birthday",
+                message: "Digite a data de nascimento:",
+                validate: (val) =>
+                  val.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/gm)
+                    ? true
+                    : "Formato invalido",
+              },
+            ])
+            .then((answers) => {
+              main([, , "create", answers.name, answers.cpf, answers.birthday]);
             });
-          });
-        });
-        break;
-      }
-      case "pay": {
-        rl.question("Digite o nome: ", (name: string) => {
-          args.push(name);
-          rl.question("Digite o CPF: ", (cpf: string) => {
-            args.push(cpf);
-            rl.question("Digite o valor: ", (amount: string) => {
-              args.push(amount);
-              rl.question("Digite uma descrição: ", (description: string) => {
-                args.push(description);
-                main(args);
-                rl.close();
-              });
+          break;
+        }
+        case "Deposito": {
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "name",
+                message: "Digite o nome:",
+              },
+              {
+                type: "input",
+                name: "cpf",
+                message: "Digite o CPF",
+                validate: (val) =>
+                  val.match(/^[0-9]/gm) ? true : "Digite um numero",
+              },
+              {
+                type: "input",
+                name: "amount",
+                message: "Digite a quantidade:",
+                validate: (val) =>
+                  val.match(/^[0-9]/gm) ? true : "Digite um numero",
+              },
+            ])
+            .then((answers) => {
+              main([, , "deposit", answers.name, answers.cpf, answers.amount]);
             });
-          });
-        });
-        break;
-      }
-      case "balance": {
-        rl.question("Digite o nome: ", (name: string) => {
-          args.push(name);
-          rl.question("Digite o CPF: ", (cpf: string) => {
-            args.push(cpf);
-            main(args);
-            rl.close();
-          });
-        });
-        break;
-      }
-      case "deposit": {
-        rl.question("Digite o nome: ", (name: string) => {
-          args.push(name);
-          rl.question("Digite o CPF: ", (cpf: string) => {
-            args.push(cpf);
-            rl.question("Digite o valor: ", (amount: string) => {
-              args.push(amount);
-              main(args);
-              rl.close();
+          break;
+        }
+        case "Saldo": {
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "name",
+                message: "Digite o nome:",
+              },
+              {
+                type: "input",
+                name: "cpf",
+                message: "Digite o CPF",
+                validate: (val) =>
+                  val.match(/^[0-9]/gm) ? true : "Digite um numero",
+              },
+            ])
+            .then((answers) => {
+              main([, , "balance", answers.name, answers.cpf]);
             });
-          });
-        });
-        break;
+          break;
+        }
+        case "Pagamento": {
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "name",
+                message: "Digite o nome:",
+              },
+              {
+                type: "input",
+                name: "cpf",
+                message: "Digite o CPF:",
+                validate: (val) =>
+                  val.match(/^[0-9]/gm) ? true : "Digite um numero",
+              },
+              {
+                type: "input",
+                name: "amount",
+                message: "Digite o valor:",
+                validate: (val) =>
+                  val.match(/^[0-9]/gm) ? true : "Digite um numero",
+              },
+              {
+                type: "input",
+                name: "description",
+                message: "Digite uma descricao:",
+              },
+              {
+                type: "input",
+                name: "date",
+                message: "(Opcional)Digite a data:",
+                validate: (val) =>
+                  !val.length || val.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/gm)
+                    ? true
+                    : "Formato invalido",
+              },
+            ])
+            .then((answers) => {
+              main([
+                ,
+                ,
+                "pay",
+                answers.name,
+                answers.cpf,
+                answers.amount,
+                answers.description,
+                answers.date,
+              ]);
+            });
+          break;
+        }
+        case "Transferir": {
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "senderName",
+                message: "Digite o nome do remetente:",
+              },
+              {
+                type: "input",
+                name: "senderCpf",
+                message: "Digite o CPF do remetente:",
+                validate: (val) =>
+                  val.match(/^[0-9]/gm) ? true : "Digite um numero",
+              },
+              {
+                type: "input",
+                name: "recieverName",
+                message: "Digite o nome do remetente:",
+              },
+              {
+                type: "input",
+                name: "recieverCpf",
+                message: "Digite o CPF do remetente:",
+                validate: (val) =>
+                  val.match(/^[0-9]/gm) ? true : "Digite um numero",
+              },
+              {
+                type: "input",
+                name: "amount",
+                message: "Digite o valor:",
+                validate: (val) =>
+                  val.match(/^[0-9]/gm) ? true : "Digite um numero",
+              },
+              {
+                type: "input",
+                name: "description",
+                message: "Digite uma descricao:",
+              },
+              {
+                type: "input",
+                name: "date",
+                message: "(Opcional)Digite a data:",
+                validate: (val) =>
+                  !val.length || val.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/gm)
+                    ? true
+                    : "Formato invalido",
+              },
+            ])
+            .then((answers) => {
+              main([
+                ,
+                ,
+                "transfer",
+                answers.senderName,
+                answers.senderCpf,
+                answers.recieverName,
+                answers.recieverCpf,
+                answers.amount,
+                answers.description,
+                answers.date,
+              ]);
+            });
+          break;
+        }
+        case "Atualizar saldos": {
+          main([, , "update"]);
+          break;
+        }
+        case "Imprimir todas as contas": {
+          main([, , "print"]);
+          break;
+        }
+        default:
+          break;
       }
-      case "create": {
-        rl.question("Digite o nome: ", (name: string) => {
-          args.push(name);
-          rl.question("Digite o CPF: ", (cpf: string) => {
-            args.push(cpf);
-            rl.question(
-              "Digite a data de nascimento (DD/MM/AAAA): ",
-              (birthday: string) => {
-                args.push(birthday);
-                main(args);
-                rl.close();
-              }
-            );
-          });
-        });
-        break;
-      }
-      default:
-        console.log("Operacao invalida");
-        rl.close();
-        return;
-    }
-  });
+    });
 }
