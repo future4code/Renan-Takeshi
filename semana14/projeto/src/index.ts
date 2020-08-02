@@ -58,7 +58,7 @@ function inquire() {
     .prompt({
       type: "list",
       name: "operation",
-      message: "Escolha uma operacao",
+      message: "Escolha uma operacao:",
       choices: [
         "Criar conta",
         "Deposito",
