@@ -25,7 +25,10 @@ export class Bank {
     );
   };
 
-  public getAccountByCpfAndName = (name: string, cpf: number): UserAccount =>
+  public getAccountByCpfAndName = (
+    name: string,
+    cpf: number
+  ): UserAccount | undefined =>
     this.getAllAccounts().find(
       (item) => item.getName() === name && item.getCpf() === cpf
     );
