@@ -1,4 +1,3 @@
-import { CustomerAccount } from "./types";
 import * as moment from "moment";
 import * as colors from "colors";
 import printAllAccounts from "./printAllAccounts";

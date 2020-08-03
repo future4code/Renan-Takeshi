@@ -1,10 +1,13 @@
-import { CustomerAccount, TransactionsEnum, Transaction } from "./types";
 import getAllAccounts from "./getAllAccounts";
-import { JSONFileManager } from "./JSONFileManager";
 
 import * as colors from "colors";
 import * as moment from "moment";
 import printAllAccounts from "./printAllAccounts";
+
+import { UserAccount } from "./UserAccount";
+import { Bank } from "./Bank";
+import { Transaction, TransactionsEnum } from "./Transaction";
+import { JSONFileManager } from "./JSONFileManager";
 
 const payBill = (
   name: string,
@@ -19,9 +22,9 @@ const payBill = (
     return;
   }
 
-  const allAccounts: CustomerAccount[] = getAllAccounts();
-  const accountIdx: number = allAccounts.findIndex(
-    (item) => item.name === name && item.cpf === cpf
+  const allAccounts: UserAccount[] = new Bank().getAllAccounts();
+  const accountIdx = allAccounts.findIndex(
+    (item) => item.getName() === name && item.getCpf() === cpf
   );
 
   // Validacao de cliente
@@ -31,20 +34,20 @@ const payBill = (
   }
 
   // Validacao de saldo
-  if (allAccounts[accountIdx].balance < amount) {
+  if (allAccounts[accountIdx].getBalance() < amount) {
     console.log(colors.red.bgBlack.bold("Insufficient funds"));
     return;
   }
 
-  const transaction: Transaction = {
-    type: TransactionsEnum.PAY_BILL,
+  const transaction = new Transaction(
+    TransactionsEnum.PAY_BILL,
     amount,
-    date: date ? moment(date, "DD/MM/YYYY").unix() : moment().unix(),
+    date ? moment(date, "DD/MM/YYYY").unix() : moment().unix(),
     description,
-    completed: false,
-  };
+    false
+  );
 
-  allAccounts[accountIdx].transactions.push(transaction);
+  allAccounts[accountIdx].addTransaction(transaction);
 
   const fm = new JSONFileManager("./data.json");
   fm.writeToDatabase(allAccounts);

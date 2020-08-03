@@ -1,9 +1,11 @@
-import { CustomerAccount, TransactionsEnum, Transaction } from "./types";
 import getAllAccounts from "./getAllAccounts";
 import { JSONFileManager } from "./JSONFileManager";
 import * as colors from "colors";
 import * as moment from "moment";
 import printAllAccounts from "./printAllAccounts";
+import { UserAccount } from "./UserAccount";
+import { Bank } from "./Bank";
+import { Transaction, TransactionsEnum } from "./Transaction";
 
 const performTransfer = (
   senderName: string,
@@ -20,43 +22,44 @@ const performTransfer = (
     return;
   }
 
-  const allAccounts: CustomerAccount[] = getAllAccounts();
+  const allAccounts: UserAccount[] = new Bank().getAllAccounts();
   const senderIdx: number = allAccounts.findIndex(
-    (item) => item.cpf === senderCpf && item.name === senderName
+    (item) => item.getCpf() === senderCpf && item.getName() === senderName
   );
   const receiverIdx: number = allAccounts.findIndex(
-    (item) => item.cpf === receiverCpf && item.name === receiverName
+    (item) => item.getCpf() === receiverCpf && item.getName() === receiverName
   );
-
+  console.log(receiverName, receiverCpf);
+  console.log(senderIdx, receiverIdx);
   // Validacao de cliente
   if (senderIdx === -1 || receiverIdx === -1) {
-    console.log(colors.red.bgBlack.bold("Invalid customer information"));
+    console.log(colors.red.bgBlack.bold("Invalid customer information\n"));
     return;
   }
 
   // Validacao de saldo
-  if (allAccounts[senderIdx].balance < amount) {
-    console.log(colors.red.bgBlack.bold("Insufficient funds"));
+  if (allAccounts[senderIdx].getBalance() < amount) {
+    console.log(colors.red.bgBlack.bold("Insufficient funds\n"));
     return;
   }
 
-  const transactionSender: Transaction = {
-    type: TransactionsEnum.TRANSFER_SENT,
+  const transactionSender: Transaction = new Transaction(
+    TransactionsEnum.TRANSFER_SENT,
     amount,
-    date: date ? moment(date, "DD/MM/YYYY").unix() : moment().unix(),
-    description: `${description} (para: ${receiverName})`,
-    completed: false,
-  };
-  allAccounts[senderIdx].transactions.push(transactionSender);
+    date ? moment(date, "DD/MM/YYYY").unix() : moment().unix(),
+    `${description} (para: ${receiverName})`,
+    false
+  );
+  allAccounts[senderIdx].addTransaction(transactionSender);
 
-  const transactionReceiver: Transaction = {
-    type: TransactionsEnum.TRANSFER_RECEIVED,
+  const transactionReceiver: Transaction = new Transaction(
+    TransactionsEnum.TRANSFER_RECEIVED,
     amount,
-    date: date ? moment(date, "DD/MM/YYYY").unix() : moment().unix(),
-    description: `${description} (de: ${senderName})`,
-    completed: false,
-  };
-  allAccounts[receiverIdx].transactions.push(transactionReceiver);
+    date ? moment(date, "DD/MM/YYYY").unix() : moment().unix(),
+    `${description} (de: ${senderName})`,
+    false
+  );
+  allAccounts[receiverIdx].addTransaction(transactionReceiver);
 
   const fm = new JSONFileManager("./data.json");
   fm.writeToDatabase(allAccounts);

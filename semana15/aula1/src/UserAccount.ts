@@ -33,4 +33,7 @@ export class UserAccount {
   public addTransaction = (transaction: Transaction) => {
     this.transactions.push(transaction);
   };
+  public setBalance = (balance): void => {
+    this.balance = balance;
+  };
 }

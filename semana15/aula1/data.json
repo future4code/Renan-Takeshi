@@ -3,7 +3,7 @@
       "name": "re",
       "cpf": 2,
       "birthday": 942285600,
-      "balance": 22,
+      "balance": 21,
       "transactions": [
          {
             "type": 0,
@@ -11,7 +11,21 @@
             "date": 1596465814,
             "description": "Depósito de dinheiro",
             "completed": true
+         },
+         {
+            "type": 1,
+            "amount": 1,
+            "date": 1596466660,
+            "description": "asdasd ",
+            "completed": true
          }
       ]
+   },
+   {
+      "name": "re",
+      "cpf": 1,
+      "birthday": 942285600,
+      "balance": 0,
+      "transactions": []
    }
 ]
