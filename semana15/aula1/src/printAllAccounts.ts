@@ -1,6 +1,5 @@
 import * as moment from "moment";
 import * as colors from "colors";
-import getAllAccounts from "./getAllAccounts";
 import { Bank } from "./Bank";
 
 export default () => {

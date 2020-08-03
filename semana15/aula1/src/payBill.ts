@@ -1,5 +1,3 @@
-import getAllAccounts from "./getAllAccounts";
-
 import * as colors from "colors";
 import * as moment from "moment";
 import printAllAccounts from "./printAllAccounts";

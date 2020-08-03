@@ -1,4 +1,3 @@
-import getAllAccounts from "./getAllAccounts";
 import { JSONFileManager } from "./JSONFileManager";
 import * as colors from "colors";
 import * as moment from "moment";
@@ -30,7 +29,6 @@ const performTransfer = (
     (item) => item.getCpf() === receiverCpf && item.getName() === receiverName
   );
   console.log(receiverName, receiverCpf);
-  console.log(senderIdx, receiverIdx);
   // Validacao de cliente
   if (senderIdx === -1 || receiverIdx === -1) {
     console.log(colors.red.bgBlack.bold("Invalid customer information\n"));

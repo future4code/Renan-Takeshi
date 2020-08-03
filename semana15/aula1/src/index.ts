@@ -218,7 +218,7 @@ function inquire() {
               },
               {
                 type: "input",
-                name: "recieverName",
+                name: "receiverName",
                 message: "Digite o nome do destinatario:",
               },
               {
@@ -257,8 +257,8 @@ function inquire() {
                 "transfer",
                 answers.senderName,
                 answers.senderCpf,
-                answers.recieverName,
-                answers.recieverCpf,
+                answers.receiverName,
+                answers.receiverCpf,
                 answers.amount,
                 answers.description,
                 answers.date,

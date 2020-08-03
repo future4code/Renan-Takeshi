@@ -1,31 +1,74 @@
 [
    {
-      "name": "re",
-      "cpf": 2,
-      "birthday": 942285600,
-      "balance": 21,
+      "name": "Maria",
+      "cpf": 321,
+      "birthday": 10800,
+      "balance": 33,
       "transactions": [
          {
             "type": 0,
-            "amount": 22,
-            "date": 1596465814,
+            "amount": 100,
+            "date": 1596467850,
             "description": "Depósito de dinheiro",
             "completed": true
          },
          {
             "type": 1,
-            "amount": 1,
-            "date": 1596466660,
-            "description": "asdasd ",
+            "amount": 10,
+            "date": 1596467855,
+            "description": "Conta de luz",
+            "completed": true
+         },
+         {
+            "type": 2,
+            "amount": 5,
+            "date": 1596467863,
+            "description": "Empréstimo pro folgado (para: Jao)",
+            "completed": true
+         },
+         {
+            "type": 2,
+            "amount": 50,
+            "date": 1596423600,
+            "description": "Emprestimo (para: Jao)",
+            "completed": true
+         },
+         {
+            "type": 2,
+            "amount": 2,
+            "date": 1596468104,
+            "description": "a (para: Jao)",
             "completed": true
          }
       ]
    },
    {
-      "name": "re",
-      "cpf": 1,
-      "birthday": 942285600,
-      "balance": 0,
-      "transactions": []
+      "name": "Jao",
+      "cpf": 123,
+      "birthday": -75600,
+      "balance": 57,
+      "transactions": [
+         {
+            "type": 3,
+            "amount": 5,
+            "date": 1596467863,
+            "description": "Empréstimo pro folgado (de: Maria)",
+            "completed": true
+         },
+         {
+            "type": 3,
+            "amount": 50,
+            "date": 1596423600,
+            "description": "Emprestimo (de: Maria)",
+            "completed": true
+         },
+         {
+            "type": 3,
+            "amount": 2,
+            "date": 1596468104,
+            "description": "a (de: Maria)",
+            "completed": true
+         }
+      ]
    }
 ]
