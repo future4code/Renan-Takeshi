@@ -1,0 +1,46 @@
+[
+   {
+      "name": "re",
+      "cpf": 1,
+      "birthday": 942285600,
+      "balance": 89,
+      "transactions": [
+         {
+            "type": 0,
+            "amount": 111,
+            "date": 1596458598,
+            "description": "Depósito de dinheiro",
+            "completed": true
+         },
+         {
+            "type": 2,
+            "amount": 22,
+            "date": 1596458619,
+            "description": "asdasd (para: re)",
+            "completed": true
+         }
+      ]
+   },
+   {
+      "name": "re",
+      "cpf": 2,
+      "birthday": 942285600,
+      "balance": 22,
+      "transactions": [
+         {
+            "type": 3,
+            "amount": 22,
+            "date": 1596458619,
+            "description": "asdasd (de: re)",
+            "completed": true
+         }
+      ]
+   },
+   {
+      "name": "re",
+      "cpf": 5,
+      "birthday": 942285600,
+      "balance": 0,
+      "transactions": []
+   }
+]
