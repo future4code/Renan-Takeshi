@@ -1,17 +1,17 @@
-import { CustomerAccount } from "./types";
-import getAllAccounts from "./getAllAccounts";
 import * as colors from "colors";
+import { UserAccount } from "./UserAccount";
+import { Bank } from "./Bank";
 
 const getBalance = (name: string, cpf: number): number | void => {
-  const accounts: CustomerAccount[] = getAllAccounts();
+  const accounts: UserAccount[] = new Bank().getAllAccounts();
   for (const account of accounts) {
-    if (account.cpf === cpf && account.name === name) {
+    if (account.getCpf() === cpf && account.getName() === name) {
       console.log(
         colors.green.bgBlack.bold(
-          `Account balance: R$${account.balance.toFixed(2)}`
+          `Account balance: R$${account.getBalance().toFixed(2)}`
         )
       );
-      return account.balance;
+      return account.getBalance();
     }
   }
   console.log(colors.red.bgBlack.bold("Invalid customer information"));

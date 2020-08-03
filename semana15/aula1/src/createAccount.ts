@@ -1,9 +1,9 @@
 import { CustomerAccount } from "./types";
-import getAllAccounts from "./getAllAccounts";
 import * as moment from "moment";
 import * as colors from "colors";
 import printAllAccounts from "./printAllAccounts";
-import { JSONFileManager } from "./JSONFileManager";
+import { Bank } from "./Bank";
+import { UserAccount } from "./UserAccount";
 
 const createAccount = (name: string, cpf: number, birthday: string): void => {
   // Validacao de maioridade
@@ -12,27 +12,26 @@ const createAccount = (name: string, cpf: number, birthday: string): void => {
     return;
   }
 
-  const accounts: CustomerAccount[] = getAllAccounts();
+  const bank = new Bank();
+  const allAccounts: UserAccount[] = bank.getAllAccounts();
 
   // Validacao de CPF
-  for (const account of accounts) {
-    if (account.cpf === cpf) {
+  for (const account of allAccounts) {
+    if (account.getCpf() === cpf) {
       console.log(colors.red.bgBlack.bold("CPF already in use"));
       return;
     }
   }
 
-  const newAccount: CustomerAccount = {
+  const newAccount: UserAccount = new UserAccount(
     name,
     cpf,
-    birthday: moment(birthday, "DD/MM/YYYY").unix(),
-    balance: 0,
-    transactions: [],
-  };
-  accounts.push(newAccount);
+    moment(birthday, "DD/MM/YYYY").unix(),
+    0,
+    []
+  );
 
-  const fm = new JSONFileManager("./data.json");
-  fm.writeToDatabase(accounts);
+  bank.createAccount(newAccount);
 
   printAllAccounts();
   console.log(colors.green.bgBlack.bold("Account successfully created\n"));

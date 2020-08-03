@@ -119,7 +119,7 @@ function inquire() {
               {
                 type: "input",
                 name: "amount",
-                message: "Digite a quantidade:",
+                message: "Digite o valor:",
                 validate: (val) =>
                   val.match(/^[0-9]+$/) ? true : "Digite um numero",
               },
@@ -223,7 +223,7 @@ function inquire() {
               },
               {
                 type: "input",
-                name: "recieverCpf",
+                name: "receiverCpf",
                 message: "Digite o CPF do destinatario:",
                 validate: (val) =>
                   val.match(/^[0-9]+$/) ? true : "Digite um numero",

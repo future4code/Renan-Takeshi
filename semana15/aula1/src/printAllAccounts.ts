@@ -1,40 +1,43 @@
 import * as moment from "moment";
 import * as colors from "colors";
 import getAllAccounts from "./getAllAccounts";
+import { Bank } from "./Bank";
 
 export default () => {
-  const accounts = getAllAccounts();
+  const accounts = new Bank().getAllAccounts();
 
   for (const account of accounts) {
     console.log(
-      colors.bgBlack.bold("Nome:".padEnd(15) + account.name.padEnd(50))
+      colors.bgBlack.bold("Nome:".padEnd(15) + account.getName().padEnd(50))
     );
     console.log(
       colors.bgBlack.bold(
         "Nascimento:".padEnd(15) +
-          moment.unix(account.birthday).format("DD/MM/YYYY").padEnd(50)
+          moment.unix(account.getBirthday()).format("DD/MM/YYYY").padEnd(50)
       )
     );
     console.log(
-      colors.bgBlack.bold("CPF:".padEnd(15) + account.cpf.toString().padEnd(50))
+      colors.bgBlack.bold(
+        "CPF:".padEnd(15) + account.getCpf().toString().padEnd(50)
+      )
     );
-    if (account.balance > 0) {
+    if (account.getBalance() > 0) {
       console.log(
         colors.bgBlack.bold(
           "Saldo:".padEnd(15) +
-            colors.green(account.balance.toFixed(2).padEnd(50))
+            colors.green(account.getBalance().toFixed(2).padEnd(50))
         )
       );
     } else {
       console.log(
         colors.bgBlack.bold(
           "Saldo:".padEnd(15) +
-            colors.red(account.balance.toFixed(2).padEnd(50))
+            colors.red(account.getBalance().toFixed(2).padEnd(50))
         )
       );
     }
     console.log(colors.bgBlack.bold("Transações:".padEnd(65)));
-    for (const transaction of account.transactions) {
+    for (const transaction of account.getTransactions()) {
       if (transaction.completed) {
         console.log(
           colors.green.bgBlack.bold("Consolidada".padStart(16).padEnd(65))

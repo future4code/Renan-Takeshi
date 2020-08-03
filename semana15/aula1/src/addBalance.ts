@@ -1,14 +1,15 @@
-import { CustomerAccount, TransactionsEnum, Transaction } from "./types";
-import getAllAccounts from "./getAllAccounts";
-import { JSONFileManager } from "./JSONFileManager";
 import * as moment from "moment";
 import * as colors from "colors";
 import printAllAccounts from "./printAllAccounts";
+import { UserAccount } from "./UserAccount";
+import { Bank } from "./Bank";
+import { Transaction, TransactionsEnum } from "./Transaction";
+import { JSONFileManager } from "./JSONFileManager";
 
 const addBalance = (name: string, cpf: number, amount: number): void => {
-  const allAccounts: CustomerAccount[] = getAllAccounts();
+  const allAccounts: UserAccount[] = new Bank().getAllAccounts();
   const accountIdx: number = allAccounts.findIndex(
-    (item) => item.name === name && item.cpf === cpf
+    (item) => item.getName() === name && item.getCpf() === cpf
   );
 
   // Validacao de cliente
@@ -17,15 +18,16 @@ const addBalance = (name: string, cpf: number, amount: number): void => {
     return;
   }
 
-  const transaction: Transaction = {
-    type: TransactionsEnum.ADD_BALANCE,
+  const transaction: Transaction = new Transaction(
+    TransactionsEnum.ADD_BALANCE,
     amount,
-    date: moment().unix(),
-    description: "Depósito de dinheiro",
-    completed: true,
-  };
-  allAccounts[accountIdx].transactions.push(transaction);
-  allAccounts[accountIdx].balance += amount;
+    moment().unix(),
+    "Depósito de dinheiro",
+    true
+  );
+
+  allAccounts[accountIdx].addTransaction(transaction);
+  allAccounts[accountIdx].addBalance(amount);
 
   const fm = new JSONFileManager("./data.json");
   fm.writeToDatabase(allAccounts);

@@ -1,1 +1,17 @@
-[]
+[
+   {
+      "name": "re",
+      "cpf": 2,
+      "birthday": 942285600,
+      "balance": 22,
+      "transactions": [
+         {
+            "type": 0,
+            "amount": 22,
+            "date": 1596465814,
+            "description": "Depósito de dinheiro",
+            "completed": true
+         }
+      ]
+   }
+]
