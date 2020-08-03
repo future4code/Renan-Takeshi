@@ -1,6 +1,6 @@
 import { CustomerAccount, TransactionsEnum, Transaction } from "./types";
 import getAllAccounts from "./getAllAccounts";
-import { writeToDatabase } from "./fileSystem";
+import { JSONFileManager } from "./JSONFileManager";
 import * as colors from "colors";
 import * as moment from "moment";
 import printAllAccounts from "./printAllAccounts";
@@ -58,7 +58,8 @@ const performTransfer = (
   };
   allAccounts[receiverIdx].transactions.push(transactionReceiver);
 
-  writeToDatabase(allAccounts);
+  const fm = new JSONFileManager("./data.json");
+  fm.writeToDatabase(allAccounts);
 
   printAllAccounts();
   console.log(colors.green.bgBlack.bold("Transfer scheduled\n"));

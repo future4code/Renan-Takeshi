@@ -1,4 +1,3 @@
-import { readDatabase } from "./fileSystem";
 import { CustomerAccount } from "./types";
 import { JSONFileManager } from "./JSONFileManager";
 

@@ -1,6 +1,6 @@
 import { CustomerAccount, TransactionsEnum, Transaction } from "./types";
 import getAllAccounts from "./getAllAccounts";
-import { writeToDatabase } from "./fileSystem";
+import { JSONFileManager } from "./JSONFileManager";
 import * as moment from "moment";
 import * as colors from "colors";
 import printAllAccounts from "./printAllAccounts";
@@ -27,7 +27,8 @@ const addBalance = (name: string, cpf: number, amount: number): void => {
   allAccounts[accountIdx].transactions.push(transaction);
   allAccounts[accountIdx].balance += amount;
 
-  writeToDatabase(allAccounts);
+  const fm = new JSONFileManager("./data.json");
+  fm.writeToDatabase(allAccounts);
 
   printAllAccounts();
   console.log(colors.green.bgBlack.bold("Deposit sucesfull\n"));

@@ -1,6 +1,6 @@
 import { CustomerAccount, TransactionsEnum } from "./types";
 import getAllAccounts from "./getAllAccounts";
-import { writeToDatabase } from "./fileSystem";
+import { JSONFileManager } from "./JSONFileManager";
 import * as moment from "moment";
 import * as colors from "colors";
 import printAllAccounts from "./printAllAccounts";
@@ -28,7 +28,8 @@ const updateBalance = (): void => {
     }, acount.balance);
   }
 
-  writeToDatabase(allAccounts);
+  const fm = new JSONFileManager("./data.json");
+  fm.writeToDatabase(allAccounts);
 
   printAllAccounts();
   console.log(colors.green.bgBlack.bold("Balance update sucesfull\n"));

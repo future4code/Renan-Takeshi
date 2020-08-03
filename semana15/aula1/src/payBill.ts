@@ -1,6 +1,7 @@
 import { CustomerAccount, TransactionsEnum, Transaction } from "./types";
 import getAllAccounts from "./getAllAccounts";
-import { writeToDatabase } from "./fileSystem";
+import { JSONFileManager } from "./JSONFileManager";
+
 import * as colors from "colors";
 import * as moment from "moment";
 import printAllAccounts from "./printAllAccounts";
@@ -45,7 +46,8 @@ const payBill = (
 
   allAccounts[accountIdx].transactions.push(transaction);
 
-  writeToDatabase(allAccounts);
+  const fm = new JSONFileManager("./data.json");
+  fm.writeToDatabase(allAccounts);
 
   printAllAccounts();
   console.log(colors.green.bgBlack.bold("Payment scheduled\n"));

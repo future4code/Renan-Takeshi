@@ -1,6 +1,5 @@
 import { CustomerAccount } from "./types";
 import getAllAccounts from "./getAllAccounts";
-import { writeToDatabase } from "./fileSystem";
 import * as moment from "moment";
 import * as colors from "colors";
 import printAllAccounts from "./printAllAccounts";
