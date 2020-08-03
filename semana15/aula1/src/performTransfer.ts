@@ -28,7 +28,7 @@ const performTransfer = (
   const receiverIdx: number = allAccounts.findIndex(
     (item) => item.getCpf() === receiverCpf && item.getName() === receiverName
   );
-  console.log(receiverName, receiverCpf);
+
   // Validacao de cliente
   if (senderIdx === -1 || receiverIdx === -1) {
     console.log(colors.red.bgBlack.bold("Invalid customer information\n"));
