@@ -19,6 +19,7 @@ export class UserAccount {
     this.birthday = birthday;
     this.balance = balance;
     this.transactions = transactions;
+    console.log("Chamando o construtor da classe User");
   }
 
   public getName = (): string => this.name;

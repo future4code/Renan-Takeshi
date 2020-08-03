@@ -17,7 +17,20 @@ export default () => {
     );
     console.log(
       colors.bgBlack.bold(
-        "CPF:".padEnd(15) + account.getCpf().toString().padEnd(50)
+        "CPF:".padEnd(15) +
+          `${account
+            .getCpf()
+            .toString()
+            .substring(0, 3)}.${account
+            .getCpf()
+            .toString()
+            .substring(3, 6)}.${account
+            .getCpf()
+            .toString()
+            .substring(6, 9)}-${account
+            .getCpf()
+            .toString()
+            .substring(9)}`.padEnd(50)
       )
     );
     if (account.getBalance() > 0) {

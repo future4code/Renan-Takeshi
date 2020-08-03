@@ -84,7 +84,9 @@ function inquire() {
                 name: "cpf",
                 message: "Digite o CPF:",
                 validate: (val) =>
-                  val.match(/^[0-9]+$/) ? true : "Digite um numero",
+                  val.length === 11 && val.match(/^[0-9]+$/)
+                    ? true
+                    : "Digite 11 numeros",
               },
               {
                 type: "input",
