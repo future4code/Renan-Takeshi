@@ -31,7 +31,7 @@ export class UserAccount {
   public addBalance = (value: number): void => {
     this.balance += value;
   };
-  public addTransaction = (transaction: Transaction) => {
+  public addTransaction = (transaction: Transaction): void => {
     this.transactions.push(transaction);
   };
   public setBalance = (balance): void => {

@@ -25,7 +25,7 @@ export class Bank {
     );
   };
 
-  public getAccountByCpfAndName = (name: string, cpf: number) =>
+  public getAccountByCpfAndName = (name: string, cpf: number): UserAccount =>
     this.getAllAccounts().find(
       (item) => item.getName() === name && item.getCpf() === cpf
     );
