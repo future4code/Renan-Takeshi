@@ -1,0 +1,32 @@
+{
+  "name": "aula1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node ./src/index.ts",
+    "createJao": "ts-node ./src/index.ts create Jao 11111111111 31/12/1969",
+    "createMaria": "ts-node ./src/index.ts create Maria 22222222222 01/01/1970",
+    "createError": "ts-node ./src/index.ts create Joana 33333333333 01/01/2010",
+    "deposit": "ts-node ./src/index.ts deposit Maria 22222222222 100",
+    "balance": "ts-node ./src/index.ts balance Maria 22222222222",
+    "mariaPay": "ts-node ./src/index.ts pay Maria 22222222222 10 'Conta de luz'",
+    "jaoPay": "ts-node ./src/index.ts pay Jao 11111111111 10 'Carne do BAU'",
+    "transfer": "ts-node ./src/index.ts transfer Maria 22222222222 Jao 11111111111 5 'Empréstimo pro folgado'",
+    "update": "ts-node ./src/index.ts update",
+    "print": "ts-node ./src/index.ts print",
+    "todos": "ts-node ./src/index.ts create Maria 22222222222 01/01/1970 && ts-node ./src/index.ts create Jao 11111111111 31/12/1969 && ts-node ./src/index.ts deposit Maria 22222222222 100 && ts-node ./src/index.ts pay Maria 22222222222 10 'Conta de luz' && ts-node ./src/index.ts transfer Maria 22222222222 Jao 11111111111 5 'Empréstimo pro folgado' && ts-node ./src/index.ts update"
+  },
+  "author": "Renan Takeshi",
+  "license": "ISC",
+  "dependencies": {
+    "@types/inquirer": "^7.3.0",
+    "@types/node": "^14.0.27",
+    "colors": "^1.4.0",
+    "inquirer": "^7.3.3",
+    "moment": "^2.27.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  }
+}
