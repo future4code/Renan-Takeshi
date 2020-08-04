@@ -1,7 +1,7 @@
-import { User } from "./User";
-import { Customer } from "./Customer";
-import { Employee } from "./Employee";
-import { Seller } from "./Seller";
+import { User } from "./user";
+import { Customer } from "./customer";
+import { Employee } from "./employee";
+import { Seller } from "./seller";
 
 // exercicio 1
 // item A
@@ -34,7 +34,8 @@ console.log(
 console.log(b.introduceYourself());
 
 // exercicio 6
-const e = new Employee("e", "e", "e", "e", new Date(Date.now()), 10);
+// Troquei para Seller pois employee eh abstract
+const e = new Seller("e", "e", "e", "e", new Date(Date.now()), 10);
 // item A
 // 3 vezes
 

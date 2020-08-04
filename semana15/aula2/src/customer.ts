@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User } from "./user";
 
 export class Customer extends User {
   public purchaseTotal: number = 0;

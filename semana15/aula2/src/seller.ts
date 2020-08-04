@@ -1,4 +1,4 @@
-import { Employee } from "./Employee";
+import { Employee } from "./employee";
 
 export class Seller extends Employee {
   private salesQuantity: number = 0;
@@ -13,4 +13,8 @@ export class Seller extends Employee {
     this.baseSalary +
     Employee.BENEFITS_VALUE +
     this.salesQuantity * Seller.SELLING_COMISSION;
+
+  public sayJob = (): void => {
+    console.log("Sou um vendedor!");
+  };
 }
