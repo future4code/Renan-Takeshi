@@ -34,8 +34,7 @@ console.log(
 console.log(b.introduceYourself());
 
 // exercicio 6
-// Troquei para Seller pois employee eh abstract
-const e = new Seller("e", "e", "e", "e", new Date(Date.now()), 10);
+const e = new Employee("e", "e", "e", "e", new Date(Date.now()), 10);
 // item A
 // 3 vezes
 

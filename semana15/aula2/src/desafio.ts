@@ -6,7 +6,6 @@ import { Manager } from "./manager";
 
 let menu: Dish[] = [];
 let employees: Employee[] = [];
-let bills: number[] = [1, 2, 3, 4];
 
 const chef = new Chef(
   Date.now().toString(),
@@ -18,6 +17,7 @@ const chef = new Chef(
   EmployeeTypes.CHEF
 );
 employees.push(chef);
+console.log("Quantidade de funcionarios: ", Employee.EMPLOYEE_COUNT);
 
 chef.addDishToMenu(
   menu,
@@ -38,13 +38,9 @@ chef.addDishToMenu(
   DishTypes.SWEET,
   8
 );
-
-// chef.removeDishFromMenu(menu, "Burger");
-
-console.log("Quantidade de funcionarios: ", Employee.EMPLOYEE_COUNT);
-menu.forEach((item) => {
-  console.log(item.getName());
-});
+console.log(menu.map((item) => item.getName()));
+chef.removeDishFromMenu(menu, "Burger");
+console.log(menu.map((item) => item.getName()));
 
 const manager = new Manager(
   Date.now().toString(),
@@ -64,19 +60,10 @@ manager.createEmployee(
   "muchcash",
   60
 );
-employees.forEach((item) => console.log(item.getName()));
-manager.removeEmployee(employees, "Cashier");
-employees.forEach((item) => console.log(item.getName()));
+console.log("Quantidade de funcionarios: ", Employee.EMPLOYEE_COUNT);
+console.log(employees.map((item) => item.getName()));
+manager.removeEmployee(employees, "El Chef");
 
-console.log(
-  new Cashier(
-    Date.now().toString(),
-    "manager@manager",
-    "Manager",
-    "manager",
-    new Date(Date.now()),
-    80,
-    EmployeeTypes.MANAGER
-  ).calculateBill(menu)
-);
-console.log(menu);
+console.log(employees.map((item) => item.getName()));
+
+console.log("Total da conta: ", (employees[1] as Cashier).calculateBill(menu));
