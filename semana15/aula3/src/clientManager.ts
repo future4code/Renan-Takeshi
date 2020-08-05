@@ -2,6 +2,7 @@ import { Client } from "./client";
 
 export class ClientManager {
   private clients: Client[] = [];
+  private static registrationNumbers: number[] = [];
 
   getClientsQuantity = (): number => this.clients.length;
 
@@ -25,6 +26,21 @@ export class ClientManager {
   };
 
   registerClient = (client: Client): void => {
-    this.clients.push(client);
+    if (
+      !ClientManager.registrationNumbers.includes(client.registrationNumber)
+    ) {
+      ClientManager.registrationNumbers.push(client.registrationNumber);
+      this.clients.push(client);
+    }
+  };
+
+  printClients = (): void => {
+    this.clients.forEach((item) => {
+      console.log(
+        `${item.name} - Registro: ${item.registrationNumber} - Energia: ${
+          item.consumedEnergy
+        } - Total: ${item.calculateBill()}`
+      );
+    });
   };
 }

@@ -40,7 +40,7 @@ console.log(comercio.getCep());
 console.log(industria.getCep());
 
 // exercicio 4
-// propriedade: herdados de Client: name, registrationNumber, consumedEnergy
+// propriedades: herdados de Client: name, registrationNumber, consumedEnergy
 //              herdado de Place: cep
 //              herdado de Residence: residentsQuantity
 //              exclusivo da ResidentialClient: cpf
@@ -103,3 +103,5 @@ console.log(
   clientManager.calculeteBillOfClient(333)
 );
 console.log("Total Income: ", clientManager.calculateTotalIncome());
+clientManager.registerClient(residentialClient);
+clientManager.printClients();

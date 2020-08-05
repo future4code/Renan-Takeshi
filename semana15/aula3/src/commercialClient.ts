@@ -11,6 +11,9 @@ export class CommercialClient extends Commerce implements Client {
     cep: string
   ) {
     super(floorsQuantity, cep);
+    if (!cnpj.match(/^\d{2}.\d{3}.\d{3}\/\d{4}-\d{2}/)) {
+      throw "CNPJ invalido";
+    }
   }
 
   getCnpj = (): string => this.cnpj;

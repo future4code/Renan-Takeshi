@@ -11,6 +11,9 @@ export class ResidentialClient extends Residence implements Client {
     cep: string
   ) {
     super(residentsQuantity, cep);
+    if (!cpf.match(/^\d{3}.\d{3}.\d{3}-\d{2}/)) {
+      throw "CPF invalido";
+    }
   }
 
   getCpf = (): string => this.cpf;
