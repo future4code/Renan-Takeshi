@@ -6,7 +6,4 @@ export class Residence extends Place {
   }
 
   getResidentsQuantity = (): number => this.residentsQuantity;
-  setResidentsQuantity = (value: number): void => {
-    this.residentsQuantity = value;
-  };
 }

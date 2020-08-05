@@ -6,7 +6,4 @@ export class Commerce extends Place {
   }
 
   getFloorsQuantity = (): number => this.floorsQuantity;
-  setFloorsQuantity = (value: number): void => {
-    this.floorsQuantity = value;
-  };
 }

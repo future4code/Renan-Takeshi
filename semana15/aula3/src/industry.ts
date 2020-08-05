@@ -6,7 +6,4 @@ export class Industry extends Place {
   }
 
   getMachinesQuantity = (): number => this.machinesQuantity;
-  setMachinesQuantity = (value: number): void => {
-    this.machinesQuantity = value;
-  };
 }
