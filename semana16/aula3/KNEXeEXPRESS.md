@@ -1,7 +1,7 @@
 ### Exercicio 1
 
 a) A resposta eh um array com 2 arrays dentro.
-O primeiro array contem objetos RowDataPacket com cada linha encontrada pela query por objeto
+O primeiro array contem objetos RowDataPacket correspondentes a cada linha encontrada pela query
 O segundo contem objetos FieldPacket, que descrevem meta-informacoes como nome do db, tabela e coluna.
 
 b)
