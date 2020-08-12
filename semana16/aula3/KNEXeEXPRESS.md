@@ -6,7 +6,7 @@ O segundo contem objetos FieldPacket, que descrevem meta-informacoes como nome d
 
 b)
 
-```js
+```ts
 async function getActorByName(name: string) {
   const res = await connection.raw(`
       SELECT * FROM actor WHERE name = '${name}'
@@ -18,7 +18,7 @@ async function getActorByName(name: string) {
 
 c)
 
-```js
+```ts
 async function countActors(gender: string): Promise<any> {
   const res = await connection.raw(`
     SELECT COUNT(*) as quantidade, gender
@@ -36,7 +36,7 @@ async function countActors(gender: string): Promise<any> {
 
 a)
 
-```js
+```ts
 async function updateSalary(id: string, salary: number) {
   await connection("actor").where({ id }).update({ salary });
 }
@@ -44,7 +44,7 @@ async function updateSalary(id: string, salary: number) {
 
 b)
 
-```js
+```ts
 async function deleteActor(id: string) {
   await connection("actor").where({ id }).delete();
 }
@@ -52,7 +52,7 @@ async function deleteActor(id: string) {
 
 c)
 
-```js
+```ts
 async function averageSalary(gender: string) {
   const res = await connection("actor")
     .where({ gender })
@@ -67,11 +67,11 @@ async function averageSalary(gender: string) {
 
 ### Exercicio 3
 
-a) Essa eh uma caracteristica do Request do express.js, que cria um objeto params com uma chave com o mesmo nome que esta na route.
+a) Essa eh uma caracteristica do Request do express.ts, que cria um objeto params com uma chave com o mesmo nome que esta na route.
 b) Eles enviam uma resposta com o status e conteudo definido nessas linhas.
 c)
 
-```js
+```ts
 app.get("/actor", async (req: Request, res: Response) => {
   try {
     const count = await countActors(req.query.gender as string);
@@ -90,7 +90,7 @@ app.get("/actor", async (req: Request, res: Response) => {
 
 a)
 
-```js
+```ts
 app.post("/actor", async (req: Request, res: Response) => {
   try {
     await updateSalary(req.body.id, req.body.salary);
@@ -107,7 +107,7 @@ app.post("/actor", async (req: Request, res: Response) => {
 
 b)
 
-```js
+```ts
 app.delete("/actor/:id", async (req: Request, res: Response) => {
   try {
     await deleteActor(req.params.id);
@@ -128,7 +128,7 @@ app.delete("/actor/:id", async (req: Request, res: Response) => {
 
 a)
 
-```js
+```ts
 async function createMovie(
   id: string,
   name: string,
@@ -146,7 +146,7 @@ async function createMovie(
 }
 ```
 
-```js
+```ts
 app.post("/movie", async (req: Request, res: Response) => {
   try {
     await createMovie(
@@ -174,14 +174,14 @@ app.post("/movie", async (req: Request, res: Response) => {
 
 a)
 
-```js
+```ts
 async function getMovies() {
   const res = await connection("movie").limit(15);
   return res;
 }
 ```
 
-```js
+```ts
 app.get("/movie", async (req: Request, res: Response) => {
   try {
     const movies = await getMovies();
@@ -198,7 +198,7 @@ app.get("/movie", async (req: Request, res: Response) => {
 
 ### Exercicio 7
 
-```js
+```ts
 async function searchMovies(query: any) {
   const res = await connection("movie")
     .where("name", "LIKE", `%${query}%`)
@@ -208,7 +208,7 @@ async function searchMovies(query: any) {
 }
 ```
 
-```js
+```ts
 app.get("/movie/search", async (req: Request, res: Response) => {
   try {
     const movies = await searchMovies(req.query.query as string);
