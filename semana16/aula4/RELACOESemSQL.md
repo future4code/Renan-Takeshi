@@ -68,3 +68,18 @@ Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint
 ---
 
 ### Exercicio 3
+
+a) O 'JOIN' faz a juncao das tabelas 'rating' e 'movie'.
+O operador 'ON' indica quais linhas retornar por meio de uma comparacao.
+
+b)
+
+```sql
+SELECT movie.id, movie.name as Title, rating.rate
+FROM movie INNER JOIN rating
+ON movie.id = rating.movie_id;
+```
+
+---
+
+### Exercicio 4
