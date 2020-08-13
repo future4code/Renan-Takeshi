@@ -135,6 +135,9 @@ Error Code: 1054. Unknown column 'm' in 'field list'
 
 ### Exercicio 6
 
+a) Modelei como 1:N, pois julguei que o custo de armazenar o tipo do Oscar
+seria menor do que ter uma terceira tabela com os chaves do filme e oscar.
+
 b)
 
 ```sql
@@ -152,23 +155,25 @@ c)
 ```sql
 INSERT INTO oscar VALUES
 ("1","Fotografia","2018-01-01","001"),
-("2","Animacao","2018-01-01","002"),
-("3","Trilha Sonora","2018-01-01","003"),
-("4","Fotografia","2019-01-01","004"),
-("5","Animacao","2019-01-01","007"),
-("6","Trilha Sonora","2019-01-01","10"),
-("7","Fotografia","2020-01-01","001"),
-("8","Animacao","2020-01-01","002"),
-("9","Trilha Sonora","2020-01-01","003"),
-("10","Fotografia","2021-01-01","004"),
-("11","Animacao","2021-01-01","007"),
+("2","Animacao","2018-01-01","001"),
+("3","Trilha Sonora","2018-01-01","002"),
+("4","Fotografia","2019-01-01","002"),
+("5","Animacao","2019-01-01","003"),
+("6","Trilha Sonora","2019-01-01","003"),
+("7","Fotografia","2020-01-01","004"),
+("8","Animacao","2020-01-01","004"),
+("9","Trilha Sonora","2020-01-01","007"),
+("10","Fotografia","2021-01-01","007"),
+("11","Animacao","2021-01-01","10"),
 ("12","Trilha Sonora","2021-01-01","10");
 ```
 
 d)
 
 ```sql
-SELECT movie.name, GROUP_CONCAT(CONCAT(oscar.name, ' em ', oscar.date) SEPARATOR ", ") AS oscar_list
+SELECT movie.name,
+    GROUP_CONCAT(CONCAT(oscar.name, ' em ', oscar.date) SEPARATOR ", ") AS oscar_list
 FROM oscar JOIN movie on oscar.movie_id = movie.id
-GROUP BY movie.name;
+GROUP BY movie.name
+ORDER BY movie.name;
 ```
