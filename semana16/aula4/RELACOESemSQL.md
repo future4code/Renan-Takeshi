@@ -112,3 +112,25 @@ GROUP BY movie.name;
 ---
 
 ### Exercicio 5
+
+a) Essa query retorna todos os filmes-actor, onde o filme tem atores relacionados.
+As colunas sao todas das tabelas 'movie', 'moviecast' e 'actor'.
+Sao necessarios dois 'JOIN' pois as tabelas 'movie' e 'actor' nao contem informacoes sobre o elenco de cada filme.
+Essas informacao estao na tabela 'moviecast'.
+b)
+
+```sql
+SELECT m.id as movie_id, m.name as movie_title,a.id as actor_id,a.name as actor_name
+FROM movie m LEFT JOIN moviecast mc ON m.id = mc.movie_id
+JOIN actor a ON a.id = mc.actor_id;
+```
+
+c) Tinha uma virgula no 'm,title'
+
+```
+Error Code: 1054. Unknown column 'm' in 'field list'
+```
+
+---
+
+### Exercicio 6
