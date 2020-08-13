@@ -83,3 +83,32 @@ ON movie.id = rating.movie_id;
 ---
 
 ### Exercicio 4
+
+a)
+
+```sql
+SELECT movie.id, movie.name as Title, rating.rate, rating.comment
+FROM movie LEFT JOIN rating
+ON movie.id = rating.movie_id;
+```
+
+b)
+
+```sql
+SELECT movie.id as movie_id, movie.name as movie_name, moviecast.actor_id
+FROM moviecast RIGHT JOIN movie
+ON moviecast.movie_id = movie.id;
+```
+
+c)
+
+```sql
+SELECT AVG(rating.rate) as avg_rate, movie.name
+FROM rating RIGHT JOIN movie
+ON movie.id = rating.movie_id
+GROUP BY movie.name;
+```
+
+---
+
+### Exercicio 5
