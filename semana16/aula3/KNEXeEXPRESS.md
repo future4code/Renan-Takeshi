@@ -7,7 +7,7 @@ O segundo contem objetos FieldPacket, que descrevem meta-informacoes como nome d
 b)
 
 ```ts
-async function getActorByName(name: string) {
+async function getActorByName(name: string): Promise<any> {
   const res = await connection.raw(`
       SELECT * FROM actor WHERE name = '${name}'
     `);
@@ -37,7 +37,7 @@ async function countActors(gender: string): Promise<any> {
 a)
 
 ```ts
-async function updateSalary(id: string, salary: number) {
+async function updateSalary(id: string, salary: number): Promise<void> {
   await connection("actor").where({ id }).update({ salary });
 }
 ```
@@ -45,7 +45,7 @@ async function updateSalary(id: string, salary: number) {
 b)
 
 ```ts
-async function deleteActor(id: string) {
+async function deleteActor(id: string): Promise<any> {
   await connection("actor").where({ id }).delete();
 }
 ```
@@ -53,7 +53,7 @@ async function deleteActor(id: string) {
 c)
 
 ```ts
-async function averageSalary(gender: string) {
+async function averageSalary(gender: string): Promise<any> {
   const res = await connection("actor")
     .where({ gender })
     .select("gender")
@@ -135,7 +135,7 @@ async function createMovie(
   synopsis: string,
   launch_date: Date,
   playing_limit_date: Date
-) {
+): Promise<void> {
   await connection("movie").insert({
     id,
     name,
@@ -175,7 +175,7 @@ app.post("/movie", async (req: Request, res: Response) => {
 a)
 
 ```ts
-async function getMovies() {
+async function getMovies(): Promise<any> {
   const res = await connection("movie").limit(15);
   return res;
 }
@@ -199,7 +199,7 @@ app.get("/movie", async (req: Request, res: Response) => {
 ### Exercicio 7
 
 ```ts
-async function searchMovies(query: any) {
+async function searchMovies(query: string): Promise<any> {
   const res = await connection("movie")
     .where("name", "LIKE", `%${query}%`)
     .orWhere("synopsis", "LIKE", `%${query}%`)
