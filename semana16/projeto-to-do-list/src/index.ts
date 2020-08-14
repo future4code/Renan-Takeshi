@@ -273,4 +273,28 @@ async function searchUsers(query: string): Promise<any> {
   } else throw { message: "Quero query" };
 }
 
-searchUsers("2");
+/**************************************************************/
+
+app.post("/task/responsible", async (req: Request, res: Response) => {
+  try {
+    await assingUserToTask(req.body.task_id, req.body.responsible_user_id);
+    res.status(200).send({
+      message: "Success",
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function assingUserToTask(taskId: string, userId: string): Promise<void> {
+  if (taskId && userId) {
+    await connection.raw(`
+                    INSERT INTO task_user VALUE
+                    (UUID_TO_BIN('${taskId}'), UUID_TO_BIN('${userId}'))
+    `);
+  } else throw { message: "Quero IDs" };
+}
+
+/**************************************************************/
