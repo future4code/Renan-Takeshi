@@ -83,7 +83,7 @@ async function getUserById(id: string): Promise<any> {
     const response = await connection.raw(`
             SELECT BIN_TO_UUID(id) as id, nickname  
             FROM user 
-            WHERE "${id}" = BIN_TO_UUID(ID)
+            WHERE "${id}" = BIN_TO_UUID(id)
         `);
     return response[0][0];
   } else throw { message: "Todos os campos sao obrigatorios" };
@@ -161,3 +161,37 @@ async function createTask(
 }
 
 /**************************************************************/
+
+app.get("/task/:id", async (req: Request, res: Response) => {
+  try {
+    const response = await getTaskById(req.params.id);
+    if (response) {
+      response.limit_date = (response.limit_date as Date)
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("/");
+
+      res.status(200).send(response);
+    } else {
+      res.status(200).send({ message: "Tarefa nao encontrada" });
+    }
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function getTaskById(id: string): Promise<any> {
+  if (id) {
+    const response = await connection.raw(`
+            SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date, status, BIN_TO_UUID(user.id) AS creatorUserId, user.nickname AS creatorUserNickname
+            FROM task JOIN user
+            WHERE "${id}" = BIN_TO_UUID(task.id)
+        `);
+
+    return response[0][0];
+  } else throw { message: "Quero id" };
+}
