@@ -298,3 +298,27 @@ async function assingUserToTask(taskId: string, userId: string): Promise<void> {
 }
 
 /**************************************************************/
+
+app.get("/task/:id/responsible", async (req: Request, res: Response) => {
+  try {
+    const response = await getUsersByTaskId(req.params.id);
+    res.status(200).send({ users: response });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function getUsersByTaskId(taskId: string): Promise<any> {
+  if (taskId) {
+    const response = await connection.raw(`
+                    SELECT BIN_TO_UUID(user.id) AS id, user.nickname
+                    FROM task_user JOIN user ON BIN_TO_UUID(task_user.user_id) = BIN_TO_UUID(user.id)
+                    WHERE BIN_TO_UUID(task_user.task_id) = '${taskId}' 
+    `);
+    return response[0];
+  } else throw { message: "Quero ID" };
+}
+
+/**************************************************************/
