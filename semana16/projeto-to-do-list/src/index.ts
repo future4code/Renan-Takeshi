@@ -40,8 +40,6 @@ app.post("/user", async (req: Request, res: Response) => {
       message: "Success",
     });
   } catch (error) {
-    // const errno: number = error.errno;
-    // const key: string = (error.sqlMessage as string).split(" ")[5];
     res
       .status(400)
       .send(error.sqlMessage ? { message: error.sqlMessage } : error);
@@ -58,10 +56,11 @@ async function createUser(
     nickname.replace(" ", "") &&
     email.replace(" ", "")
   ) {
-    connection.raw(`
+    const response = await connection.raw(`
         INSERT INTO user VALUE 
         (UUID_TO_BIN(UUID()), '${name}', '${nickname}', '${email}')
     `);
+    console.log(response);
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
 
@@ -327,19 +326,19 @@ app.get("/task/:id", async (req: Request, res: Response) => {
   try {
     const response = await getTaskByIdChallenge(req.params.id);
     if (response) {
-      response.responsibleUsers = response.responsibleUsers
-        .split(";")
-        .map((item: string) => {
-          const user = item.split(",");
-          return { id: user[0], nickname: user[1] };
-        });
+      //   response.responsibleUsers = response.responsibleUsers
+      //     .split(";")
+      //     .map((item: string) => {
+      //       const user = item.split(",");
+      //       return { id: user[0], nickname: user[1] };
+      //     });
 
-      response.limitDate = (response.limitDate as Date)
-        .toISOString()
-        .split("T")[0]
-        .split("-")
-        .reverse()
-        .join("/");
+      //   response.limitDate = (response.limitDate as Date)
+      //     .toISOString()
+      //     .split("T")[0]
+      //     .split("-")
+      //     .reverse()
+      //     .join("/");
 
       res.status(200).send(response);
     } else {
@@ -353,15 +352,22 @@ app.get("/task/:id", async (req: Request, res: Response) => {
 });
 
 async function getTaskByIdChallenge(id: string): Promise<any> {
+  console.log(`
+    
+`);
   if (id) {
     const response = await connection.raw(`
-        SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date as limitDate, status, BIN_TO_UUID(user.id) AS creatorUserId, user.nickname AS creatorUserNickname, 
-        GROUP_CONCAT(BIN_TO_UUID(user.id),"," ,user.nickname SEPARATOR ";") as responsibleUsers
-        FROM task JOIN user ON BIN_TO_UUID(task.user_id) = BIN_TO_UUID(user.id)
-        JOIN task_user ON BIN_TO_UUID(task_user.task_id) = BIN_TO_UUID(task.id)
-        WHERE '${id}' = BIN_TO_UUID(task.id)
-        GROUP BY BIN_TO_UUID(task.id), title, description, limitDate, status, creatorUserId, creatorUserNickname;
+        SELECT 
+            BIN_TO_UUID(task_user.task_id) AS taskId,
+            task.title,
+            task.description,
+            task.limit_date AS limitDate,
+            BIN_TO_UUID(task.user_id) AS creatorUserId,
+            user.nickname
+        FROM task JOIN task_user ON task.id = task_user.task_id
+        JOIN user ON task_user.user_id = user.id
+        WHERE BIN_TO_UUID(task_user.task_id) = '${id}'
     `);
-    return response[0][0];
+    return response[0];
   } else throw { message: "Quero id" };
 }
