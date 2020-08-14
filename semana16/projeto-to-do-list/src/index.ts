@@ -68,10 +68,9 @@ async function createUser(
     nickname.replace(" ", "") &&
     email.replace(" ", "")
   ) {
-    const response = await connection.raw(`
+    connection.raw(`
         INSERT INTO user VALUE (UUID_TO_BIN(UUID(),true), '${name}', '${nickname}', '${email}')
     `);
-    console.log(response[0].affectedRows);
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
 
@@ -86,7 +85,7 @@ app.get("/user/:id", async (req: Request, res: Response) => {
   }
 });
 
-async function getUserById(id: string) {
+async function getUserById(id: string): Promise<any> {
   if (id.replace(" ", "")) {
     const response = await connection.raw(`
             SELECT BIN_TO_UUID(id) as id, nickname  
@@ -114,18 +113,18 @@ app.post("/user/edit/:id", async (req: Request, res: Response) => {
   }
 });
 
-async function editUser(id: string, name: string, nickname: string) {
-  if (
-    id.replace(" ", "") &&
-    name.replace(" ", "") &&
-    nickname.replace(" ", "")
-  ) {
-    const response = await connection.raw(`
+async function editUser(
+  id: string,
+  name?: string,
+  nickname?: string
+): Promise<void> {
+  if (id.replace(" ", "") && (name || nickname)) {
+    await connection.raw(`
             UPDATE user
-            SET name = "${name}", nickname = "${nickname}"
+            SET ${name ? `name = '${name}'` : ""}
+                ${nickname && name ? ", " : ""}
+                ${nickname ? `nickname = '${nickname}'` : ""} 
             WHERE "${id}" = BIN_TO_UUID(id)
         `);
-    console.log(response[0].affectedRows);
-    return response[0].affectedRows;
-  } else throw { message: "Todos os campos sao obrigatorios" };
+  } else throw { message: "Pelo menos um!" };
 }
