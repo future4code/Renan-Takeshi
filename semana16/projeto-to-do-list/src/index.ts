@@ -58,7 +58,7 @@ async function createUser(
   ) {
     const response = await connection.raw(`
         INSERT INTO user VALUE 
-        (UUID_TO_BIN(UUID()), '${name}', '${nickname}', '${email}')
+            (UUID_TO_BIN(UUID()), '${name}', '${nickname}', '${email}')
     `);
     console.log(response);
   } else throw { message: "Todos os campos sao obrigatorios" };
@@ -80,10 +80,10 @@ app.get("/user/:id", async (req: Request, res: Response) => {
 async function getUserById(id: string): Promise<any> {
   if (id.replace(" ", "")) {
     const response = await connection.raw(`
-            SELECT BIN_TO_UUID(id) as id, nickname  
-            FROM user 
-            WHERE "${id}" = BIN_TO_UUID(id)
-        `);
+        SELECT BIN_TO_UUID(id) as id, nickname  
+        FROM user 
+        WHERE "${id}" = BIN_TO_UUID(id)
+    `);
     return response[0][0];
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
@@ -110,12 +110,12 @@ async function editUser(
 ): Promise<void> {
   if (id.replace(" ", "") && (name || nickname)) {
     await connection.raw(`
-            UPDATE user
-            SET ${name ? `name = '${name}'` : ""}
-                ${nickname && name ? ", " : ""}
-                ${nickname ? `nickname = '${nickname}'` : ""} 
-            WHERE "${id}" = BIN_TO_UUID(id)
-        `);
+        UPDATE user
+        SET ${name ? `name = '${name}'` : ""}
+            ${nickname && name ? ", " : ""}
+            ${nickname ? `nickname = '${nickname}'` : ""} 
+        WHERE "${id}" = BIN_TO_UUID(id)
+    `);
   } else throw { message: "Pelo menos um!" };
 }
 
@@ -211,7 +211,7 @@ async function getAllUsers(): Promise<any> {
   const response = await connection.raw(`
     SELECT BIN_TO_UUID(id) AS id, nickname
     FROM user
-  `);
+`);
   return response[0];
 }
 
@@ -239,10 +239,17 @@ app.get("/task", async (req: Request, res: Response) => {
 async function getTasksByUserId(id: string): Promise<any> {
   if (id) {
     const response = await connection.raw(`
-              SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date AS limitDate, BIN_TO_UUID(user.id) AS creatorUserId, status, user.nickname AS creatorUserNickname
-              FROM task JOIN user ON task.user_id = user.id
-              WHERE BIN_TO_UUID(user.id) = '${id}'
-          `);
+        SELECT 
+            BIN_TO_UUID(task.id) as taskId, 
+            title, 
+            description, 
+            limit_date AS limitDate, 
+            BIN_TO_UUID(user.id) AS creatorUserId, 
+            status, 
+            user.nickname AS creatorUserNickname
+        FROM task JOIN user ON task.user_id = user.id
+        WHERE BIN_TO_UUID(user.id) = '${id}'
+    `);
     return response[0];
   } else throw { message: "Quero id" };
 }
@@ -263,11 +270,11 @@ app.get("/user", async (req: Request, res: Response) => {
 async function searchUsers(query: string): Promise<any> {
   if (query) {
     const response = await connection.raw(`
-                  SELECT BIN_TO_UUID(id) AS id, nickname
-                  FROM user
-                  WHERE user.nickname LIKE '%${query}%' 
-                  OR user.email LIKE '%${query}%'        
-              `);
+        SELECT BIN_TO_UUID(id) AS id, nickname
+        FROM user
+        WHERE user.nickname LIKE '%${query}%' 
+        OR user.email LIKE '%${query}%'        
+    `);
     return response[0];
   } else throw { message: "Quero query" };
 }
@@ -290,8 +297,8 @@ app.post("/task/responsible", async (req: Request, res: Response) => {
 async function assingUserToTask(taskId: string, userId: string): Promise<void> {
   if (taskId && userId) {
     await connection.raw(`
-                    INSERT INTO task_user VALUE
-                    (UUID_TO_BIN('${taskId}'), UUID_TO_BIN('${userId}'))
+        INSERT INTO task_user VALUE
+        (UUID_TO_BIN('${taskId}'), UUID_TO_BIN('${userId}'))
     `);
   } else throw { message: "Quero IDs" };
 }
@@ -312,9 +319,9 @@ app.get("/task/:id/responsible", async (req: Request, res: Response) => {
 async function getUsersByTaskId(taskId: string): Promise<any> {
   if (taskId) {
     const response = await connection.raw(`
-                    SELECT BIN_TO_UUID(user.id) AS id, user.nickname
-                    FROM task_user JOIN user ON task_user.user_id = user.id
-                    WHERE BIN_TO_UUID(task_user.task_id) = '${taskId}' 
+        SELECT BIN_TO_UUID(user.id) AS id, user.nickname
+        FROM task_user JOIN user ON task_user.user_id = user.id
+        WHERE BIN_TO_UUID(task_user.task_id) = '${taskId}' 
     `);
     return response[0];
   } else throw { message: "Quero ID" };
@@ -347,15 +354,15 @@ app.get("/task/:id", async (req: Request, res: Response) => {
 async function getTaskByIdChallenge(id: string): Promise<any> {
   if (id) {
     const creatorUser = connection.raw(`
-          SELECT 
+        SELECT 
             BIN_TO_UUID(task.id) AS taskId,
             task.title,
             task.description,
             task.limit_date AS limitDate,
             BIN_TO_UUID(user.id) as creatorUserId, 
             user.nickname as creatorUserNickname
-          FROM task JOIN user ON task.user_id = user.id
-          WHERE BIN_TO_UUID(task.id) = '${id}'
+        FROM task JOIN user ON task.user_id = user.id
+        WHERE BIN_TO_UUID(task.id) = '${id}'
       `);
     const responsibleUsers = connection.raw(`
         SELECT 
