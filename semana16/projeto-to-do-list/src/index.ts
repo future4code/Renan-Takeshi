@@ -195,3 +195,26 @@ async function getTaskById(id: string): Promise<any> {
     return response[0][0];
   } else throw { message: "Quero id" };
 }
+
+/**************************************************************/
+
+app.get("/users/all", async (req: Request, res: Response) => {
+  try {
+    const response = await getAllUsers();
+    res.status(200).send({ users: response });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function getAllUsers(): Promise<any> {
+  const response = await connection.raw(`
+    SELECT BIN_TO_UUID(id) AS id, nickname
+    FROM user
+  `);
+  return response[0];
+}
+
+/**************************************************************/
