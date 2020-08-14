@@ -3,6 +3,8 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { AddressInfo } from "net";
 
+/**************************************************************/
+
 dotenv.config();
 
 const connection = knex({
@@ -29,19 +31,7 @@ const server = app.listen(process.env.PORT || 3003, () => {
   }
 });
 
-// app.get("/", testEndpoint);
-
-async function testEndpoint(req: Request, res: Response): Promise<void> {
-  try {
-    const result = await connection.raw(`
-      SELECT * FROM actor
-    `);
-
-    res.status(200).send(result);
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-}
+/**************************************************************/
 
 app.post("/user", async (req: Request, res: Response) => {
   try {
@@ -69,10 +59,13 @@ async function createUser(
     email.replace(" ", "")
   ) {
     connection.raw(`
-        INSERT INTO user VALUE (UUID_TO_BIN(UUID(),true), '${name}', '${nickname}', '${email}')
+        INSERT INTO user VALUE 
+        (UUID_TO_BIN(UUID()), '${name}', '${nickname}', '${email}')
     `);
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
+
+/**************************************************************/
 
 app.get("/user/:id", async (req: Request, res: Response) => {
   try {
@@ -96,13 +89,11 @@ async function getUserById(id: string): Promise<any> {
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
 
+/**************************************************************/
+
 app.post("/user/edit/:id", async (req: Request, res: Response) => {
   try {
-    const response = await editUser(
-      req.params.id,
-      req.body.name,
-      req.body.nickname
-    );
+    await editUser(req.params.id, req.body.name, req.body.nickname);
     res.status(200).send({
       message: "Success",
     });
@@ -128,3 +119,45 @@ async function editUser(
         `);
   } else throw { message: "Pelo menos um!" };
 }
+
+/**************************************************************/
+
+app.put("/task", async (req: Request, res: Response) => {
+  try {
+    await createTask(
+      req.body.creatorUserId,
+      req.body.title,
+      req.body.description,
+      req.body.limitDate
+    );
+    res.status(200).send({
+      message: "Success",
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function createTask(
+  userId: string,
+  title: string,
+  description: string,
+  limitDate: string
+): Promise<void> {
+  if (userId && title && description && limitDate) {
+    await connection.raw(`
+        INSERT INTO task VALUE(
+            UUID_TO_BIN(UUID()),
+            UUID_TO_BIN('${userId}'),
+            '${title}',
+            '${description}',
+            'pending',
+            '${limitDate.split("/").reverse().join("-")}'            
+        )
+    `);
+  } else throw { message: "Todos os campos sao obrigatorios" };
+}
+
+/**************************************************************/
