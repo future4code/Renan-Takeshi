@@ -187,7 +187,7 @@ async function getTaskById(id: string): Promise<any> {
   if (id) {
     const response = await connection.raw(`
             SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date as limitDate, status, BIN_TO_UUID(user.id) AS creatorUserId, user.nickname AS creatorUserNickname
-            FROM task JOIN user ON BIN_TO_UUID(task.user_id) = BIN_TO_UUID(user.id)
+            FROM task JOIN user ON task.user_id = user.id
             WHERE "${id}" = BIN_TO_UUID(task.id)
         `);
     return response[0][0];
@@ -240,8 +240,8 @@ async function getTasksByUserId(id: string): Promise<any> {
   if (id) {
     const response = await connection.raw(`
               SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date AS limitDate, BIN_TO_UUID(user.id) AS creatorUserId, status, user.nickname AS creatorUserNickname
-              FROM task JOIN user ON BIN_TO_UUID(task.user_id) = BIN_TO_UUID(user.id)
-              WHERE "${id}" = BIN_TO_UUID(user.id)
+              FROM task JOIN user ON task.user_id = user.id
+              WHERE BIN_TO_UUID(user.id) = '${id}'
           `);
     return response[0];
   } else throw { message: "Quero id" };
@@ -313,7 +313,7 @@ async function getUsersByTaskId(taskId: string): Promise<any> {
   if (taskId) {
     const response = await connection.raw(`
                     SELECT BIN_TO_UUID(user.id) AS id, user.nickname
-                    FROM task_user JOIN user ON BIN_TO_UUID(task_user.user_id) = BIN_TO_UUID(user.id)
+                    FROM task_user JOIN user ON task_user.user_id = user.id
                     WHERE BIN_TO_UUID(task_user.task_id) = '${taskId}' 
     `);
     return response[0];
@@ -325,7 +325,7 @@ async function getUsersByTaskId(taskId: string): Promise<any> {
 app.get("/task/:id", async (req: Request, res: Response) => {
   try {
     const response = await getTaskByIdChallenge(req.params.id);
-    if (response) {
+    if (response.taskId) {
       response.limitDate = (response.limitDate as Date)
         .toISOString()
         .split("T")[0]
@@ -366,5 +366,5 @@ async function getTaskByIdChallenge(id: string): Promise<any> {
     `);
     const values = await Promise.all([creatorUser, responsibleUsers]);
     return { ...values[0][0][0], responsibleUsers: values[1][0] };
-  } else throw { message: "Missing task id value" };
+  } else throw { message: "Missing task id value." };
 }
