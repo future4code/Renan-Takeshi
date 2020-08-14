@@ -326,19 +326,12 @@ app.get("/task/:id", async (req: Request, res: Response) => {
   try {
     const response = await getTaskByIdChallenge(req.params.id);
     if (response) {
-      //   response.responsibleUsers = response.responsibleUsers
-      //     .split(";")
-      //     .map((item: string) => {
-      //       const user = item.split(",");
-      //       return { id: user[0], nickname: user[1] };
-      //     });
-
-      //   response.limitDate = (response.limitDate as Date)
-      //     .toISOString()
-      //     .split("T")[0]
-      //     .split("-")
-      //     .reverse()
-      //     .join("/");
+      response.limitDate = (response.limitDate as Date)
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("/");
 
       res.status(200).send(response);
     } else {
@@ -356,18 +349,26 @@ async function getTaskByIdChallenge(id: string): Promise<any> {
     
 `);
   if (id) {
-    const response = await connection.raw(`
+    const creatorUser = connection.raw(`
+          SELECT 
+          BIN_TO_UUID(task.id) AS taskId,
+          task.title,
+          task.description,
+          task.limit_date AS limitDate,
+          BIN_TO_UUID(user.id) as creatorUserId, 
+          user.nickname as creatorUserNickname
+          FROM task JOIN user ON task.user_id = user.id
+          WHERE BIN_TO_UUID(task.id) = '${id}'
+      `);
+    const responsibleUsers = connection.raw(`
         SELECT 
-            BIN_TO_UUID(task_user.task_id) AS taskId,
-            task.title,
-            task.description,
-            task.limit_date AS limitDate,
-            BIN_TO_UUID(task.user_id) AS creatorUserId,
+            BIN_TO_UUID(task_user.user_id) AS id,
             user.nickname
         FROM task JOIN task_user ON task.id = task_user.task_id
         JOIN user ON task_user.user_id = user.id
         WHERE BIN_TO_UUID(task_user.task_id) = '${id}'
     `);
-    return response[0];
+    const values = await Promise.all([creatorUser, responsibleUsers]);
+    return { ...values[0][0][0], responsibleUsers: values[1][0] };
   } else throw { message: "Quero id" };
 }
