@@ -96,3 +96,36 @@ async function getUserById(id: string) {
     return response[0][0];
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
+
+app.post("/user/edit/:id", async (req: Request, res: Response) => {
+  try {
+    const response = await editUser(
+      req.params.id,
+      req.body.name,
+      req.body.nickname
+    );
+    res.status(200).send({
+      message: "Success",
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function editUser(id: string, name: string, nickname: string) {
+  if (
+    id.replace(" ", "") &&
+    name.replace(" ", "") &&
+    nickname.replace(" ", "")
+  ) {
+    const response = await connection.raw(`
+            UPDATE user
+            SET name = "${name}", nickname = "${nickname}"
+            WHERE "${id}" = BIN_TO_UUID(id)
+        `);
+    console.log(response[0].affectedRows);
+    return response[0].affectedRows;
+  } else throw { message: "Todos os campos sao obrigatorios" };
+}
