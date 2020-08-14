@@ -166,7 +166,7 @@ app.get("/task/:id", async (req: Request, res: Response) => {
   try {
     const response = await getTaskById(req.params.id);
     if (response) {
-      response.limit_date = (response.limit_date as Date)
+      response.limitDate = (response.limitDate as Date)
         .toISOString()
         .split("T")[0]
         .split("-")
@@ -187,11 +187,10 @@ app.get("/task/:id", async (req: Request, res: Response) => {
 async function getTaskById(id: string): Promise<any> {
   if (id) {
     const response = await connection.raw(`
-            SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date, status, BIN_TO_UUID(user.id) AS creatorUserId, user.nickname AS creatorUserNickname
-            FROM task JOIN user
+            SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date as limitDate, status, BIN_TO_UUID(user.id) AS creatorUserId, user.nickname AS creatorUserNickname
+            FROM task JOIN user ON BIN_TO_UUID(task.user_id) = BIN_TO_UUID(user.id)
             WHERE "${id}" = BIN_TO_UUID(task.id)
         `);
-
     return response[0][0];
   } else throw { message: "Quero id" };
 }
@@ -218,3 +217,33 @@ async function getAllUsers(): Promise<any> {
 }
 
 /**************************************************************/
+
+app.get("/task", async (req: Request, res: Response) => {
+  try {
+    const response = await getTasksByUserId(req.query.creatorUserId as string);
+    for (const task of response) {
+      task.limitDate = (task.limitDate as Date)
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("/");
+    }
+    res.status(200).send({ tasks: response });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function getTasksByUserId(id: string): Promise<any> {
+  if (id) {
+    const response = await connection.raw(`
+              SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date AS limitDate, BIN_TO_UUID(user.id) AS creatorUserId, status, user.nickname AS creatorUserNickname
+              FROM task JOIN user ON BIN_TO_UUID(task.user_id) = BIN_TO_UUID(user.id)
+              WHERE "${id}" = BIN_TO_UUID(user.id)
+          `);
+    return response[0];
+  } else throw { message: "Quero id" };
+}
