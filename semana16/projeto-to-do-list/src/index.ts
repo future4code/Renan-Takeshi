@@ -334,6 +334,13 @@ app.get("/task/:id", async (req: Request, res: Response) => {
           return { id: user[0], nickname: user[1] };
         });
 
+      response.limitDate = (response.limitDate as Date)
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("/");
+
       res.status(200).send(response);
     } else {
       res.status(200).send({ message: "Tarefa nao encontrada" });
