@@ -345,18 +345,15 @@ app.get("/task/:id", async (req: Request, res: Response) => {
 });
 
 async function getTaskByIdChallenge(id: string): Promise<any> {
-  console.log(`
-    
-`);
   if (id) {
     const creatorUser = connection.raw(`
           SELECT 
-          BIN_TO_UUID(task.id) AS taskId,
-          task.title,
-          task.description,
-          task.limit_date AS limitDate,
-          BIN_TO_UUID(user.id) as creatorUserId, 
-          user.nickname as creatorUserNickname
+            BIN_TO_UUID(task.id) AS taskId,
+            task.title,
+            task.description,
+            task.limit_date AS limitDate,
+            BIN_TO_UUID(user.id) as creatorUserId, 
+            user.nickname as creatorUserNickname
           FROM task JOIN user ON task.user_id = user.id
           WHERE BIN_TO_UUID(task.id) = '${id}'
       `);
@@ -364,11 +361,10 @@ async function getTaskByIdChallenge(id: string): Promise<any> {
         SELECT 
             BIN_TO_UUID(task_user.user_id) AS id,
             user.nickname
-        FROM task JOIN task_user ON task.id = task_user.task_id
-        JOIN user ON task_user.user_id = user.id
+        FROM user JOIN task_user ON user.id = task_user.user_id
         WHERE BIN_TO_UUID(task_user.task_id) = '${id}'
     `);
     const values = await Promise.all([creatorUser, responsibleUsers]);
     return { ...values[0][0][0], responsibleUsers: values[1][0] };
-  } else throw { message: "Quero id" };
+  } else throw { message: "Missing task id value" };
 }
