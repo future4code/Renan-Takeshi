@@ -3,7 +3,7 @@ import express, { Request, Response, response } from "express";
 import dotenv from "dotenv";
 import { AddressInfo } from "net";
 
-/**************************************************************/
+/****************************** Exercicio 11 ********************************/
 
 dotenv.config();
 
@@ -31,7 +31,7 @@ const server = app.listen(process.env.PORT || 3003, () => {
   }
 });
 
-/**************************************************************/
+/****************************** Exercicio 01 ********************************/
 
 app.post("/user", async (req: Request, res: Response) => {
   try {
@@ -64,7 +64,7 @@ async function createUser(
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
 
-/**************************************************************/
+/****************************** Exercicio 02 ********************************/
 
 app.get("/user/:id", async (req: Request, res: Response) => {
   try {
@@ -88,7 +88,7 @@ async function getUserById(id: string): Promise<any> {
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
 
-/**************************************************************/
+/****************************** Exercicio 03 ********************************/
 
 app.post("/user/edit/:id", async (req: Request, res: Response) => {
   try {
@@ -119,7 +119,7 @@ async function editUser(
   } else throw { message: "Pelo menos um!" };
 }
 
-/**************************************************************/
+/****************************** Exercicio 04 ********************************/
 
 app.put("/task", async (req: Request, res: Response) => {
   try {
@@ -159,7 +159,7 @@ async function createTask(
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
 
-/**************************************************************/
+/****************************** Exercicio 05 ********************************/
 
 // app.get("/task/:id", async (req: Request, res: Response) => {
 //   try {
@@ -194,7 +194,7 @@ async function getTaskById(id: string): Promise<any> {
   } else throw { message: "Quero id" };
 }
 
-/**************************************************************/
+/****************************** Exercicio 06 ********************************/
 
 app.get("/users/all", async (req: Request, res: Response) => {
   try {
@@ -215,7 +215,7 @@ async function getAllUsers(): Promise<any> {
   return response[0];
 }
 
-/**************************************************************/
+/****************************** Exercicio 07 ********************************/
 
 app.get("/task", async (req: Request, res: Response) => {
   try {
@@ -254,7 +254,7 @@ async function getTasksByUserId(id: string): Promise<any> {
   } else throw { message: "Quero id" };
 }
 
-/**************************************************************/
+/****************************** Exercicio 08 ********************************/
 
 app.get("/user", async (req: Request, res: Response) => {
   try {
@@ -279,7 +279,7 @@ async function searchUsers(query: string): Promise<any> {
   } else throw { message: "Quero query" };
 }
 
-/**************************************************************/
+/****************************** Exercicio 09 ********************************/
 
 app.post("/task/responsible", async (req: Request, res: Response) => {
   try {
@@ -303,7 +303,7 @@ async function assingUserToTask(taskId: string, userId: string): Promise<void> {
   } else throw { message: "Quero IDs" };
 }
 
-/**************************************************************/
+/****************************** Exercicio 10 ********************************/
 
 app.get("/task/:id/responsible", async (req: Request, res: Response) => {
   try {
@@ -327,7 +327,7 @@ async function getUsersByTaskId(taskId: string): Promise<any> {
   } else throw { message: "Quero ID" };
 }
 
-/**************************************************************/
+/****************************** Exercicio 11 ********************************/
 
 app.get("/task/:id", async (req: Request, res: Response) => {
   try {
@@ -376,7 +376,7 @@ async function getTaskByIdChallenge(id: string): Promise<any> {
   } else throw { message: "Missing task id value." };
 }
 
-/**************************************************************/
+/****************************** Exercicio 12 ********************************/
 
 app.post("/task/:id/status/edit", async (req: Request, res: Response) => {
   try {
@@ -400,19 +400,33 @@ async function updateTaskStatus(id: string, status: string) {
   } else throw { message: "Missing task id or status value." };
 }
 
-/**************************************************************/
+/****************************** Exercicio 13 ********************************/
 app.get("/tasks", async (req: Request, res: Response) => {
   try {
-    const response = await getTaskByStatus(req.query.status as string);
-    for (const task of response) {
-      task.limitDate = (task.limitDate as Date)
-        .toISOString()
-        .split("T")[0]
-        .split("-")
-        .reverse()
-        .join("/");
-    }
-    res.status(200).send({ tasks: response });
+    if (req.query.status) {
+      const response = await getTaskByStatus(req.query.status as string);
+      for (const task of response) {
+        task.limitDate = (task.limitDate as Date)
+          .toISOString()
+          .split("T")[0]
+          .split("-")
+          .reverse()
+          .join("/");
+      }
+      res.status(200).send({ tasks: response });
+    } else throw { message: "Quero query" };
+    if (req.query.query) {
+      const response = await searchTasks(req.query.query as string);
+      for (const task of response) {
+        task.limitDate = (task.limitDate as Date)
+          .toISOString()
+          .split("T")[0]
+          .split("-")
+          .reverse()
+          .join("/");
+      }
+      res.status(200).send({ tasks: response });
+    } else throw { message: "Quero query" };
   } catch (error) {
     res
       .status(400)
@@ -421,8 +435,7 @@ app.get("/tasks", async (req: Request, res: Response) => {
 });
 
 async function getTaskByStatus(status: string) {
-  if (status) {
-    const response = await connection.raw(`
+  const response = await connection.raw(`
       SELECT 
         BIN_TO_UUID(t.id) AS taskId, 
         t.title, 
@@ -433,11 +446,10 @@ async function getTaskByStatus(status: string) {
       FROM task t JOIN user u ON t.user_id = u.id
       WHERE t.status = '${status}'
     `);
-    return response[0];
-  } else throw { message: "Missing task status value." };
+  return response[0];
 }
 
-/**************************************************************/
+/****************************** Exercicio 14 ********************************/
 
 app.get("/tasks/delayed", async (req: Request, res: Response) => {
   try {
@@ -473,7 +485,7 @@ async function getDelayedTasks() {
   return response[0];
 }
 
-/**************************************************************/
+/****************************** Exercicio 15 ********************************/
 
 app.post(
   "/task/:taskId/responsible/:responsibleId",
@@ -506,7 +518,24 @@ async function removeResponsibleFromTask(
   } else throw { message: "Missing ids." };
 }
 
-/*19*************************************************************/
+/****************************** Exercicio 17 ********************************/
+
+async function searchTasks(query: string): Promise<any> {
+  const response = await connection.raw(`
+        SELECT 
+          BIN_TO_UUID(t.id) AS taskId,
+          t.title,
+          t.description,
+          t.limit_date AS limitDate,
+          BIN_TO_UUID(t.user_id) as creatorUserId,
+          u.nickname AS creatorUserNickname
+        FROM task t JOIN user u ON t.user_id = u.id
+        WHERE t.title LIKE '%${query}%' OR t.description LIKE '%${query}%'      
+    `);
+  return response[0];
+}
+
+/****************************** Exercicio 19 ********************************/
 
 app.delete("/task/:id", async (req: Request, res: Response) => {
   try {
@@ -529,7 +558,7 @@ async function deleteTask(taskId: string) {
   } else throw { message: "Missing task id" };
 }
 
-/*20*************************************************************/
+/****************************** Exercicio 20 ********************************/
 
 app.delete("/user/:id", async (req: Request, res: Response) => {
   try {
