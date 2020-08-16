@@ -521,7 +521,7 @@ app.delete("/task/:id", async (req: Request, res: Response) => {
 
 async function deleteTask(taskId: string) {
   if (taskId) {
-    const response = await connection.raw(`
+    await connection.raw(`
         DELETE
         FROM task t
         WHERE BIN_TO_UUID(t.id) = '${taskId}'
@@ -530,3 +530,24 @@ async function deleteTask(taskId: string) {
 }
 
 /*20*************************************************************/
+
+app.delete("/user/:id", async (req: Request, res: Response) => {
+  try {
+    await deleteUser(req.params.id);
+    res.status(200).send({ message: "Sucess" });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function deleteUser(id: string) {
+  if (id) {
+    await connection.raw(`
+      DELETE
+      FROM user u
+      WHERE BIN_TO_UUID(u.id) = '${id}'
+    `);
+  } else throw { message: "Missing user id" };
+}
