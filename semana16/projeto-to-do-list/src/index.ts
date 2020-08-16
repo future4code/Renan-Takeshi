@@ -505,3 +505,28 @@ async function removeResponsibleFromTask(
     `);
   } else throw { message: "Missing ids." };
 }
+
+/*19*************************************************************/
+
+app.delete("/task/:id", async (req: Request, res: Response) => {
+  try {
+    await deleteTask(req.params.id);
+    res.status(200).send({ message: "Sucess" });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function deleteTask(taskId: string) {
+  if (taskId) {
+    const response = await connection.raw(`
+        DELETE
+        FROM task t
+        WHERE BIN_TO_UUID(t.id) = '${taskId}'
+    `);
+  } else throw { message: "Missing task id" };
+}
+
+/*20*************************************************************/
