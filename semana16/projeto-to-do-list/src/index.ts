@@ -1,5 +1,5 @@
 import knex from "knex";
-import express, { Request, Response } from "express";
+import express, { Request, Response, response } from "express";
 import dotenv from "dotenv";
 import { AddressInfo } from "net";
 
@@ -474,3 +474,34 @@ async function getDelayedTasks() {
 }
 
 /**************************************************************/
+
+app.post(
+  "/task/:taskId/responsible/:responsibleId",
+  async (req: Request, res: Response) => {
+    try {
+      await removeResponsibleFromTask(
+        req.params.taskId,
+        req.params.responsibleId
+      );
+      res.status(200).send({ message: "Sucess" });
+    } catch (error) {
+      res
+        .status(400)
+        .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+    }
+  }
+);
+
+async function removeResponsibleFromTask(
+  taskId: string,
+  responsibleId: string
+) {
+  if (taskId && responsibleId) {
+    await connection.raw(`
+      DELETE
+      FROM task_user tu
+      WHERE BIN_TO_UUID(tu.user_id) = '${responsibleId}'
+      AND BIN_TO_UUID(tu.task_id) = '${taskId}'
+    `);
+  } else throw { message: "Missing ids." };
+}
