@@ -1,5 +1,5 @@
 import knex from "knex";
-import express, { Request, Response, response } from "express";
+import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { AddressInfo } from "net";
 
@@ -30,6 +30,8 @@ const server = app.listen(process.env.PORT || 3003, () => {
     console.error(`Failure upon starting server.`);
   }
 });
+
+const validadeString = (str: string) => str.replace(/\s/g, "");
 
 /****************************** Exercicio 01 ********************************/
 
