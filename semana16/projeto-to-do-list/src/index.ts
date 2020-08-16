@@ -56,11 +56,10 @@ async function createUser(
     nickname.replace(" ", "") &&
     email.replace(" ", "")
   ) {
-    const response = await connection.raw(`
+    await connection.raw(`
         INSERT INTO user VALUE 
             (UUID_TO_BIN(UUID()), '${name}', '${nickname}', '${email}')
     `);
-    console.log(response);
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
 
@@ -160,28 +159,6 @@ async function createTask(
 }
 
 /****************************** Exercicio 05 ********************************/
-
-// app.get("/task/:id", async (req: Request, res: Response) => {
-//   try {
-//     const response = await getTaskById(req.params.id);
-//     if (response) {
-//       response.limitDate = (response.limitDate as Date)
-//         .toISOString()
-//         .split("T")[0]
-//         .split("-")
-//         .reverse()
-//         .join("/");
-
-//       res.status(200).send(response);
-//     } else {
-//       res.status(200).send({ message: "Tarefa nao encontrada" });
-//     }
-//   } catch (error) {
-//     res
-//       .status(400)
-//       .send(error.sqlMessage ? { message: error.sqlMessage } : error);
-//   }
-// });
 
 async function getTaskById(id: string): Promise<any> {
   if (id) {
