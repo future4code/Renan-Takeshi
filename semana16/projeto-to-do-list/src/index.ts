@@ -33,7 +33,7 @@ const server = app.listen(process.env.PORT || 3003, () => {
 
 /****************************** Exercicio 01 ********************************/
 
-app.post("/user", async (req: Request, res: Response) => {
+app.put("/user", async (req: Request, res: Response) => {
   try {
     await createUser(req.body.name, req.body.nickname, req.body.email);
     res.status(200).send({
