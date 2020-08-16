@@ -404,6 +404,14 @@ async function updateTaskStatus(id: string, status: string) {
 app.get("/tasks", async (req: Request, res: Response) => {
   try {
     const response = await getTaskByStatus(req.query.status as string);
+    for (const task of response) {
+      task.limitDate = (task.limitDate as Date)
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("/");
+    }
     res.status(200).send({ tasks: response });
   } catch (error) {
     res
@@ -428,3 +436,41 @@ async function getTaskByStatus(status: string) {
     return response[0];
   } else throw { message: "Missing task status value." };
 }
+
+/**************************************************************/
+
+app.get("/tasks/delayed", async (req: Request, res: Response) => {
+  try {
+    const response = await getDelayedTasks();
+    for (const task of response) {
+      task.limitDate = (task.limitDate as Date)
+        .toISOString()
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("/");
+    }
+    res.status(200).send({ tasks: response });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+
+async function getDelayedTasks() {
+  const response = await connection.raw(`
+    SELECT 
+      BIN_TO_UUID(t.id) AS taskId,
+      t.title,
+      t.description,
+      t.limit_date AS limitDate,
+      BIN_TO_UUID(t.user_id) AS creatorUserId,
+      u.nickname AS creatorUserNickname
+    FROM task t JOIN user u ON t.user_id = u.id
+    WHERE t.limit_date < CURDATE()
+  `);
+  return response[0];
+}
+
+/**************************************************************/
