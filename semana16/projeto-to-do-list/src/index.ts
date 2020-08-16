@@ -375,3 +375,27 @@ async function getTaskByIdChallenge(id: string): Promise<any> {
     return { ...values[0][0][0], responsibleUsers: values[1][0] };
   } else throw { message: "Missing task id value." };
 }
+
+/**************************************************************/
+app.post("/task/:id/status/edit", async (req: Request, res: Response) => {
+  try {
+    await updateTaskStatus(req.params.id, req.body.status);
+    res.status(200).send({
+      message: "Success",
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
+  }
+});
+async function updateTaskStatus(id: string, status: string) {
+  if (id && status) {
+    const response = await connection.raw(`
+      UPDATE task t
+      SET t.status = '${status}'
+      WHERE BIN_TO_UUID(t.id) = '${id}'
+    `);
+    console.log(response);
+  }
+}
