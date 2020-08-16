@@ -186,10 +186,10 @@ async function createTask(
 async function getTaskById(id: string): Promise<any> {
   if (id) {
     const response = await connection.raw(`
-            SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date as limitDate, status, BIN_TO_UUID(user.id) AS creatorUserId, user.nickname AS creatorUserNickname
-            FROM task JOIN user ON task.user_id = user.id
-            WHERE "${id}" = BIN_TO_UUID(task.id)
-        `);
+        SELECT BIN_TO_UUID(task.id) as taskId, title, description, limit_date as limitDate, status, BIN_TO_UUID(user.id) AS creatorUserId, user.nickname AS creatorUserNickname
+        FROM task JOIN user ON task.user_id = user.id
+        WHERE "${id}" = BIN_TO_UUID(task.id)
+    `);
     return response[0][0];
   } else throw { message: "Quero id" };
 }
