@@ -283,10 +283,20 @@ async function searchUsers(query: string): Promise<any> {
 
 app.post("/task/responsible", async (req: Request, res: Response) => {
   try {
-    await assingUserToTask(req.body.task_id, req.body.responsible_user_id);
-    res.status(200).send({
-      message: "Success",
-    });
+    if (req.body.task_id && req.body.responsible_user_id) {
+      await assingUserToTask(req.body.task_id, req.body.responsible_user_id);
+      res.status(200).send({
+        message: "Success",
+      });
+    } else if (req.body.task_id && req.body.responsible_user_ids.length) {
+      await assingMultipleUsersToTask(
+        req.body.task_id,
+        req.body.responsible_user_ids
+      );
+      res.status(200).send({
+        message: "Success",
+      });
+    } else throw { message: "Quero IDs" };
   } catch (error) {
     res
       .status(400)
@@ -295,12 +305,10 @@ app.post("/task/responsible", async (req: Request, res: Response) => {
 });
 
 async function assingUserToTask(taskId: string, userId: string): Promise<void> {
-  if (taskId && userId) {
-    await connection.raw(`
+  await connection.raw(`
         INSERT INTO task_user VALUE
         (UUID_TO_BIN('${taskId}'), UUID_TO_BIN('${userId}'))
     `);
-  } else throw { message: "Quero IDs" };
 }
 
 /****************************** Exercicio 10 ********************************/
@@ -414,8 +422,7 @@ app.get("/tasks", async (req: Request, res: Response) => {
           .join("/");
       }
       res.status(200).send({ tasks: response });
-    } else throw { message: "Quero query" };
-    if (req.query.query) {
+    } else if (req.query.query) {
       const response = await searchTasks(req.query.query as string);
       for (const task of response) {
         task.limitDate = (task.limitDate as Date)
@@ -516,6 +523,17 @@ async function removeResponsibleFromTask(
       AND BIN_TO_UUID(tu.task_id) = '${taskId}'
     `);
   } else throw { message: "Missing ids." };
+}
+
+/****************************** Exercicio 16 ********************************/
+
+async function assingMultipleUsersToTask(taskId: string, usersIds: string[]) {
+  await connection.raw(`
+  INSERT INTO task_user VALUES
+  ${usersIds.map(
+    (item) => `(UUID_TO_BIN('${taskId}'), UUID_TO_BIN('${item}'))`
+  )}
+`);
 }
 
 /****************************** Exercicio 17 ********************************/
