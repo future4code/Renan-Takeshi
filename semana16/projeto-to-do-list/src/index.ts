@@ -377,6 +377,7 @@ async function getTaskByIdChallenge(id: string): Promise<any> {
 }
 
 /**************************************************************/
+
 app.post("/task/:id/status/edit", async (req: Request, res: Response) => {
   try {
     await updateTaskStatus(req.params.id, req.body.status);
@@ -391,11 +392,39 @@ app.post("/task/:id/status/edit", async (req: Request, res: Response) => {
 });
 async function updateTaskStatus(id: string, status: string) {
   if (id && status) {
-    const response = await connection.raw(`
+    await connection.raw(`
       UPDATE task t
       SET t.status = '${status}'
       WHERE BIN_TO_UUID(t.id) = '${id}'
     `);
-    console.log(response);
+  } else throw { message: "Missing task id or status value." };
+}
+
+/**************************************************************/
+app.get("/tasks", async (req: Request, res: Response) => {
+  try {
+    const response = await getTaskByStatus(req.query.status as string);
+    res.status(200).send({ tasks: response });
+  } catch (error) {
+    res
+      .status(400)
+      .send(error.sqlMessage ? { message: error.sqlMessage } : error);
   }
+});
+
+async function getTaskByStatus(status: string) {
+  if (status) {
+    const response = await connection.raw(`
+      SELECT 
+        BIN_TO_UUID(t.id) AS taskId, 
+        t.title, 
+        t.description, 
+        t.limit_date AS limitDate,
+        BIN_TO_UUID(t.user_id) AS creatorUserId,
+        u.nickname AS creatorUserNickname
+      FROM task t JOIN user u ON t.user_id = u.id
+      WHERE t.status = '${status}'
+    `);
+    return response[0];
+  } else throw { message: "Missing task status value." };
 }
