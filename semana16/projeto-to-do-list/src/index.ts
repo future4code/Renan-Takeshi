@@ -616,14 +616,8 @@ async function updateMultipleTasksStatus(taskIds: string[], status: string) {
     !item[0].length && taskNotFoundIndexes.push(idx);
   });
 
-  const validTaskIds: string[] = taskIds.reduce(
-    (acc: string[], cur: string, idx: number) => {
-      if (!taskNotFoundIndexes.includes(idx)) {
-        acc.push(cur);
-      }
-      return acc;
-    },
-    []
+  const validTaskIds: string[] = taskIds.filter(
+    (item: string, idx: number) => !taskNotFoundIndexes.includes(idx)
   );
 
   if (!validTaskIds.length) throw { message: "None of the ids are valid" };
