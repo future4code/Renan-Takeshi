@@ -3,7 +3,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { AddressInfo } from "net";
 
-/****************************** Exercicio 11 ********************************/
+/****************************** Initial Config ******************************/
 
 dotenv.config();
 
@@ -31,7 +31,7 @@ const server = app.listen(process.env.PORT || 3003, () => {
   }
 });
 
-const validadeString = (str: string) => str.replace(/\s/g, "");
+const validadeString = (str: string) => str && str.replace(/\s/g, "");
 
 /****************************** Exercicio 01 ********************************/
 
@@ -54,13 +54,13 @@ async function createUser(
   email: string
 ): Promise<void> {
   if (
-    name.replace(" ", "") &&
-    nickname.replace(" ", "") &&
-    email.replace(" ", "")
+    validadeString(name) &&
+    validadeString(nickname) &&
+    validadeString(email)
   ) {
     await connection.raw(`
         INSERT INTO user VALUE 
-            (UUID_TO_BIN(UUID()), '${name}', '${nickname}', '${email}')
+            (UUID_TO_BIN(UUID()), '${name.trim()}', '${nickname.trim()}', '${email.trim()}')
     `);
   } else throw { message: "Todos os campos sao obrigatorios" };
 }
@@ -79,14 +79,16 @@ app.get("/user/:id", async (req: Request, res: Response) => {
 });
 
 async function getUserById(id: string): Promise<any> {
-  if (id.replace(" ", "")) {
-    const response = await connection.raw(`
+  const response = await connection.raw(`
         SELECT BIN_TO_UUID(id) as id, nickname  
         FROM user 
         WHERE "${id}" = BIN_TO_UUID(id)
     `);
+  if (response[0][0]) {
     return response[0][0];
-  } else throw { message: "Todos os campos sao obrigatorios" };
+  } else {
+    throw { message: "Usuario nao encontrado" };
+  }
 }
 
 /****************************** Exercicio 03 ********************************/
@@ -106,18 +108,19 @@ app.post("/user/edit/:id", async (req: Request, res: Response) => {
 
 async function editUser(
   id: string,
-  name?: string,
-  nickname?: string
+  name: string,
+  nickname: string
 ): Promise<void> {
-  if (id.replace(" ", "") && (name || nickname)) {
-    await connection.raw(`
+  if (validadeString(name) || validadeString(nickname)) {
+    const response = await connection.raw(`
         UPDATE user
-        SET ${name ? `name = '${name}'` : ""}
+        SET ${name ? `name = '${name.trim()}'` : ""}
             ${nickname && name ? ", " : ""}
-            ${nickname ? `nickname = '${nickname}'` : ""} 
+            ${nickname ? `nickname = '${nickname.trim()}'` : ""} 
         WHERE "${id}" = BIN_TO_UUID(id)
     `);
-  } else throw { message: "Pelo menos um!" };
+    if (!response[0].affectedRows) throw { message: "Usuario nao encontrado" };
+  } else throw { message: "Dados do body invalidos" };
 }
 
 /****************************** Exercicio 04 ********************************/
@@ -146,7 +149,12 @@ async function createTask(
   description: string,
   limitDate: string
 ): Promise<void> {
-  if (userId && title && description && limitDate) {
+  if (
+    validadeString(userId) &&
+    validadeString(title) &&
+    validadeString(description) &&
+    validadeString(limitDate)
+  ) {
     await connection.raw(`
         INSERT INTO task VALUE(
             UUID_TO_BIN(UUID()),
@@ -230,7 +238,7 @@ async function getTasksByUserId(id: string): Promise<any> {
         WHERE BIN_TO_UUID(user.id) = '${id}'
     `);
     return response[0];
-  } else throw { message: "Quero id" };
+  } else throw { message: "User id not on query params" };
 }
 
 /****************************** Exercicio 08 ********************************/
@@ -255,27 +263,33 @@ async function searchUsers(query: string): Promise<any> {
         OR user.email LIKE '%${query}%'        
     `);
     return response[0];
-  } else throw { message: "Quero query" };
+  } else throw { message: "Missing query parameters" };
 }
 
 /****************************** Exercicio 09 ********************************/
 
 app.post("/task/responsible", async (req: Request, res: Response) => {
   try {
-    if (req.body.task_id && req.body.responsible_user_id) {
-      await assingUserToTask(req.body.task_id, req.body.responsible_user_id);
+    if (
+      validadeString(req.body.task_id) &&
+      validadeString(req.body.responsible_user_id)
+    ) {
+      await assingnUserToTask(req.body.task_id, req.body.responsible_user_id);
       res.status(200).send({
         message: "Success",
       });
-    } else if (req.body.task_id && req.body.responsible_user_ids.length) {
-      await assingMultipleUsersToTask(
+    } else if (
+      validadeString(req.body.task_id) &&
+      req.body.responsible_user_ids.length
+    ) {
+      await assingnMultipleUsersToTask(
         req.body.task_id,
         req.body.responsible_user_ids
       );
       res.status(200).send({
         message: "Success",
       });
-    } else throw { message: "Quero IDs" };
+    } else throw { message: "Missing or incorrect body parameters" };
   } catch (error) {
     res
       .status(400)
@@ -283,7 +297,10 @@ app.post("/task/responsible", async (req: Request, res: Response) => {
   }
 });
 
-async function assingUserToTask(taskId: string, userId: string): Promise<void> {
+async function assingnUserToTask(
+  taskId: string,
+  userId: string
+): Promise<void> {
   await connection.raw(`
         INSERT INTO task_user VALUE
         (UUID_TO_BIN('${taskId}'), UUID_TO_BIN('${userId}'))
@@ -305,13 +322,19 @@ app.get("/task/:id/responsible", async (req: Request, res: Response) => {
 
 async function getUsersByTaskId(taskId: string): Promise<any> {
   if (taskId) {
+    const task = await connection.raw(`
+      SELECT BIN_TO_UUID(task.id) as id
+      FROM task 
+      WHERE BIN_TO_UUID(task.id) = '${taskId}'
+    `);
+    if (!task[0].length) throw { message: "Task not found" };
     const response = await connection.raw(`
         SELECT BIN_TO_UUID(user.id) AS id, user.nickname
         FROM task_user JOIN user ON task_user.user_id = user.id
         WHERE BIN_TO_UUID(task_user.task_id) = '${taskId}' 
     `);
     return response[0];
-  } else throw { message: "Quero ID" };
+  } else throw { message: "Missing id value" };
 }
 
 /****************************** Exercicio 11 ********************************/
@@ -329,7 +352,7 @@ app.get("/task/:id", async (req: Request, res: Response) => {
 
       res.status(200).send(response);
     } else {
-      res.status(200).send({ message: "Tarefa nao encontrada" });
+      res.status(200).send({ message: "Task not found" });
     }
   } catch (error) {
     res
@@ -365,32 +388,41 @@ async function getTaskByIdChallenge(id: string): Promise<any> {
 
 /****************************** Exercicio 12 ********************************/
 
-app.post("/task/:id/status/edit", async (req: Request, res: Response) => {
+app.post("/task/status/edit", async (req: Request, res: Response) => {
   try {
-    await updateTaskStatus(req.params.id, req.body.status);
-    res.status(200).send({
-      message: "Success",
-    });
+    if (validadeString(req.body.status) && validadeString(req.body.task_id)) {
+      await updateTaskStatus(req.body.task_id, req.body.status);
+      res.status(200).send({
+        message: "Success single task",
+      });
+    } //else throw { message: "exercicio 12" };
+    if (validadeString(req.body.status) && req.body.task_ids.length) {
+      const response = await updateMultipleTasksStatus(
+        req.body.task_ids,
+        req.body.status
+      );
+      res.status(200).send(response);
+    }
   } catch (error) {
     res
       .status(400)
       .send(error.sqlMessage ? { message: error.sqlMessage } : error);
   }
 });
+
 async function updateTaskStatus(id: string, status: string) {
-  if (id && status) {
-    await connection.raw(`
+  const response = await connection.raw(`
       UPDATE task t
       SET t.status = '${status}'
       WHERE BIN_TO_UUID(t.id) = '${id}'
     `);
-  } else throw { message: "Missing task id or status value." };
+  if (!response[0].affectedRows) throw { message: "Task not found" };
 }
 
 /****************************** Exercicio 13 ********************************/
 app.get("/tasks", async (req: Request, res: Response) => {
   try {
-    if (req.query.status) {
+    if (validadeString(req.query.status as string)) {
       const response = await getTaskByStatus(req.query.status as string);
       for (const task of response) {
         task.limitDate = (task.limitDate as Date)
@@ -412,7 +444,7 @@ app.get("/tasks", async (req: Request, res: Response) => {
           .join("/");
       }
       res.status(200).send({ tasks: response });
-    } else throw { message: "Quero query" };
+    } else throw { message: "Missing query" };
   } catch (error) {
     res
       .status(400)
@@ -495,23 +527,57 @@ async function removeResponsibleFromTask(
   responsibleId: string
 ) {
   if (taskId && responsibleId) {
-    await connection.raw(`
+    const task = connection.raw(`
+      SELECT BIN_TO_UUID(id) AS id
+      FROM task
+      WHERE BIN_TO_UUID(id) = '${taskId}'
+    `);
+    const user = connection.raw(`
+      SELECT BIN_TO_UUID(id) AS id
+      FROM user
+      WHERE BIN_TO_UUID(id) = '${responsibleId}'
+    `);
+
+    const values = await Promise.all([task, user]);
+    if (!values[0][0][0]) throw { message: "Task not found" };
+    if (!values[1][0][0]) throw { message: "User not found" };
+
+    const response = await connection.raw(`
       DELETE
       FROM task_user tu
       WHERE BIN_TO_UUID(tu.user_id) = '${responsibleId}'
       AND BIN_TO_UUID(tu.task_id) = '${taskId}'
     `);
+
+    if (!response[0].affectedRows)
+      throw { message: "User not assigned to task" };
   } else throw { message: "Missing ids." };
 }
 
 /****************************** Exercicio 16 ********************************/
 
-async function assingMultipleUsersToTask(taskId: string, usersIds: string[]) {
+async function assingnMultipleUsersToTask(taskId: string, usersIds: string[]) {
+  const task = connection.raw(`
+    SELECT BIN_TO_UUID(id) AS id
+    FROM task
+    WHERE BIN_TO_UUID(id) = '${taskId}'
+  `);
+  const users = connection.raw(`
+    SELECT BIN_TO_UUID(id) AS id
+    FROM user
+    WHERE  ${usersIds.map((item) => `BIN_TO_UUID(id) = '${item}'`).join(" OR ")}
+  `);
+
+  const values = await Promise.all([task, users]);
+  if (!values[0][0][0]) throw { message: "Task not found" };
+  if (values[1][0].length < usersIds.length)
+    throw { message: "One or more users not found" };
+
   await connection.raw(`
   INSERT INTO task_user VALUES
-  ${usersIds.map(
-    (item) => `(UUID_TO_BIN('${taskId}'), UUID_TO_BIN('${item}'))`
-  )}
+  ${usersIds
+    .map((item) => `(UUID_TO_BIN('${taskId}'), UUID_TO_BIN('${item}'))`)
+    .join(",")}
 `);
 }
 
@@ -530,6 +596,57 @@ async function searchTasks(query: string): Promise<any> {
         WHERE t.title LIKE '%${query}%' OR t.description LIKE '%${query}%'      
     `);
   return response[0];
+}
+
+/****************************** Exercicio 18 ********************************/
+
+async function updateMultipleTasksStatus(taskIds: string[], status: string) {
+  const tasks = await Promise.all(
+    taskIds.map((item) =>
+      connection.raw(`
+        SELECT BIN_TO_UUID(id) AS id
+        FROM task
+        WHERE BIN_TO_UUID(id) = '${item}'
+      `)
+    )
+  );
+
+  const taskNotFoundIndexes: number[] = [];
+  tasks.forEach((item, idx) => {
+    !item[0].length && taskNotFoundIndexes.push(idx);
+  });
+
+  const validTaskIds: string[] = taskIds.reduce(
+    (acc: string[], cur: string, idx: number) => {
+      if (!taskNotFoundIndexes.includes(idx)) {
+        acc.push(cur);
+      }
+      return acc;
+    },
+    []
+  );
+
+  if (!validTaskIds.length) throw { message: "None of the ids are valid" };
+
+  await connection.raw(`
+    UPDATE task
+    SET status = '${status}'
+    WHERE  ${validTaskIds
+      .map((item) => `BIN_TO_UUID(id) = '${item}'`)
+      .join(" OR ")}
+`);
+
+  if (taskNotFoundIndexes.length) {
+    const message = {
+      message: "Updated valid tasks, but some ids were not valid",
+      invalidIds: taskIds.filter((item: string, idx: number) =>
+        taskNotFoundIndexes.includes(idx)
+      ),
+    };
+    return message;
+  }
+
+  return { message: "All tasks updated sucefully" };
 }
 
 /****************************** Exercicio 19 ********************************/
