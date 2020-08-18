@@ -15,13 +15,11 @@ export class UserDatabase extends BaseDatabase {
       password,
       role,
     });
-    // .into(UserDatabase.TABLE_NAME);
   }
 
   public async getUserByEmail(email: string): Promise<any> {
-    const result = await this.getConnection()
+    const result = await this.getConnection()(UserDatabase.TABLE_NAME)
       .select("*")
-      .from(UserDatabase.TABLE_NAME)
       .where({ email });
 
     return result[0];
@@ -32,7 +30,6 @@ export class UserDatabase extends BaseDatabase {
       .select("*")
       .from(UserDatabase.TABLE_NAME)
       .where({ id });
-
     return result[0];
   }
 

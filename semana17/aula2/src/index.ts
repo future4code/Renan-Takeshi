@@ -95,7 +95,6 @@ app.get("/user/profile", async (req: Request, res: Response) => {
 
     const authenticator = new Authenticator();
     const authenticationData = authenticator.getData(token);
-
     if (authenticationData.role !== "normal") {
       throw new Error("Only a normal user can access this funcionality");
     }
@@ -109,7 +108,7 @@ app.get("/user/profile", async (req: Request, res: Response) => {
       role: authenticationData.role,
     });
   } catch (err) {
-    res.status(400).send({
+    res.status(401).send({
       message: err.message,
     });
   }
@@ -126,7 +125,6 @@ app.delete("/user/:id", async (req: Request, res: Response) => {
     if (authenticationData.role !== "admin") {
       throw new Error("Only a admin user can access this funcionality");
     }
-
     const id = req.params.id;
 
     const userDatabase = new UserDatabase();
@@ -149,10 +147,8 @@ app.get("/user/:id", async (req: Request, res: Response) => {
     authenticator.getData(token);
     // a gente PRECISA verificar se o token não está expirado
 
-    const id = req.params.id;
-
     const userDatabase = new UserDatabase();
-    const user = await userDatabase.getUserById(id);
+    const user = await userDatabase.getUserById(req.params.id);
 
     res.status(200).send({
       id: user.id,
