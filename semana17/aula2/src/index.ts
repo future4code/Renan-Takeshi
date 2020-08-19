@@ -13,10 +13,6 @@ const app = express();
 
 app.use(express.json());
 
-// (async () => {
-//   console.log(await HashManager.hash("asdasd"));
-// })();
-
 app.post("/signup", async (req: Request, res: Response) => {
   try {
     const userData = {
