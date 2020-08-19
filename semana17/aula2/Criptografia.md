@@ -8,6 +8,6 @@ O valor recomendado é baseado no tempo que o servidor vai demorar para fazer a 
 
 a) Primeiro o cadastro, para que as senhas sejam guardadas encriptografadas. E tabmém porque o cadastro é feito antes do login.
 
-d) Não, pois o endpoint lê/manipula a senha, utilizando somente o token para autenticação.
+d) Não, pois o endpoint não lê/manipula a senha, utilizando somente o token para autenticação.
 
 ### Exercício 3
