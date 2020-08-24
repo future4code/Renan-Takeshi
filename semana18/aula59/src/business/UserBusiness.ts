@@ -58,7 +58,12 @@ export class UserBusiness {
     return token;
   }
 
-  public async getAllUsers(): Promise<any> {
+  public async getAllUsers(token: string): Promise<any> {
+    const authenticator = new Authenticator();
+    const authenticationData = authenticator.getData(token);
+
+    if (!authenticationData) throw new Error("Usuario precisa estar logado");
+
     return new UserDatabase().getAllUsers();
   }
 

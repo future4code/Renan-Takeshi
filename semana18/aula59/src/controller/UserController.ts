@@ -30,7 +30,9 @@ export class UserController {
   async getAll(req: Request, res: Response) {
     const userBusiness: UserBusiness = new UserBusiness();
     try {
-      const users = await userBusiness.getAllUsers();
+      const users = await userBusiness.getAllUsers(
+        req.headers.authorization as string
+      );
 
       res.status(200).send({ users });
     } catch (e) {
