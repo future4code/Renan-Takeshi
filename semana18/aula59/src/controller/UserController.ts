@@ -14,6 +14,18 @@ export class UserController {
     }
   }
 
+  async login(req: Request, res: Response) {
+    const userBusiness: UserBusiness = new UserBusiness();
+    try {
+      const { email, password } = req.body;
+
+      const token = await userBusiness.login(email, password);
+
+      res.status(200).send({ token });
+    } catch (e) {
+      res.status(400).send({ message: e.sqlMessage || e.message });
+    }
+  }
   // async approve(req: Request, res: Response) {
   //     const userBusiness: UserBusiness = new UserBusiness();
   //     try {

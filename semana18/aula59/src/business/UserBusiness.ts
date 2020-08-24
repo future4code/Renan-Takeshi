@@ -30,7 +30,7 @@ export class UserBusiness {
     await userDataBase.createUser(id, name, email, hashPassword, role);
 
     const authenticator = new Authenticator();
-    const token = authenticator.generateToken({ id });
+    const token = authenticator.generateToken({ id, role });
 
     return token;
   }
@@ -52,6 +52,7 @@ export class UserBusiness {
     const authenticator = new Authenticator();
     const token = authenticator.generateToken({
       id: user.id,
+      role: user.role,
     });
 
     return token;
