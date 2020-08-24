@@ -39,6 +39,20 @@ export class UserController {
       res.status(400).send({ message: e.sqlMessage || e.message });
     }
   }
+
+  async deleteUser(req: Request, res: Response) {
+    const userBusiness: UserBusiness = new UserBusiness();
+    try {
+      await userBusiness.deleteUser(
+        req.headers.authorization as string,
+        req.params.id
+      );
+
+      res.status(200).send({ message: "Usuario apagado com sucesso" });
+    } catch (e) {
+      res.status(400).send({ message: e.sqlMessage || e.message });
+    }
+  }
   // async approve(req: Request, res: Response) {
   //     const userBusiness: UserBusiness = new UserBusiness();
   //     try {

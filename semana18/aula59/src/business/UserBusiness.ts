@@ -67,6 +67,15 @@ export class UserBusiness {
     return new UserDatabase().getAllUsers();
   }
 
+  public async deleteUser(token: string, userId: string): Promise<any> {
+    const authenticator = new Authenticator();
+    const authenticationData = authenticator.getData(token);
+
+    if (!authenticationData) throw new Error("Usuario precisa estar logado");
+
+    await new UserDatabase().deleteUser(userId);
+  }
+
   public async getUserProfile(token: string): Promise<any> {
     const authenticator = new Authenticator();
     const authenticationData = authenticator.getData(token);
