@@ -1,60 +1,35 @@
-import { BaseDataBase } from "./BaseDatabase";
-import { IdGenerator } from "../services/IdGenerator";
+import { BaseDatabase } from "./BaseDatabase";
 
-export class UserDatabase extends BaseDataBase {
-    tableName: string = "User_arq";
-    private idGenerator = new IdGenerator();
+export class UserDatabase extends BaseDatabase {
+  private static TABLE_NAME = "User_Arq";
 
-    public async signup(name: string, email: string) {
-        try {
-            const id = this.idGenerator.generate();
-            await super.getConnection().raw(`
-             INSERT INTO User_arq(id, name, email)
-             VALUES
-                 (
-                     "${id}",
-                     "${name}",
-                "${email}"
-                )
-                `);
-            } catch (err) {
-                throw new Error(err.message);
-            }
-    }
+  public async createUser(
+    id: string,
+    name: string,
+    email: string,
+    password: string,
+    role: string
+  ): Promise<void> {
+    await this.getConnection()(UserDatabase.TABLE_NAME).insert({
+      id,
+      name,
+      email,
+      password,
+      role,
+    });
+  }
 
-    public async approve(id: string){
-        const queryData = await this.getConnection().raw(`
-        SELECT * FROM User_arq
-        WHERE id = "${id}"
-        `);
-    
-        const data = queryData[0][0];
-        console.log(data);
-    
-        if(data.is_approved === 1){
-          throw new Error("Usuário já aprovado!");
-        }
-    
-        await this.getConnection().raw(`
-        UPDATE User_arq
-        SET is_approved = 1
-        WHERE id = "${id}"
-        `);
-    }
+  public async getUserByEmail(email: string): Promise<any> {
+    const result = await this.getConnection()(UserDatabase.TABLE_NAME)
+      .select()
+      .where({ email });
+    return result[0];
+  }
 
-    public async getUserById(id: string){
-
-        const result = await this.getConnection().raw(`
-        SELECT * FROM User_arq
-        WHERE id = "${id}"
-        `);
-    
-        const data = result[0][0];
-        console.log(data);
-        if(data.is_approved === 0){
-          throw new Error("Usuário não aprovado");
-        }
-
-        return data;
-    }
+  public async getUserById(id: string): Promise<any> {
+    const result = await this.getConnection()(UserDatabase.TABLE_NAME)
+      .select()
+      .where({ id });
+    return result[0];
+  }
 }
