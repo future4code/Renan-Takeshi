@@ -26,8 +26,7 @@ export class UserBusiness {
     const hashManager = new HashManager();
     const hashPassword = await hashManager.hash(password);
 
-    const userDataBase = new UserDatabase();
-    await userDataBase.createUser(id, name, email, hashPassword, role);
+    await UserDatabase.createUser(id, name, email, hashPassword, role);
 
     const authenticator = new Authenticator();
     const token = authenticator.generateToken({ id, role });
@@ -36,8 +35,7 @@ export class UserBusiness {
   }
 
   public async login(email: string, password: string): Promise<string> {
-    const userDataBase = new UserDatabase();
-    const user = await userDataBase.getUserByEmail(email);
+    const user = await UserDatabase.getUserByEmail(email);
 
     const hashManager = new HashManager();
     const isPasswordCorrect = await hashManager.compare(
@@ -64,7 +62,7 @@ export class UserBusiness {
 
     if (!authenticationData) throw new Error("Usuario precisa estar logado");
 
-    return new UserDatabase().getAllUsers();
+    return UserDatabase.getAllUsers();
   }
 
   public async deleteUser(token: string, userId: string): Promise<any> {
@@ -73,16 +71,6 @@ export class UserBusiness {
 
     if (!authenticationData) throw new Error("Usuario precisa estar logado");
 
-    await new UserDatabase().deleteUser(userId);
-  }
-
-  public async getUserProfile(token: string): Promise<any> {
-    const authenticator = new Authenticator();
-    const authenticationData = authenticator.getData(token);
-
-    const userDataBase = new UserDatabase();
-    const user = await userDataBase.getUserById(authenticationData.id);
-
-    return user;
+    await UserDatabase.deleteUser(userId);
   }
 }
