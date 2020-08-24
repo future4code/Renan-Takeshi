@@ -26,6 +26,17 @@ export class UserController {
       res.status(400).send({ message: e.sqlMessage || e.message });
     }
   }
+
+  async getAll(req: Request, res: Response) {
+    const userBusiness: UserBusiness = new UserBusiness();
+    try {
+      const users = await userBusiness.getAllUsers();
+
+      res.status(200).send({ users });
+    } catch (e) {
+      res.status(400).send({ message: e.sqlMessage || e.message });
+    }
+  }
   // async approve(req: Request, res: Response) {
   //     const userBusiness: UserBusiness = new UserBusiness();
   //     try {

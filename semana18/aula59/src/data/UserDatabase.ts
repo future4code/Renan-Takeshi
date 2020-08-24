@@ -32,4 +32,9 @@ export class UserDatabase extends BaseDatabase {
       .where({ id });
     return result[0];
   }
+
+  public async getAllUsers(): Promise<any> {
+    const result = await this.getConnection()(UserDatabase.TABLE_NAME).select();
+    return result;
+  }
 }
