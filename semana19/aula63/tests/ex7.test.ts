@@ -2,7 +2,7 @@ import { PostsDatabase } from "../src/data/PostDatabase";
 import { BaseDatabase } from "../src/data/BaseDatabase";
 import dotenv from "dotenv";
 dotenv.config();
-describe("Exercicio 6", () => {
+describe("Exercicio 7", () => {
   const db = new PostsDatabase();
 
   afterAll(async () => {
