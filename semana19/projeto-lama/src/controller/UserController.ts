@@ -18,10 +18,10 @@ export class UserController {
       };
 
       const userBusiness = new UserBusiness(
-        new IdGenerator(),
+        new Authenticator(),
         new HashManager(),
-        new UserDatabase(),
-        new Authenticator()
+        new IdGenerator(),
+        new UserDatabase()
       );
       const token = await userBusiness.createUser(input);
 
@@ -41,10 +41,10 @@ export class UserController {
       };
 
       const userBusiness = new UserBusiness(
-        new IdGenerator(),
+        new Authenticator(),
         new HashManager(),
-        new UserDatabase(),
-        new Authenticator()
+        new IdGenerator(),
+        new UserDatabase()
       );
       const token = await userBusiness.getUserByEmail(loginData);
 

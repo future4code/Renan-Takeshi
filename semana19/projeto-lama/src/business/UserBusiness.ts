@@ -6,10 +6,10 @@ import { Authenticator } from "../services/Authenticator";
 
 export class UserBusiness {
   constructor(
-    private idGenerator: IdGenerator,
+    private authenticator: Authenticator,
     private hashManager: HashManager,
-    private userDatabase: UserDatabase,
-    private authenticator: Authenticator
+    private idGenerator: IdGenerator,
+    private userDatabase: UserDatabase
   ) {}
   async createUser(user: UserInputDTO) {
     const id = this.idGenerator.generate();
@@ -34,6 +34,8 @@ export class UserBusiness {
 
   async getUserByEmail(user: LoginInputDTO) {
     const userFromDB = await this.userDatabase.getUserByEmail(user.email);
+
+    if (!userFromDB) throw "Nao encontrado";
 
     const hashCompare = await this.hashManager.compare(
       user.password,
