@@ -1,4 +1,4 @@
-import { BandInputDTO } from "../model/Band";
+import { BandInputDTO, Band } from "../model/Band";
 import { BandDatabase } from "../data/BandDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { Authenticator } from "../services/Authenticator";
@@ -23,5 +23,15 @@ export class BandBusiness {
       band.musicGenre,
       band.responsible
     );
+  }
+  async getBandByNameOrId(name: string, id: string): Promise<Band> {
+    const bandFromDatabase = await this.bandDatabase.getBandByNameOrId(
+      name,
+      id
+    );
+
+    if (!bandFromDatabase) throw new Error("BandBusiness getBand");
+
+    return bandFromDatabase;
   }
 }

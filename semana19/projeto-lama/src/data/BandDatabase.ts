@@ -24,11 +24,18 @@ export class BandDatabase extends BaseDatabase {
     }
   }
 
-  public async getUserByEmail(email: string): Promise<Band | undefined> {
+  public async getBandByNameOrId(
+    name: string,
+    id: string
+  ): Promise<Band | undefined> {
+    console.log(name, id);
     const result = await this.getConnection()
       .select()
       .from(BandDatabase.TABLE_NAME)
-      .where({ email });
+      .where(name ? { name } : {})
+      .orWhere(id ? { id } : {});
+
+    if (!result[0]) return;
 
     return Band.toBandModel(result[0]);
   }
