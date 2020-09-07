@@ -26,9 +26,24 @@ export class Event {
   }
 }
 
+export enum WEEKDAY {
+  FRIDAY = "FRIDAY",
+  SATURDAY = "SATURDAY",
+  SUNDAY = "SUNDAY",
+}
+
 export interface EventInputDTO {
   weekDay: string;
   startTime: number;
   endTime: number;
   bandId: string;
+}
+
+export interface EventAndBandDTO {
+  id: string;
+  weekDay: string;
+  startTime: number;
+  endTime: number;
+  name: string;
+  musicGenre: string;
 }

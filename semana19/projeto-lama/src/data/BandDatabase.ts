@@ -28,7 +28,6 @@ export class BandDatabase extends BaseDatabase {
     name: string,
     id: string
   ): Promise<Band | undefined> {
-    console.log(name, id);
     const result = await this.getConnection()
       .select()
       .from(BandDatabase.TABLE_NAME)

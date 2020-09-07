@@ -3,7 +3,7 @@ import { BandBusiness } from "../business/BandBusiness";
 import { BaseDatabase } from "../data/BaseDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { Authenticator } from "../services/Authenticator";
-import { BandInputDTO, Band } from "../model/Band";
+import { BandInputDTO } from "../model/Band";
 import { BandDatabase } from "../data/BandDatabase";
 
 export class BandController {
@@ -35,7 +35,7 @@ export class BandController {
         new IdGenerator(),
         new BandDatabase()
       );
-      const band: Band = await bandBusiness.getBandByNameOrId(name, id);
+      const band = await bandBusiness.getBandByNameOrId(name, id);
 
       res.status(200).send({ band });
     } catch (error) {
