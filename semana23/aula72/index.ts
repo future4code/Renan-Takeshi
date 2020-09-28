@@ -7,7 +7,6 @@ function isOneEdit(strA: string, strB: string): boolean {
     let temp = strA;
     strA = strB;
     strB = temp;
-    console.log(strA);
   }
   // if one is bigger, must include the other
   if (strA.length > strB.length) return strA.includes(strB);
