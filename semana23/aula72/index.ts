@@ -1,16 +1,20 @@
-/* Exercicio 1 - Ta errado, nao me julgue! */
+/* Exercicio 1 */
 function isOneEdit(strA: string, strB: string): boolean {
-  if (strA.length > strB.length + 1 || strA.length < strB.length - 1)
-    return false;
+  if (Math.abs(strB.length - strA.length) > 1) return false;
 
-  const countCharsNotInB = strA
-    .split("")
-    .filter((char, idx) => char != strB[idx]).length;
-  const countCharsNotInA = strB
-    .split("")
-    .filter((char, idx) => char != strA[idx]).length;
+  // strA is now the largest
+  if (strB.length > strA.length) {
+    let temp = strA;
+    strA = strB;
+    strB = temp;
+    console.log(strA);
+  }
+  // if one is bigger, must include the other
+  if (strA.length > strB.length) return strA.includes(strB);
 
-  return !(countCharsNotInB + countCharsNotInA > 2);
+  // inputs have the same size, there can be only 1 mismatch
+  const charsDiff = strA.split("").filter((char, idx) => char !== strB[idx]);
+  return !(charsDiff.length > 1);
 }
 
 /* Exercicio 2 */
@@ -27,6 +31,31 @@ function compressString(str: string) {
   }
 
   return result.length > str.length ? str : result;
+}
+
+/* Exercicio 3 */
+function replaceMatrixValue(
+  matrix: number[][],
+  col: number,
+  row: number,
+  value: number
+) {
+  if (!matrix[row] || !matrix[row][col]) throw "Out of bounds";
+  matrix[row][col] = value;
+}
+
+/* Exercicio 4 */
+function transpose(matrix: number[][]) {
+  let transpose: number[][] = Array.from(
+    { length: matrix[0].length },
+    () => []
+  );
+  for (let i = 0; i < matrix[0].length; i++) {
+    for (let j = 0; j < matrix.length; j++) {
+      transpose[i][j] = matrix[j][i];
+    }
+  }
+  return transpose;
 }
 
 /* Exercicio 5 */
