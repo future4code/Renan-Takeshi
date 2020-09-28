@@ -1,4 +1,4 @@
-/* Exercicio 1 */
+/* Exercicio 1 - Ta errado, nao me julgue! */
 function isOneEdit(strA: string, strB: string): boolean {
   if (strA.length > strB.length + 1 || strA.length < strB.length - 1)
     return false;
