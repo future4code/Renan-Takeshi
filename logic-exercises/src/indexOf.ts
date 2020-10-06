@@ -4,6 +4,7 @@ export function indexOf(source: string, query: string) {
       let count = 1;
       for (let q = 1; q < query.length; q++) {
         if (source[s + q] === query[q]) count++;
+        else break;
       }
       if (count === query.length) return s;
     }
