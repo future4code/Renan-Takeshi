@@ -1,12 +1,12 @@
 export function indexOf(source: string, query: string) {
-  for (let s = 0; s < source.length; s++) {
-    if (source[s] === query[0]) {
+  for (let sourceIndex = 0; sourceIndex < source.length; sourceIndex++) {
+    if (source[sourceIndex] === query[0]) {
       let count = 1;
-      for (let q = 1; q < query.length; q++) {
-        if (source[s + q] === query[q]) count++;
+      for (let queryIndex = 1; queryIndex < query.length; queryIndex++) {
+        if (source[sourceIndex + queryIndex] === query[queryIndex]) count++;
         else break;
       }
-      if (count === query.length) return s;
+      if (count === query.length) return sourceIndex;
     }
   }
   return -1;
