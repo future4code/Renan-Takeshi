@@ -2,7 +2,7 @@ export function checkBrackets(str: string) {
   const regex = /\(\)|\[\]|\{\}/g;
 
   let tempStr = str;
-  let prevLength = tempStr.length;
+  let prevLength: number;
 
   do {
     prevLength = tempStr.length;
