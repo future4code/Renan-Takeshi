@@ -1,28 +1,13 @@
-export function checaParenteses(str: string) {
-  const stack = [];
+export function checkBrackets(str: string) {
+  const regex = /\(\)|\[\]|\{\}/g;
 
-  const pairs: BracketPair = { "(": ")", "[": "]", "{": "}" };
+  let tempStr = str;
+  let prevLength = tempStr.length;
 
-  for (let char of str) {
-    if (Object.keys(pairs).includes(char)) {
-      stack.push(char);
-    } else {
-      const lastOpeningChar = stack.pop();
-      if (!lastOpeningChar) {
-        return false;
-      } else if (pairs[lastOpeningChar] !== char) {
-        return false;
-      }
-    }
-  }
+  do {
+    prevLength = tempStr.length;
+    tempStr = tempStr.replace(regex, "");
+  } while (tempStr.length !== prevLength);
 
-  if (stack.length > 0) {
-    return false;
-  }
-
-  return true;
-}
-
-interface BracketPair {
-  [key: string]: string;
+  return tempStr.length === 0;
 }
